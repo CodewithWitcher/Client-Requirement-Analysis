@@ -18,6 +18,7 @@
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
@@ -37,8 +38,8 @@
 
       <div class="doc-meta-row">
         <span>File Size: 12.0 KB</span>
-        <span>Metrics: 1,376 words</span>
-        <span>Reading Time: 6 min read</span>
+        <span>Metrics: 1,508 words</span>
+        <span>Reading Time: 7 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -66,9 +67,30 @@
       </div>
     </section>
 
-    <!-- Document Preview Content -->
-    <main class="doc-content-card">
-      <div class="rendered-markdown">
+    <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
+    <div class="doc-layout-grid">
+      
+        <aside class="doc-sidebar-toc">
+          <div class="toc-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <ul class="toc-list">
+            <li ><a href="#what-this-module-does">📌 🎯 What This Module Does</a></li><li ><a href="#4-phase-workflow">📌 📊 4-Phase Workflow</a></li><li ><a href="#20-core-categories">📌 🏗️ 20 Core Categories</a></li><li ><a href="#quick-pricing-formula">📌 💰 Quick Pricing Formula</a></li><li style="padding-left: 0.75rem;"><a href="#base-calculation">📌 Base Calculation:</a></li><li style="padding-left: 0.75rem;"><a href="#per-page-costs">📌 Per-Page Costs:</a></li><li style="padding-left: 0.75rem;"><a href="#common-features">📌 Common Features:</a></li><li style="padding-left: 0.75rem;"><a href="#tech-stack-multipliers">📌 Tech Stack Multipliers:</a></li><li ><a href="#project-cost-ranges">📌 📊 Project Cost Ranges</a></li><li ><a href="#key-cost-drivers">📌 🎯 Key Cost Drivers</a></li><li style="padding-left: 0.75rem;"><a href="#highest-impact-can-double-cost">📌 Highest Impact (Can double cost):</a></li><li style="padding-left: 0.75rem;"><a href="#medium-impact-add-20-50">📌 Medium Impact (Add 20-50%):</a></li><li style="padding-left: 0.75rem;"><a href="#lower-impact-add-10-20">📌 Lower Impact (Add 10-20%):</a></li><li ><a href="#hosting-guide">📌 🏪 Hosting Guide</a></li><li style="padding-left: 0.75rem;"><a href="#annual-infrastructure-costs">📌 Annual Infrastructure Costs:</a></li><li ><a href="#e-commerce-quick-guide">📌 🛍️ E-Commerce Quick Guide</a></li><li style="padding-left: 0.75rem;"><a href="#platform-comparison">📌 Platform Comparison:</a></li><li style="padding-left: 0.75rem;"><a href="#e-commerce-features">📌 E-Commerce Features:</a></li><li ><a href="#payment-integration">📌 💳 Payment Integration</a></li><li ><a href="#design-pricing">📌 🎨 Design Pricing</a></li><li ><a href="#seo-analytics">📌 🔍 SEO &amp;amp; Analytics</a></li><li ><a href="#maintenance-tiers">📌 🛡️ Maintenance Tiers</a></li><li ><a href="#technology-recommendations">📌 ⚙️ Technology Recommendations</a></li><li style="padding-left: 0.75rem;"><a href="#for-most-projects">📌 For Most Projects:</a></li><li style="padding-left: 0.75rem;"><a href="#for-e-commerce">📌 For E-Commerce:</a></li><li style="padding-left: 0.75rem;"><a href="#for-web-apps">📌 For Web Apps:</a></li><li style="padding-left: 0.75rem;"><a href="#for-budget-conscious">📌 For Budget-Conscious:</a></li><li ><a href="#common-pitfalls">📌 ⚠️ Common Pitfalls</a></li><li ><a href="#quick-checklist">📌 ✅ Quick Checklist</a></li><li ><a href="#pro-tips">📌 💡 Pro Tips</a></li><li ><a href="#for-excalidraw-diagrams">📌 🎨 For Excalidraw Diagrams</a></li><li ><a href="#using-this-guide">📌 📞 Using This Guide</a></li><li ><a href="#full-documentation">📌 📚 Full Documentation</a></li>
+          </ul>
+        </aside>
+        
+
+      <main class="doc-main-content">
+        <div class="doc-content-card">
+          
         <div class="summary-card" style="margin-bottom: 2rem; background: rgba(59, 130, 246, 0.05);">
           <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.5rem;">
             <span>Task Checklist Progress</span>
@@ -78,22 +100,24 @@
             <div id="checklist-progress-bar" style="height: 100%; width: 0%; background: var(--accent-primary); transition: width 0.3s ease;"></div>
           </div>
         </div>
-        <h1 id="website-pricing-quick-reference-guide">🌐 Website Pricing — Quick Reference Guide</h1>
+        
+          <div class="rendered-markdown">
+            <h1 id="website-pricing-quick-reference-guide">🌐 Website Pricing — Quick Reference Guide</h1>
 <blockquote>
 <p><strong>Condensed version for quick sharing and presentations</strong></p>
 </blockquote>
 <hr />
-<h2 id="what-this-module-does">🎯 What This Module Does</h2>
+<div class="section-scope-header"><h2 id="what-this-module-does">🎯 What This Module Does</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
 <p>A complete toolkit for pricing website projects, from landing pages to complex web applications and e-commerce platforms. Covers discovery, estimation, proposal, and delivery.</p>
 <hr />
-<h2 id="4-phase-workflow">📊 4-Phase Workflow</h2>
+<div class="section-scope-header"><h2 id="4-phase-workflow">📊 4-Phase Workflow</h2><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
 <pre><code>1. Discovery → Use Client Questionnaire during meeting
 2. Estimation → Map requirements to Pricing Parameters
 3. Proposal → Generate formal proposal with quote
 4. Development → Follow Project Checklist to launch
 </code></pre>
 <hr />
-<h2 id="20-core-categories">🏗️ 20 Core Categories</h2>
+<div class="section-scope-header"><h2 id="20-core-categories">🏗️ 20 Core Categories</h2><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -206,8 +230,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="quick-pricing-formula">💰 Quick Pricing Formula</h2>
-<h3 id="base-calculation">Base Calculation:</h3>
+<div class="section-scope-header"><h2 id="quick-pricing-formula">💰 Quick Pricing Formula</h2><button class="section-scope-btn" data-sec-id="sec_3">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="base-calculation">Base Calculation:</h3><button class="section-scope-btn" data-sec-id="sec_4">+ Add to Scope</button></div>
 <pre><code>1. Base Cost = (Pages × Page Cost) + Features
 2. Design Cost = Custom designs + branding
 3. E-Commerce Cost = Platform + features (if applicable)
@@ -217,7 +241,7 @@
 7. Subtotal = Sum of all above
 8. Final = Subtotal × Tech Multiplier × Complexity × (1 + Profit %)
 </code></pre>
-<h3 id="per-page-costs">Per-Page Costs:</h3>
+<div class="section-scope-header"><h3 id="per-page-costs">Per-Page Costs:</h3><button class="section-scope-btn" data-sec-id="sec_5">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -248,7 +272,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="common-features">Common Features:</h3>
+<div class="section-scope-header"><h3 id="common-features">Common Features:</h3><button class="section-scope-btn" data-sec-id="sec_6">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -295,7 +319,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="tech-stack-multipliers">Tech Stack Multipliers:</h3>
+<div class="section-scope-header"><h3 id="tech-stack-multipliers">Tech Stack Multipliers:</h3><button class="section-scope-btn" data-sec-id="sec_7">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -338,7 +362,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="project-cost-ranges">📊 Project Cost Ranges</h2>
+<div class="section-scope-header"><h2 id="project-cost-ranges">📊 Project Cost Ranges</h2><button class="section-scope-btn" data-sec-id="sec_8">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -409,8 +433,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="key-cost-drivers">🎯 Key Cost Drivers</h2>
-<h3 id="highest-impact-can-double-cost">Highest Impact (Can double cost):</h3>
+<div class="section-scope-header"><h2 id="key-cost-drivers">🎯 Key Cost Drivers</h2><button class="section-scope-btn" data-sec-id="sec_9">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="highest-impact-can-double-cost">Highest Impact (Can double cost):</h3><button class="section-scope-btn" data-sec-id="sec_10">+ Add to Scope</button></div>
 <ul>
 <li>✅ Custom design vs template</li>
 <li>✅ E-commerce functionality</li>
@@ -418,7 +442,7 @@
 <li>✅ Complex integrations</li>
 <li>✅ Tech stack choice</li>
 </ul>
-<h3 id="medium-impact-add-20-50">Medium Impact (Add 20-50%):</h3>
+<div class="section-scope-header"><h3 id="medium-impact-add-20-50">Medium Impact (Add 20-50%):</h3><button class="section-scope-btn" data-sec-id="sec_11">+ Add to Scope</button></div>
 <ul>
 <li>✅ Number of pages</li>
 <li>✅ CMS complexity</li>
@@ -426,7 +450,7 @@
 <li>✅ Payment integration</li>
 <li>✅ Multi-language support</li>
 </ul>
-<h3 id="lower-impact-add-10-20">Lower Impact (Add 10-20%):</h3>
+<div class="section-scope-header"><h3 id="lower-impact-add-10-20">Lower Impact (Add 10-20%):</h3><button class="section-scope-btn" data-sec-id="sec_12">+ Add to Scope</button></div>
 <ul>
 <li>✅ SEO optimization</li>
 <li>✅ Analytics setup</li>
@@ -435,7 +459,7 @@
 <li>✅ Contact forms</li>
 </ul>
 <hr />
-<h2 id="hosting-guide">🏪 Hosting Guide</h2>
+<div class="section-scope-header"><h2 id="hosting-guide">🏪 Hosting Guide</h2><button class="section-scope-btn" data-sec-id="sec_13">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -490,7 +514,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="annual-infrastructure-costs">Annual Infrastructure Costs:</h3>
+<div class="section-scope-header"><h3 id="annual-infrastructure-costs">Annual Infrastructure Costs:</h3><button class="section-scope-btn" data-sec-id="sec_14">+ Add to Scope</button></div>
 <ul>
 <li>Domain (.com): $10–$15/year</li>
 <li>SSL (Let's Encrypt): $0 (free)</li>
@@ -499,8 +523,8 @@
 <li>Email (Google Workspace): $72–$216/user/year</li>
 </ul>
 <hr />
-<h2 id="e-commerce-quick-guide">🛍️ E-Commerce Quick Guide</h2>
-<h3 id="platform-comparison">Platform Comparison:</h3>
+<div class="section-scope-header"><h2 id="e-commerce-quick-guide">🛍️ E-Commerce Quick Guide</h2><button class="section-scope-btn" data-sec-id="sec_15">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="platform-comparison">Platform Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_16">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -531,7 +555,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="e-commerce-features">E-Commerce Features:</h3>
+<div class="section-scope-header"><h3 id="e-commerce-features">E-Commerce Features:</h3><button class="section-scope-btn" data-sec-id="sec_17">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -575,7 +599,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="payment-integration">💳 Payment Integration</h2>
+<div class="section-scope-header"><h2 id="payment-integration">💳 Payment Integration</h2><button class="section-scope-btn" data-sec-id="sec_18">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -613,7 +637,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="design-pricing">🎨 Design Pricing</h2>
+<div class="section-scope-header"><h2 id="design-pricing">🎨 Design Pricing</h2><button class="section-scope-btn" data-sec-id="sec_19">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -656,7 +680,7 @@
 - Full Custom: 2.0x–3.0x<br />
 - Award-winning: 3.0x–5.0x</p>
 <hr />
-<h2 id="seo-analytics">🔍 SEO &amp; Analytics</h2>
+<div class="section-scope-header"><h2 id="seo-analytics">🔍 SEO &amp; Analytics</h2><button class="section-scope-btn" data-sec-id="sec_20">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -699,7 +723,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="maintenance-tiers">🛡️ Maintenance Tiers</h2>
+<div class="section-scope-header"><h2 id="maintenance-tiers">🛡️ Maintenance Tiers</h2><button class="section-scope-btn" data-sec-id="sec_21">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -733,28 +757,28 @@
 </table>
 <p><strong>Rule of Thumb:</strong> Annual maintenance = 15-20% of initial development cost</p>
 <hr />
-<h2 id="technology-recommendations">⚙️ Technology Recommendations</h2>
-<h3 id="for-most-projects">For Most Projects:</h3>
+<div class="section-scope-header"><h2 id="technology-recommendations">⚙️ Technology Recommendations</h2><button class="section-scope-btn" data-sec-id="sec_22">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="for-most-projects">For Most Projects:</h3><button class="section-scope-btn" data-sec-id="sec_23">+ Add to Scope</button></div>
 <ul>
 <li><strong>CMS:</strong> WordPress (easiest for clients)</li>
 <li><strong>Hosting:</strong> Shared or VPS (based on traffic)</li>
 <li><strong>Design:</strong> Template + customization (fastest)</li>
 <li><strong>Database:</strong> MySQL (standard)</li>
 </ul>
-<h3 id="for-e-commerce">For E-Commerce:</h3>
+<div class="section-scope-header"><h3 id="for-e-commerce">For E-Commerce:</h3><button class="section-scope-btn" data-sec-id="sec_24">+ Add to Scope</button></div>
 <ul>
 <li><strong>Platform:</strong> WooCommerce (cost-effective) or Shopify (ease)</li>
 <li><strong>Payment:</strong> Stripe (global) or Razorpay (India)</li>
 <li><strong>Hosting:</strong> VPS or managed hosting</li>
 </ul>
-<h3 id="for-web-apps">For Web Apps:</h3>
+<div class="section-scope-header"><h3 id="for-web-apps">For Web Apps:</h3><button class="section-scope-btn" data-sec-id="sec_25">+ Add to Scope</button></div>
 <ul>
 <li><strong>Stack:</strong> MERN or Laravel</li>
 <li><strong>Hosting:</strong> Cloud (AWS/GCP) with auto-scaling</li>
 <li><strong>Database:</strong> PostgreSQL or MongoDB</li>
 <li><strong>Design:</strong> Custom from scratch</li>
 </ul>
-<h3 id="for-budget-conscious">For Budget-Conscious:</h3>
+<div class="section-scope-header"><h3 id="for-budget-conscious">For Budget-Conscious:</h3><button class="section-scope-btn" data-sec-id="sec_26">+ Add to Scope</button></div>
 <ul>
 <li><strong>CMS:</strong> WordPress with free theme</li>
 <li><strong>Hosting:</strong> Shared hosting</li>
@@ -762,7 +786,7 @@
 <li><strong>Plugins:</strong> Free alternatives where possible</li>
 </ul>
 <hr />
-<h2 id="common-pitfalls">⚠️ Common Pitfalls</h2>
+<div class="section-scope-header"><h2 id="common-pitfalls">⚠️ Common Pitfalls</h2><button class="section-scope-btn" data-sec-id="sec_27">+ Add to Scope</button></div>
 <p>❌ Underestimating content entry time<br />
 ❌ Forgetting responsive design testing<br />
 ❌ Not accounting for browser compatibility<br />
@@ -774,7 +798,7 @@
 ❌ Not clarifying domain ownership<br />
 ❌ Underpricing e-commerce complexity  </p>
 <hr />
-<h2 id="quick-checklist">✅ Quick Checklist</h2>
+<div class="section-scope-header"><h2 id="quick-checklist">✅ Quick Checklist</h2><button class="section-scope-btn" data-sec-id="sec_28">+ Add to Scope</button></div>
 <p><strong>Before Quoting:</strong><br />
 - <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-0" > Page count and types identified<br />
 - <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-1" > Design preference (template/custom)<br />
@@ -798,7 +822,7 @@
 - <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-18" > Timeline with phases<br />
 - <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-19" > Deliverables list</p>
 <hr />
-<h2 id="pro-tips">💡 Pro Tips</h2>
+<div class="section-scope-header"><h2 id="pro-tips">💡 Pro Tips</h2><button class="section-scope-btn" data-sec-id="sec_29">+ Add to Scope</button></div>
 <p><strong>Save Costs:</strong><br />
 - Use WordPress for standard sites (fastest, cheapest)<br />
 - Choose template + customization over full custom<br />
@@ -818,7 +842,7 @@
 - Define revision limits clearly<br />
 - Charge for content entry separately</p>
 <hr />
-<h2 id="for-excalidraw-diagrams">🎨 For Excalidraw Diagrams</h2>
+<div class="section-scope-header"><h2 id="for-excalidraw-diagrams">🎨 For Excalidraw Diagrams</h2><button class="section-scope-btn" data-sec-id="sec_30">+ Add to Scope</button></div>
 <p><strong>5 Essential Diagrams:</strong></p>
 <ol>
 <li><strong>Workflow Flowchart:</strong> Discovery → Design → Development → Testing → Launch</li>
@@ -828,7 +852,7 @@
 <li><strong>Timeline Gantt:</strong> Visual phases with dependencies</li>
 </ol>
 <hr />
-<h2 id="using-this-guide">📞 Using This Guide</h2>
+<div class="section-scope-header"><h2 id="using-this-guide">📞 Using This Guide</h2><button class="section-scope-btn" data-sec-id="sec_31">+ Add to Scope</button></div>
 <p><strong>For Quick Quotes:</strong><br />
 1. Count pages: Static ($60-$180) + Dynamic ($120-$360)<br />
 2. Add features from pricing table<br />
@@ -848,14 +872,17 @@
 - Practice with 5 sample projects<br />
 - Use Excel calculator for accuracy</p>
 <hr />
-<h2 id="full-documentation">📚 Full Documentation</h2>
+<div class="section-scope-header"><h2 id="full-documentation">📚 Full Documentation</h2><button class="section-scope-btn" data-sec-id="sec_32">+ Add to Scope</button></div>
 <p>For comprehensive details, see:<br />
 - <strong>Website-Requirements-Complete-Guide.md</strong> (764 lines)<br />
 - <strong>Website-Pricing-Parameters.md</strong> (417 lines)<br />
 - <strong>Website-Pricing-Module-Overview.md</strong> (854 lines)</p>
 <hr />
-<p><strong>Version:</strong> 1.0 | <strong>Last Updated:</strong> March 3, 2026 | <strong>Character Count:</strong> ~6,800</p></div>
-    </main>
+<p><strong>Version:</strong> 1.0 | <strong>Last Updated:</strong> March 3, 2026 | <strong>Character Count:</strong> ~6,800</p>
+          </div>
+        </div>
+      </main>
+    </div>
 
     <!-- Site Footer -->
     <footer class="site-footer">

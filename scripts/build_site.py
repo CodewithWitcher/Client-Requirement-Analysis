@@ -2,7 +2,7 @@
 """
 Document Hub & Interactive Static Site Generator
 Scans repository for .md, .xlsx, .xls, .doc, and .docx files, converts them into web pages,
-embeds interactive client workspace engines, and builds a static web hub in `docs/` for GitHub Pages.
+embeds interactive client workspace engines, builds 2-column TOC layouts, and builds static web hub in `docs/`.
 
 Run:
   python scripts/build_site.py
@@ -93,7 +93,7 @@ def get_document_topics(file_path: Path):
 # ─── Document Converters ──────────────────────────────────────────────────
 
 def parse_markdown_file(file_path: Path):
-    """Convert Markdown file to HTML with interactive checkboxes for checklists."""
+    """Convert Markdown file to HTML with 2-column TOC sidebar and interactive scope selectors."""
     content = file_path.read_text(encoding="utf-8", errors="replace")
     
     title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
@@ -114,6 +114,43 @@ def parse_markdown_file(file_path: Path):
 
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'attr_list', 'nl2br'])
     rendered_html = md.convert(processed_content)
+
+    # Extract headings for Sidebar Table of Contents (TOC)
+    headings = re.findall(r'<h([23])\s+id="([^"]+)">([^<]+)</h[23]>', rendered_html)
+    toc_items_html = []
+    sec_count = 0
+
+    for level, head_id, head_text in headings:
+        indent = 'style="padding-left: 0.75rem;"' if level == '3' else ''
+        clean_head_text = re.sub(r'^[0-9\.]+\s*', '', head_text).strip()
+        toc_items_html.append(f'<li {indent}><a href="#{head_id}">📌 {html.escape(clean_head_text)}</a></li>')
+
+        # Inject interactive "+ Add to Scope" buttons on H2 / H3 section headers
+        sec_id = f"sec_{sec_count}"
+        scope_btn = f'<div class="section-scope-header"><h{level} id="{head_id}">{head_text}</h{level}><button class="section-scope-btn" data-sec-id="{sec_id}">+ Add to Scope</button></div>'
+        rendered_html = rendered_html.replace(f'<h{level} id="{head_id}">{head_text}</h{level}>', scope_btn)
+        sec_count += 1
+
+    sidebar_toc_html = ""
+    if toc_items_html:
+        sidebar_toc_html = f'''
+        <aside class="doc-sidebar-toc">
+          <div class="toc-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <ul class="toc-list">
+            {"".join(toc_items_html)}
+          </ul>
+        </aside>
+        '''
 
     progress_bar_html = ""
     if cb_count > 0:
@@ -137,7 +174,9 @@ def parse_markdown_file(file_path: Path):
 
     return {
         "title": title,
-        "html": f'<div class="rendered-markdown">{progress_bar_html}{rendered_html}</div>',
+        "html": f'{rendered_html}',
+        "sidebar_toc": sidebar_toc_html,
+        "progress_bar": progress_bar_html,
         "excerpt": excerpt,
         "word_count": word_count,
         "meta_label": f"{word_count:,} words",
@@ -176,6 +215,8 @@ def parse_docx_file(file_path: Path):
     return {
         "title": title,
         "html": f'<div class="rendered-docx">{processed_html}</div>',
+        "sidebar_toc": "",
+        "progress_bar": "",
         "excerpt": excerpt,
         "word_count": word_count,
         "meta_label": f"{word_count:,} words",
@@ -300,6 +341,8 @@ def parse_excel_file(file_path: Path):
         return {
             "title": title,
             "html": full_html,
+            "sidebar_toc": "",
+            "progress_bar": "",
             "excerpt": excerpt,
             "word_count": total_rows,
             "meta_label": f"{len(sheet_names)} Sheet(s) • {total_rows:,} Rows",
@@ -311,6 +354,8 @@ def parse_excel_file(file_path: Path):
         return {
             "title": title,
             "html": f'<div class="no-results">Unable to preview spreadsheet: {html.escape(str(e))}</div>',
+            "sidebar_toc": "",
+            "progress_bar": "",
             "excerpt": "Excel file data preview unavailable.",
             "word_count": 0,
             "meta_label": "Excel Sheet",
@@ -372,7 +417,7 @@ def generate_export_files(doc_data: dict, file_path: Path, slug: str):
 # ─── HTML Page Generator Templates ───────────────────────────────────────
 
 def generate_index_html(documents: list) -> str:
-    """Build home index dashboard page (docs/index.html) with Web, Mobile, Pricing & File-type filters."""
+    """Build home index dashboard page (docs/index.html)."""
     cards_html = []
     
     md_count = sum(1 for d in documents if d['category'] == 'md')
@@ -428,6 +473,7 @@ def generate_index_html(documents: list) -> str:
         <span>Client Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <span class="breadcrumb">
           <span style="font-weight: 600; color: var(--text-main);">{len(documents)} Total Documents</span>
@@ -498,7 +544,10 @@ def generate_index_html(documents: list) -> str:
 
 
 def generate_doc_page_html(doc: dict) -> str:
-    """Build individual document view page (docs/pages/<slug>.html)."""
+    """Build individual document view page (docs/pages/<slug>.html) with 2-Column TOC layout."""
+    layout_wrapper_start = '<div class="doc-layout-grid">' if doc.get('sidebar_toc') else '<div>'
+    layout_wrapper_end = '</div>'
+
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -519,6 +568,7 @@ def generate_doc_page_html(doc: dict) -> str:
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
@@ -567,10 +617,19 @@ def generate_doc_page_html(doc: dict) -> str:
       </div>
     </section>
 
-    <!-- Document Preview Content -->
-    <main class="doc-content-card">
-      {doc['rendered_html']}
-    </main>
+    <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
+    {layout_wrapper_start}
+      {doc.get('sidebar_toc', '')}
+
+      <main class="doc-main-content">
+        <div class="doc-content-card">
+          {doc.get('progress_bar', '')}
+          <div class="rendered-markdown">
+            {doc['rendered_html']}
+          </div>
+        </div>
+      </main>
+    {layout_wrapper_end}
 
     <!-- Site Footer -->
     <footer class="site-footer">
@@ -610,6 +669,7 @@ def generate_proposal_builder_tool_html() -> str:
         <span>Interactive Proposal Builder</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
           <span class="breadcrumb-sep">&rsaquo;</span>
@@ -729,6 +789,8 @@ def main():
             parsed = {
                 "title": file_path.stem,
                 "html": f"<p>Preview not available for {ext}</p>",
+                "sidebar_toc": "",
+                "progress_bar": "",
                 "excerpt": f"Document file ({ext})",
                 "word_count": 0,
                 "meta_label": ext.upper(),
@@ -745,6 +807,8 @@ def main():
             "badge_class": type_info["badge_class"],
             "excerpt": parsed["excerpt"],
             "rendered_html": parsed["html"],
+            "sidebar_toc": parsed.get("sidebar_toc", ""),
+            "progress_bar": parsed.get("progress_bar", ""),
             "meta_label": parsed["meta_label"],
             "read_time": parsed["read_time"],
             "file_size": file_size,

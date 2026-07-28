@@ -18,6 +18,7 @@
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
@@ -37,8 +38,8 @@
 
       <div class="doc-meta-row">
         <span>File Size: 22.8 KB</span>
-        <span>Metrics: 2,151 words</span>
-        <span>Reading Time: 10 min read</span>
+        <span>Metrics: 2,283 words</span>
+        <span>Reading Time: 11 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -66,14 +67,37 @@
       </div>
     </section>
 
-    <!-- Document Preview Content -->
-    <main class="doc-content-card">
-      <div class="rendered-markdown"><h1 id="application-pricing-parameters-quick-reference-sheet">📱 Application Pricing Parameters — Quick Reference Sheet</h1>
+    <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
+    <div class="doc-layout-grid">
+      
+        <aside class="doc-sidebar-toc">
+          <div class="toc-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <ul class="toc-list">
+            <li ><a href="#how-to-use-this-sheet">📌 How to Use This Sheet</a></li><li ><a href="#1-platform-development-approach">📌 Platform &amp;amp; Development Approach</a></li><li style="padding-left: 0.75rem;"><a href="#platform-cost-multipliers">📌 Platform Cost Multipliers</a></li><li style="padding-left: 0.75rem;"><a href="#development-approach-costs">📌 Development Approach Costs</a></li><li ><a href="#2-app-store-deployment">📌 App Store &amp;amp; Deployment</a></li><li ><a href="#3-design-uiux">📌 Design &amp;amp; UI/UX</a></li><li style="padding-left: 0.75rem;"><a href="#per-screen-pricing">📌 Per-Screen Pricing</a></li><li style="padding-left: 0.75rem;"><a href="#design-services">📌 Design Services</a></li><li ><a href="#4-authentication-user-management">📌 Authentication &amp;amp; User Management</a></li><li ><a href="#5-core-features-pricing">📌 Core Features Pricing</a></li><li style="padding-left: 0.75rem;"><a href="#advanced-features">📌 Advanced Features</a></li><li ><a href="#6-backend-api">📌 Backend &amp;amp; API</a></li><li style="padding-left: 0.75rem;"><a href="#backend-hosting-costs-monthly">📌 Backend Hosting Costs (Monthly)</a></li><li ><a href="#7-database-storage">📌 Database &amp;amp; Storage</a></li><li style="padding-left: 0.75rem;"><a href="#cloud-storage">📌 Cloud Storage</a></li><li ><a href="#8-push-notification-services">📌 Push Notification Services</a></li><li ><a href="#9-payment-integration">📌 Payment Integration</a></li><li style="padding-left: 0.75rem;"><a href="#monetization-setup">📌 Monetization Setup</a></li><li ><a href="#10-security-features">📌 Security Features</a></li><li ><a href="#11-testing-qa">📌 Testing &amp;amp; QA</a></li><li ><a href="#12-analytics-monitoring">📌 Analytics &amp;amp; Monitoring</a></li><li ><a href="#13-third-party-integrations">📌 Third-Party Integrations</a></li><li ><a href="#14-maintenance-support-plans">📌 Maintenance &amp;amp; Support Plans</a></li><li style="padding-left: 0.75rem;"><a href="#app-update-costs">📌 App Update Costs</a></li><li ><a href="#15-app-complexity-guide-total-estimates">📌 App Complexity Guide &amp;amp; Total Estimates</a></li><li style="padding-left: 0.75rem;"><a href="#by-app-complexity">📌 By App Complexity</a></li><li style="padding-left: 0.75rem;"><a href="#by-app-type">📌 By App Type</a></li><li ><a href="#quick-estimation-formula">📌 Quick Estimation Formula</a></li><li ><a href="#hourly-rate-reference">📌 Hourly Rate Reference</a></li><li ><a href="#sample-project-estimates">📌 Sample Project Estimates</a></li><li style="padding-left: 0.75rem;"><a href="#example-1-simple-business-app-android-ios-via-flutter">📌 Example 1: Simple Business App (Android + iOS via Flutter)</a></li><li style="padding-left: 0.75rem;"><a href="#example-2-e-commerce-app-both-platforms">📌 Example 2: E-Commerce App (Both Platforms)</a></li><li style="padding-left: 0.75rem;"><a href="#example-3-on-demand-service-app-uber-like">📌 Example 3: On-Demand Service App (Uber-like)</a></li>
+          </ul>
+        </aside>
+        
+
+      <main class="doc-main-content">
+        <div class="doc-content-card">
+          
+          <div class="rendered-markdown">
+            <h1 id="application-pricing-parameters-quick-reference-sheet">📱 Application Pricing Parameters — Quick Reference Sheet</h1>
 <blockquote>
 <p><strong>Purpose:</strong> A condensed pricing reference to quickly calculate mobile app development costs. Use after the Client Questionnaire to map requirements to prices.</p>
 </blockquote>
 <hr />
-<h2 id="how-to-use-this-sheet">How to Use This Sheet</h2>
+<div class="section-scope-header"><h2 id="how-to-use-this-sheet">How to Use This Sheet</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
 <ol>
 <li>Determine platform(s) — Android, iOS, or Both</li>
 <li>Choose development approach — Native, Flutter, React Native</li>
@@ -84,8 +108,8 @@
 <li>Present the final quote</li>
 </ol>
 <hr />
-<h2 id="1-platform-development-approach">1. Platform &amp; Development Approach</h2>
-<h3 id="platform-cost-multipliers">Platform Cost Multipliers</h3>
+<div class="section-scope-header"><h2 id="1-platform-development-approach">1. Platform &amp; Development Approach</h2><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="platform-cost-multipliers">Platform Cost Multipliers</h3><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -122,7 +146,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="development-approach-costs">Development Approach Costs</h3>
+<div class="section-scope-header"><h3 id="development-approach-costs">Development Approach Costs</h3><button class="section-scope-btn" data-sec-id="sec_3">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -170,7 +194,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="2-app-store-deployment">2. App Store &amp; Deployment</h2>
+<div class="section-scope-header"><h2 id="2-app-store-deployment">2. App Store &amp; Deployment</h2><button class="section-scope-btn" data-sec-id="sec_4">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -244,8 +268,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="3-design-uiux">3. Design &amp; UI/UX</h2>
-<h3 id="per-screen-pricing">Per-Screen Pricing</h3>
+<div class="section-scope-header"><h2 id="3-design-uiux">3. Design &amp; UI/UX</h2><button class="section-scope-btn" data-sec-id="sec_5">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="per-screen-pricing">Per-Screen Pricing</h3><button class="section-scope-btn" data-sec-id="sec_6">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -285,7 +309,7 @@
 <strong>Medium</strong> = Forms, interactive elements, API data<br />
 <strong>Complex</strong> = Maps, charts, real-time data, custom components</p>
 </blockquote>
-<h3 id="design-services">Design Services</h3>
+<div class="section-scope-header"><h3 id="design-services">Design Services</h3><button class="section-scope-btn" data-sec-id="sec_7">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -353,7 +377,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="4-authentication-user-management">4. Authentication &amp; User Management</h2>
+<div class="section-scope-header"><h2 id="4-authentication-user-management">4. Authentication &amp; User Management</h2><button class="section-scope-btn" data-sec-id="sec_8">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -451,7 +475,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="5-core-features-pricing">5. Core Features Pricing</h2>
+<div class="section-scope-header"><h2 id="5-core-features-pricing">5. Core Features Pricing</h2><button class="section-scope-btn" data-sec-id="sec_9">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -686,7 +710,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="advanced-features">Advanced Features</h3>
+<div class="section-scope-header"><h3 id="advanced-features">Advanced Features</h3><button class="section-scope-btn" data-sec-id="sec_10">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -772,7 +796,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="6-backend-api">6. Backend &amp; API</h2>
+<div class="section-scope-header"><h2 id="6-backend-api">6. Backend &amp; API</h2><button class="section-scope-btn" data-sec-id="sec_11">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -851,7 +875,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="backend-hosting-costs-monthly">Backend Hosting Costs (Monthly)</h3>
+<div class="section-scope-header"><h3 id="backend-hosting-costs-monthly">Backend Hosting Costs (Monthly)</h3><button class="section-scope-btn" data-sec-id="sec_12">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -913,7 +937,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="7-database-storage">7. Database &amp; Storage</h2>
+<div class="section-scope-header"><h2 id="7-database-storage">7. Database &amp; Storage</h2><button class="section-scope-btn" data-sec-id="sec_13">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -990,7 +1014,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="cloud-storage">Cloud Storage</h3>
+<div class="section-scope-header"><h3 id="cloud-storage">Cloud Storage</h3><button class="section-scope-btn" data-sec-id="sec_14">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1034,7 +1058,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="8-push-notification-services">8. Push Notification Services</h2>
+<div class="section-scope-header"><h2 id="8-push-notification-services">8. Push Notification Services</h2><button class="section-scope-btn" data-sec-id="sec_15">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1072,7 +1096,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="9-payment-integration">9. Payment Integration</h2>
+<div class="section-scope-header"><h2 id="9-payment-integration">9. Payment Integration</h2><button class="section-scope-btn" data-sec-id="sec_16">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1149,7 +1173,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="monetization-setup">Monetization Setup</h3>
+<div class="section-scope-header"><h3 id="monetization-setup">Monetization Setup</h3><button class="section-scope-btn" data-sec-id="sec_17">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1192,7 +1216,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="10-security-features">10. Security Features</h2>
+<div class="section-scope-header"><h2 id="10-security-features">10. Security Features</h2><button class="section-scope-btn" data-sec-id="sec_18">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1284,7 +1308,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="11-testing-qa">11. Testing &amp; QA</h2>
+<div class="section-scope-header"><h2 id="11-testing-qa">11. Testing &amp; QA</h2><button class="section-scope-btn" data-sec-id="sec_19">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1361,7 +1385,7 @@
 <p><strong>Rule of Thumb:</strong> Testing = 15-25% of total development cost</p>
 </blockquote>
 <hr />
-<h2 id="12-analytics-monitoring">12. Analytics &amp; Monitoring</h2>
+<div class="section-scope-header"><h2 id="12-analytics-monitoring">12. Analytics &amp; Monitoring</h2><button class="section-scope-btn" data-sec-id="sec_20">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1429,7 +1453,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="13-third-party-integrations">13. Third-Party Integrations</h2>
+<div class="section-scope-header"><h2 id="13-third-party-integrations">13. Third-Party Integrations</h2><button class="section-scope-btn" data-sec-id="sec_21">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1512,7 +1536,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="14-maintenance-support-plans">14. Maintenance &amp; Support Plans</h2>
+<div class="section-scope-header"><h2 id="14-maintenance-support-plans">14. Maintenance &amp; Support Plans</h2><button class="section-scope-btn" data-sec-id="sec_22">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1555,7 +1579,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="app-update-costs">App Update Costs</h3>
+<div class="section-scope-header"><h3 id="app-update-costs">App Update Costs</h3><button class="section-scope-btn" data-sec-id="sec_23">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1598,8 +1622,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="15-app-complexity-guide-total-estimates">15. App Complexity Guide &amp; Total Estimates</h2>
-<h3 id="by-app-complexity">By App Complexity</h3>
+<div class="section-scope-header"><h2 id="15-app-complexity-guide-total-estimates">15. App Complexity Guide &amp; Total Estimates</h2><button class="section-scope-btn" data-sec-id="sec_24">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="by-app-complexity">By App Complexity</h3><button class="section-scope-btn" data-sec-id="sec_25">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1646,7 +1670,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="by-app-type">By App Type</h3>
+<div class="section-scope-header"><h3 id="by-app-type">By App Type</h3><button class="section-scope-btn" data-sec-id="sec_26">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1750,7 +1774,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="quick-estimation-formula">Quick Estimation Formula</h2>
+<div class="section-scope-header"><h2 id="quick-estimation-formula">Quick Estimation Formula</h2><button class="section-scope-btn" data-sec-id="sec_27">+ Add to Scope</button></div>
 <pre><code>TOTAL APP COST = 
   (Sum of Screen Costs — Design + Development) 
   + (Sum of Feature Costs) 
@@ -1768,7 +1792,7 @@
   + (20% Buffer for unforeseen tasks)
 </code></pre>
 <hr />
-<h2 id="hourly-rate-reference">Hourly Rate Reference</h2>
+<div class="section-scope-header"><h2 id="hourly-rate-reference">Hourly Rate Reference</h2><button class="section-scope-btn" data-sec-id="sec_28">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1811,8 +1835,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="sample-project-estimates">Sample Project Estimates</h2>
-<h3 id="example-1-simple-business-app-android-ios-via-flutter">Example 1: Simple Business App (Android + iOS via Flutter)</h3>
+<div class="section-scope-header"><h2 id="sample-project-estimates">Sample Project Estimates</h2><button class="section-scope-btn" data-sec-id="sec_29">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="example-1-simple-business-app-android-ios-via-flutter">Example 1: Simple Business App (Android + iOS via Flutter)</h3><button class="section-scope-btn" data-sec-id="sec_30">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1867,7 +1891,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="example-2-e-commerce-app-both-platforms">Example 2: E-Commerce App (Both Platforms)</h3>
+<div class="section-scope-header"><h3 id="example-2-e-commerce-app-both-platforms">Example 2: E-Commerce App (Both Platforms)</h3><button class="section-scope-btn" data-sec-id="sec_31">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1938,7 +1962,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="example-3-on-demand-service-app-uber-like">Example 3: On-Demand Service App (Uber-like)</h3>
+<div class="section-scope-header"><h3 id="example-3-on-demand-service-app-uber-like">Example 3: On-Demand Service App (Uber-like)</h3><button class="section-scope-btn" data-sec-id="sec_32">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -2016,8 +2040,11 @@
 <hr />
 <blockquote>
 <p><strong>Remember:</strong> These are reference prices. Adjust based on your experience, market conditions, client budget, project urgency, and complexity.</p>
-</blockquote></div>
-    </main>
+</blockquote>
+          </div>
+        </div>
+      </main>
+    </div>
 
     <!-- Site Footer -->
     <footer class="site-footer">

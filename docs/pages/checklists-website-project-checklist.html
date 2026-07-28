@@ -18,6 +18,7 @@
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
@@ -37,8 +38,8 @@
 
       <div class="doc-meta-row">
         <span>File Size: 15.1 KB</span>
-        <span>Metrics: 1,750 words</span>
-        <span>Reading Time: 8 min read</span>
+        <span>Metrics: 1,918 words</span>
+        <span>Reading Time: 9 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -66,9 +67,30 @@
       </div>
     </section>
 
-    <!-- Document Preview Content -->
-    <main class="doc-content-card">
-      <div class="rendered-markdown">
+    <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
+    <div class="doc-layout-grid">
+      
+        <aside class="doc-sidebar-toc">
+          <div class="toc-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <ul class="toc-list">
+            <li ><a href="#phase-1-pre-project-discovery-planning">📌 Phase 1: Pre-Project (Discovery &amp;amp; Planning)</a></li><li style="padding-left: 0.75rem;"><a href="#11-client-discovery">📌 Client Discovery</a></li><li style="padding-left: 0.75rem;"><a href="#12-requirements-documentation">📌 Requirements Documentation</a></li><li style="padding-left: 0.75rem;"><a href="#13-project-scope-quotation">📌 Project Scope &amp;amp; Quotation</a></li><li ><a href="#phase-2-setup-infrastructure">📌 Phase 2: Setup &amp;amp; Infrastructure</a></li><li style="padding-left: 0.75rem;"><a href="#21-domain-hosting">📌 Domain &amp;amp; Hosting</a></li><li style="padding-left: 0.75rem;"><a href="#22-development-environment">📌 Development Environment</a></li><li style="padding-left: 0.75rem;"><a href="#23-database">📌 Database</a></li><li ><a href="#phase-3-design">📌 Phase 3: Design</a></li><li style="padding-left: 0.75rem;"><a href="#31-uiux-design">📌 UI/UX Design</a></li><li style="padding-left: 0.75rem;"><a href="#32-branding-assets">📌 Branding &amp;amp; Assets</a></li><li ><a href="#phase-4-development">📌 Phase 4: Development</a></li><li style="padding-left: 0.75rem;"><a href="#41-frontend-development">📌 Frontend Development</a></li><li style="padding-left: 0.75rem;"><a href="#42-backend-development">📌 Backend Development</a></li><li style="padding-left: 0.75rem;"><a href="#43-database">📌 Database</a></li><li style="padding-left: 0.75rem;"><a href="#44-features-integrations">📌 Features &amp;amp; Integrations</a></li><li ><a href="#phase-5-content">📌 Phase 5: Content</a></li><li style="padding-left: 0.75rem;"><a href="#51-content-population">📌 Content Population</a></li><li style="padding-left: 0.75rem;"><a href="#52-legal-pages">📌 Legal Pages</a></li><li ><a href="#phase-6-seo-analytics">📌 Phase 6: SEO &amp;amp; Analytics</a></li><li style="padding-left: 0.75rem;"><a href="#61-technical-seo">📌 Technical SEO</a></li><li style="padding-left: 0.75rem;"><a href="#62-analytics-tracking">📌 Analytics &amp;amp; Tracking</a></li><li ><a href="#phase-7-performance-optimization">📌 Phase 7: Performance &amp;amp; Optimization</a></li><li style="padding-left: 0.75rem;"><a href="#71-page-speed">📌 Page Speed</a></li><li style="padding-left: 0.75rem;"><a href="#72-core-web-vitals">📌 Core Web Vitals</a></li><li ><a href="#phase-8-security">📌 Phase 8: Security</a></li><li style="padding-left: 0.75rem;"><a href="#81-security-checklist">📌 Security Checklist</a></li><li style="padding-left: 0.75rem;"><a href="#82-compliance">📌 Compliance</a></li><li ><a href="#phase-9-testing">📌 Phase 9: Testing</a></li><li style="padding-left: 0.75rem;"><a href="#91-functional-testing">📌 Functional Testing</a></li><li style="padding-left: 0.75rem;"><a href="#92-compatibility-testing">📌 Compatibility Testing</a></li><li style="padding-left: 0.75rem;"><a href="#93-user-acceptance-testing-uat">📌 User Acceptance Testing (UAT)</a></li><li ><a href="#phase-10-pre-launch">📌 Phase 10: Pre-Launch</a></li><li style="padding-left: 0.75rem;"><a href="#101-pre-launch-checklist">📌 Pre-Launch Checklist</a></li><li ><a href="#phase-11-launch">📌 Phase 11: Launch</a></li><li style="padding-left: 0.75rem;"><a href="#111-deployment">📌 Deployment</a></li><li style="padding-left: 0.75rem;"><a href="#112-post-launch-verification">📌 Post-Launch Verification</a></li><li ><a href="#phase-12-post-launch">📌 Phase 12: Post-Launch</a></li><li style="padding-left: 0.75rem;"><a href="#121-handover">📌 Handover</a></li><li style="padding-left: 0.75rem;"><a href="#122-final-payment-closure">📌 Final Payment &amp;amp; Closure</a></li><li style="padding-left: 0.75rem;"><a href="#123-ongoing-maintenance-if-applicable">📌 Ongoing Maintenance (if applicable)</a></li><li ><a href="#quick-reference-common-mistakes-to-avoid">📌 Quick Reference: Common Mistakes to Avoid</a></li>
+          </ul>
+        </aside>
+        
+
+      <main class="doc-main-content">
+        <div class="doc-content-card">
+          
         <div class="summary-card" style="margin-bottom: 2rem; background: rgba(59, 130, 246, 0.05);">
           <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.5rem;">
             <span>Task Checklist Progress</span>
@@ -78,13 +100,15 @@
             <div id="checklist-progress-bar" style="height: 100%; width: 0%; background: var(--accent-primary); transition: width 0.3s ease;"></div>
           </div>
         </div>
-        <h1 id="website-project-checklist">✅ Website Project Checklist</h1>
+        
+          <div class="rendered-markdown">
+            <h1 id="website-project-checklist">✅ Website Project Checklist</h1>
 <blockquote>
 <p><strong>Purpose:</strong> A step-by-step checklist to follow throughout the entire website project lifecycle. Use this to ensure nothing is missed from initial contact to post-launch support.</p>
 </blockquote>
 <hr />
-<h2 id="phase-1-pre-project-discovery-planning">Phase 1: Pre-Project (Discovery &amp; Planning)</h2>
-<h3 id="11-client-discovery">1.1 Client Discovery</h3>
+<div class="section-scope-header"><h2 id="phase-1-pre-project-discovery-planning">Phase 1: Pre-Project (Discovery &amp; Planning)</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="11-client-discovery">1.1 Client Discovery</h3><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-0" > Initial client meeting/call completed</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-1" > Client Questionnaire filled out</li>
@@ -94,7 +118,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-5" > Client's existing assets collected (logo, brand guidelines, content)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-6" > Reference websites reviewed with client</li>
 </ul>
-<h3 id="12-requirements-documentation">1.2 Requirements Documentation</h3>
+<div class="section-scope-header"><h3 id="12-requirements-documentation">1.2 Requirements Documentation</h3><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-7" > All pages listed with descriptions</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-8" > All features and functionalities listed</li>
@@ -107,7 +131,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-15" > Multi-language requirements noted</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-16" > Accessibility requirements noted</li>
 </ul>
-<h3 id="13-project-scope-quotation">1.3 Project Scope &amp; Quotation</h3>
+<div class="section-scope-header"><h3 id="13-project-scope-quotation">1.3 Project Scope &amp; Quotation</h3><button class="section-scope-btn" data-sec-id="sec_3">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-17" > Pricing calculation completed (use Pricing Parameters sheet)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-18" > Project scope document prepared</li>
@@ -121,8 +145,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-26" > Project start date confirmed</li>
 </ul>
 <hr />
-<h2 id="phase-2-setup-infrastructure">Phase 2: Setup &amp; Infrastructure</h2>
-<h3 id="21-domain-hosting">2.1 Domain &amp; Hosting</h3>
+<div class="section-scope-header"><h2 id="phase-2-setup-infrastructure">Phase 2: Setup &amp; Infrastructure</h2><button class="section-scope-btn" data-sec-id="sec_4">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="21-domain-hosting">2.1 Domain &amp; Hosting</h3><button class="section-scope-btn" data-sec-id="sec_5">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-27" > Domain name purchased / transferred</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-28" > Domain DNS configured</li>
@@ -134,7 +158,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-34" > File manager access verified</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-35" > Staging/development URL set up</li>
 </ul>
-<h3 id="22-development-environment">2.2 Development Environment</h3>
+<div class="section-scope-header"><h3 id="22-development-environment">2.2 Development Environment</h3><button class="section-scope-btn" data-sec-id="sec_6">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-36" > Git repository created</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-37" > Branch strategy decided (main, develop, feature branches)</li>
@@ -145,7 +169,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-42" > Communication channel set up (Slack, WhatsApp, Email)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-43" > File sharing set up (Google Drive, Dropbox, etc.)</li>
 </ul>
-<h3 id="23-database">2.3 Database</h3>
+<div class="section-scope-header"><h3 id="23-database">2.3 Database</h3><button class="section-scope-btn" data-sec-id="sec_7">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-44" > Database server set up</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-45" > Database schema designed</li>
@@ -154,8 +178,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-48" > Data migration planned (if applicable)</li>
 </ul>
 <hr />
-<h2 id="phase-3-design">Phase 3: Design</h2>
-<h3 id="31-uiux-design">3.1 UI/UX Design</h3>
+<div class="section-scope-header"><h2 id="phase-3-design">Phase 3: Design</h2><button class="section-scope-btn" data-sec-id="sec_8">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="31-uiux-design">3.1 UI/UX Design</h3><button class="section-scope-btn" data-sec-id="sec_9">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-49" > Sitemap / Information architecture created</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-50" > Wireframes created (low-fidelity)</li>
@@ -170,7 +194,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-59" > Final design approved by client</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-60" > Design assets exported for development</li>
 </ul>
-<h3 id="32-branding-assets">3.2 Branding &amp; Assets</h3>
+<div class="section-scope-header"><h3 id="32-branding-assets">3.2 Branding &amp; Assets</h3><button class="section-scope-btn" data-sec-id="sec_10">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-61" > Logo finalized</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-62" > Color palette defined</li>
@@ -183,8 +207,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-69" > Open Graph image created (for social sharing)</li>
 </ul>
 <hr />
-<h2 id="phase-4-development">Phase 4: Development</h2>
-<h3 id="41-frontend-development">4.1 Frontend Development</h3>
+<div class="section-scope-header"><h2 id="phase-4-development">Phase 4: Development</h2><button class="section-scope-btn" data-sec-id="sec_11">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="41-frontend-development">4.1 Frontend Development</h3><button class="section-scope-btn" data-sec-id="sec_12">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-70" > Project scaffolded (React / Next.js / Vue / HTML etc.)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-71" > Component library / design system set up</li>
@@ -213,7 +237,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-94" > Loading states / skeletons implemented</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-95" > Error states / empty states handled</li>
 </ul>
-<h3 id="42-backend-development">4.2 Backend Development</h3>
+<div class="section-scope-header"><h3 id="42-backend-development">4.2 Backend Development</h3><button class="section-scope-btn" data-sec-id="sec_13">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-96" > API routes / controllers set up</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-97" > Authentication system implemented</li>
@@ -231,7 +255,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-109" > Error handling standardized</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-110" > API documentation created</li>
 </ul>
-<h3 id="43-database">4.3 Database</h3>
+<div class="section-scope-header"><h3 id="43-database">4.3 Database</h3><button class="section-scope-btn" data-sec-id="sec_14">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-111" > Tables / collections created</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-112" > Relationships / references set up</li>
@@ -240,7 +264,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-115" > Data migration executed (if applicable)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-116" > Backup mechanism tested</li>
 </ul>
-<h3 id="44-features-integrations">4.4 Features &amp; Integrations</h3>
+<div class="section-scope-header"><h3 id="44-features-integrations">4.4 Features &amp; Integrations</h3><button class="section-scope-btn" data-sec-id="sec_15">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-117" > Contact form working (with email notification)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-118" > Newsletter subscription integrated</li>
@@ -264,8 +288,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-136" > All APIs consumed and tested</li>
 </ul>
 <hr />
-<h2 id="phase-5-content">Phase 5: Content</h2>
-<h3 id="51-content-population">5.1 Content Population</h3>
+<div class="section-scope-header"><h2 id="phase-5-content">Phase 5: Content</h2><button class="section-scope-btn" data-sec-id="sec_16">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="51-content-population">5.1 Content Population</h3><button class="section-scope-btn" data-sec-id="sec_17">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-137" > All page content added</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-138" > All images optimized and uploaded</li>
@@ -280,7 +304,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-147" > Map location verified</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-148" > Social media links verified</li>
 </ul>
-<h3 id="52-legal-pages">5.2 Legal Pages</h3>
+<div class="section-scope-header"><h3 id="52-legal-pages">5.2 Legal Pages</h3><button class="section-scope-btn" data-sec-id="sec_18">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-149" > Privacy Policy page created</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-150" > Terms &amp; Conditions page created</li>
@@ -290,8 +314,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-154" > Accessibility statement (if applicable)</li>
 </ul>
 <hr />
-<h2 id="phase-6-seo-analytics">Phase 6: SEO &amp; Analytics</h2>
-<h3 id="61-technical-seo">6.1 Technical SEO</h3>
+<div class="section-scope-header"><h2 id="phase-6-seo-analytics">Phase 6: SEO &amp; Analytics</h2><button class="section-scope-btn" data-sec-id="sec_19">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="61-technical-seo">6.1 Technical SEO</h3><button class="section-scope-btn" data-sec-id="sec_20">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-155" > Page titles set for all pages</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-156" > Meta descriptions written for all pages</li>
@@ -311,7 +335,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-170" > No duplicate content</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-171" > Mobile-friendly test passed</li>
 </ul>
-<h3 id="62-analytics-tracking">6.2 Analytics &amp; Tracking</h3>
+<div class="section-scope-header"><h3 id="62-analytics-tracking">6.2 Analytics &amp; Tracking</h3><button class="section-scope-btn" data-sec-id="sec_21">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-172" > Google Analytics 4 (GA4) installed</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-173" > Google Search Console set up</li>
@@ -323,8 +347,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-179" > Custom dashboard / reports set up (if needed)</li>
 </ul>
 <hr />
-<h2 id="phase-7-performance-optimization">Phase 7: Performance &amp; Optimization</h2>
-<h3 id="71-page-speed">7.1 Page Speed</h3>
+<div class="section-scope-header"><h2 id="phase-7-performance-optimization">Phase 7: Performance &amp; Optimization</h2><button class="section-scope-btn" data-sec-id="sec_22">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="71-page-speed">7.1 Page Speed</h3><button class="section-scope-btn" data-sec-id="sec_23">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-180" > Google PageSpeed Insights score &gt; 90 (desktop)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-181" > Google PageSpeed Insights score &gt; 80 (mobile)</li>
@@ -339,7 +363,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-190" > CDN configured (if applicable)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-191" > Server response time &lt; 200ms (TTFB)</li>
 </ul>
-<h3 id="72-core-web-vitals">7.2 Core Web Vitals</h3>
+<div class="section-scope-header"><h3 id="72-core-web-vitals">7.2 Core Web Vitals</h3><button class="section-scope-btn" data-sec-id="sec_24">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-192" > LCP (Largest Contentful Paint) &lt; 2.5s</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-193" > FID (First Input Delay) &lt; 100ms</li>
@@ -347,8 +371,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-195" > INP (Interaction to Next Paint) &lt; 200ms</li>
 </ul>
 <hr />
-<h2 id="phase-8-security">Phase 8: Security</h2>
-<h3 id="81-security-checklist">8.1 Security Checklist</h3>
+<div class="section-scope-header"><h2 id="phase-8-security">Phase 8: Security</h2><button class="section-scope-btn" data-sec-id="sec_25">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="81-security-checklist">8.1 Security Checklist</h3><button class="section-scope-btn" data-sec-id="sec_26">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-196" > SSL/HTTPS working on all pages</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-197" > HTTP to HTTPS redirect configured</li>
@@ -367,7 +391,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-210" > Backup files not accessible via URL</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-211" > .env / config files not exposed</li>
 </ul>
-<h3 id="82-compliance">8.2 Compliance</h3>
+<div class="section-scope-header"><h3 id="82-compliance">8.2 Compliance</h3><button class="section-scope-btn" data-sec-id="sec_27">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-212" > Cookie consent banner implemented (if needed)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-213" > GDPR compliance verified (if applicable)</li>
@@ -375,8 +399,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-215" > PCI-DSS compliance (if handling card data directly)</li>
 </ul>
 <hr />
-<h2 id="phase-9-testing">Phase 9: Testing</h2>
-<h3 id="91-functional-testing">9.1 Functional Testing</h3>
+<div class="section-scope-header"><h2 id="phase-9-testing">Phase 9: Testing</h2><button class="section-scope-btn" data-sec-id="sec_28">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="91-functional-testing">9.1 Functional Testing</h3><button class="section-scope-btn" data-sec-id="sec_29">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-216" > All links working (no broken links)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-217" > All forms submitting correctly</li>
@@ -395,7 +419,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-230" > All CRUD operations tested</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-231" > Admin panel functions tested</li>
 </ul>
-<h3 id="92-compatibility-testing">9.2 Compatibility Testing</h3>
+<div class="section-scope-header"><h3 id="92-compatibility-testing">9.2 Compatibility Testing</h3><button class="section-scope-btn" data-sec-id="sec_30">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-232" > Chrome (latest) — Desktop &amp; Mobile</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-233" > Firefox (latest) — Desktop &amp; Mobile</li>
@@ -407,7 +431,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-239" > Tablet tested (if applicable)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-240" > Different screen resolutions tested</li>
 </ul>
-<h3 id="93-user-acceptance-testing-uat">9.3 User Acceptance Testing (UAT)</h3>
+<div class="section-scope-header"><h3 id="93-user-acceptance-testing-uat">9.3 User Acceptance Testing (UAT)</h3><button class="section-scope-btn" data-sec-id="sec_31">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-241" > UAT environment prepared</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-242" > Client / stakeholders have access</li>
@@ -417,8 +441,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-246" > Final UAT sign-off received</li>
 </ul>
 <hr />
-<h2 id="phase-10-pre-launch">Phase 10: Pre-Launch</h2>
-<h3 id="101-pre-launch-checklist">10.1 Pre-Launch Checklist</h3>
+<div class="section-scope-header"><h2 id="phase-10-pre-launch">Phase 10: Pre-Launch</h2><button class="section-scope-btn" data-sec-id="sec_32">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="101-pre-launch-checklist">10.1 Pre-Launch Checklist</h3><button class="section-scope-btn" data-sec-id="sec_33">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-247" > Favicon uploaded (all sizes: 16x16, 32x32, 180x180, 192x192, 512x512)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-248" > Apple touch icon set</li>
@@ -441,8 +465,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-265" > All dummy/placeholder content replaced</li>
 </ul>
 <hr />
-<h2 id="phase-11-launch">Phase 11: Launch</h2>
-<h3 id="111-deployment">11.1 Deployment</h3>
+<div class="section-scope-header"><h2 id="phase-11-launch">Phase 11: Launch</h2><button class="section-scope-btn" data-sec-id="sec_34">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="111-deployment">11.1 Deployment</h3><button class="section-scope-btn" data-sec-id="sec_35">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-266" > Production build created</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-267" > Build tested on staging</li>
@@ -456,7 +480,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-275" > Performance verified on production</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-276" > Backup created post-deployment</li>
 </ul>
-<h3 id="112-post-launch-verification">11.2 Post-Launch Verification</h3>
+<div class="section-scope-header"><h3 id="112-post-launch-verification">11.2 Post-Launch Verification</h3><button class="section-scope-btn" data-sec-id="sec_36">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-277" > All pages accessible</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-278" > Forms working</li>
@@ -470,8 +494,8 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-286" > SSL showing in browser</li>
 </ul>
 <hr />
-<h2 id="phase-12-post-launch">Phase 12: Post-Launch</h2>
-<h3 id="121-handover">12.1 Handover</h3>
+<div class="section-scope-header"><h2 id="phase-12-post-launch">Phase 12: Post-Launch</h2><button class="section-scope-btn" data-sec-id="sec_37">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="121-handover">12.1 Handover</h3><button class="section-scope-btn" data-sec-id="sec_38">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-287" > All credentials shared securely with client</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-288" > Hosting access provided</li>
@@ -484,7 +508,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-295" > All third-party account details shared</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-296" > Client has list of all services, logins, and renewal dates</li>
 </ul>
-<h3 id="122-final-payment-closure">12.2 Final Payment &amp; Closure</h3>
+<div class="section-scope-header"><h3 id="122-final-payment-closure">12.2 Final Payment &amp; Closure</h3><button class="section-scope-btn" data-sec-id="sec_39">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-297" > Final payment received</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-298" > Invoice sent</li>
@@ -494,7 +518,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-302" > Maintenance plan discussed and agreed (if applicable)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-303" > Warranty / support period communicated</li>
 </ul>
-<h3 id="123-ongoing-maintenance-if-applicable">12.3 Ongoing Maintenance (if applicable)</h3>
+<div class="section-scope-header"><h3 id="123-ongoing-maintenance-if-applicable">12.3 Ongoing Maintenance (if applicable)</h3><button class="section-scope-btn" data-sec-id="sec_40">+ Add to Scope</button></div>
 <ul>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-304" > Monitoring set up (uptime, performance, errors)</li>
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-305" > Backup schedule configured</li>
@@ -506,7 +530,7 @@
 <li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-311" > Software/plugin updates schedule set</li>
 </ul>
 <hr />
-<h2 id="quick-reference-common-mistakes-to-avoid">Quick Reference: Common Mistakes to Avoid</h2>
+<div class="section-scope-header"><h2 id="quick-reference-common-mistakes-to-avoid">Quick Reference: Common Mistakes to Avoid</h2><button class="section-scope-btn" data-sec-id="sec_41">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -581,8 +605,11 @@
 <hr />
 <blockquote>
 <p><strong>Tip:</strong> Print this checklist or copy it to your project management tool at the start of every project. Check off items as you complete them.</p>
-</blockquote></div>
-    </main>
+</blockquote>
+          </div>
+        </div>
+      </main>
+    </div>
 
     <!-- Site Footer -->
     <footer class="site-footer">

@@ -18,6 +18,7 @@
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
@@ -37,8 +38,8 @@
 
       <div class="doc-meta-row">
         <span>File Size: 18.6 KB</span>
-        <span>Metrics: 1,785 words</span>
-        <span>Reading Time: 8 min read</span>
+        <span>Metrics: 1,885 words</span>
+        <span>Reading Time: 9 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -66,14 +67,37 @@
       </div>
     </section>
 
-    <!-- Document Preview Content -->
-    <main class="doc-content-card">
-      <div class="rendered-markdown"><h1 id="website-pricing-parameters-quick-reference-sheet">🌐 Website Pricing Parameters — Quick Reference Sheet</h1>
+    <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
+    <div class="doc-layout-grid">
+      
+        <aside class="doc-sidebar-toc">
+          <div class="toc-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <ul class="toc-list">
+            <li ><a href="#how-to-use-this-sheet">📌 How to Use This Sheet</a></li><li ><a href="#1-domain-ssl">📌 Domain &amp;amp; SSL</a></li><li ><a href="#2-hosting">📌 Hosting</a></li><li style="padding-left: 0.75rem;"><a href="#email-hosting-add-on">📌 Email Hosting Add-on</a></li><li ><a href="#3-database">📌 Database</a></li><li style="padding-left: 0.75rem;"><a href="#database-setup-fee-one-time">📌 Database Setup Fee (One-time)</a></li><li ><a href="#4-design-uiux">📌 Design &amp;amp; UI/UX</a></li><li style="padding-left: 0.75rem;"><a href="#design-add-ons">📌 Design Add-ons</a></li><li ><a href="#5-development-per-pagecomponent-pricing">📌 Development — Per Page/Component Pricing</a></li><li ><a href="#6-feature-pricing">📌 Feature Pricing</a></li><li ><a href="#7-e-commerce-specific">📌 E-Commerce Specific</a></li><li ><a href="#8-payment-gateway-integration">📌 Payment Gateway Integration</a></li><li ><a href="#9-seo-analytics">📌 SEO &amp;amp; Analytics</a></li><li ><a href="#10-security">📌 Security</a></li><li ><a href="#11-third-party-integrations">📌 Third-Party Integrations</a></li><li ><a href="#12-cms-setup">📌 CMS Setup</a></li><li ><a href="#13-content-services">📌 Content Services</a></li><li ><a href="#14-maintenance-support-plans">📌 Maintenance &amp;amp; Support Plans</a></li><li ><a href="#15-project-complexity-multipliers">📌 Project Complexity Multipliers</a></li><li ><a href="#quick-estimation-formula">📌 Quick Estimation Formula</a></li><li ><a href="#hourly-rate-reference">📌 Hourly Rate Reference</a></li><li ><a href="#sample-project-estimates">📌 Sample Project Estimates</a></li><li style="padding-left: 0.75rem;"><a href="#example-1-simple-business-website">📌 Example 1: Simple Business Website</a></li><li style="padding-left: 0.75rem;"><a href="#example-2-e-commerce-website">📌 Example 2: E-Commerce Website</a></li><li style="padding-left: 0.75rem;"><a href="#example-3-saas-web-application">📌 Example 3: SaaS Web Application</a></li>
+          </ul>
+        </aside>
+        
+
+      <main class="doc-main-content">
+        <div class="doc-content-card">
+          
+          <div class="rendered-markdown">
+            <h1 id="website-pricing-parameters-quick-reference-sheet">🌐 Website Pricing Parameters — Quick Reference Sheet</h1>
 <blockquote>
 <p><strong>Purpose:</strong> A condensed pricing reference to quickly calculate project costs. Use after the Client Questionnaire to map requirements to prices.</p>
 </blockquote>
 <hr />
-<h2 id="how-to-use-this-sheet">How to Use This Sheet</h2>
+<div class="section-scope-header"><h2 id="how-to-use-this-sheet">How to Use This Sheet</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
 <ol>
 <li>Go through each category below</li>
 <li>Check which items apply to the client's project</li>
@@ -83,7 +107,7 @@
 <li>Present the final quote</li>
 </ol>
 <hr />
-<h2 id="1-domain-ssl">1. Domain &amp; SSL</h2>
+<div class="section-scope-header"><h2 id="1-domain-ssl">1. Domain &amp; SSL</h2><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -151,7 +175,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="2-hosting">2. Hosting</h2>
+<div class="section-scope-header"><h2 id="2-hosting">2. Hosting</h2><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -228,7 +252,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="email-hosting-add-on">Email Hosting Add-on</h3>
+<div class="section-scope-header"><h3 id="email-hosting-add-on">Email Hosting Add-on</h3><button class="section-scope-btn" data-sec-id="sec_3">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -261,7 +285,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="3-database">3. Database</h2>
+<div class="section-scope-header"><h2 id="3-database">3. Database</h2><button class="section-scope-btn" data-sec-id="sec_4">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -334,7 +358,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="database-setup-fee-one-time">Database Setup Fee (One-time)</h3>
+<div class="section-scope-header"><h3 id="database-setup-fee-one-time">Database Setup Fee (One-time)</h3><button class="section-scope-btn" data-sec-id="sec_5">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -372,7 +396,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="4-design-uiux">4. Design &amp; UI/UX</h2>
+<div class="section-scope-header"><h2 id="4-design-uiux">4. Design &amp; UI/UX</h2><button class="section-scope-btn" data-sec-id="sec_6">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -439,7 +463,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="design-add-ons">Design Add-ons</h3>
+<div class="section-scope-header"><h3 id="design-add-ons">Design Add-ons</h3><button class="section-scope-btn" data-sec-id="sec_7">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -477,7 +501,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="5-development-per-pagecomponent-pricing">5. Development — Per Page/Component Pricing</h2>
+<div class="section-scope-header"><h2 id="5-development-per-pagecomponent-pricing">5. Development — Per Page/Component Pricing</h2><button class="section-scope-btn" data-sec-id="sec_8">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -670,7 +694,7 @@
 <strong>Complex</strong> = Full CRUD, real-time updates, complex logic, animations</p>
 </blockquote>
 <hr />
-<h2 id="6-feature-pricing">6. Feature Pricing</h2>
+<div class="section-scope-header"><h2 id="6-feature-pricing">6. Feature Pricing</h2><button class="section-scope-btn" data-sec-id="sec_9">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -888,7 +912,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="7-e-commerce-specific">7. E-Commerce Specific</h2>
+<div class="section-scope-header"><h2 id="7-e-commerce-specific">7. E-Commerce Specific</h2><button class="section-scope-btn" data-sec-id="sec_10">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -986,7 +1010,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="8-payment-gateway-integration">8. Payment Gateway Integration</h2>
+<div class="section-scope-header"><h2 id="8-payment-gateway-integration">8. Payment Gateway Integration</h2><button class="section-scope-btn" data-sec-id="sec_11">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1054,7 +1078,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="9-seo-analytics">9. SEO &amp; Analytics</h2>
+<div class="section-scope-header"><h2 id="9-seo-analytics">9. SEO &amp; Analytics</h2><button class="section-scope-btn" data-sec-id="sec_12">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1117,7 +1141,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="10-security">10. Security</h2>
+<div class="section-scope-header"><h2 id="10-security">10. Security</h2><button class="section-scope-btn" data-sec-id="sec_13">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1180,7 +1204,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="11-third-party-integrations">11. Third-Party Integrations</h2>
+<div class="section-scope-header"><h2 id="11-third-party-integrations">11. Third-Party Integrations</h2><button class="section-scope-btn" data-sec-id="sec_14">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1253,7 +1277,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="12-cms-setup">12. CMS Setup</h2>
+<div class="section-scope-header"><h2 id="12-cms-setup">12. CMS Setup</h2><button class="section-scope-btn" data-sec-id="sec_15">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1309,7 +1333,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="13-content-services">13. Content Services</h2>
+<div class="section-scope-header"><h2 id="13-content-services">13. Content Services</h2><button class="section-scope-btn" data-sec-id="sec_16">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1357,7 +1381,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="14-maintenance-support-plans">14. Maintenance &amp; Support Plans</h2>
+<div class="section-scope-header"><h2 id="14-maintenance-support-plans">14. Maintenance &amp; Support Plans</h2><button class="section-scope-btn" data-sec-id="sec_17">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1401,7 +1425,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="15-project-complexity-multipliers">15. Project Complexity Multipliers</h2>
+<div class="section-scope-header"><h2 id="15-project-complexity-multipliers">15. Project Complexity Multipliers</h2><button class="section-scope-btn" data-sec-id="sec_18">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1459,7 +1483,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="quick-estimation-formula">Quick Estimation Formula</h2>
+<div class="section-scope-header"><h2 id="quick-estimation-formula">Quick Estimation Formula</h2><button class="section-scope-btn" data-sec-id="sec_19">+ Add to Scope</button></div>
 <pre><code>TOTAL PROJECT COST = 
   (Sum of Page Costs) 
   + (Sum of Feature Costs) 
@@ -1474,7 +1498,7 @@
   + (20% Buffer for unforeseen tasks)
 </code></pre>
 <hr />
-<h2 id="hourly-rate-reference">Hourly Rate Reference</h2>
+<div class="section-scope-header"><h2 id="hourly-rate-reference">Hourly Rate Reference</h2><button class="section-scope-btn" data-sec-id="sec_20">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1517,8 +1541,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="sample-project-estimates">Sample Project Estimates</h2>
-<h3 id="example-1-simple-business-website">Example 1: Simple Business Website</h3>
+<div class="section-scope-header"><h2 id="sample-project-estimates">Sample Project Estimates</h2><button class="section-scope-btn" data-sec-id="sec_21">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="example-1-simple-business-website">Example 1: Simple Business Website</h3><button class="section-scope-btn" data-sec-id="sec_22">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1569,7 +1593,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="example-2-e-commerce-website">Example 2: E-Commerce Website</h3>
+<div class="section-scope-header"><h3 id="example-2-e-commerce-website">Example 2: E-Commerce Website</h3><button class="section-scope-btn" data-sec-id="sec_23">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1636,7 +1660,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="example-3-saas-web-application">Example 3: SaaS Web Application</h3>
+<div class="section-scope-header"><h3 id="example-3-saas-web-application">Example 3: SaaS Web Application</h3><button class="section-scope-btn" data-sec-id="sec_24">+ Add to Scope</button></div>
 <table>
 <thead>
 <tr>
@@ -1698,8 +1722,11 @@
 <hr />
 <blockquote>
 <p><strong>Remember:</strong> These are reference prices. Adjust based on your experience, market, client budget, project urgency, and complexity.</p>
-</blockquote></div>
-    </main>
+</blockquote>
+          </div>
+        </div>
+      </main>
+    </div>
 
     <!-- Site Footer -->
     <footer class="site-footer">
