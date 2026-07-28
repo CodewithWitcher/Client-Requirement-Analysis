@@ -470,6 +470,32 @@ h4 { font-size: 1.2rem; font-weight: 700; }
   margin-top: 0.2rem;
 }
 
+/* Full-Stack Combined Bucket — accent border */
+.combined-bucket {
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: linear-gradient(135deg,
+    rgba(30, 58, 95, 0.08) 0%,
+    rgba(15, 23, 42, 0.94) 50%,
+    rgba(30, 61, 47, 0.08) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+.combined-bucket::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, rgba(56,189,248,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.combined-bucket .bucket-title {
+  background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Card Grid Inside Buckets */
 .card-grid {
   display: grid;

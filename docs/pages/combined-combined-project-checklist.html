@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Web + App Project Checklist — Requirement Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header & Breadcrumb Navigation -->
+    <header class="glass-header">
+      <a href="../index.html" class="brand-title">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">DOC VIEW</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
+      </nav>
+    </header>
+
+    <!-- Document Header Info Card -->
+    <section class="doc-header-card">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <span class="badge badge-md">MD</span>
+        <span style="font-size: 0.85rem; color: var(--text-subtle);">combined\Combined-Project-Checklist.md</span>
+      </div>
+      <h1>Combined Web + App Project Checklist</h1>
+
+      <div class="doc-meta-row">
+        <span>File Size: 34.3 KB</span>
+        <span>Metrics: 4,380 words</span>
+        <span>Reading Time: 21 min read</span>
+        <span>Last Modified: Jul 28, 2026</span>
+      </div>
+
+      <!-- Dynamic Format-Specific Export & Download Action Bar -->
+      <div class="export-toolbar">
+        <button class="export-btn primary" onclick="ExportManager.exportPDF()">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Export as PDF
+        </button>
+        
+        <button class="export-btn" onclick="ExportManager.exportDOCX(null, 'combined-combined-project-checklist.doc')">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Export as Word (.doc)
+        </button>
+        
+        <button class="export-btn" onclick="ExportManager.copyContentToClipboard()">
+          <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copy Content
+        </button>
+        
+        <button class="export-btn" onclick="ExportManager.downloadFile('../files/combined/Combined-Project-Checklist.md', 'Combined-Project-Checklist.md')">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Original (Combined-Project-Checklist.md)
+        </button>
+        </div>
+    </section>
+
+    <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
+    <div class="doc-layout-grid">
+      
+        <aside class="doc-sidebar-toc">
+          <div class="toc-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <ul class="toc-list">
+            <li ><a href="#part-1-website-web-application">📌 🌐 Part 1: Website / Web Application</a></li><li ><a href="#phase-1-pre-project-discovery-planning">📌 Phase 1: Pre-Project (Discovery &amp;amp; Planning)</a></li><li style="padding-left: 0.75rem;"><a href="#11-client-discovery">📌 Client Discovery</a></li><li style="padding-left: 0.75rem;"><a href="#12-requirements-documentation">📌 Requirements Documentation</a></li><li style="padding-left: 0.75rem;"><a href="#13-project-scope-quotation">📌 Project Scope &amp;amp; Quotation</a></li><li ><a href="#phase-2-setup-infrastructure">📌 Phase 2: Setup &amp;amp; Infrastructure</a></li><li style="padding-left: 0.75rem;"><a href="#21-domain-hosting">📌 Domain &amp;amp; Hosting</a></li><li style="padding-left: 0.75rem;"><a href="#22-development-environment">📌 Development Environment</a></li><li style="padding-left: 0.75rem;"><a href="#23-database">📌 Database</a></li><li ><a href="#phase-3-design">📌 Phase 3: Design</a></li><li style="padding-left: 0.75rem;"><a href="#31-uiux-design">📌 UI/UX Design</a></li><li style="padding-left: 0.75rem;"><a href="#32-branding-assets">📌 Branding &amp;amp; Assets</a></li><li ><a href="#phase-4-development">📌 Phase 4: Development</a></li><li style="padding-left: 0.75rem;"><a href="#41-frontend-development">📌 Frontend Development</a></li><li style="padding-left: 0.75rem;"><a href="#42-backend-development">📌 Backend Development</a></li><li style="padding-left: 0.75rem;"><a href="#43-database">📌 Database</a></li><li style="padding-left: 0.75rem;"><a href="#44-features-integrations">📌 Features &amp;amp; Integrations</a></li><li ><a href="#phase-5-content">📌 Phase 5: Content</a></li><li style="padding-left: 0.75rem;"><a href="#51-content-population">📌 Content Population</a></li><li style="padding-left: 0.75rem;"><a href="#52-legal-pages">📌 Legal Pages</a></li><li ><a href="#phase-6-seo-analytics">📌 Phase 6: SEO &amp;amp; Analytics</a></li><li style="padding-left: 0.75rem;"><a href="#61-technical-seo">📌 Technical SEO</a></li><li style="padding-left: 0.75rem;"><a href="#62-analytics-tracking">📌 Analytics &amp;amp; Tracking</a></li><li ><a href="#phase-7-performance-optimization">📌 Phase 7: Performance &amp;amp; Optimization</a></li><li style="padding-left: 0.75rem;"><a href="#71-page-speed">📌 Page Speed</a></li><li style="padding-left: 0.75rem;"><a href="#72-core-web-vitals">📌 Core Web Vitals</a></li><li ><a href="#phase-8-security">📌 Phase 8: Security</a></li><li style="padding-left: 0.75rem;"><a href="#81-security-checklist">📌 Security Checklist</a></li><li style="padding-left: 0.75rem;"><a href="#82-compliance">📌 Compliance</a></li><li ><a href="#phase-9-testing">📌 Phase 9: Testing</a></li><li style="padding-left: 0.75rem;"><a href="#91-functional-testing">📌 Functional Testing</a></li><li style="padding-left: 0.75rem;"><a href="#92-compatibility-testing">📌 Compatibility Testing</a></li><li style="padding-left: 0.75rem;"><a href="#93-user-acceptance-testing-uat">📌 User Acceptance Testing (UAT)</a></li><li ><a href="#phase-10-pre-launch">📌 Phase 10: Pre-Launch</a></li><li style="padding-left: 0.75rem;"><a href="#101-pre-launch-checklist">📌 Pre-Launch Checklist</a></li><li ><a href="#phase-11-launch">📌 Phase 11: Launch</a></li><li style="padding-left: 0.75rem;"><a href="#111-deployment">📌 Deployment</a></li><li style="padding-left: 0.75rem;"><a href="#112-post-launch-verification">📌 Post-Launch Verification</a></li><li ><a href="#phase-12-post-launch">📌 Phase 12: Post-Launch</a></li><li style="padding-left: 0.75rem;"><a href="#121-handover">📌 Handover</a></li><li style="padding-left: 0.75rem;"><a href="#122-final-payment-closure">📌 Final Payment &amp;amp; Closure</a></li><li style="padding-left: 0.75rem;"><a href="#123-ongoing-maintenance-if-applicable">📌 Ongoing Maintenance (if applicable)</a></li><li ><a href="#quick-reference-common-mistakes-to-avoid">📌 Quick Reference: Common Mistakes to Avoid</a></li><li ><a href="#part-2-mobile-application">📌 📱 Part 2: Mobile Application</a></li><li ><a href="#phase-1-pre-project-discovery-planning_1">📌 Phase 1: Pre-Project (Discovery &amp;amp; Planning)</a></li><li style="padding-left: 0.75rem;"><a href="#11-client-discovery_1">📌 Client Discovery</a></li><li style="padding-left: 0.75rem;"><a href="#12-requirements-documentation_1">📌 Requirements Documentation</a></li><li style="padding-left: 0.75rem;"><a href="#13-project-scope-quotation_1">📌 Project Scope &amp;amp; Quotation</a></li><li ><a href="#phase-2-setup-infrastructure_1">📌 Phase 2: Setup &amp;amp; Infrastructure</a></li><li style="padding-left: 0.75rem;"><a href="#21-app-store-accounts">📌 App Store Accounts</a></li><li style="padding-left: 0.75rem;"><a href="#22-development-environment_1">📌 Development Environment</a></li><li style="padding-left: 0.75rem;"><a href="#23-backend-database-setup">📌 Backend &amp;amp; Database Setup</a></li><li style="padding-left: 0.75rem;"><a href="#24-third-party-services">📌 Third-Party Services</a></li><li ><a href="#phase-3-design_1">📌 Phase 3: Design</a></li><li style="padding-left: 0.75rem;"><a href="#31-uiux-design_1">📌 UI/UX Design</a></li><li style="padding-left: 0.75rem;"><a href="#32-app-assets">📌 App Assets</a></li><li ><a href="#phase-4-development_1">📌 Phase 4: Development</a></li><li style="padding-left: 0.75rem;"><a href="#41-core-app-structure">📌 Core App Structure</a></li><li style="padding-left: 0.75rem;"><a href="#42-authentication">📌 Authentication</a></li><li style="padding-left: 0.75rem;"><a href="#43-screen-development">📌 Screen Development</a></li><li style="padding-left: 0.75rem;"><a href="#44-backend-development">📌 Backend Development</a></li><li style="padding-left: 0.75rem;"><a href="#45-features-integrations">📌 Features &amp;amp; Integrations</a></li><li style="padding-left: 0.75rem;"><a href="#46-admin-panel-if-applicable">📌 Admin Panel (if applicable)</a></li><li ><a href="#phase-5-testing">📌 Phase 5: Testing</a></li><li style="padding-left: 0.75rem;"><a href="#51-unit-integration-testing">📌 Unit &amp;amp; Integration Testing</a></li><li style="padding-left: 0.75rem;"><a href="#52-manual-testing">📌 Manual Testing</a></li><li style="padding-left: 0.75rem;"><a href="#53-device-testing">📌 Device Testing</a></li><li style="padding-left: 0.75rem;"><a href="#54-performance-testing">📌 Performance Testing</a></li><li style="padding-left: 0.75rem;"><a href="#55-security-testing">📌 Security Testing</a></li><li style="padding-left: 0.75rem;"><a href="#56-beta-testing">📌 Beta Testing</a></li><li style="padding-left: 0.75rem;"><a href="#57-user-acceptance-testing-uat">📌 User Acceptance Testing (UAT)</a></li><li ><a href="#phase-6-pre-launch-preparation">📌 Phase 6: Pre-Launch Preparation</a></li><li style="padding-left: 0.75rem;"><a href="#61-app-store-preparation-google-play">📌 App Store Preparation — Google Play</a></li><li style="padding-left: 0.75rem;"><a href="#62-app-store-preparation-apple-app-store">📌 App Store Preparation — Apple App Store</a></li><li style="padding-left: 0.75rem;"><a href="#63-final-code-preparation">📌 Final Code Preparation</a></li><li ><a href="#phase-7-launch">📌 Phase 7: Launch</a></li><li style="padding-left: 0.75rem;"><a href="#71-build-submit">📌 Build &amp;amp; Submit</a></li><li style="padding-left: 0.75rem;"><a href="#72-post-submission">📌 Post-Submission</a></li><li ><a href="#phase-8-post-launch">📌 Phase 8: Post-Launch</a></li><li style="padding-left: 0.75rem;"><a href="#81-monitoring-first-2-weeks">📌 Monitoring (First 2 Weeks)</a></li><li style="padding-left: 0.75rem;"><a href="#82-handover">📌 Handover</a></li><li style="padding-left: 0.75rem;"><a href="#83-final-payment-closure">📌 Final Payment &amp;amp; Closure</a></li><li style="padding-left: 0.75rem;"><a href="#84-ongoing-maintenance-if-applicable">📌 Ongoing Maintenance (if applicable)</a></li><li ><a href="#quick-reference-common-app-rejection-reasons">📌 Quick Reference: Common App Rejection Reasons</a></li><li style="padding-left: 0.75rem;"><a href="#google-play-rejections">📌 Google Play Rejections</a></li><li style="padding-left: 0.75rem;"><a href="#apple-app-store-rejections">📌 Apple App Store Rejections</a></li><li ><a href="#quick-reference-common-mistakes-to-avoid_1">📌 Quick Reference: Common Mistakes to Avoid</a></li>
+          </ul>
+        </aside>
+        
+
+      <main class="doc-main-content">
+        <div class="doc-content-card">
+          
+        <div class="summary-card" style="margin-bottom: 2rem; background: rgba(59, 130, 246, 0.05);">
+          <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.5rem;">
+            <span>Task Checklist Progress</span>
+            <span id="checklist-progress-text">0 of 661 completed (0%)</span>
+          </div>
+          <div style="height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden;">
+            <div id="checklist-progress-bar" style="height: 100%; width: 0%; background: var(--accent-primary); transition: width 0.3s ease;"></div>
+          </div>
+        </div>
+        
+          <div class="rendered-markdown">
+            <h1 id="combined-web-app-project-checklist">Combined Web + App Project Checklist</h1>
+<blockquote>
+<p>Full-scope project delivery checklist covering all phases for both website and mobile application projects from discovery to launch.</p>
+<p><strong>Scope:</strong> This document covers both <strong>Web / Website Projects</strong> and <strong>Mobile Application Projects</strong>. Use the relevant sections for your client's project type.</p>
+</blockquote>
+<hr />
+<div class="section-scope-header"><h2 id="part-1-website-web-application">🌐 Part 1: Website / Web Application</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
+<hr />
+<blockquote>
+<p><strong>Purpose:</strong> A step-by-step checklist to follow throughout the entire website project lifecycle. Use this to ensure nothing is missed from initial contact to post-launch support.</p>
+</blockquote>
+<hr />
+<div class="section-scope-header"><h2 id="phase-1-pre-project-discovery-planning">Phase 1: Pre-Project (Discovery &amp; Planning)</h2><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="11-client-discovery">1.1 Client Discovery</h3><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-0" > Initial client meeting/call completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-1" > Client Questionnaire filled out</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-2" > Business goals and objectives documented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-3" > Target audience identified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-4" > Competitor analysis done (list competitor URLs)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-5" > Client's existing assets collected (logo, brand guidelines, content)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-6" > Reference websites reviewed with client</li>
+</ul>
+<div class="section-scope-header"><h3 id="12-requirements-documentation">1.2 Requirements Documentation</h3><button class="section-scope-btn" data-sec-id="sec_3">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-7" > All pages listed with descriptions</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-8" > All features and functionalities listed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-9" > Tech stack decided (Frontend / Backend / Database)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-10" > CMS requirements defined</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-11" > Third-party integrations identified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-12" > E-commerce requirements documented (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-13" > Payment gateway decided (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-14" > Content responsibility assigned (Client / Developer)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-15" > Multi-language requirements noted</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-16" > Accessibility requirements noted</li>
+</ul>
+<div class="section-scope-header"><h3 id="13-project-scope-quotation">1.3 Project Scope &amp; Quotation</h3><button class="section-scope-btn" data-sec-id="sec_4">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-17" > Pricing calculation completed (use Pricing Parameters sheet)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-18" > Project scope document prepared</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-19" > Timeline with milestones created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-20" > Quotation / Proposal sent to client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-21" > Quotation approved by client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-22" > Payment terms agreed upon</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-23" > Advance payment received</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-24" > Contract / Agreement signed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-25" > NDA signed (if required)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-26" > Project start date confirmed</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-2-setup-infrastructure">Phase 2: Setup &amp; Infrastructure</h2><button class="section-scope-btn" data-sec-id="sec_5">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="21-domain-hosting">2.1 Domain &amp; Hosting</h3><button class="section-scope-btn" data-sec-id="sec_6">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-27" > Domain name purchased / transferred</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-28" > Domain DNS configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-29" > Hosting account set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-30" > Server environment configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-31" > SSL certificate installed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-32" > Email hosting configured (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-33" > FTP/SSH access set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-34" > File manager access verified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-35" > Staging/development URL set up</li>
+</ul>
+<div class="section-scope-header"><h3 id="22-development-environment">2.2 Development Environment</h3><button class="section-scope-btn" data-sec-id="sec_7">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-36" > Git repository created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-37" > Branch strategy decided (main, develop, feature branches)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-38" > Development environment set up locally</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-39" > Staging environment set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-40" > CI/CD pipeline configured (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-41" > Project management tool set up (Trello, Jira, Notion, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-42" > Communication channel set up (Slack, WhatsApp, Email)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-43" > File sharing set up (Google Drive, Dropbox, etc.)</li>
+</ul>
+<div class="section-scope-header"><h3 id="23-database">2.3 Database</h3><button class="section-scope-btn" data-sec-id="sec_8">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-44" > Database server set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-45" > Database schema designed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-46" > Database user credentials created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-47" > Backup strategy configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-48" > Data migration planned (if applicable)</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-3-design">Phase 3: Design</h2><button class="section-scope-btn" data-sec-id="sec_9">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="31-uiux-design">3.1 UI/UX Design</h3><button class="section-scope-btn" data-sec-id="sec_10">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-49" > Sitemap / Information architecture created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-50" > Wireframes created (low-fidelity)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-51" > Wireframes approved by client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-52" > High-fidelity mockups designed (Figma/XD)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-53" > Desktop design completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-54" > Mobile design completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-55" > Tablet design completed (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-56" > Dark mode designed (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-57" > Design review with client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-58" > Design revisions completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-59" > Final design approved by client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-60" > Design assets exported for development</li>
+</ul>
+<div class="section-scope-header"><h3 id="32-branding-assets">3.2 Branding &amp; Assets</h3><button class="section-scope-btn" data-sec-id="sec_11">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-61" > Logo finalized</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-62" > Color palette defined</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-63" > Typography selected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-64" > Icon set chosen</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-65" > Stock images sourced</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-66" > Custom illustrations created (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-67" > Video assets ready (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-68" > Favicon created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-69" > Open Graph image created (for social sharing)</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-4-development">Phase 4: Development</h2><button class="section-scope-btn" data-sec-id="sec_12">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="41-frontend-development">4.1 Frontend Development</h3><button class="section-scope-btn" data-sec-id="sec_13">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-70" > Project scaffolded (React / Next.js / Vue / HTML etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-71" > Component library / design system set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-72" > Responsive grid / layout system implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-73" > Navigation / Header implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-74" > Footer implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-75" > Home page developed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-76" > About page developed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-77" > Services page developed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-78" > Contact page developed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-79" > Blog listing page developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-80" > Blog detail page developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-81" > Product listing page developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-82" > Product detail page developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-83" > Shopping cart page developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-84" > Checkout page developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-85" > Login / Register pages developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-86" > User dashboard developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-87" > Admin panel developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-88" > Search page developed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-89" > All other pages developed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-90" > 404 error page developed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-91" > All pages responsive (mobile, tablet, desktop)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-92" > Cross-browser testing done (Chrome, Firefox, Safari, Edge)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-93" > Animations / transitions implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-94" > Loading states / skeletons implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-95" > Error states / empty states handled</li>
+</ul>
+<div class="section-scope-header"><h3 id="42-backend-development">4.2 Backend Development</h3><button class="section-scope-btn" data-sec-id="sec_14">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-96" > API routes / controllers set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-97" > Authentication system implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-98" > User management (CRUD) implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-99" > Password reset / forgot password implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-100" > Email verification implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-101" > Role-based access control implemented (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-102" > Content management endpoints built</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-103" > Media upload / management implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-104" > Search functionality implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-105" > Filtering and sorting implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-106" > Pagination implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-107" > API rate limiting set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-108" > Input validation / sanitization implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-109" > Error handling standardized</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-110" > API documentation created</li>
+</ul>
+<div class="section-scope-header"><h3 id="43-database">4.3 Database</h3><button class="section-scope-btn" data-sec-id="sec_15">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-111" > Tables / collections created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-112" > Relationships / references set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-113" > Indexes created for performance</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-114" > Seed data added (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-115" > Data migration executed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-116" > Backup mechanism tested</li>
+</ul>
+<div class="section-scope-header"><h3 id="44-features-integrations">4.4 Features &amp; Integrations</h3><button class="section-scope-btn" data-sec-id="sec_16">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-117" > Contact form working (with email notification)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-118" > Newsletter subscription integrated</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-119" > Social login integrated (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-120" > Payment gateway integrated (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-121" > Shopping cart functionality working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-122" > Order management working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-123" > Shipping calculation working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-124" > Tax calculation working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-125" > Discount / coupon system working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-126" > Booking / appointment system working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-127" > Chat / chatbot integrated (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-128" > Google Maps integrated (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-129" > Social media sharing buttons added</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-130" > Comments system working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-131" > Ratings &amp; reviews working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-132" > File upload/download working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-133" > Notification system working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-134" > Multi-language working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-135" > All third-party integrations completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-136" > All APIs consumed and tested</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-5-content">Phase 5: Content</h2><button class="section-scope-btn" data-sec-id="sec_17">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="51-content-population">5.1 Content Population</h3><button class="section-scope-btn" data-sec-id="sec_18">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-137" > All page content added</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-138" > All images optimized and uploaded</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-139" > Alt text added to all images</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-140" > Videos embedded / uploaded (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-141" > Blog posts added (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-142" > Product data imported (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-143" > Team / staff information added (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-144" > Testimonials / reviews added</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-145" > FAQ content added (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-146" > Contact information verified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-147" > Map location verified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-148" > Social media links verified</li>
+</ul>
+<div class="section-scope-header"><h3 id="52-legal-pages">5.2 Legal Pages</h3><button class="section-scope-btn" data-sec-id="sec_19">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-149" > Privacy Policy page created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-150" > Terms &amp; Conditions page created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-151" > Cookie Policy page created (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-152" > Refund/Cancellation policy page (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-153" > Disclaimer page (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-154" > Accessibility statement (if applicable)</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-6-seo-analytics">Phase 6: SEO &amp; Analytics</h2><button class="section-scope-btn" data-sec-id="sec_20">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="61-technical-seo">6.1 Technical SEO</h3><button class="section-scope-btn" data-sec-id="sec_21">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-155" > Page titles set for all pages</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-156" > Meta descriptions written for all pages</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-157" > H1, H2, H3 hierarchy checked</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-158" > URL structure is clean and SEO-friendly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-159" > Canonical URLs set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-160" > XML sitemap generated</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-161" > robots.txt configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-162" > Schema markup added (Organization, Product, Article, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-163" > Open Graph tags set for social sharing</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-164" > Twitter Card tags set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-165" > Hreflang tags set (for multi-language)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-166" > Breadcrumbs implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-167" > Internal linking structure checked</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-168" > Image optimization (WebP, lazy loading)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-169" > No broken links (404 check)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-170" > No duplicate content</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-171" > Mobile-friendly test passed</li>
+</ul>
+<div class="section-scope-header"><h3 id="62-analytics-tracking">6.2 Analytics &amp; Tracking</h3><button class="section-scope-btn" data-sec-id="sec_22">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-172" > Google Analytics 4 (GA4) installed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-173" > Google Search Console set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-174" > Sitemap submitted to Google Search Console</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-175" > Google Tag Manager installed (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-176" > Facebook/Meta Pixel installed (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-177" > Conversion tracking set up (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-178" > Event tracking configured (button clicks, form submissions, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-179" > Custom dashboard / reports set up (if needed)</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-7-performance-optimization">Phase 7: Performance &amp; Optimization</h2><button class="section-scope-btn" data-sec-id="sec_23">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="71-page-speed">7.1 Page Speed</h3><button class="section-scope-btn" data-sec-id="sec_24">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-180" > Google PageSpeed Insights score &gt; 90 (desktop)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-181" > Google PageSpeed Insights score &gt; 80 (mobile)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-182" > Images compressed and in modern format (WebP/AVIF)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-183" > Lazy loading implemented for images &amp; videos</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-184" > CSS and JS minified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-185" > Unused CSS/JS removed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-186" > Font loading optimized (font-display: swap)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-187" > Critical CSS inlined (above the fold)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-188" > Gzip/Brotli compression enabled</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-189" > Browser caching configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-190" > CDN configured (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-191" > Server response time &lt; 200ms (TTFB)</li>
+</ul>
+<div class="section-scope-header"><h3 id="72-core-web-vitals">7.2 Core Web Vitals</h3><button class="section-scope-btn" data-sec-id="sec_25">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-192" > LCP (Largest Contentful Paint) &lt; 2.5s</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-193" > FID (First Input Delay) &lt; 100ms</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-194" > CLS (Cumulative Layout Shift) &lt; 0.1</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-195" > INP (Interaction to Next Paint) &lt; 200ms</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-8-security">Phase 8: Security</h2><button class="section-scope-btn" data-sec-id="sec_26">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="81-security-checklist">8.1 Security Checklist</h3><button class="section-scope-btn" data-sec-id="sec_27">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-196" > SSL/HTTPS working on all pages</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-197" > HTTP to HTTPS redirect configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-198" > Security headers set (X-Frame-Options, CSP, HSTS, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-199" > XSS protection implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-200" > CSRF protection implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-201" > SQL injection protection (parameterized queries)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-202" > Input validation on all forms</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-203" > CAPTCHA on sensitive forms</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-204" > Rate limiting on API / login endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-205" > File upload restrictions (type, size)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-206" > Admin panel access restricted</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-207" > Default credentials changed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-208" > Error messages don't expose sensitive info</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-209" > Directory listing disabled</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-210" > Backup files not accessible via URL</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-211" > .env / config files not exposed</li>
+</ul>
+<div class="section-scope-header"><h3 id="82-compliance">8.2 Compliance</h3><button class="section-scope-btn" data-sec-id="sec_28">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-212" > Cookie consent banner implemented (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-213" > GDPR compliance verified (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-214" > Accessibility (WCAG 2.1 AA) checked (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-215" > PCI-DSS compliance (if handling card data directly)</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-9-testing">Phase 9: Testing</h2><button class="section-scope-btn" data-sec-id="sec_29">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="91-functional-testing">9.1 Functional Testing</h3><button class="section-scope-btn" data-sec-id="sec_30">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-216" > All links working (no broken links)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-217" > All forms submitting correctly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-218" > All buttons / CTAs working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-219" > Navigation working on all pages</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-220" > Search working correctly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-221" > Login / logout working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-222" > Registration working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-223" > Password reset working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-224" > Payment flow tested (live &amp; sandbox)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-225" > Email notifications receiving correctly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-226" > File upload / download working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-227" > Error pages showing correctly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-228" > Pagination working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-229" > Filters and sorting working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-230" > All CRUD operations tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-231" > Admin panel functions tested</li>
+</ul>
+<div class="section-scope-header"><h3 id="92-compatibility-testing">9.2 Compatibility Testing</h3><button class="section-scope-btn" data-sec-id="sec_31">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-232" > Chrome (latest) — Desktop &amp; Mobile</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-233" > Firefox (latest) — Desktop &amp; Mobile</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-234" > Safari (latest) — Desktop &amp; Mobile (Mac/iOS)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-235" > Edge (latest) — Desktop</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-236" > Samsung Internet — Mobile</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-237" > iPhone (different sizes) tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-238" > Android phones (different sizes) tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-239" > Tablet tested (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-240" > Different screen resolutions tested</li>
+</ul>
+<div class="section-scope-header"><h3 id="93-user-acceptance-testing-uat">9.3 User Acceptance Testing (UAT)</h3><button class="section-scope-btn" data-sec-id="sec_32">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-241" > UAT environment prepared</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-242" > Client / stakeholders have access</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-243" > Test scenarios provided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-244" > UAT feedback collected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-245" > UAT issues resolved</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-246" > Final UAT sign-off received</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-10-pre-launch">Phase 10: Pre-Launch</h2><button class="section-scope-btn" data-sec-id="sec_33">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="101-pre-launch-checklist">10.1 Pre-Launch Checklist</h3><button class="section-scope-btn" data-sec-id="sec_34">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-247" > Favicon uploaded (all sizes: 16x16, 32x32, 180x180, 192x192, 512x512)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-248" > Apple touch icon set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-249" > Web app manifest (manifest.json) configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-250" > 404 page tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-251" > 500 error page configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-252" > Sitemap.xml accessible</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-253" > robots.txt properly configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-254" > Print stylesheet added (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-255" > All TODO/FIXME comments resolved</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-256" > Console errors cleared</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-257" > Debug mode disabled</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-258" > Environment variables set for production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-259" > Database backed up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-260" > DNS propagation checked</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-261" > CDN configured and tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-262" > Email delivery tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-263" > Social media cards preview tested (LinkedIn, Twitter, Facebook)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-264" > Browser tab title correct on all pages</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-265" > All dummy/placeholder content replaced</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-11-launch">Phase 11: Launch</h2><button class="section-scope-btn" data-sec-id="sec_35">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="111-deployment">11.1 Deployment</h3><button class="section-scope-btn" data-sec-id="sec_36">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-266" > Production build created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-267" > Build tested on staging</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-268" > DNS pointed to production server</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-269" > SSL verified on production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-270" > Database migrated to production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-271" > Environment variables set for production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-272" > Website accessible on live URL</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-273" > All pages loading correctly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-274" > All features working on production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-275" > Performance verified on production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-276" > Backup created post-deployment</li>
+</ul>
+<div class="section-scope-header"><h3 id="112-post-launch-verification">11.2 Post-Launch Verification</h3><button class="section-scope-btn" data-sec-id="sec_37">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-277" > All pages accessible</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-278" > Forms working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-279" > Payments working (live mode)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-280" > Emails being sent</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-281" > Analytics collecting data</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-282" > Search Console receiving data</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-283" > No console errors</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-284" > Mobile experience verified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-285" > Speed test on live site</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-286" > SSL showing in browser</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-12-post-launch">Phase 12: Post-Launch</h2><button class="section-scope-btn" data-sec-id="sec_38">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="121-handover">12.1 Handover</h3><button class="section-scope-btn" data-sec-id="sec_39">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-287" > All credentials shared securely with client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-288" > Hosting access provided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-289" > Domain registrar access provided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-290" > CMS admin access provided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-291" > Admin panel walkthrough / training completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-292" > User manual / documentation delivered</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-293" > Source code access provided (if agreed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-294" > Design files shared (if agreed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-295" > All third-party account details shared</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-296" > Client has list of all services, logins, and renewal dates</li>
+</ul>
+<div class="section-scope-header"><h3 id="122-final-payment-closure">12.2 Final Payment &amp; Closure</h3><button class="section-scope-btn" data-sec-id="sec_40">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-297" > Final payment received</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-298" > Invoice sent</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-299" > Client feedback collected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-300" > Testimonial requested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-301" > Project archived (code, docs, designs)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-302" > Maintenance plan discussed and agreed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-303" > Warranty / support period communicated</li>
+</ul>
+<div class="section-scope-header"><h3 id="123-ongoing-maintenance-if-applicable">12.3 Ongoing Maintenance (if applicable)</h3><button class="section-scope-btn" data-sec-id="sec_41">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-304" > Monitoring set up (uptime, performance, errors)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-305" > Backup schedule configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-306" > Security updates schedule set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-307" > Content update process documented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-308" > Support communication channel active</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-309" > Monthly/quarterly check-in scheduled</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-310" > Analytics report schedule set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-311" > Software/plugin updates schedule set</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="quick-reference-common-mistakes-to-avoid">Quick Reference: Common Mistakes to Avoid</h2><button class="section-scope-btn" data-sec-id="sec_42">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Mistake</th>
+<th>Prevention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>No contract/agreement</td>
+<td>Always sign before starting</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Scope creep</td>
+<td>Document scope clearly, charge for extras</td>
+</tr>
+<tr>
+<td>3</td>
+<td>No advance payment</td>
+<td>Take 30-50% advance before starting</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Skipping mobile testing</td>
+<td>Test on real devices, not just browser resize</td>
+</tr>
+<tr>
+<td>5</td>
+<td>No SEO from start</td>
+<td>Build with SEO in mind from day 1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Poor image optimization</td>
+<td>Compress all images, use WebP</td>
+</tr>
+<tr>
+<td>7</td>
+<td>No backup before launch</td>
+<td>Always backup before deploying</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Hardcoded sensitive data</td>
+<td>Use environment variables</td>
+</tr>
+<tr>
+<td>9</td>
+<td>No SSL</td>
+<td>Always use HTTPS</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Skipping accessibility</td>
+<td>At minimum, check contrast, alt text, keyboard nav</td>
+</tr>
+<tr>
+<td>11</td>
+<td>No error handling</td>
+<td>Handle 404, 500, form errors gracefully</td>
+</tr>
+<tr>
+<td>12</td>
+<td>No analytics</td>
+<td>Install analytics before launch</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>Tip:</strong> Print this checklist or copy it to your project management tool at the start of every project. Check off items as you complete them.</p>
+</blockquote>
+<hr />
+<div class="section-scope-header"><h2 id="part-2-mobile-application">📱 Part 2: Mobile Application</h2><button class="section-scope-btn" data-sec-id="sec_43">+ Add to Scope</button></div>
+<hr />
+<blockquote>
+<p><strong>Purpose:</strong> A step-by-step checklist to follow throughout the entire mobile app project lifecycle. Use this to ensure nothing is missed from initial contact to post-launch support.</p>
+</blockquote>
+<hr />
+<div class="section-scope-header"><h2 id="phase-1-pre-project-discovery-planning_1">Phase 1: Pre-Project (Discovery &amp; Planning)</h2><button class="section-scope-btn" data-sec-id="sec_44">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="11-client-discovery_1">1.1 Client Discovery</h3><button class="section-scope-btn" data-sec-id="sec_45">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-312" > Initial client meeting/call completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-313" > Client Questionnaire filled out</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-314" > App purpose and goals documented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-315" > Target audience identified (age, geography, behavior)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-316" > Competitor apps analyzed (features, ratings, reviews)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-317" > Client's existing assets collected (logo, brand, API docs)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-318" > Reference/inspiration apps reviewed with client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-319" > Monetization strategy discussed</li>
+</ul>
+<div class="section-scope-header"><h3 id="12-requirements-documentation_1">1.2 Requirements Documentation</h3><button class="section-scope-btn" data-sec-id="sec_46">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-320" > All screens/flows listed with descriptions</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-321" > All features and functionalities listed with priority</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-322" > Platform decided (Android / iOS / Both)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-323" > Development approach decided (Native / Flutter / React Native)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-324" > Backend approach decided (Custom / Firebase / Supabase / etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-325" > Authentication methods decided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-326" > Third-party integrations identified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-327" > Payment requirements documented (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-328" > Push notification requirements documented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-329" > Offline requirements documented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-330" > Device feature requirements (Camera, GPS, Bluetooth, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-331" > Security and compliance requirements noted</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-332" > Multi-language requirements noted</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-333" > Accessibility requirements noted</li>
+</ul>
+<div class="section-scope-header"><h3 id="13-project-scope-quotation_1">1.3 Project Scope &amp; Quotation</h3><button class="section-scope-btn" data-sec-id="sec_47">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-334" > Pricing calculation completed (use Pricing Parameters sheet)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-335" > MVP vs Full scope decided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-336" > Feature roadmap created (Phase 1, Phase 2, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-337" > Project scope document prepared</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-338" > Timeline with milestones created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-339" > Quotation / Proposal sent to client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-340" > Quotation approved by client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-341" > Payment terms agreed upon</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-342" > Advance payment received</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-343" > Contract / Agreement signed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-344" > NDA signed (if required)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-345" > Project start date confirmed</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-2-setup-infrastructure_1">Phase 2: Setup &amp; Infrastructure</h2><button class="section-scope-btn" data-sec-id="sec_48">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="21-app-store-accounts">2.1 App Store Accounts</h3><button class="section-scope-btn" data-sec-id="sec_49">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-346" > Google Play Developer account ready ($25 one-time)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-347" > Apple Developer account ready ($99/year)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-348" > Account ownership decided (Client / Developer)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-349" > Team members added to accounts (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-350" > App ID / Bundle ID reserved</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-351" > Signing certificates generated</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-352" > Provisioning profiles created (iOS)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-353" > Keystore created (Android)</li>
+</ul>
+<div class="section-scope-header"><h3 id="22-development-environment_1">2.2 Development Environment</h3><button class="section-scope-btn" data-sec-id="sec_50">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-354" > Git repository created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-355" > Branch strategy decided (main, develop, feature branches)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-356" > Flutter/React Native/Native project initialized</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-357" > Project structure set up (folders, packages)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-358" > Code formatting &amp; linting rules set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-359" > CI/CD pipeline configured (GitHub Actions / Fastlane / Codemagic)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-360" > Automated build setup for Android</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-361" > Automated build setup for iOS</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-362" > Project management tool set up (Trello, Jira, Notion)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-363" > Communication channel set up (Slack, WhatsApp)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-364" > File sharing set up (Google Drive, Figma links)</li>
+</ul>
+<div class="section-scope-header"><h3 id="23-backend-database-setup">2.3 Backend &amp; Database Setup</h3><button class="section-scope-btn" data-sec-id="sec_51">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-365" > Backend project initialized / Firebase project created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-366" > Database set up and configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-367" > Database schema / collections designed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-368" > Cloud storage configured (S3 / Firebase Storage / etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-369" > API framework set up (Express, FastAPI, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-370" > Authentication service configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-371" > Environment variables configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-372" > Staging / development server deployed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-373" > API testing tool set up (Postman / Insomnia)</li>
+</ul>
+<div class="section-scope-header"><h3 id="24-third-party-services">2.4 Third-Party Services</h3><button class="section-scope-btn" data-sec-id="sec_52">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-374" > Push notification service set up (FCM / OneSignal)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-375" > Analytics service set up (Firebase Analytics / Mixpanel)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-376" > Crash reporting set up (Crashlytics / Sentry)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-377" > Payment gateway developer account created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-378" > Maps API key obtained (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-379" > SMS/Email service configured (Twilio / SendGrid)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-380" > Other API keys obtained and documented</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-3-design_1">Phase 3: Design</h2><button class="section-scope-btn" data-sec-id="sec_53">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="31-uiux-design_1">3.1 UI/UX Design</h3><button class="section-scope-btn" data-sec-id="sec_54">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-381" > User flows / User journeys mapped</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-382" > Information architecture created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-383" > Wireframes created (low-fidelity)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-384" > Wireframes approved by client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-385" > High-fidelity mockups designed (Figma/XD)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-386" > All screens designed for primary platform</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-387" > Screens adapted for secondary platform (if both)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-388" > Tablet layouts designed (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-389" > Dark mode designed (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-390" > Interactive prototype created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-391" > Prototype shared with client for review</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-392" > Design revisions completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-393" > Final design approved by client</li>
+</ul>
+<div class="section-scope-header"><h3 id="32-app-assets">3.2 App Assets</h3><button class="section-scope-btn" data-sec-id="sec_55">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-394" > App icon designed (all sizes)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-395" > Splash screen designed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-396" > Onboarding screens designed (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-397" > Empty state illustrations created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-398" > Error state illustrations created</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-399" > Custom icons created (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-400" > Lottie animations created (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-401" > App store screenshots designed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-402" > App store feature graphic designed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-403" > Design system / Component library documented</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-4-development_1">Phase 4: Development</h2><button class="section-scope-btn" data-sec-id="sec_56">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="41-core-app-structure">4.1 Core App Structure</h3><button class="section-scope-btn" data-sec-id="sec_57">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-404" > Navigation / Routing set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-405" > State management set up (Provider / Bloc / Redux / Riverpod)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-406" > Theme / Styling system implemented (colors, fonts, spacing)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-407" > Responsive layout utilities implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-408" > Network layer / API client set up (Dio / Axios / http)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-409" > Error handling framework implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-410" > Local storage utility set up</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-411" > App configuration (dev/staging/prod environments)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-412" > Dependency injection set up (if using)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-413" > Localization/i18n framework set up (if multi-language)</li>
+</ul>
+<div class="section-scope-header"><h3 id="42-authentication">4.2 Authentication</h3><button class="section-scope-btn" data-sec-id="sec_58">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-414" > Login screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-415" > Registration screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-416" > Email/Password auth working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-417" > Phone/OTP auth working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-418" > Google Sign-In working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-419" > Apple Sign-In working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-420" > Facebook Login working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-421" > Biometric auth working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-422" > Forgot password flow working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-423" > Email/Phone verification working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-424" > Session management / Token refresh working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-425" > Auto-login (remember me) working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-426" > Logout working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-427" > Account deletion working (required by Apple)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-428" > Guest mode working (if applicable)</li>
+</ul>
+<div class="section-scope-header"><h3 id="43-screen-development">4.3 Screen Development</h3><button class="section-scope-btn" data-sec-id="sec_59">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-429" > Splash screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-430" > Onboarding screens implemented (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-431" > Home / Main screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-432" > Profile screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-433" > Settings screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-434" > Search screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-435" > Detail screens implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-436" > List / Feed screens implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-437" > Form screens implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-438" > Chat screens implemented (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-439" > Cart / Checkout screens implemented (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-440" > Order tracking screens (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-441" > Notification center screen implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-442" > All other screens implemented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-443" > All screens handle loading states</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-444" > All screens handle error states</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-445" > All screens handle empty states</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-446" > Pull-to-refresh implemented where needed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-447" > Infinite scroll / pagination implemented where needed</li>
+</ul>
+<div class="section-scope-header"><h3 id="44-backend-development">4.4 Backend Development</h3><button class="section-scope-btn" data-sec-id="sec_60">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-448" > User management API endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-449" > Authentication API endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-450" > Core business logic API endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-451" > File upload API endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-452" > Search API endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-453" > Notification API endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-454" > Payment API endpoints (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-455" > Admin API endpoints</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-456" > API input validation</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-457" > API error handling standardized</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-458" > API rate limiting</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-459" > API versioning</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-460" > API documentation (Swagger / Postman collection)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-461" > Database indexes created for performance</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-462" > Background jobs / scheduled tasks (if needed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-463" > WebSocket / real-time endpoints (if applicable)</li>
+</ul>
+<div class="section-scope-header"><h3 id="45-features-integrations">4.5 Features &amp; Integrations</h3><button class="section-scope-btn" data-sec-id="sec_61">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-464" > Push notifications sending and receiving</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-465" > Push notification handling (foreground / background / terminated)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-466" > Deep linking working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-467" > In-app messaging / Chat working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-468" > GPS / Location services working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-469" > Maps integration working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-470" > Camera integration working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-471" > Gallery / Image picker working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-472" > File picker / Document scanner working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-473" > QR/Barcode scanner working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-474" > Payment gateway integrated and tested (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-475" > In-app purchases configured (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-476" > Subscription management working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-477" > Social sharing working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-478" > Email/SMS service integrated</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-479" > Analytics events tracked</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-480" > Crash reporting working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-481" > All third-party SDKs integrated</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-482" > Offline mode working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-483" > Data sync working (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-484" > Background tasks working (if applicable)</li>
+</ul>
+<div class="section-scope-header"><h3 id="46-admin-panel-if-applicable">4.6 Admin Panel (if applicable)</h3><button class="section-scope-btn" data-sec-id="sec_62">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-485" > Admin authentication</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-486" > Dashboard with key metrics</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-487" > User management (view, edit, ban)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-488" > Content management</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-489" > Order management (if e-commerce)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-490" > Push notification composer</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-491" > Analytics overview</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-492" > Report generation</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-493" > Settings / Configuration panel</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-5-testing">Phase 5: Testing</h2><button class="section-scope-btn" data-sec-id="sec_63">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="51-unit-integration-testing">5.1 Unit &amp; Integration Testing</h3><button class="section-scope-btn" data-sec-id="sec_64">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-494" > Unit tests written for critical business logic</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-495" > Unit tests written for state management</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-496" > API integration tests written</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-497" > Widget / UI tests written (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-498" > All tests passing</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-499" > Code coverage &gt; 70% (target)</li>
+</ul>
+<div class="section-scope-header"><h3 id="52-manual-testing">5.2 Manual Testing</h3><button class="section-scope-btn" data-sec-id="sec_65">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-500" > All screens manually tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-501" > All user flows tested end-to-end</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-502" > All forms tested (valid + invalid input)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-503" > All buttons and CTAs working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-504" > Navigation (forward, back, deep link) tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-505" > Login/Logout flow tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-506" > Payment flow tested (sandbox)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-507" > Push notification tested (all states)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-508" > Offline behavior tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-509" > Error scenarios tested (no network, server error, timeout)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-510" > Edge cases tested (empty data, large data, special characters)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-511" > Permissions tested (camera, location, contacts, etc.)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-512" > App lifecycle tested (background, foreground, kill, resume)</li>
+</ul>
+<div class="section-scope-header"><h3 id="53-device-testing">5.3 Device Testing</h3><button class="section-scope-btn" data-sec-id="sec_66">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-513" > Android — Small phone (e.g., 5" screen)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-514" > Android — Medium phone (e.g., 6" screen)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-515" > Android — Large phone (e.g., 6.7" screen)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-516" > Android — Tablet (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-517" > iOS — iPhone SE / Mini</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-518" > iOS — iPhone Standard (14/15/16)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-519" > iOS — iPhone Pro Max</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-520" > iOS — iPad (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-521" > Different OS versions tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-522" > Notch / Dynamic Island / Punch-hole handling verified</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-523" > Landscape mode tested (if supported)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-524" > Dark mode tested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-525" > Accessibility tested (screen reader, font scaling)</li>
+</ul>
+<div class="section-scope-header"><h3 id="54-performance-testing">5.4 Performance Testing</h3><button class="section-scope-btn" data-sec-id="sec_67">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-526" > App startup time &lt; 3 seconds</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-527" > Screen transitions smooth (60fps)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-528" > No memory leaks</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-529" > No excessive battery drain</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-530" > App size within acceptable limits</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-531" > API response times acceptable</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-532" > Large list / data scrolling smooth</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-533" > Image loading optimized (caching, placeholders)</li>
+</ul>
+<div class="section-scope-header"><h3 id="55-security-testing">5.5 Security Testing</h3><button class="section-scope-btn" data-sec-id="sec_68">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-534" > API endpoints require authentication</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-535" > Sensitive data encrypted in local storage</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-536" > No hardcoded secrets in code</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-537" > Certificate pinning working (if implemented)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-538" > Session timeout working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-539" > Jailbreak/Root detection working (if implemented)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-540" > Input validation on both client and server</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-541" > No sensitive data in logs</li>
+</ul>
+<div class="section-scope-header"><h3 id="56-beta-testing">5.6 Beta Testing</h3><button class="section-scope-btn" data-sec-id="sec_69">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-542" > Beta build created (TestFlight / Play Console Internal Testing)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-543" > Beta testers identified and invited</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-544" > Beta test feedback collected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-545" > Beta test issues resolved</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-546" > Beta feedback incorporated</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-547" > Final beta sign-off received</li>
+</ul>
+<div class="section-scope-header"><h3 id="57-user-acceptance-testing-uat">5.7 User Acceptance Testing (UAT)</h3><button class="section-scope-btn" data-sec-id="sec_70">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-548" > UAT build provided to client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-549" > Test scenarios shared with client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-550" > Client feedback collected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-551" > UAT issues resolved</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-552" > Final UAT sign-off from client</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-6-pre-launch-preparation">Phase 6: Pre-Launch Preparation</h2><button class="section-scope-btn" data-sec-id="sec_71">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="61-app-store-preparation-google-play">6.1 App Store Preparation — Google Play</h3><button class="section-scope-btn" data-sec-id="sec_72">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-553" > App title finalized</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-554" > Short description written (80 chars)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-555" > Full description written (4000 chars)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-556" > Category selected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-557" > Privacy policy URL ready</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-558" > App icon uploaded (512×512)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-559" > Feature graphic uploaded (1024×500)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-560" > Screenshots uploaded (min 2 per device type)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-561" > Content rating questionnaire completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-562" > Target audience and content settings configured</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-563" > Data safety section completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-564" > App pricing set (Free / Paid)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-565" > In-app products configured (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-566" > Subscriptions configured (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-567" > App signing configured (Google Play App Signing)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-568" > Release track selected (Internal / Closed / Open / Production)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-569" > Release notes written</li>
+</ul>
+<div class="section-scope-header"><h3 id="62-app-store-preparation-apple-app-store">6.2 App Store Preparation — Apple App Store</h3><button class="section-scope-btn" data-sec-id="sec_73">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-570" > App name chosen and verified available</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-571" > Subtitle written (30 chars)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-572" > Description written</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-573" > Keywords set (100 chars)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-574" > Category selected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-575" > Privacy policy URL ready</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-576" > App icon uploaded (1024×1024)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-577" > Screenshots uploaded for all required device sizes</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-578" > App preview video uploaded (optional)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-579" > Age rating set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-580" > App privacy details completed (nutrition labels)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-581" > In-app purchases configured (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-582" > Subscriptions configured (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-583" > App pricing set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-584" > Review notes prepared (for Apple review team)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-585" > Demo account credentials ready (for Apple reviewer)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-586" > Contact information set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-587" > What's New text written</li>
+</ul>
+<div class="section-scope-header"><h3 id="63-final-code-preparation">6.3 Final Code Preparation</h3><button class="section-scope-btn" data-sec-id="sec_74">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-588" > All TODO/FIXME comments resolved</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-589" > All console.log / print statements removed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-590" > Debug flags disabled</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-591" > Environment configured for production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-592" > ProGuard / R8 rules configured (Android)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-593" > App size optimized</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-594" > Code obfuscation enabled</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-595" > Version number and build number set</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-596" > Changelog documented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-597" > Final code review completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-598" > Code merged to main/release branch</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-7-launch">Phase 7: Launch</h2><button class="section-scope-btn" data-sec-id="sec_75">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="71-build-submit">7.1 Build &amp; Submit</h3><button class="section-scope-btn" data-sec-id="sec_76">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-599" > Production build generated (Android — AAB)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-600" > Production build generated (iOS — Archive)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-601" > Build tested via TestFlight / Internal Testing</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-602" > Android app submitted to Google Play</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-603" > iOS app submitted to App Store Connect</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-604" > App review status monitored</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-605" > Review feedback addressed (if rejected)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-606" > App approved</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-607" > Release date set / Published</li>
+</ul>
+<div class="section-scope-header"><h3 id="72-post-submission">7.2 Post-Submission</h3><button class="section-scope-btn" data-sec-id="sec_77">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-608" > App live and accessible on Play Store</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-609" > App live and accessible on App Store</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-610" > Download and install from store — verified working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-611" > All features working on production</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-612" > Payments working in live mode</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-613" > Push notifications working</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-614" > Analytics receiving data</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-615" > Crash reporting active</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-616" > Backend / API performing well</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-617" > No critical bugs in first 24-48 hours</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="phase-8-post-launch">Phase 8: Post-Launch</h2><button class="section-scope-btn" data-sec-id="sec_78">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="81-monitoring-first-2-weeks">8.1 Monitoring (First 2 Weeks)</h3><button class="section-scope-btn" data-sec-id="sec_79">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-618" > Crash rate monitored daily</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-619" > App ratings and reviews monitored</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-620" > User metrics tracked (DAU, MAU, retention)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-621" > Server / API performance monitored</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-622" > Error rates monitored</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-623" > User feedback collected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-624" > Critical bugs fixed immediately</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-625" > Hotfix release pushed (if needed)</li>
+</ul>
+<div class="section-scope-header"><h3 id="82-handover">8.2 Handover</h3><button class="section-scope-btn" data-sec-id="sec_80">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-626" > All credentials shared securely with client</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-627" > App store account access provided / transferred</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-628" > Backend / server access provided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-629" > Database access provided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-630" > Firebase / Supabase project access provided</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-631" > Source code access provided (if agreed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-632" > Design files (Figma) access provided (if agreed)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-633" > API documentation shared</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-634" > Third-party service credentials shared</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-635" > All API keys and service accounts documented</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-636" > Admin panel walkthrough / training completed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-637" > User manual / documentation delivered</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-638" > Client has list of all services, logins, renewal dates</li>
+</ul>
+<div class="section-scope-header"><h3 id="83-final-payment-closure">8.3 Final Payment &amp; Closure</h3><button class="section-scope-btn" data-sec-id="sec_81">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-639" > Final payment received</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-640" > Invoice sent</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-641" > Client feedback collected</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-642" > Testimonial requested</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-643" > Project archived (code, docs, designs, credentials)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-644" > Case study created (for portfolio)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-645" > Maintenance plan agreed upon (if applicable)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-646" > Warranty / support period communicated</li>
+</ul>
+<div class="section-scope-header"><h3 id="84-ongoing-maintenance-if-applicable">8.4 Ongoing Maintenance (if applicable)</h3><button class="section-scope-btn" data-sec-id="sec_82">+ Add to Scope</button></div>
+<ul>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-647" > Crash monitoring active</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-648" > Performance monitoring active</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-649" > OS update compatibility checked (new Android/iOS versions)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-650" > Library / SDK updates scheduled</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-651" > Security patches applied promptly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-652" > App store policy changes monitored</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-653" > User feedback reviewed regularly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-654" > Analytics reports generated (monthly/quarterly)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-655" > Feature updates planned and deployed</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-656" > App store listing updated for new features</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-657" > Server costs monitored and optimized</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-658" > Database maintained (cleanup, optimization)</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-659" > Backup verified regularly</li>
+<li><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-660" > Support tickets responded to within SLA</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="quick-reference-common-app-rejection-reasons">Quick Reference: Common App Rejection Reasons</h2><button class="section-scope-btn" data-sec-id="sec_83">+ Add to Scope</button></div>
+<div class="section-scope-header"><h3 id="google-play-rejections">Google Play Rejections</h3><button class="section-scope-btn" data-sec-id="sec_84">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Reason</th>
+<th>Prevention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Crashes or ANRs</td>
+<td>Thorough testing on multiple devices</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Privacy policy missing</td>
+<td>Add URL before submission</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Deceptive behavior</td>
+<td>App must do what it claims</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Permissions not justified</td>
+<td>Only request necessary permissions</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Data safety form incomplete</td>
+<td>Fill accurately</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Intellectual property violation</td>
+<td>Use original content</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Ads policy violation</td>
+<td>Follow AdMob policies</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Impersonation</td>
+<td>Don't copy other apps</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="apple-app-store-rejections">Apple App Store Rejections</h3><button class="section-scope-btn" data-sec-id="sec_85">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Reason</th>
+<th>Prevention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Crashes during review</td>
+<td>Test on latest iOS version</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Incomplete information</td>
+<td>Provide demo account credentials</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Guideline 4.3 — Spam/similar apps</td>
+<td>Ensure app provides unique value</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Privacy policy missing/inadequate</td>
+<td>Include comprehensive privacy policy</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Sign in with Apple missing</td>
+<td>Add if other social logins exist</td>
+</tr>
+<tr>
+<td>6</td>
+<td>No account deletion</td>
+<td>Must provide account deletion</td>
+</tr>
+<tr>
+<td>7</td>
+<td>In-app purchase required (digital goods)</td>
+<td>Can't use external payment for digital</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Guideline 2.1 — Performance</td>
+<td>Optimize for speed and stability</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Metadata issues</td>
+<td>Match screenshots to actual app</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Kids category issues</td>
+<td>Follow COPPA if targeting children</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="quick-reference-common-mistakes-to-avoid_1">Quick Reference: Common Mistakes to Avoid</h2><button class="section-scope-btn" data-sec-id="sec_86">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Mistake</th>
+<th>Prevention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>No contract</td>
+<td>Always sign before starting</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Scope creep</td>
+<td>Document scope, charge for extras</td>
+</tr>
+<tr>
+<td>3</td>
+<td>No advance payment</td>
+<td>Take 30-50% advance</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Skipping design phase</td>
+<td>Design first, develop second</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Not testing on real devices</td>
+<td>Don't rely only on emulators</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Hardcoded API keys</td>
+<td>Use environment variables</td>
+</tr>
+<tr>
+<td>7</td>
+<td>No crash reporting</td>
+<td>Set up Crashlytics/Sentry from day 1</td>
+</tr>
+<tr>
+<td>8</td>
+<td>No version control</td>
+<td>Use Git from the start</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Ignoring app store guidelines</td>
+<td>Read guidelines before development</td>
+</tr>
+<tr>
+<td>10</td>
+<td>No backup strategy</td>
+<td>Set up automated backups</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Poor error handling</td>
+<td>Handle network, auth, server errors gracefully</td>
+</tr>
+<tr>
+<td>12</td>
+<td>No analytics</td>
+<td>Install analytics before launch</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Forgetting account deletion</td>
+<td>Apple requires it — build it in</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Not planning for updates</td>
+<td>Build with maintainability in mind</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>Tip:</strong> Copy this checklist into your project management tool at the start of every mobile app project. Check off items as you complete them.</p>
+</blockquote>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <p>&copy; 2026 Client Requirement Analysis • Interactive Web App</p>
+    </footer>
+  </div>
+
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/proposal.js"></script>
+  <script src="../assets/js/assistant.js"></script>
+  <script src="../assets/js/ai-engine.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/export.js"></script>
+</body>
+</html>

@@ -1,0 +1,5412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Web + App Requirements Complete Guide — Requirement Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header & Breadcrumb Navigation -->
+    <header class="glass-header">
+      <a href="../index.html" class="brand-title">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">DOC VIEW</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
+      </nav>
+    </header>
+
+    <!-- Document Header Info Card -->
+    <section class="doc-header-card">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <span class="badge badge-md">MD</span>
+        <span style="font-size: 0.85rem; color: var(--text-subtle);">combined\Combined-Requirements-Complete-Guide.md</span>
+      </div>
+      <h1>Combined Web + App Requirements Complete Guide</h1>
+
+      <div class="doc-meta-row">
+        <span>File Size: 89.5 KB</span>
+        <span>Metrics: 11,384 words</span>
+        <span>Reading Time: 56 min read</span>
+        <span>Last Modified: Jul 28, 2026</span>
+      </div>
+
+      <!-- Dynamic Format-Specific Export & Download Action Bar -->
+      <div class="export-toolbar">
+        <button class="export-btn primary" onclick="ExportManager.exportPDF()">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Export as PDF
+        </button>
+        
+        <button class="export-btn" onclick="ExportManager.exportDOCX(null, 'combined-combined-requirements-complete-guide.doc')">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Export as Word (.doc)
+        </button>
+        
+        <button class="export-btn" onclick="ExportManager.copyContentToClipboard()">
+          <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copy Content
+        </button>
+        
+        <button class="export-btn" onclick="ExportManager.downloadFile('../files/combined/Combined-Requirements-Complete-Guide.md', 'Combined-Requirements-Complete-Guide.md')">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Original (Combined-Requirements-Complete-Guide.md)
+        </button>
+        </div>
+    </section>
+
+    <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
+    <div class="doc-layout-grid">
+      
+        <aside class="doc-sidebar-toc">
+          <div class="toc-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <ul class="toc-list">
+            <li ><a href="#part-1-website-web-application">📌 🌐 Part 1: Website / Web Application</a></li><li ><a href="#table-of-contents">📌 Table of Contents</a></li><li ><a href="#1-domain">📌 Domain</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#pricing-considerations">📌 Pricing Considerations:</a></li><li ><a href="#2-hosting">📌 Hosting</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_1">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_1">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#hosting-type-comparison">📌 Hosting Type Comparison:</a></li><li style="padding-left: 0.75rem;"><a href="#pricing-considerations_1">📌 Pricing Considerations:</a></li><li ><a href="#3-ssl-certificate-security">📌 SSL Certificate &amp;amp; Security</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_2">📌 Parameters:</a></li><li ><a href="#4-database">📌 Database</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_2">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_3">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#database-engine-comparison">📌 Database Engine Comparison:</a></li><li style="padding-left: 0.75rem;"><a href="#pricing-considerations_2">📌 Pricing Considerations:</a></li><li ><a href="#5-tech-stack">📌 Tech Stack</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_3">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_4">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#tech-stack-comparison-common-combinations">📌 Tech Stack Comparison (Common Combinations):</a></li><li style="padding-left: 0.75rem;"><a href="#pricing-considerations_3">📌 Pricing Considerations:</a></li><li ><a href="#6-design-user-experience">📌 Design &amp;amp; User Experience</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_4">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_5">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#pricing-tiers-for-design">📌 Pricing Tiers for Design:</a></li><li ><a href="#7-pages-site-structure">📌 Pages &amp;amp; Site Structure</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_5">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_6">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#common-page-types-pricing">📌 Common Page Types &amp;amp; Pricing:</a></li><li ><a href="#8-features-functionality">📌 Features &amp;amp; Functionality</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_7">📌 Parameters:</a></li><li ><a href="#9-e-commerce">📌 E-Commerce</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_6">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_8">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#e-commerce-platform-comparison">📌 E-Commerce Platform Comparison:</a></li><li ><a href="#10-payment-integration">📌 Payment Integration</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_9">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#payment-gateway-comparison">📌 Payment Gateway Comparison:</a></li><li ><a href="#11-content-management">📌 Content Management</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_10">📌 Parameters:</a></li><li ><a href="#12-seo-analytics">📌 SEO &amp;amp; Analytics</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_11">📌 Parameters:</a></li><li ><a href="#13-performance-traffic">📌 Performance &amp;amp; Traffic</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_7">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_12">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#traffic-hosting-recommendations">📌 Traffic &amp;amp; Hosting Recommendations:</a></li><li ><a href="#14-security-compliance">📌 Security &amp;amp; Compliance</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_13">📌 Parameters:</a></li><li ><a href="#15-third-party-integrations">📌 Third-Party Integrations</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_14">📌 Parameters:</a></li><li ><a href="#16-maintenance-support">📌 Maintenance &amp;amp; Support</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_8">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_15">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#maintenance-plan-tiers">📌 Maintenance Plan Tiers:</a></li><li ><a href="#17-timeline-milestones-release">📌 Timeline, Milestones &amp;amp; Release</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_16">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#recommended-milestone-structure">📌 Recommended Milestone Structure:</a></li><li ><a href="#18-legal-compliance">📌 Legal &amp;amp; Compliance</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_17">📌 Parameters:</a></li><li ><a href="#19-branding-assets">📌 Branding &amp;amp; Assets</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_18">📌 Parameters:</a></li><li ><a href="#20-communication-project-management">📌 Communication &amp;amp; Project Management</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_19">📌 Parameters:</a></li><li ><a href="#quick-price-estimation-formula">📌 📊 Quick Price Estimation Formula</a></li><li style="padding-left: 0.75rem;"><a href="#hourly-rate-reference">📌 Hourly Rate Reference:</a></li><li ><a href="#part-2-mobile-application">📌 📱 Part 2: Mobile Application</a></li><li ><a href="#table-of-contents_1">📌 Table of Contents</a></li><li ><a href="#1-platform-technology">📌 Platform &amp;amp; Technology</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_9">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_20">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#development-approach-comparison">📌 Development Approach Comparison:</a></li><li style="padding-left: 0.75rem;"><a href="#technology-cost-comparison">📌 Technology Cost Comparison:</a></li><li ><a href="#2-app-store-deployment">📌 App Store &amp;amp; Deployment</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_10">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_21">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#app-store-submission-checklist">📌 App Store Submission Checklist:</a></li><li ><a href="#3-design-user-experience">📌 Design &amp;amp; User Experience</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_11">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_22">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#screen-design-pricing">📌 Screen Design Pricing:</a></li><li ><a href="#4-authentication-user-management">📌 Authentication &amp;amp; User Management</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_23">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#authentication-service-comparison">📌 Authentication Service Comparison:</a></li><li ><a href="#5-features-functionality">📌 Features &amp;amp; Functionality</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_24">📌 Parameters:</a></li><li ><a href="#6-backend-api">📌 Backend &amp;amp; API</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_12">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_25">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#backend-service-comparison">📌 Backend Service Comparison:</a></li><li ><a href="#7-database-storage">📌 Database &amp;amp; Storage</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_26">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#storage-cost-comparison">📌 Storage Cost Comparison:</a></li><li ><a href="#8-push-notifications">📌 Push Notifications</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_27">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#notification-service-comparison">📌 Notification Service Comparison:</a></li><li ><a href="#9-payment-monetization">📌 Payment &amp;amp; Monetization</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_13">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_28">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#important-applegoogle-payment-rules">📌 Important Apple/Google Payment Rules:</a></li><li style="padding-left: 0.75rem;"><a href="#subscription-integration-cost">📌 Subscription Integration Cost:</a></li><li ><a href="#10-media-content">📌 Media &amp;amp; Content</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_29">📌 Parameters:</a></li><li ><a href="#11-device-features-hardware">📌 Device Features &amp;amp; Hardware</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_30">📌 Parameters:</a></li><li ><a href="#12-offline-capability">📌 Offline Capability</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_31">📌 Parameters:</a></li><li ><a href="#13-security">📌 Security</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_32">📌 Parameters:</a></li><li ><a href="#14-testing-quality-assurance">📌 Testing &amp;amp; Quality Assurance</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_33">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#testing-budget-rule">📌 Testing Budget Rule:</a></li><li ><a href="#15-performance-optimization">📌 Performance Optimization</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_34">📌 Parameters:</a></li><li ><a href="#16-analytics-monitoring">📌 Analytics &amp;amp; Monitoring</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_35">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#analytics-service-comparison">📌 Analytics Service Comparison:</a></li><li ><a href="#17-third-party-integrations">📌 Third-Party Integrations</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_36">📌 Parameters:</a></li><li ><a href="#18-maintenance-support">📌 Maintenance &amp;amp; Support</a></li><li style="padding-left: 0.75rem;"><a href="#key-questions-to-ask_14">📌 Key Questions to Ask:</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_37">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#maintenance-plan-tiers_1">📌 Maintenance Plan Tiers:</a></li><li ><a href="#19-legal-compliance-app-store-policies">📌 Legal, Compliance &amp;amp; App Store Policies</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_38">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#common-app-store-rejection-reasons">📌 Common App Store Rejection Reasons:</a></li><li ><a href="#20-timeline-milestones-release">📌 Timeline, Milestones &amp;amp; Release</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_39">📌 Parameters:</a></li><li style="padding-left: 0.75rem;"><a href="#recommended-milestone-structure_1">📌 Recommended Milestone Structure:</a></li><li ><a href="#21-communication-project-management">📌 Communication &amp;amp; Project Management</a></li><li style="padding-left: 0.75rem;"><a href="#parameters_40">📌 Parameters:</a></li><li ><a href="#quick-price-estimation-formula_1">📌 📊 Quick Price Estimation Formula</a></li><li style="padding-left: 0.75rem;"><a href="#platform-cost-multipliers">📌 Platform Cost Multipliers:</a></li><li style="padding-left: 0.75rem;"><a href="#app-complexity-pricing-guide">📌 App Complexity &amp;amp; Pricing Guide:</a></li><li style="padding-left: 0.75rem;"><a href="#hourly-rate-reference_1">📌 Hourly Rate Reference:</a></li>
+          </ul>
+        </aside>
+        
+
+      <main class="doc-main-content">
+        <div class="doc-content-card">
+          
+          <div class="rendered-markdown">
+            <h1 id="combined-web-app-requirements-complete-guide">Combined Web + App Requirements Complete Guide</h1>
+<blockquote>
+<p>Comprehensive requirements guide covering both website/web application and mobile application projects in a single reference document.</p>
+<p><strong>Scope:</strong> This document covers both <strong>Web / Website Projects</strong> and <strong>Mobile Application Projects</strong>. Use the relevant sections for your client's project type.</p>
+</blockquote>
+<hr />
+<div class="section-scope-header"><h2 id="part-1-website-web-application">🌐 Part 1: Website / Web Application</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
+<hr />
+<blockquote>
+<p>This is the master reference document for every parameter you need to discuss, evaluate, and price when building a website for a client. Use this guide during discovery calls and proposal preparation.</p>
+</blockquote>
+<hr />
+<div class="section-scope-header"><h2 id="table-of-contents">Table of Contents</h2><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
+<ol>
+<li><a href="#1-domain">Domain</a></li>
+<li><a href="#2-hosting">Hosting</a></li>
+<li><a href="#3-ssl-certificate--security">SSL Certificate &amp; Security</a></li>
+<li><a href="#4-database">Database</a></li>
+<li><a href="#5-tech-stack">Tech Stack</a></li>
+<li><a href="#6-design--user-experience">Design &amp; User Experience</a></li>
+<li><a href="#7-pages--site-structure">Pages &amp; Site Structure</a></li>
+<li><a href="#8-features--functionality">Features &amp; Functionality</a></li>
+<li><a href="#9-e-commerce">E-Commerce</a></li>
+<li><a href="#10-payment-integration">Payment Integration</a></li>
+<li><a href="#11-content-management">Content Management</a></li>
+<li><a href="#12-seo--analytics">SEO &amp; Analytics</a></li>
+<li><a href="#13-performance--traffic">Performance &amp; Traffic</a></li>
+<li><a href="#14-security--compliance">Security &amp; Compliance</a></li>
+<li><a href="#15-third-party-integrations">Third-Party Integrations</a></li>
+<li><a href="#16-maintenance--support">Maintenance &amp; Support</a></li>
+<li><a href="#17-timeline-milestones--release">Timeline, Milestones &amp; Release</a></li>
+<li><a href="#18-legal--compliance">Legal &amp; Compliance</a></li>
+<li><a href="#19-branding--assets">Branding &amp; Assets</a></li>
+<li><a href="#20-communication--project-management">Communication &amp; Project Management</a></li>
+</ol>
+<hr />
+<div class="section-scope-header"><h2 id="1-domain">1. Domain</h2><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
+<p>The domain is the web address (URL) of the website. Clarify who owns, registers, and manages it.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_3">+ Add to Scope</button></div>
+<ul>
+<li>Does the client already have a domain? If yes, what is it?</li>
+<li>Who is the current registrar? (GoDaddy, Namecheap, Google Domains, etc.)</li>
+<li>Does the client want a new domain? What name and extension?</li>
+<li>Will there be multiple domains (redirects)?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_4">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Domain Registration</strong></td>
+<td>Client provides / Developer registers</td>
+<td>If developer registers — include cost ($10–$50/year)</td>
+</tr>
+<tr>
+<td><strong>Domain Extension</strong></td>
+<td>.com, .in, .org, .io, .co, .net, .tech, .store, .app</td>
+<td>Premium extensions cost more (.io = $30–$60/year)</td>
+</tr>
+<tr>
+<td><strong>Domain Privacy Protection</strong></td>
+<td>Enabled / Disabled</td>
+<td>WHOIS privacy ($5–$15/year)</td>
+</tr>
+<tr>
+<td><strong>Domain Transfer</strong></td>
+<td>Required / Not required</td>
+<td>Transfer fees and DNS migration time</td>
+</tr>
+<tr>
+<td><strong>Subdomain Setup</strong></td>
+<td>blog.site.com, shop.site.com, app.site.com</td>
+<td>Additional DNS configuration</td>
+</tr>
+<tr>
+<td><strong>Custom Email</strong></td>
+<td>info@domain.com, support@domain.com</td>
+<td>Google Workspace / Zoho Mail ($6–$12/user/month)</td>
+</tr>
+<tr>
+<td><strong>Domain Renewal</strong></td>
+<td>Annual / Multi-year</td>
+<td>Long-term registration discounts</td>
+</tr>
+<tr>
+<td><strong>DNS Management</strong></td>
+<td>Developer-managed / Client-managed</td>
+<td>Ongoing management responsibility</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="pricing-considerations">Pricing Considerations:</h3><button class="section-scope-btn" data-sec-id="sec_5">+ Add to Scope</button></div>
+<ul>
+<li>If you handle domain registration, charge the domain cost + a setup fee ($20–$50).</li>
+<li>If the client provides the domain, ensure you get DNS access or nameserver delegation.</li>
+<li>Custom email setup is a separate line item.</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="2-hosting">2. Hosting</h2><button class="section-scope-btn" data-sec-id="sec_6">+ Add to Scope</button></div>
+<p>Hosting is where the website files, database, and media live. This is one of the most critical pricing factors.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_1">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_7">+ Add to Scope</button></div>
+<ul>
+<li>Does the client have existing hosting? If yes, what provider?</li>
+<li>What type of hosting does the project require?</li>
+<li>What is the expected traffic volume?</li>
+<li>Are there geographic requirements for the server?</li>
+<li>Does the client need email hosting as well?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_1">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_8">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hosting Type</strong></td>
+<td>Shared / VPS / Dedicated / Cloud / Managed</td>
+<td>Shared = $3–$15/mo, VPS = $20–$100/mo, Cloud = $50–$500+/mo</td>
+</tr>
+<tr>
+<td><strong>Hosting Provider</strong></td>
+<td>AWS, DigitalOcean, Hostinger, Bluehost, GoDaddy, Vercel, Netlify, Railway, Render</td>
+<td>Provider choice affects cost and features</td>
+</tr>
+<tr>
+<td><strong>Server OS</strong></td>
+<td>Linux (Ubuntu/CentOS) / Windows Server</td>
+<td>Linux is standard; Windows for .NET</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>5GB / 10GB / 50GB / 100GB / Unlimited</td>
+<td>Based on media files, database size</td>
+</tr>
+<tr>
+<td><strong>Bandwidth</strong></td>
+<td>100GB / 500GB / 1TB / Unlimited</td>
+<td>Based on expected traffic</td>
+</tr>
+<tr>
+<td><strong>RAM</strong></td>
+<td>512MB / 1GB / 2GB / 4GB / 8GB+</td>
+<td>Higher for dynamic applications</td>
+</tr>
+<tr>
+<td><strong>CPU</strong></td>
+<td>1 Core / 2 Cores / 4 Cores / 8 Cores</td>
+<td>Higher for compute-heavy applications</td>
+</tr>
+<tr>
+<td><strong>Server Location</strong></td>
+<td>US / Europe / India / Asia-Pacific / Multi-region</td>
+<td>Affects latency for target audience</td>
+</tr>
+<tr>
+<td><strong>Uptime SLA</strong></td>
+<td>99.9% / 99.95% / 99.99%</td>
+<td>Higher SLA = higher cost</td>
+</tr>
+<tr>
+<td><strong>Backup Frequency</strong></td>
+<td>Daily / Weekly / Monthly / None</td>
+<td>Automated backups add cost</td>
+</tr>
+<tr>
+<td><strong>Managed vs Unmanaged</strong></td>
+<td>Managed (provider handles updates) / Unmanaged (you handle)</td>
+<td>Managed = higher monthly cost</td>
+</tr>
+<tr>
+<td><strong>Email Hosting</strong></td>
+<td>Included / Separate (Google Workspace, Zoho)</td>
+<td>$5–$12/user/month if separate</td>
+</tr>
+<tr>
+<td><strong>Staging Environment</strong></td>
+<td>Yes / No</td>
+<td>Separate staging server adds cost</td>
+</tr>
+<tr>
+<td><strong>CDN Included</strong></td>
+<td>Yes / No / Separate (Cloudflare, AWS CloudFront)</td>
+<td>Free tier available, premium = $20+/mo</td>
+</tr>
+<tr>
+<td><strong>Auto-Scaling</strong></td>
+<td>Yes / No</td>
+<td>Cloud hosting with auto-scaling for traffic spikes</td>
+</tr>
+<tr>
+<td><strong>Containerization</strong></td>
+<td>Docker / Kubernetes / None</td>
+<td>Adds complexity and cost</td>
+</tr>
+<tr>
+<td><strong>CI/CD Pipeline</strong></td>
+<td>Yes / No</td>
+<td>GitHub Actions, GitLab CI, Jenkins setup</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="hosting-type-comparison">Hosting Type Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_9">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Best For</th>
+<th>Monthly Cost</th>
+<th>Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shared Hosting</strong></td>
+<td>Small sites, blogs, portfolios</td>
+<td>$3–$15</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>VPS (Virtual Private Server)</strong></td>
+<td>Medium businesses, moderate traffic</td>
+<td>$20–$100</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Cloud Hosting (AWS/GCP/Azure)</strong></td>
+<td>Scalable applications, high traffic</td>
+<td>$50–$500+</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Dedicated Server</strong></td>
+<td>Enterprise applications, maximum control</td>
+<td>$100–$500+</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>Managed WordPress</strong></td>
+<td>WordPress sites (WP Engine, Kinsta)</td>
+<td>$25–$100</td>
+<td>Medium-High</td>
+</tr>
+<tr>
+<td><strong>Static Hosting (Vercel/Netlify)</strong></td>
+<td>Static sites, JAMstack, Next.js</td>
+<td>Free–$20</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Serverless (AWS Lambda, Vercel)</strong></td>
+<td>API-driven, microservices</td>
+<td>Pay-per-use</td>
+<td>Variable</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="pricing-considerations_1">Pricing Considerations:</h3><button class="section-scope-btn" data-sec-id="sec_10">+ Add to Scope</button></div>
+<ul>
+<li>Always clarify who pays the ongoing hosting bill — client or you.</li>
+<li>If you manage hosting, charge a monthly management fee ($50–$200/month).</li>
+<li>Setup fee for server configuration ($100–$500 one-time).</li>
+<li>Include hosting cost in the first year and quote renewals separately.</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="3-ssl-certificate-security">3. SSL Certificate &amp; Security</h2><button class="section-scope-btn" data-sec-id="sec_11">+ Add to Scope</button></div>
+<p>SSL secures data transmission between the browser and server.</p>
+<div class="section-scope-header"><h3 id="parameters_2">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_12">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSL Type</strong></td>
+<td>Free (Let's Encrypt) / Domain Validated / Organization Validated / Extended Validation</td>
+<td>Free–$300/year</td>
+</tr>
+<tr>
+<td><strong>Wildcard SSL</strong></td>
+<td>Yes (covers subdomains) / No</td>
+<td>$50–$200/year</td>
+</tr>
+<tr>
+<td><strong>SSL Provider</strong></td>
+<td>Let's Encrypt, Cloudflare, Comodo, DigiCert, GeoTrust</td>
+<td>Varies significantly</td>
+</tr>
+<tr>
+<td><strong>Auto-Renewal</strong></td>
+<td>Enabled / Manual</td>
+<td>Setup for auto-renewal</td>
+</tr>
+<tr>
+<td><strong>HTTPS Redirect</strong></td>
+<td>Forced HTTPS / Mixed content</td>
+<td>Configuration effort</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="4-database">4. Database</h2><button class="section-scope-btn" data-sec-id="sec_13">+ Add to Scope</button></div>
+<p>The database stores all dynamic content, user data, orders, and application state.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_2">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_14">+ Add to Scope</button></div>
+<ul>
+<li>What type of data will be stored?</li>
+<li>How much data is expected over 1 year? 5 years?</li>
+<li>Is real-time data access needed?</li>
+<li>Are there existing databases to migrate from?</li>
+<li>What are the data backup and recovery requirements?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_3">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_15">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Database Type</strong></td>
+<td>Relational (SQL) / Non-Relational (NoSQL) / Both</td>
+<td>Architecture choice</td>
+</tr>
+<tr>
+<td><strong>Database Engine</strong></td>
+<td>MySQL / PostgreSQL / MongoDB / Firebase / Supabase / DynamoDB / SQLite</td>
+<td>Engine affects hosting options</td>
+</tr>
+<tr>
+<td><strong>Database Size</strong></td>
+<td>Small (&lt;1GB) / Medium (1–10GB) / Large (10–100GB) / Enterprise (100GB+)</td>
+<td>Storage costs scale</td>
+</tr>
+<tr>
+<td><strong>Number of Tables/Collections</strong></td>
+<td>&lt;10 / 10–50 / 50–100 / 100+</td>
+<td>Complexity indicator</td>
+</tr>
+<tr>
+<td><strong>Read/Write Ratio</strong></td>
+<td>Read-heavy / Write-heavy / Balanced</td>
+<td>Affects optimization strategy</td>
+</tr>
+<tr>
+<td><strong>Backup Strategy</strong></td>
+<td>Daily automated / Weekly / On-demand / None</td>
+<td>$10–$100/month for managed backups</td>
+</tr>
+<tr>
+<td><strong>Backup Retention</strong></td>
+<td>7 days / 30 days / 90 days / 1 year</td>
+<td>Longer retention = higher cost</td>
+</tr>
+<tr>
+<td><strong>Replication</strong></td>
+<td>Single instance / Read replicas / Multi-region</td>
+<td>High availability adds cost</td>
+</tr>
+<tr>
+<td><strong>Data Migration</strong></td>
+<td>No migration / Simple import / Complex ETL</td>
+<td>$200–$2,000 based on complexity</td>
+</tr>
+<tr>
+<td><strong>Database Hosting</strong></td>
+<td>Same server / Managed service (RDS, Atlas, PlanetScale)</td>
+<td>Managed services = $15–$200+/month</td>
+</tr>
+<tr>
+<td><strong>Connection Pooling</strong></td>
+<td>Yes / No</td>
+<td>For high-concurrency apps</td>
+</tr>
+<tr>
+<td><strong>Caching Layer</strong></td>
+<td>None / Redis / Memcached</td>
+<td>Performance boost, $15–$50/month</td>
+</tr>
+<tr>
+<td><strong>Search Engine</strong></td>
+<td>None / Elasticsearch / Algolia / Meilisearch</td>
+<td>Full-text search capability $0–$100+/month</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="database-engine-comparison">Database Engine Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_16">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Engine</th>
+<th>Type</th>
+<th>Best For</th>
+<th>Managed Service Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MySQL</strong></td>
+<td>SQL</td>
+<td>Traditional web apps, WordPress, PHP</td>
+<td>$15–$100/mo</td>
+</tr>
+<tr>
+<td><strong>PostgreSQL</strong></td>
+<td>SQL</td>
+<td>Complex queries, data integrity, analytics</td>
+<td>$15–$100/mo</td>
+</tr>
+<tr>
+<td><strong>MongoDB</strong></td>
+<td>NoSQL</td>
+<td>Flexible schema, real-time, JSON-heavy</td>
+<td>$57+/mo (Atlas)</td>
+</tr>
+<tr>
+<td><strong>Firebase Firestore</strong></td>
+<td>NoSQL</td>
+<td>Real-time apps, mobile backends</td>
+<td>Free–$100+/mo</td>
+</tr>
+<tr>
+<td><strong>Supabase</strong></td>
+<td>SQL (Postgres)</td>
+<td>Open-source Firebase alternative</td>
+<td>Free–$25+/mo</td>
+</tr>
+<tr>
+<td><strong>SQLite</strong></td>
+<td>SQL</td>
+<td>Small apps, prototypes, embedded</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>DynamoDB</strong></td>
+<td>NoSQL</td>
+<td>Serverless, AWS ecosystem</td>
+<td>Pay-per-use</td>
+</tr>
+<tr>
+<td><strong>Redis</strong></td>
+<td>In-memory</td>
+<td>Caching, sessions, real-time leaderboards</td>
+<td>$15–$50/mo</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="pricing-considerations_2">Pricing Considerations:</h3><button class="section-scope-btn" data-sec-id="sec_17">+ Add to Scope</button></div>
+<ul>
+<li>Database design and schema creation: $200–$1,000</li>
+<li>Data migration from existing system: $300–$2,000</li>
+<li>Database optimization and indexing: $100–$500</li>
+<li>Ongoing database management: $50–$200/month</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="5-tech-stack">5. Tech Stack</h2><button class="section-scope-btn" data-sec-id="sec_18">+ Add to Scope</button></div>
+<p>The technology stack determines the tools, languages, and frameworks used to build the website.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_3">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_19">+ Add to Scope</button></div>
+<ul>
+<li>Is there a preferred technology? (Often tied to existing systems)</li>
+<li>Does the team have in-house developers for maintenance?</li>
+<li>What is the expected lifespan of the website?</li>
+<li>Any requirement for a specific CMS?</li>
+<li>Are there SEO requirements that affect framework choice?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_4">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_20">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontend Framework</strong></td>
+<td>HTML/CSS/JS (Vanilla) / React / Next.js / Vue.js / Angular / Svelte / Astro</td>
+<td>Framework complexity affects dev time</td>
+</tr>
+<tr>
+<td><strong>CSS Framework</strong></td>
+<td>Tailwind CSS / Bootstrap / Material UI / Custom CSS / Shadcn UI</td>
+<td>$0–$500 for custom styling</td>
+</tr>
+<tr>
+<td><strong>Backend Language</strong></td>
+<td>Node.js / Python / PHP / Java / C# / Ruby / Go</td>
+<td>Language choice affects hosting</td>
+</tr>
+<tr>
+<td><strong>Backend Framework</strong></td>
+<td>Express.js / Django / Laravel / Spring Boot / ASP.NET / Rails / FastAPI</td>
+<td>Framework affects development speed</td>
+</tr>
+<tr>
+<td><strong>CMS</strong></td>
+<td>None (Custom) / WordPress / Strapi / Contentful / Sanity / Ghost / Drupal</td>
+<td>CMS licensing and customization costs</td>
+</tr>
+<tr>
+<td><strong>Static Site Generator</strong></td>
+<td>Next.js / Gatsby / Hugo / Astro / 11ty</td>
+<td>Good for blogs, portfolios, docs</td>
+</tr>
+<tr>
+<td><strong>API Architecture</strong></td>
+<td>REST / GraphQL / tRPC / None</td>
+<td>GraphQL adds 20–30% dev time</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Custom / Firebase Auth / Auth0 / Clerk / NextAuth / Supabase Auth</td>
+<td>Auth service = $0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>State Management</strong></td>
+<td>None / Redux / Zustand / Jotai / Context API</td>
+<td>Complexity for frontend</td>
+</tr>
+<tr>
+<td><strong>Package Manager</strong></td>
+<td>npm / yarn / pnpm / bun</td>
+<td>Developer preference</td>
+</tr>
+<tr>
+<td><strong>Build Tool</strong></td>
+<td>Vite / Webpack / Turbopack / esbuild</td>
+<td>Modern tools improve DX</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>None / Jest / Playwright / Cypress / Vitest</td>
+<td>Testing adds 15–25% dev time</td>
+</tr>
+<tr>
+<td><strong>Version Control</strong></td>
+<td>Git (GitHub / GitLab / Bitbucket)</td>
+<td>Standard for all projects</td>
+</tr>
+<tr>
+<td><strong>TypeScript</strong></td>
+<td>Yes / No</td>
+<td>Adds 10–15% dev time, better quality</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="tech-stack-comparison-common-combinations">Tech Stack Comparison (Common Combinations):</h3><button class="section-scope-btn" data-sec-id="sec_21">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Stack</th>
+<th>Components</th>
+<th>Best For</th>
+<th>Dev Time Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WordPress</strong></td>
+<td>PHP + MySQL + Themes</td>
+<td>Blogs, small businesses, content sites</td>
+<td>1x (fastest)</td>
+</tr>
+<tr>
+<td><strong>MERN</strong></td>
+<td>MongoDB + Express + React + Node.js</td>
+<td>Full-stack web apps</td>
+<td>1.5x</td>
+</tr>
+<tr>
+<td><strong>MEAN</strong></td>
+<td>MongoDB + Express + Angular + Node.js</td>
+<td>Enterprise web apps</td>
+<td>1.7x</td>
+</tr>
+<tr>
+<td><strong>Next.js Full-Stack</strong></td>
+<td>Next.js + PostgreSQL + Prisma</td>
+<td>Modern web apps, SEO-critical</td>
+<td>1.3x</td>
+</tr>
+<tr>
+<td><strong>LAMP</strong></td>
+<td>Linux + Apache + MySQL + PHP</td>
+<td>Traditional web apps</td>
+<td>1x</td>
+</tr>
+<tr>
+<td><strong>Django</strong></td>
+<td>Python + Django + PostgreSQL</td>
+<td>Data-heavy apps, dashboards</td>
+<td>1.4x</td>
+</tr>
+<tr>
+<td><strong>Laravel</strong></td>
+<td>PHP + Laravel + MySQL</td>
+<td>E-commerce, SaaS, CRM</td>
+<td>1.3x</td>
+</tr>
+<tr>
+<td><strong>JAMstack</strong></td>
+<td>Static (Astro/Hugo) + Headless CMS + CDN</td>
+<td>Static sites, blogs, portfolios</td>
+<td>0.8x</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="pricing-considerations_3">Pricing Considerations:</h3><button class="section-scope-btn" data-sec-id="sec_22">+ Add to Scope</button></div>
+<ul>
+<li>WordPress site (theme-based): $500–$3,000</li>
+<li>WordPress (custom theme): $2,000–$10,000</li>
+<li>Custom-coded site (React/Next.js): $3,000–$25,000+</li>
+<li>Full-stack application: $10,000–$100,000+</li>
+<li>Technology consulting fee (stack recommendation): $200–$500</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="6-design-user-experience">6. Design &amp; User Experience</h2><button class="section-scope-btn" data-sec-id="sec_23">+ Add to Scope</button></div>
+<p>Design is one of the highest-value components and often the first thing clients care about.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_4">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_24">+ Add to Scope</button></div>
+<ul>
+<li>Does the client have existing branding (logo, colors, fonts)?</li>
+<li>Is there any design inspiration or reference websites?</li>
+<li>Do they want custom design or are they okay with a template?</li>
+<li>How many design revisions are expected?</li>
+<li>Is a mobile-first approach needed?</li>
+<li>Do they need prototyping or wireframing?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_5">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_25">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Design Approach</strong></td>
+<td>Custom Design / Template/Theme-based / Hybrid</td>
+<td>Custom = 3–5x more expensive</td>
+</tr>
+<tr>
+<td><strong>Wireframing</strong></td>
+<td>Yes (Low-fidelity) / Yes (High-fidelity) / No</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Prototyping</strong></td>
+<td>Interactive prototype in Figma/Adobe XD / No</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>UI Design Tool</strong></td>
+<td>Figma / Adobe XD / Sketch / Canva</td>
+<td>Figma is industry standard</td>
+</tr>
+<tr>
+<td><strong>Responsive Design</strong></td>
+<td>Desktop only / Desktop + Tablet / Desktop + Tablet + Mobile</td>
+<td>Mobile-responsive is standard</td>
+</tr>
+<tr>
+<td><strong>Number of Unique Page Designs</strong></td>
+<td>3–5 / 5–10 / 10–20 / 20+</td>
+<td>Each unique page = $200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Design Revisions</strong></td>
+<td>2 rounds / 3 rounds / Unlimited</td>
+<td>Unlimited revisions = higher cost</td>
+</tr>
+<tr>
+<td><strong>Dark Mode</strong></td>
+<td>Yes / No</td>
+<td>+10–15% design/dev effort</td>
+</tr>
+<tr>
+<td><strong>Animations &amp; Micro-interactions</strong></td>
+<td>None / Subtle / Heavy (parallax, scroll effects)</td>
+<td>Heavy = +20–40% dev time</td>
+</tr>
+<tr>
+<td><strong>Accessibility (WCAG)</strong></td>
+<td>Level A / Level AA / Level AAA / None</td>
+<td>AA is recommended, AAA is rare</td>
+</tr>
+<tr>
+<td><strong>Icon Set</strong></td>
+<td>Free (Heroicons, Lucide) / Premium (FontAwesome Pro) / Custom</td>
+<td>Custom icons = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Typography</strong></td>
+<td>Google Fonts (free) / Adobe Fonts / Custom fonts</td>
+<td>Custom fonts = licensing fee</td>
+</tr>
+<tr>
+<td><strong>Image Style</strong></td>
+<td>Stock photos / Custom photography / Illustrations / AI-generated</td>
+<td>Custom photography = $500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Design System</strong></td>
+<td>None / Basic style guide / Full design system</td>
+<td>Full design system = $2,000–$10,000</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="pricing-tiers-for-design">Pricing Tiers for Design:</h3><button class="section-scope-btn" data-sec-id="sec_26">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Includes</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic</strong></td>
+<td>Template-based, minor color/font changes, responsive</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Standard</strong></td>
+<td>Semi-custom, wireframes, 5–8 unique pages, 2 revisions</td>
+<td>$1,000–$3,000</td>
+</tr>
+<tr>
+<td><strong>Premium</strong></td>
+<td>Fully custom, prototyping, animations, 10+ pages, 3 revisions</td>
+<td>$3,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>Full design system, user research, A/B testing, unlimited revisions</td>
+<td>$10,000–$50,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="7-pages-site-structure">7. Pages &amp; Site Structure</h2><button class="section-scope-btn" data-sec-id="sec_27">+ Add to Scope</button></div>
+<p>Understanding the site map is critical for accurate pricing.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_5">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_28">+ Add to Scope</button></div>
+<ul>
+<li>How many pages does the website need?</li>
+<li>Which pages are static and which are dynamic?</li>
+<li>Is there a blog or news section?</li>
+<li>Is there a user dashboard or admin panel?</li>
+<li>Do they need multi-language support?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_6">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_29">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Pages</strong></td>
+<td>1–5 / 5–10 / 10–25 / 25–50 / 50+</td>
+<td>Each page = $100–$500</td>
+</tr>
+<tr>
+<td><strong>Static Pages</strong></td>
+<td>Home, About, Contact, Services, Portfolio</td>
+<td>Simpler to build</td>
+</tr>
+<tr>
+<td><strong>Dynamic Pages</strong></td>
+<td>Product listings, blog posts, user profiles</td>
+<td>Require database integration</td>
+</tr>
+<tr>
+<td><strong>Landing Pages</strong></td>
+<td>0 / 1–3 / 3–5 / 5+</td>
+<td>Marketing-optimized pages</td>
+</tr>
+<tr>
+<td><strong>Blog Section</strong></td>
+<td>No / Basic (posts only) / Advanced (categories, tags, search, comments)</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Admin Dashboard</strong></td>
+<td>No / Basic / Advanced (analytics, user management)</td>
+<td>$1,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>User Dashboard</strong></td>
+<td>No / Profile only / Full dashboard (orders, settings, notifications)</td>
+<td>$1,000–$8,000</td>
+</tr>
+<tr>
+<td><strong>Multi-Language</strong></td>
+<td>No / 2 languages / 3–5 languages / 10+ languages</td>
+<td>Each language adds 30–50% content cost</td>
+</tr>
+<tr>
+<td><strong>Sitemap</strong></td>
+<td>Auto-generated / Custom</td>
+<td>Usually auto-generated</td>
+</tr>
+<tr>
+<td><strong>URL Structure</strong></td>
+<td>Simple / SEO-optimized / Custom</td>
+<td>SEO-optimized URLs are standard</td>
+</tr>
+<tr>
+<td><strong>Breadcrumbs</strong></td>
+<td>Yes / No</td>
+<td>Minor effort</td>
+</tr>
+<tr>
+<td><strong>404 Custom Page</strong></td>
+<td>Yes / No</td>
+<td>Custom branded 404 page</td>
+</tr>
+<tr>
+<td><strong>Search Functionality</strong></td>
+<td>No / Basic search / Advanced (filters, faceted search)</td>
+<td>$200–$2,000</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="common-page-types-pricing">Common Page Types &amp; Pricing:</h3><button class="section-scope-btn" data-sec-id="sec_30">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Page Type</th>
+<th>Complexity</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home Page</td>
+<td>High (hero, features, testimonials, CTA)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td>About Us</td>
+<td>Low–Medium</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td>Contact Page (with form)</td>
+<td>Low–Medium</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td>Services/Products Page</td>
+<td>Medium</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td>Individual Service Page</td>
+<td>Medium</td>
+<td>$150–$500</td>
+</tr>
+<tr>
+<td>Blog Listing Page</td>
+<td>Medium</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td>Blog Post Template</td>
+<td>Medium</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td>Portfolio/Gallery</td>
+<td>Medium–High</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td>FAQ Page</td>
+<td>Low</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td>Pricing Page</td>
+<td>Medium</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td>Testimonials Page</td>
+<td>Low–Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Team/Staff Page</td>
+<td>Low–Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Login/Register Page</td>
+<td>Medium–High</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td>User Dashboard</td>
+<td>High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td>Admin Panel</td>
+<td>Very High</td>
+<td>$2,000–$10,000</td>
+</tr>
+<tr>
+<td>Product Detail Page</td>
+<td>Medium–High</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td>Cart &amp; Checkout</td>
+<td>Very High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td>Order Tracking</td>
+<td>High</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td>Terms &amp; Privacy</td>
+<td>Low</td>
+<td>$50–$200</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="8-features-functionality">8. Features &amp; Functionality</h2><button class="section-scope-btn" data-sec-id="sec_31">+ Add to Scope</button></div>
+<p>This is where the scope can balloon quickly. Be very specific about what's included.</p>
+<div class="section-scope-header"><h3 id="parameters_7">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_32">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Options</th>
+<th>Complexity</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Contact Form</strong></td>
+<td>Basic / Advanced (file upload, conditional fields)</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>User Registration</strong></td>
+<td>Email/Password / Social login / Phone OTP</td>
+<td>Medium–High</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>User Authentication</strong></td>
+<td>Session-based / JWT / OAuth 2.0</td>
+<td>Medium</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Role-Based Access</strong></td>
+<td>None / 2 roles / Multiple roles</td>
+<td>Medium–High</td>
+<td>$500–$2,500</td>
+</tr>
+<tr>
+<td><strong>Email Notifications</strong></td>
+<td>None / Transactional / Marketing</td>
+<td>Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>SMS Notifications</strong></td>
+<td>None / OTP only / Full SMS</td>
+<td>Medium</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Push Notifications (Web)</strong></td>
+<td>None / Basic / Advanced</td>
+<td>Medium</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Live Chat</strong></td>
+<td>None / Third-party (Crisp, Tawk.to) / Custom</td>
+<td>Low–High</td>
+<td>$0–$3,000</td>
+</tr>
+<tr>
+<td><strong>Chatbot</strong></td>
+<td>None / Rule-based / AI-powered</td>
+<td>Medium–Very High</td>
+<td>$500–$10,000+</td>
+</tr>
+<tr>
+<td><strong>Newsletter Subscription</strong></td>
+<td>None / Basic / Integration (Mailchimp, SendGrid)</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Social Media Sharing</strong></td>
+<td>None / Share buttons / Auto-post</td>
+<td>Low</td>
+<td>$50–$300</td>
+</tr>
+<tr>
+<td><strong>Social Media Feed</strong></td>
+<td>None / Instagram / Twitter / Facebook</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Review &amp; Ratings</strong></td>
+<td>None / Basic / Advanced (verified, photos)</td>
+<td>Medium</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Booking/Appointment</strong></td>
+<td>None / Calendar-based / Full booking system</td>
+<td>Medium–High</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>File Upload</strong></td>
+<td>None / Images only / Multi-file / Large files</td>
+<td>Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>PDF Generation</strong></td>
+<td>None / Invoices / Reports / Certificates</td>
+<td>Medium</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Maps Integration</strong></td>
+<td>None / Google Maps embed / Interactive maps</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Video Player</strong></td>
+<td>None / YouTube/Vimeo embed / Custom player</td>
+<td>Low–Medium</td>
+<td>$100–$800</td>
+</tr>
+<tr>
+<td><strong>Image Gallery</strong></td>
+<td>None / Basic grid / Lightbox / Masonry</td>
+<td>Low–Medium</td>
+<td>$100–$600</td>
+</tr>
+<tr>
+<td><strong>Drag &amp; Drop</strong></td>
+<td>None / Kanban board / Page builder / File upload</td>
+<td>Medium–High</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Real-Time Features</strong></td>
+<td>None / Chat / Notifications / Collaboration</td>
+<td>High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Data Export</strong></td>
+<td>None / CSV / Excel / PDF</td>
+<td>Medium</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Data Import</strong></td>
+<td>None / CSV upload / API sync / Bulk import</td>
+<td>Medium–High</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Multi-Tenant</strong></td>
+<td>No / Yes</td>
+<td>Very High</td>
+<td>$5,000–$20,000+</td>
+</tr>
+<tr>
+<td><strong>Cron Jobs / Scheduled Tasks</strong></td>
+<td>None / Email digests / Report generation / Data cleanup</td>
+<td>Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Wishlist/Favorites</strong></td>
+<td>None / Basic / With notifications</td>
+<td>Low–Medium</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td><strong>Comparison Feature</strong></td>
+<td>None / Side-by-side / Table view</td>
+<td>Medium</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Referral System</strong></td>
+<td>None / Basic codes / Full affiliate</td>
+<td>Medium–High</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Notification Center</strong></td>
+<td>None / In-app / In-app + Email + SMS</td>
+<td>Medium–High</td>
+<td>$500–$2,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="9-e-commerce">9. E-Commerce</h2><button class="section-scope-btn" data-sec-id="sec_33">+ Add to Scope</button></div>
+<p>If the website is an online store, this section is critical.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_6">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_34">+ Add to Scope</button></div>
+<ul>
+<li>How many products will be listed (now and in the future)?</li>
+<li>Are products physical, digital, or both?</li>
+<li>Is there a subscription model?</li>
+<li>Shipping — domestic, international, or both?</li>
+<li>Tax calculation requirements?</li>
+<li>Inventory management needs?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_8">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_35">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E-Commerce Type</strong></td>
+<td>None / Simple (few products) / Full store / Marketplace</td>
+<td>Marketplace = highest complexity</td>
+</tr>
+<tr>
+<td><strong>Product Count</strong></td>
+<td>1–10 / 10–100 / 100–1,000 / 1,000+</td>
+<td>Affects catalog design</td>
+</tr>
+<tr>
+<td><strong>Product Type</strong></td>
+<td>Physical / Digital / Service / Subscription / Mixed</td>
+<td>Each type has different logic</td>
+</tr>
+<tr>
+<td><strong>Product Variants</strong></td>
+<td>None / Size/Color / Multiple attributes</td>
+<td>Variant management adds complexity</td>
+</tr>
+<tr>
+<td><strong>Product Reviews</strong></td>
+<td>None / Basic / Verified purchase / With photos</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Inventory Management</strong></td>
+<td>None / Basic stock tracking / Advanced (warehouse, multi-location)</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Shopping Cart</strong></td>
+<td>Simple / Persistent / Multi-vendor</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Wishlist</strong></td>
+<td>Yes / No</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Checkout Process</strong></td>
+<td>Single page / Multi-step / Guest checkout</td>
+<td>Multi-step = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Order Management</strong></td>
+<td>Basic / Advanced (status tracking, notifications)</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Shipping Calculation</strong></td>
+<td>Free / Flat rate / Weight-based / API-based (FedEx, UPS)</td>
+<td>API integration = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Tax Calculation</strong></td>
+<td>None / Manual / Automated (tax API)</td>
+<td>Automated = $200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Coupon/Discount System</strong></td>
+<td>None / Basic codes / Advanced (rules, tiers, auto-apply)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Invoice Generation</strong></td>
+<td>None / Basic / Branded / Tax-compliant</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Return/Refund Management</strong></td>
+<td>None / Basic / Full (RMA process)</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Vendor/Seller Management</strong></td>
+<td>None / Single vendor / Multi-vendor marketplace</td>
+<td>Marketplace = $10,000–$50,000+</td>
+</tr>
+<tr>
+<td><strong>Product Comparison</strong></td>
+<td>None / Yes</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Recently Viewed</strong></td>
+<td>None / Yes</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Product Recommendations</strong></td>
+<td>None / Manual / AI-powered</td>
+<td>$200–$5,000</td>
+</tr>
+<tr>
+<td><strong>Abandoned Cart Recovery</strong></td>
+<td>None / Email reminders / Full flow</td>
+<td>$300–$1,500</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="e-commerce-platform-comparison">E-Commerce Platform Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_36">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Best For</th>
+<th>Cost</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WooCommerce</strong></td>
+<td>WordPress stores</td>
+<td>Free (+ plugins)</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Shopify</strong></td>
+<td>All-in-one stores</td>
+<td>$29–$399/mo</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Custom (Next.js + DB)</strong></td>
+<td>Unique requirements</td>
+<td>Dev cost only</td>
+<td>Full</td>
+</tr>
+<tr>
+<td><strong>Medusa.js</strong></td>
+<td>Headless e-commerce</td>
+<td>Free (open-source)</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>Saleor</strong></td>
+<td>Enterprise headless</td>
+<td>Free–$2,000/mo</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>BigCommerce</strong></td>
+<td>Large catalogs</td>
+<td>$29–$299/mo</td>
+<td>Medium</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="10-payment-integration">10. Payment Integration</h2><button class="section-scope-btn" data-sec-id="sec_37">+ Add to Scope</button></div>
+<p>Payment processing is where money flows — get this right.</p>
+<div class="section-scope-header"><h3 id="parameters_9">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_38">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Payment Gateway</strong></td>
+<td>Stripe / Razorpay / PayPal / Square / Braintree / PayU / CCAvenue</td>
+<td>Each gateway = $300–$1,000 to integrate</td>
+</tr>
+<tr>
+<td><strong>Number of Gateways</strong></td>
+<td>1 / 2 / 3+</td>
+<td>Each additional = +$300–$500</td>
+</tr>
+<tr>
+<td><strong>Payment Methods</strong></td>
+<td>Credit/Debit cards / UPI / Net Banking / Wallets / EMI / BNPL</td>
+<td>Each method within gateway</td>
+</tr>
+<tr>
+<td><strong>Multi-Currency</strong></td>
+<td>No / Yes (2–5 currencies) / Yes (global)</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Recurring Payments</strong></td>
+<td>No / Monthly subscriptions / Annual / Custom intervals</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Invoice Payments</strong></td>
+<td>No / Yes (pay via link)</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Split Payments</strong></td>
+<td>No / Yes (marketplace commission)</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Refund Handling</strong></td>
+<td>Manual / Automated / Partial refunds</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Payment Security</strong></td>
+<td>PCI DSS compliant / 3D Secure / Tokenization</td>
+<td>Usually handled by gateway</td>
+</tr>
+<tr>
+<td><strong>Webhook Integration</strong></td>
+<td>Yes / No</td>
+<td>Payment status callbacks $200–$500</td>
+</tr>
+<tr>
+<td><strong>Test Environment</strong></td>
+<td>Sandbox / Test mode</td>
+<td>Standard for all integrations</td>
+</tr>
+<tr>
+<td><strong>Payment Analytics</strong></td>
+<td>Basic / Advanced dashboard</td>
+<td>$200–$1,000</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="payment-gateway-comparison">Payment Gateway Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_39">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Gateway</th>
+<th>Best For</th>
+<th>Transaction Fee</th>
+<th>Regions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stripe</strong></td>
+<td>Global, developers</td>
+<td>2.9% + $0.30</td>
+<td>Global</td>
+</tr>
+<tr>
+<td><strong>Razorpay</strong></td>
+<td>India</td>
+<td>2%</td>
+<td>India</td>
+</tr>
+<tr>
+<td><strong>PayPal</strong></td>
+<td>International payments</td>
+<td>3.49% + $0.49</td>
+<td>Global</td>
+</tr>
+<tr>
+<td><strong>Square</strong></td>
+<td>In-person + online</td>
+<td>2.6% + $0.10</td>
+<td>US, UK, CA, AU, JP</td>
+</tr>
+<tr>
+<td><strong>Braintree</strong></td>
+<td>PayPal-owned, enterprise</td>
+<td>2.59% + $0.49</td>
+<td>Global</td>
+</tr>
+<tr>
+<td><strong>PayU</strong></td>
+<td>India, emerging markets</td>
+<td>2%</td>
+<td>India, LatAm, EMEA</td>
+</tr>
+<tr>
+<td><strong>CCAvenue</strong></td>
+<td>India</td>
+<td>2–3%</td>
+<td>India</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="11-content-management">11. Content Management</h2><button class="section-scope-btn" data-sec-id="sec_40">+ Add to Scope</button></div>
+<p>Content is what makes the website valuable. Clarify who creates and manages it.</p>
+<div class="section-scope-header"><h3 id="parameters_10">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_41">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Content Provider</strong></td>
+<td>Client provides all / Developer creates / Mix</td>
+<td>Content writing = $50–$200/page</td>
+</tr>
+<tr>
+<td><strong>CMS Needed</strong></td>
+<td>No (static) / Yes (client can edit)</td>
+<td>CMS adds $500–$3,000 to project</td>
+</tr>
+<tr>
+<td><strong>CMS Type</strong></td>
+<td>WordPress / Strapi / Contentful / Sanity / Custom admin</td>
+<td>See CMS comparison</td>
+</tr>
+<tr>
+<td><strong>Content Types</strong></td>
+<td>Text / Images / Videos / Documents / Audio</td>
+<td>Rich content types need more setup</td>
+</tr>
+<tr>
+<td><strong>Content Volume</strong></td>
+<td>&lt;10 pages / 10–50 / 50–200 / 200+</td>
+<td>Affects content entry time</td>
+</tr>
+<tr>
+<td><strong>Content Migration</strong></td>
+<td>No / From old website / From documents / From database</td>
+<td>$300–$5,000</td>
+</tr>
+<tr>
+<td><strong>Media Management</strong></td>
+<td>Basic upload / DAM (Digital Asset Management)</td>
+<td>DAM = $1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Content Workflow</strong></td>
+<td>Direct publish / Draft → Review → Publish</td>
+<td>Approval workflow = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Content Versioning</strong></td>
+<td>No / Yes</td>
+<td>Built into most CMS</td>
+</tr>
+<tr>
+<td><strong>Multi-Language Content</strong></td>
+<td>No / 2 languages / 5+ languages</td>
+<td>Translation management system</td>
+</tr>
+<tr>
+<td><strong>SEO Content Fields</strong></td>
+<td>None / Meta titles/descriptions / Full schema</td>
+<td>Usually included in CMS</td>
+</tr>
+<tr>
+<td><strong>Content Scheduling</strong></td>
+<td>No / Yes (publish at future date)</td>
+<td>$200–$500</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="12-seo-analytics">12. SEO &amp; Analytics</h2><button class="section-scope-btn" data-sec-id="sec_42">+ Add to Scope</button></div>
+<p>Search visibility and data tracking are critical for business websites.</p>
+<div class="section-scope-header"><h3 id="parameters_11">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_43">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>On-Page SEO</strong></td>
+<td>None / Basic (meta tags, headings) / Advanced (schema, structured data)</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Technical SEO</strong></td>
+<td>None / Sitemap + robots.txt / Full (speed, crawlability, Core Web Vitals)</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Google Analytics</strong></td>
+<td>Not needed / GA4 setup / GA4 + Custom events + Conversions</td>
+<td>$100–$1,000</td>
+</tr>
+<tr>
+<td><strong>Google Search Console</strong></td>
+<td>Not needed / Setup + Configuration</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Google Tag Manager</strong></td>
+<td>Not needed / Setup</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Heatmaps &amp; Session Recording</strong></td>
+<td>None / Hotjar / Microsoft Clarity / FullStory</td>
+<td>$0–$100/mo</td>
+</tr>
+<tr>
+<td><strong>A/B Testing</strong></td>
+<td>None / Google Optimize / VWO / Custom</td>
+<td>$0–$500/mo</td>
+</tr>
+<tr>
+<td><strong>Page Speed Optimization</strong></td>
+<td>Basic / Advanced (lazy loading, code splitting, image optimization)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Sitemap</strong></td>
+<td>Auto-generated / Custom</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td><strong>Schema Markup</strong></td>
+<td>None / Basic / Advanced (product, FAQ, article, breadcrumb)</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Open Graph Tags</strong></td>
+<td>None / Basic / Full (with images)</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Canonical URLs</strong></td>
+<td>Yes / No</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td><strong>Redirect Management</strong></td>
+<td>None / 301 redirects from old site</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Local SEO</strong></td>
+<td>None / Google Business Profile / Full local setup</td>
+<td>$200–$1,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="13-performance-traffic">13. Performance &amp; Traffic</h2><button class="section-scope-btn" data-sec-id="sec_44">+ Add to Scope</button></div>
+<p>Understanding expected traffic helps determine infrastructure requirements.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_7">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_45">+ Add to Scope</button></div>
+<ul>
+<li>How many visitors do you expect per month?</li>
+<li>Are there seasonal traffic spikes?</li>
+<li>Where is the target audience located?</li>
+<li>What should the page load time target be?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_12">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_46">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Expected Monthly Traffic</strong></td>
+<td>&lt;1,000 / 1,000–10,000 / 10,000–100,000 / 100,000+</td>
+<td>Determines hosting tier</td>
+</tr>
+<tr>
+<td><strong>Traffic Spikes</strong></td>
+<td>No / Occasional (sales, events) / Regular (media coverage)</td>
+<td>Auto-scaling needed</td>
+</tr>
+<tr>
+<td><strong>CDN (Content Delivery Network)</strong></td>
+<td>None / Cloudflare Free / Cloudflare Pro / AWS CloudFront</td>
+<td>$0–$200+/month</td>
+</tr>
+<tr>
+<td><strong>Image Optimization</strong></td>
+<td>None / Compression / WebP/AVIF conversion / Responsive images</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Code Optimization</strong></td>
+<td>None / Minification / Tree-shaking / Code splitting</td>
+<td>Standard good practice</td>
+</tr>
+<tr>
+<td><strong>Caching Strategy</strong></td>
+<td>None / Browser caching / Server caching / Full-page caching / Redis</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Lazy Loading</strong></td>
+<td>None / Images / Images + Components</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Load Balancing</strong></td>
+<td>None / Application load balancer / Multi-server</td>
+<td>$50–$300/month</td>
+</tr>
+<tr>
+<td><strong>Database Optimization</strong></td>
+<td>None / Indexing / Query optimization / Read replicas</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Performance Monitoring</strong></td>
+<td>None / Lighthouse / New Relic / Datadog</td>
+<td>$0–$500/month</td>
+</tr>
+<tr>
+<td><strong>Target Load Time</strong></td>
+<td>&lt;5 seconds / &lt;3 seconds / &lt;1 second (LCP)</td>
+<td>Faster = more optimization effort</td>
+</tr>
+<tr>
+<td><strong>Core Web Vitals</strong></td>
+<td>Not prioritized / Passing scores / Excellent scores</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Compression</strong></td>
+<td>None / Gzip / Brotli</td>
+<td>Server configuration</td>
+</tr>
+<tr>
+<td><strong>HTTP/2 or HTTP/3</strong></td>
+<td>HTTP/1.1 / HTTP/2 / HTTP/3</td>
+<td>Modern hosting includes this</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="traffic-hosting-recommendations">Traffic &amp; Hosting Recommendations:</h3><button class="section-scope-btn" data-sec-id="sec_47">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Monthly Visitors</th>
+<th>Recommended Hosting</th>
+<th>Est. Monthly Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;1,000</td>
+<td>Shared hosting / Static hosting</td>
+<td>$3–$15</td>
+</tr>
+<tr>
+<td>1,000–10,000</td>
+<td>VPS / Managed hosting</td>
+<td>$20–$50</td>
+</tr>
+<tr>
+<td>10,000–50,000</td>
+<td>Cloud VPS / Managed cloud</td>
+<td>$50–$150</td>
+</tr>
+<tr>
+<td>50,000–200,000</td>
+<td>Cloud hosting with CDN</td>
+<td>$150–$500</td>
+</tr>
+<tr>
+<td>200,000–1,000,000</td>
+<td>Auto-scaling cloud + Load balancer</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td>1,000,000+</td>
+<td>Multi-region cloud, dedicated infrastructure</td>
+<td>$2,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="14-security-compliance">14. Security &amp; Compliance</h2><button class="section-scope-btn" data-sec-id="sec_48">+ Add to Scope</button></div>
+<p>Security is non-negotiable, especially for sites handling user data or payments.</p>
+<div class="section-scope-header"><h3 id="parameters_13">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_49">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSL Certificate</strong></td>
+<td>Free (Let's Encrypt) / Paid (OV/EV)</td>
+<td>$0–$300/year</td>
+</tr>
+<tr>
+<td><strong>Web Application Firewall (WAF)</strong></td>
+<td>None / Cloudflare / AWS WAF / Sucuri</td>
+<td>$20–$200/month</td>
+</tr>
+<tr>
+<td><strong>DDoS Protection</strong></td>
+<td>None / Basic (Cloudflare Free) / Advanced</td>
+<td>$0–$200/month</td>
+</tr>
+<tr>
+<td><strong>Rate Limiting</strong></td>
+<td>None / API rate limiting / Login attempt limiting</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Input Validation</strong></td>
+<td>Basic / Advanced (XSS, SQL injection prevention)</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Content Security Policy (CSP)</strong></td>
+<td>None / Basic / Strict</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Two-Factor Authentication</strong></td>
+<td>None / Email / SMS / Authenticator app</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Password Policy</strong></td>
+<td>Basic / Advanced (complexity, expiry, breached check)</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td><strong>Activity Logging</strong></td>
+<td>None / Login logs / Full audit trail</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Data Encryption</strong></td>
+<td>At rest / In transit / Both</td>
+<td>Standard for sensitive data</td>
+</tr>
+<tr>
+<td><strong>Security Headers</strong></td>
+<td>None / Basic / Full (HSTS, X-Frame, X-Content-Type)</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Vulnerability Scanning</strong></td>
+<td>None / Monthly / Continuous</td>
+<td>$50–$500/month</td>
+</tr>
+<tr>
+<td><strong>Backup &amp; Disaster Recovery</strong></td>
+<td>None / Daily backups / Full DR plan</td>
+<td>$50–$500/month</td>
+</tr>
+<tr>
+<td><strong>CAPTCHA</strong></td>
+<td>None / reCAPTCHA / hCaptcha</td>
+<td>$0–$100</td>
+</tr>
+<tr>
+<td><strong>IP Blocking</strong></td>
+<td>None / Geo-blocking / Rate-based</td>
+<td>$100–$300</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="15-third-party-integrations">15. Third-Party Integrations</h2><button class="section-scope-btn" data-sec-id="sec_50">+ Add to Scope</button></div>
+<p>External services that the website needs to connect with.</p>
+<div class="section-scope-header"><h3 id="parameters_14">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_51">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Integration</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Email Service</strong></td>
+<td>None / SMTP / SendGrid / Mailchimp / Amazon SES</td>
+<td>$100–$500 + service costs</td>
+</tr>
+<tr>
+<td><strong>CRM</strong></td>
+<td>None / HubSpot / Salesforce / Zoho / Custom</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>ERP</strong></td>
+<td>None / SAP / Tally / Custom</td>
+<td>$2,000–$15,000</td>
+</tr>
+<tr>
+<td><strong>Social Media Login</strong></td>
+<td>None / Google / Facebook / Apple / GitHub</td>
+<td>$200–$500 per provider</td>
+</tr>
+<tr>
+<td><strong>Google Maps</strong></td>
+<td>None / Embed / Interactive / Route planning</td>
+<td>$100–$1,000</td>
+</tr>
+<tr>
+<td><strong>Shipping Provider</strong></td>
+<td>None / FedEx / UPS / DHL / Shiprocket / Delhivery</td>
+<td>$500–$2,000 per provider</td>
+</tr>
+<tr>
+<td><strong>SMS Provider</strong></td>
+<td>None / Twilio / MSG91 / AWS SNS</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Cloud Storage</strong></td>
+<td>None / AWS S3 / Google Cloud Storage / Cloudinary</td>
+<td>$100–$500 + storage costs</td>
+</tr>
+<tr>
+<td><strong>Video Conferencing</strong></td>
+<td>None / Zoom / Google Meet / Custom (WebRTC)</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Calendar Integration</strong></td>
+<td>None / Google Calendar / Calendly / Custom</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Accounting Software</strong></td>
+<td>None / QuickBooks / Xero / Tally</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Marketing Automation</strong></td>
+<td>None / Mailchimp / ActiveCampaign / HubSpot</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Webhook/API Integration</strong></td>
+<td>None / 1–3 APIs / 3–10 APIs / 10+ APIs</td>
+<td>Each API = $200–$1,000</td>
+</tr>
+<tr>
+<td><strong>AI/ML Services</strong></td>
+<td>None / OpenAI / Google AI / Custom model</td>
+<td>$500–$10,000+</td>
+</tr>
+<tr>
+<td><strong>WhatsApp Business</strong></td>
+<td>None / Chat button / Full API integration</td>
+<td>$200–$2,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="16-maintenance-support">16. Maintenance &amp; Support</h2><button class="section-scope-btn" data-sec-id="sec_52">+ Add to Scope</button></div>
+<p>Post-launch maintenance is a significant recurring revenue opportunity.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_8">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_53">+ Add to Scope</button></div>
+<ul>
+<li>Does the client need ongoing maintenance?</li>
+<li>Who will handle content updates?</li>
+<li>What is the expected response time for issues?</li>
+<li>Is 24/7 support required?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_15">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_54">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Maintenance Contract</strong></td>
+<td>None / Monthly / Quarterly / Annual</td>
+<td>Monthly = $100–$1,000</td>
+</tr>
+<tr>
+<td><strong>Bug Fixes</strong></td>
+<td>Warranty period only / Ongoing</td>
+<td>Warranty = 30–90 days free</td>
+</tr>
+<tr>
+<td><strong>Content Updates</strong></td>
+<td>Client self-service / Developer handles</td>
+<td>$50–$200/month</td>
+</tr>
+<tr>
+<td><strong>Plugin/Dependency Updates</strong></td>
+<td>No / Monthly / Weekly</td>
+<td>$100–$300/month</td>
+</tr>
+<tr>
+<td><strong>Security Patches</strong></td>
+<td>No / Monthly / As needed</td>
+<td>$100–$300/month</td>
+</tr>
+<tr>
+<td><strong>Uptime Monitoring</strong></td>
+<td>No / Basic / Advanced (with alerts)</td>
+<td>$10–$50/month</td>
+</tr>
+<tr>
+<td><strong>Performance Monitoring</strong></td>
+<td>No / Monthly report / Real-time</td>
+<td>$50–$200/month</td>
+</tr>
+<tr>
+<td><strong>Backup Management</strong></td>
+<td>No / Automated + Verified</td>
+<td>$30–$100/month</td>
+</tr>
+<tr>
+<td><strong>Support Hours</strong></td>
+<td>Business hours / Extended / 24/7</td>
+<td>24/7 = premium pricing</td>
+</tr>
+<tr>
+<td><strong>Response Time SLA</strong></td>
+<td>48 hours / 24 hours / 4 hours / 1 hour</td>
+<td>Faster SLA = higher cost</td>
+</tr>
+<tr>
+<td><strong>Support Channels</strong></td>
+<td>Email / Phone / Chat / Ticket system</td>
+<td>Multi-channel = higher cost</td>
+</tr>
+<tr>
+<td><strong>Feature Enhancements</strong></td>
+<td>Not included / Minor updates / Major updates</td>
+<td>Separate quote or hourly rate</td>
+</tr>
+<tr>
+<td><strong>Hosting Management</strong></td>
+<td>Not included / Included</td>
+<td>$50–$200/month</td>
+</tr>
+<tr>
+<td><strong>Training</strong></td>
+<td>None / Documentation / Video / Live sessions</td>
+<td>$200–$1,000</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="maintenance-plan-tiers">Maintenance Plan Tiers:</h3><button class="section-scope-btn" data-sec-id="sec_55">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Includes</th>
+<th>Monthly Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic</strong></td>
+<td>Bug fixes, security updates, backups</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Standard</strong></td>
+<td>Basic + content updates, monthly report, email support</td>
+<td>$300–$600</td>
+</tr>
+<tr>
+<td><strong>Premium</strong></td>
+<td>Standard + performance monitoring, priority support, minor enhancements</td>
+<td>$600–$1,500</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>Premium + 24/7 support, SLA, dedicated account manager</td>
+<td>$1,500–$5,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="17-timeline-milestones-release">17. Timeline, Milestones &amp; Release</h2><button class="section-scope-btn" data-sec-id="sec_56">+ Add to Scope</button></div>
+<p>Setting clear timelines prevents scope creep and manages expectations.</p>
+<div class="section-scope-header"><h3 id="parameters_16">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_57">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Timeline</strong></td>
+<td>2–4 weeks / 1–2 months / 2–4 months / 4–6 months / 6+ months</td>
+<td>Based on scope</td>
+</tr>
+<tr>
+<td><strong>Discovery Phase</strong></td>
+<td>1–2 weeks / Not needed</td>
+<td>Requirements gathering</td>
+</tr>
+<tr>
+<td><strong>Design Phase</strong></td>
+<td>1–3 weeks / 2–6 weeks</td>
+<td>Wireframes + Mockups + Revisions</td>
+</tr>
+<tr>
+<td><strong>Development Phase</strong></td>
+<td>2–8 weeks / 2–4 months</td>
+<td>Core development</td>
+</tr>
+<tr>
+<td><strong>Testing Phase</strong></td>
+<td>1–2 weeks / 2–4 weeks</td>
+<td>QA and bug fixing</td>
+</tr>
+<tr>
+<td><strong>Content Entry</strong></td>
+<td>Client handles / Developer handles (1–2 weeks)</td>
+<td>Content population</td>
+</tr>
+<tr>
+<td><strong>Launch Preparation</strong></td>
+<td>3–5 days</td>
+<td>DNS, SSL, final checks</td>
+</tr>
+<tr>
+<td><strong>Release Strategy</strong></td>
+<td>Big bang (all at once) / Phased / Soft launch → Full launch</td>
+<td>Phased reduces risk</td>
+</tr>
+<tr>
+<td><strong>Milestones</strong></td>
+<td>3–5 key milestones / Weekly deliverables</td>
+<td>Payment tied to milestones</td>
+</tr>
+<tr>
+<td><strong>Payment Schedule</strong></td>
+<td>50/50 / 30/30/40 / Monthly / Milestone-based</td>
+<td>Milestone-based recommended</td>
+</tr>
+<tr>
+<td><strong>Change Request Process</strong></td>
+<td>Formal (written + approval) / Informal</td>
+<td>Formal process prevents disputes</td>
+</tr>
+<tr>
+<td><strong>Revision Policy</strong></td>
+<td>2 rounds / 3 rounds / Unlimited / Per revision cost</td>
+<td>Define clearly in contract</td>
+</tr>
+<tr>
+<td><strong>Post-Launch Support</strong></td>
+<td>15 days / 30 days / 60 days / 90 days</td>
+<td>Free bug fix period</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="recommended-milestone-structure">Recommended Milestone Structure:</h3><button class="section-scope-btn" data-sec-id="sec_58">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Deliverable</th>
+<th>Payment %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Kickoff</strong></td>
+<td>Requirements document, sitemap, wireframes</td>
+<td>20%</td>
+</tr>
+<tr>
+<td><strong>Design Approval</strong></td>
+<td>UI/UX mockups (all pages)</td>
+<td>20%</td>
+</tr>
+<tr>
+<td><strong>Development Complete</strong></td>
+<td>Functional website on staging</td>
+<td>30%</td>
+</tr>
+<tr>
+<td><strong>Testing &amp; Revisions</strong></td>
+<td>Bug-free, client-approved</td>
+<td>20%</td>
+</tr>
+<tr>
+<td><strong>Launch &amp; Handover</strong></td>
+<td>Live website + documentation</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="18-legal-compliance">18. Legal &amp; Compliance</h2><button class="section-scope-btn" data-sec-id="sec_59">+ Add to Scope</button></div>
+<p>Never ignore legal requirements — they can have serious consequences.</p>
+<div class="section-scope-header"><h3 id="parameters_17">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_60">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Privacy Policy</strong></td>
+<td>Not needed / Template / Custom (lawyer-reviewed)</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Terms of Service</strong></td>
+<td>Not needed / Template / Custom</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Cookie Consent</strong></td>
+<td>Not needed / Basic banner / GDPR-compliant with preferences</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>GDPR Compliance</strong></td>
+<td>Not applicable / Basic / Full (DPO, data mapping)</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>CCPA Compliance</strong></td>
+<td>Not applicable / Basic / Full</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>ADA/WCAG Accessibility</strong></td>
+<td>Not required / Level A / Level AA / Level AAA</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Data Retention Policy</strong></td>
+<td>Not needed / Basic / Custom</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Copyright Notices</strong></td>
+<td>Yes / No</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td><strong>Intellectual Property</strong></td>
+<td>Client owns all / Developer retains license / Shared</td>
+<td>Define in contract</td>
+</tr>
+<tr>
+<td><strong>NDA (Non-Disclosure Agreement)</strong></td>
+<td>Not needed / Mutual NDA</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Disclaimer Pages</strong></td>
+<td>Not needed / Yes</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Age Verification</strong></td>
+<td>Not needed / Yes</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Data Processing Agreement</strong></td>
+<td>Not needed / Yes</td>
+<td>For GDPR compliance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="19-branding-assets">19. Branding &amp; Assets</h2><button class="section-scope-btn" data-sec-id="sec_61">+ Add to Scope</button></div>
+<p>Understand what branding materials the client has or needs.</p>
+<div class="section-scope-header"><h3 id="parameters_18">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_62">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Logo</strong></td>
+<td>Client provides / Need new logo / Redesign existing</td>
+<td>New logo = $200–$2,000</td>
+</tr>
+<tr>
+<td><strong>Brand Colors</strong></td>
+<td>Defined / Needs creation</td>
+<td>Color palette creation = $100–$500</td>
+</tr>
+<tr>
+<td><strong>Typography</strong></td>
+<td>Defined / Needs selection</td>
+<td>Font selection + licensing</td>
+</tr>
+<tr>
+<td><strong>Brand Guidelines</strong></td>
+<td>Existing / Need creation</td>
+<td>Brand guide = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Photography</strong></td>
+<td>Client provides / Stock photos / Custom shoot</td>
+<td>Custom = $500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Video Content</strong></td>
+<td>Not needed / Client provides / Need production</td>
+<td>Production = $1,000–$10,000+</td>
+</tr>
+<tr>
+<td><strong>Illustrations</strong></td>
+<td>Not needed / Stock / Custom</td>
+<td>Custom = $500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Favicon</strong></td>
+<td>Client provides / Create from logo</td>
+<td>$50–$100</td>
+</tr>
+<tr>
+<td><strong>Social Media Assets</strong></td>
+<td>Not needed / Cover images + Profile pictures</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Print Materials</strong></td>
+<td>Not needed / Business cards / Brochures / Flyers</td>
+<td>$200–$1,000 per item</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="20-communication-project-management">20. Communication &amp; Project Management</h2><button class="section-scope-btn" data-sec-id="sec_63">+ Add to Scope</button></div>
+<p>How the project will be managed and how client communication will work.</p>
+<div class="section-scope-header"><h3 id="parameters_19">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_64">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Management Tool</strong></td>
+<td>None / Trello / Jira / Asana / Notion / ClickUp</td>
+<td>Choose one and share with client</td>
+</tr>
+<tr>
+<td><strong>Communication Channel</strong></td>
+<td>Email / WhatsApp / Slack / Microsoft Teams / Phone</td>
+<td>Define primary channel</td>
+</tr>
+<tr>
+<td><strong>Status Updates</strong></td>
+<td>Weekly / Bi-weekly / Daily standups</td>
+<td>Weekly is standard</td>
+</tr>
+<tr>
+<td><strong>Demo/Review Meetings</strong></td>
+<td>Per milestone / Weekly / Bi-weekly</td>
+<td>Schedule in advance</td>
+</tr>
+<tr>
+<td><strong>Staging Access</strong></td>
+<td>Shared URL / Password-protected / VPN</td>
+<td>Client should review on staging</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>None / User manual / Technical docs / Video tutorials</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Source Code Access</strong></td>
+<td>Not provided / GitHub repository / Full handover</td>
+<td>Define in contract</td>
+</tr>
+<tr>
+<td><strong>Training Sessions</strong></td>
+<td>None / 1 hour / 3 hours / Full training program</td>
+<td>$100–$500/hour</td>
+</tr>
+<tr>
+<td><strong>Point of Contact</strong></td>
+<td>Single / Multiple stakeholders</td>
+<td>Multiple = longer review cycles</td>
+</tr>
+<tr>
+<td><strong>Feedback Format</strong></td>
+<td>Written (email/document) / Annotated screenshots / Loom videos</td>
+<td>Define expectations early</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="quick-price-estimation-formula">📊 Quick Price Estimation Formula</h2><button class="section-scope-btn" data-sec-id="sec_65">+ Add to Scope</button></div>
+<pre><code>Total Website Price = 
+    Domain &amp; Hosting Setup Fee
+  + Design Cost (based on pages × complexity)
+  + Development Cost (hourly rate × estimated hours)
+  + Feature Cost (sum of individual features)
+  + Integration Cost (per integration)
+  + Content Cost (per page if developer handles)
+  + Testing &amp; QA (10–15% of dev cost)
+  + Project Management (5–10% of total)
+  + Contingency Buffer (10–20% of total)
+</code></pre>
+<div class="section-scope-header"><h3 id="hourly-rate-reference">Hourly Rate Reference:</h3><button class="section-scope-btn" data-sec-id="sec_66">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Developer Level</th>
+<th>Hourly Rate (USD)</th>
+<th>Hourly Rate (INR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Junior</td>
+<td>$15–$30</td>
+<td>₹500–₹1,000</td>
+</tr>
+<tr>
+<td>Mid-Level</td>
+<td>$30–$60</td>
+<td>₹1,000–₹2,500</td>
+</tr>
+<tr>
+<td>Senior</td>
+<td>$60–$120</td>
+<td>₹2,500–₹5,000</td>
+</tr>
+<tr>
+<td>Expert/Agency</td>
+<td>$120–$250+</td>
+<td>₹5,000–₹15,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>This guide should be updated as new technologies and pricing standards emerge. Last updated: March 2026.</em></p>
+<hr />
+<div class="section-scope-header"><h2 id="part-2-mobile-application">📱 Part 2: Mobile Application</h2><button class="section-scope-btn" data-sec-id="sec_67">+ Add to Scope</button></div>
+<hr />
+<blockquote>
+<p>This is the master reference document for every parameter you need to discuss, evaluate, and price when building a mobile application (iOS/Android) for a client. Use this guide during discovery calls and proposal preparation.</p>
+</blockquote>
+<hr />
+<div class="section-scope-header"><h2 id="table-of-contents_1">Table of Contents</h2><button class="section-scope-btn" data-sec-id="sec_68">+ Add to Scope</button></div>
+<ol>
+<li><a href="#1-platform--technology">Platform &amp; Technology</a></li>
+<li><a href="#2-app-store--deployment">App Store &amp; Deployment</a></li>
+<li><a href="#3-design--user-experience">Design &amp; User Experience</a></li>
+<li><a href="#4-authentication--user-management">Authentication &amp; User Management</a></li>
+<li><a href="#5-features--functionality">Features &amp; Functionality</a></li>
+<li><a href="#6-backend--api">Backend &amp; API</a></li>
+<li><a href="#7-database--storage">Database &amp; Storage</a></li>
+<li><a href="#8-push-notifications">Push Notifications</a></li>
+<li><a href="#9-payment--monetization">Payment &amp; Monetization</a></li>
+<li><a href="#10-media--content">Media &amp; Content</a></li>
+<li><a href="#11-device-features--hardware">Device Features &amp; Hardware</a></li>
+<li><a href="#12-offline-capability">Offline Capability</a></li>
+<li><a href="#13-security">Security</a></li>
+<li><a href="#14-testing--quality-assurance">Testing &amp; Quality Assurance</a></li>
+<li><a href="#15-performance-optimization">Performance Optimization</a></li>
+<li><a href="#16-analytics--monitoring">Analytics &amp; Monitoring</a></li>
+<li><a href="#17-third-party-integrations">Third-Party Integrations</a></li>
+<li><a href="#18-maintenance--support">Maintenance &amp; Support</a></li>
+<li><a href="#19-legal-compliance--app-store-policies">Legal, Compliance &amp; App Store Policies</a></li>
+<li><a href="#20-timeline-milestones--release">Timeline, Milestones &amp; Release</a></li>
+<li><a href="#21-communication--project-management">Communication &amp; Project Management</a></li>
+</ol>
+<hr />
+<div class="section-scope-header"><h2 id="1-platform-technology">1. Platform &amp; Technology</h2><button class="section-scope-btn" data-sec-id="sec_69">+ Add to Scope</button></div>
+<p>The most fundamental decision — which platforms and technology to use.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_9">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_70">+ Add to Scope</button></div>
+<ul>
+<li>Do you need an iOS app, Android app, or both?</li>
+<li>Is a web app (PWA) acceptable, or must it be a native app?</li>
+<li>Does the client have any technology preferences?</li>
+<li>Are there performance-critical features (AR, real-time, gaming)?</li>
+<li>Will the team maintain the app in-house after delivery?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_20">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_71">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target Platform</strong></td>
+<td>iOS only / Android only / Both (iOS + Android) / Web (PWA)</td>
+<td>Both = 1.5–1.8x single platform cost</td>
+</tr>
+<tr>
+<td><strong>Development Approach</strong></td>
+<td>Native (Swift/Kotlin) / Cross-Platform (Flutter/React Native) / Hybrid (Ionic/Capacitor) / PWA</td>
+<td>See comparison below</td>
+</tr>
+<tr>
+<td><strong>iOS Language</strong></td>
+<td>Swift / Objective-C (legacy)</td>
+<td>Swift is standard</td>
+</tr>
+<tr>
+<td><strong>Android Language</strong></td>
+<td>Kotlin / Java (legacy)</td>
+<td>Kotlin is standard</td>
+</tr>
+<tr>
+<td><strong>Cross-Platform Framework</strong></td>
+<td>Flutter / React Native / .NET MAUI / KMM (Kotlin Multiplatform)</td>
+<td>Framework choice affects dev time</td>
+</tr>
+<tr>
+<td><strong>Minimum iOS Version</strong></td>
+<td>iOS 14 / iOS 15 / iOS 16 / iOS 17 / Latest only</td>
+<td>Older support = more testing effort</td>
+</tr>
+<tr>
+<td><strong>Minimum Android Version</strong></td>
+<td>Android 8 (API 26) / Android 10 / Android 12 / Android 13+</td>
+<td>Older support = more compatibility work</td>
+</tr>
+<tr>
+<td><strong>Tablet Support</strong></td>
+<td>No / Yes (responsive) / Yes (dedicated tablet UI)</td>
+<td>Dedicated tablet UI = +30–50% design</td>
+</tr>
+<tr>
+<td><strong>Wearable Support</strong></td>
+<td>No / Apple Watch / Wear OS / Both</td>
+<td>Each wearable = +$5,000–$20,000</td>
+</tr>
+<tr>
+<td><strong>TV App</strong></td>
+<td>No / Apple TV / Android TV / Both</td>
+<td>Each TV app = +$10,000–$30,000</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>MVC / MVVM / Clean Architecture / Redux</td>
+<td>Affects maintainability and cost</td>
+</tr>
+<tr>
+<td><strong>State Management</strong></td>
+<td>Provider / Bloc / Riverpod (Flutter) / Redux / MobX (React Native)</td>
+<td>Standard for framework</td>
+</tr>
+<tr>
+<td><strong>Package Manager</strong></td>
+<td>CocoaPods/SPM (iOS) / Gradle (Android) / pub (Flutter) / npm (RN)</td>
+<td>Standard for framework</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="development-approach-comparison">Development Approach Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_72">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Platforms</th>
+<th>Performance</th>
+<th>Dev Time</th>
+<th>Cost Multiplier</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Native (Swift + Kotlin)</strong></td>
+<td>Separate codebases</td>
+<td>Excellent</td>
+<td>2x (parallel dev)</td>
+<td>2x</td>
+<td>Performance-critical, AR/VR, complex animations</td>
+</tr>
+<tr>
+<td><strong>Flutter</strong></td>
+<td>Single codebase</td>
+<td>Very Good</td>
+<td>1x</td>
+<td>1x</td>
+<td>Most apps, beautiful UI, fast development</td>
+</tr>
+<tr>
+<td><strong>React Native</strong></td>
+<td>Single codebase</td>
+<td>Good</td>
+<td>1.1x</td>
+<td>1.1x</td>
+<td>Web dev teams, shared logic with web</td>
+</tr>
+<tr>
+<td><strong>Ionic/Capacitor</strong></td>
+<td>Single codebase</td>
+<td>Moderate</td>
+<td>0.9x</td>
+<td>0.9x</td>
+<td>Simple apps, web-first approach</td>
+</tr>
+<tr>
+<td><strong>PWA</strong></td>
+<td>Web browser</td>
+<td>Moderate</td>
+<td>0.7x</td>
+<td>0.7x</td>
+<td>Content apps, low device feature needs</td>
+</tr>
+<tr>
+<td><strong>KMM</strong></td>
+<td>Shared logic, native UI</td>
+<td>Excellent</td>
+<td>1.3x</td>
+<td>1.3x</td>
+<td>Shared business logic, platform-specific UI</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="technology-cost-comparison">Technology Cost Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_73">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Project Type</th>
+<th>Native (per platform)</th>
+<th>Flutter/React Native (both platforms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple app (5–10 screens)</td>
+<td>$5,000–$15,000</td>
+<td>$3,000–$10,000</td>
+</tr>
+<tr>
+<td>Medium app (10–25 screens)</td>
+<td>$15,000–$50,000</td>
+<td>$10,000–$35,000</td>
+</tr>
+<tr>
+<td>Complex app (25–50 screens)</td>
+<td>$50,000–$150,000</td>
+<td>$35,000–$100,000</td>
+</tr>
+<tr>
+<td>Enterprise app (50+ screens)</td>
+<td>$150,000–$500,000+</td>
+<td>$100,000–$350,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="2-app-store-deployment">2. App Store &amp; Deployment</h2><button class="section-scope-btn" data-sec-id="sec_74">+ Add to Scope</button></div>
+<p>Deploying to app stores has specific requirements and costs.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_10">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_75">+ Add to Scope</button></div>
+<ul>
+<li>Does the client have Apple Developer and Google Play accounts?</li>
+<li>Who will manage the app store listings?</li>
+<li>Is internal distribution needed (enterprise apps)?</li>
+<li>Is beta testing required before launch?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_21">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_76">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apple Developer Account</strong></td>
+<td>Client has / Developer creates / Client creates</td>
+<td>$99/year (required for iOS)</td>
+</tr>
+<tr>
+<td><strong>Google Play Console</strong></td>
+<td>Client has / Developer creates / Client creates</td>
+<td>$25 one-time (required for Android)</td>
+</tr>
+<tr>
+<td><strong>App Store Listing Setup</strong></td>
+<td>Developer handles / Client handles</td>
+<td>$200–$500 per platform</td>
+</tr>
+<tr>
+<td><strong>App Name &amp; Keywords</strong></td>
+<td>Client provides / Developer researches (ASO)</td>
+<td>ASO = $200–$1,000</td>
+</tr>
+<tr>
+<td><strong>App Description</strong></td>
+<td>Client writes / Developer writes</td>
+<td>$100–$300 per platform</td>
+</tr>
+<tr>
+<td><strong>Screenshots &amp; Previews</strong></td>
+<td>Client provides / Developer creates</td>
+<td>$200–$800 (5–8 screenshots per platform)</td>
+</tr>
+<tr>
+<td><strong>App Preview Video</strong></td>
+<td>None / Yes</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>App Icon Design</strong></td>
+<td>Client provides / Developer designs</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Feature Graphic (Android)</strong></td>
+<td>Client provides / Developer designs</td>
+<td>$50–$200</td>
+</tr>
+<tr>
+<td><strong>Privacy Policy URL</strong></td>
+<td>Client provides / Developer creates</td>
+<td>Required for both stores</td>
+</tr>
+<tr>
+<td><strong>App Category</strong></td>
+<td>Client decides / Developer recommends</td>
+<td>Strategy discussion</td>
+</tr>
+<tr>
+<td><strong>Age Rating</strong></td>
+<td>Client provides info / Developer handles questionnaire</td>
+<td>Required for submission</td>
+</tr>
+<tr>
+<td><strong>App Review Handling</strong></td>
+<td>Developer handles / Client handles</td>
+<td>First submission can take 1–7 days</td>
+</tr>
+<tr>
+<td><strong>Distribution Type</strong></td>
+<td>Public / TestFlight (iOS) / Internal Testing (Android) / Enterprise</td>
+<td>Enterprise = Apple Enterprise Program ($299/year)</td>
+</tr>
+<tr>
+<td><strong>Beta Testing</strong></td>
+<td>None / TestFlight (iOS) / Firebase App Distribution / Both</td>
+<td>$200–$500 setup</td>
+</tr>
+<tr>
+<td><strong>CI/CD Pipeline</strong></td>
+<td>None / Fastlane / Codemagic / Bitrise / GitHub Actions</td>
+<td>$300–$2,000 setup</td>
+</tr>
+<tr>
+<td><strong>Automated Builds</strong></td>
+<td>None / On push / On PR / Scheduled</td>
+<td>CI/CD service = $0–$100/month</td>
+</tr>
+<tr>
+<td><strong>Code Signing</strong></td>
+<td>Developer manages / Client manages</td>
+<td>Certificates and provisioning profiles</td>
+</tr>
+<tr>
+<td><strong>App Updates</strong></td>
+<td>Developer pushes / Client pushes (with training)</td>
+<td>Ongoing responsibility</td>
+</tr>
+<tr>
+<td><strong>OTA Updates</strong></td>
+<td>None / CodePush (React Native) / Shorebird (Flutter)</td>
+<td>$0–$500/month</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="app-store-submission-checklist">App Store Submission Checklist:</h3><button class="section-scope-btn" data-sec-id="sec_77">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Apple App Store</th>
+<th>Google Play Store</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Account</strong></td>
+<td>Apple Developer ($99/year)</td>
+<td>Play Console ($25 one-time)</td>
+</tr>
+<tr>
+<td><strong>App Icon</strong></td>
+<td>1024×1024 px</td>
+<td>512×512 px</td>
+</tr>
+<tr>
+<td><strong>Screenshots</strong></td>
+<td>Min 3 per device type</td>
+<td>Min 2 per device type</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Up to 4,000 chars</td>
+<td>Up to 4,000 chars</td>
+</tr>
+<tr>
+<td><strong>Privacy Policy</strong></td>
+<td>Required</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Review Time</strong></td>
+<td>1–7 days (avg 24–48 hrs)</td>
+<td>Few hours to 7 days</td>
+</tr>
+<tr>
+<td><strong>Content Rating</strong></td>
+<td>Required questionnaire</td>
+<td>Required questionnaire</td>
+</tr>
+<tr>
+<td><strong>Data Safety</strong></td>
+<td>App Privacy labels</td>
+<td>Data safety form</td>
+</tr>
+<tr>
+<td><strong>In-App Purchases</strong></td>
+<td>30% commission (15% small business)</td>
+<td>30% commission (15% small business)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="3-design-user-experience">3. Design &amp; User Experience</h2><button class="section-scope-btn" data-sec-id="sec_78">+ Add to Scope</button></div>
+<p>Mobile design has unique requirements compared to web design.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_11">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_79">+ Add to Scope</button></div>
+<ul>
+<li>Do you have existing branding (logo, colors, fonts)?</li>
+<li>Any reference apps for design inspiration?</li>
+<li>Custom design or standard platform look?</li>
+<li>How important are animations and transitions?</li>
+<li>Accessibility requirements?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_22">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_80">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Design Approach</strong></td>
+<td>Custom UI / Platform-native (Material/Cupertino) / Hybrid</td>
+<td>Custom = 2–3x more expensive</td>
+</tr>
+<tr>
+<td><strong>Wireframing</strong></td>
+<td>No / Low-fidelity / High-fidelity</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Interactive Prototype</strong></td>
+<td>No / Figma prototype / Principle / After Effects</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Design Tool</strong></td>
+<td>Figma / Sketch / Adobe XD</td>
+<td>Figma is industry standard</td>
+</tr>
+<tr>
+<td><strong>Number of Screens</strong></td>
+<td>5–10 / 10–25 / 25–50 / 50+</td>
+<td>Each screen = $100–$500 in design</td>
+</tr>
+<tr>
+<td><strong>Platform-Specific Design</strong></td>
+<td>Unified / Separate iOS &amp; Android designs</td>
+<td>Separate = +30% design cost</td>
+</tr>
+<tr>
+<td><strong>Design System</strong></td>
+<td>None / Basic components / Full design system</td>
+<td>Full system = $2,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>Material Design (Android)</strong></td>
+<td>Standard compliance / Custom Material theme</td>
+<td>Google guidelines compliance</td>
+</tr>
+<tr>
+<td><strong>Human Interface (iOS)</strong></td>
+<td>Standard compliance / Custom styling</td>
+<td>Apple guidelines compliance</td>
+</tr>
+<tr>
+<td><strong>Dark Mode</strong></td>
+<td>No / Yes (system-controlled) / Yes (in-app toggle)</td>
+<td>+15–25% design &amp; dev effort</td>
+</tr>
+<tr>
+<td><strong>Theming</strong></td>
+<td>Single theme / Light + Dark / Custom themes</td>
+<td>Multiple themes = +20% effort</td>
+</tr>
+<tr>
+<td><strong>Animations</strong></td>
+<td>None / Subtle (standard transitions) / Heavy (custom, complex)</td>
+<td>Heavy = +25–40% dev time</td>
+</tr>
+<tr>
+<td><strong>Micro-interactions</strong></td>
+<td>None / Basic (button feedback, pulls) / Advanced</td>
+<td>Advanced = +15–25% dev time</td>
+</tr>
+<tr>
+<td><strong>Onboarding Flow</strong></td>
+<td>None / Simple (3–5 slides) / Interactive walkthrough</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Splash Screen</strong></td>
+<td>Default / Animated / Branded</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Design Revisions</strong></td>
+<td>2 rounds / 3 rounds / Unlimited</td>
+<td>Define in contract</td>
+</tr>
+<tr>
+<td><strong>Icon Set</strong></td>
+<td>Platform default / Custom icon pack</td>
+<td>Custom = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Illustration Style</strong></td>
+<td>None / Stock / Custom</td>
+<td>Custom = $500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Typography</strong></td>
+<td>System fonts / Google Fonts / Custom fonts</td>
+<td>Custom font licensing</td>
+</tr>
+<tr>
+<td><strong>Accessibility</strong></td>
+<td>None / Basic (font scaling, contrast) / Full (VoiceOver, TalkBack)</td>
+<td>Full = +15–20% dev time</td>
+</tr>
+<tr>
+<td><strong>Landscape Support</strong></td>
+<td>Portrait only / Both orientations</td>
+<td>Both = +10–15% development</td>
+</tr>
+<tr>
+<td><strong>Adaptive Layout</strong></td>
+<td>Phones only / Phones + Tablets / All screen sizes</td>
+<td>Tablet support = +30%</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="screen-design-pricing">Screen Design Pricing:</h3><button class="section-scope-btn" data-sec-id="sec_81">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Screen Type</th>
+<th>Complexity</th>
+<th>Price Range (Design)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Splash/Launch</td>
+<td>Simple</td>
+<td>$50–$150</td>
+</tr>
+<tr>
+<td>Onboarding (per slide)</td>
+<td>Simple</td>
+<td>$50–$150</td>
+</tr>
+<tr>
+<td>Login/Signup</td>
+<td>Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Home/Dashboard</td>
+<td>High</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td>List/Feed Screen</td>
+<td>Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Detail Screen</td>
+<td>Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Profile Screen</td>
+<td>Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Settings Screen</td>
+<td>Low</td>
+<td>$100–$250</td>
+</tr>
+<tr>
+<td>Search Screen</td>
+<td>Medium–High</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td>Map Screen</td>
+<td>High</td>
+<td>$300–$600</td>
+</tr>
+<tr>
+<td>Chat Screen</td>
+<td>High</td>
+<td>$300–$700</td>
+</tr>
+<tr>
+<td>Cart/Checkout</td>
+<td>High</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td>Notification Center</td>
+<td>Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Modal/Bottom Sheet</td>
+<td>Low</td>
+<td>$50–$200</td>
+</tr>
+<tr>
+<td>Error/Empty States</td>
+<td>Low</td>
+<td>$50–$150 each</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="4-authentication-user-management">4. Authentication &amp; User Management</h2><button class="section-scope-btn" data-sec-id="sec_82">+ Add to Scope</button></div>
+<p>User login and profile management is needed for most apps.</p>
+<div class="section-scope-header"><h3 id="parameters_23">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_83">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Registration Method</strong></td>
+<td>Email + Password / Phone (OTP) / Social Login / All</td>
+<td>Each method = $200–$500</td>
+</tr>
+<tr>
+<td><strong>Social Login Providers</strong></td>
+<td>Google / Apple / Facebook / Twitter/X / GitHub / LinkedIn</td>
+<td>Each = $100–$300</td>
+</tr>
+<tr>
+<td><strong>Phone OTP</strong></td>
+<td>None / SMS / WhatsApp</td>
+<td>SMS service cost + $300–$800 dev</td>
+</tr>
+<tr>
+<td><strong>Email Verification</strong></td>
+<td>None / Email link / Email code</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Forgot Password</strong></td>
+<td>None / Email reset / Phone reset</td>
+<td>$200–$400</td>
+</tr>
+<tr>
+<td><strong>Biometric Login</strong></td>
+<td>None / Fingerprint / Face ID / Both</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Two-Factor Auth (2FA)</strong></td>
+<td>None / SMS / Authenticator app / Both</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Session Management</strong></td>
+<td>Auto logout / Remember me / Multi-device</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td><strong>Role-Based Access</strong></td>
+<td>None / 2 roles / Multiple roles / Custom permissions</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Profile Management</strong></td>
+<td>Basic (name, email) / Advanced (avatar, bio, preferences)</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Account Deletion</strong></td>
+<td>Not needed / Required (App Store policy)</td>
+<td>Required for iOS apps</td>
+</tr>
+<tr>
+<td><strong>Guest Mode</strong></td>
+<td>No / Limited access / Full trial</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Auth Service</strong></td>
+<td>Custom / Firebase Auth / Auth0 / Supabase Auth / Clerk</td>
+<td>See comparison below</td>
+</tr>
+<tr>
+<td><strong>Token Management</strong></td>
+<td>JWT / Session / OAuth 2.0 tokens</td>
+<td>Standard implementation</td>
+</tr>
+<tr>
+<td><strong>SSO (Single Sign-On)</strong></td>
+<td>None / SAML / OAuth / OpenID Connect</td>
+<td>Enterprise feature = $1,000–$5,000</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="authentication-service-comparison">Authentication Service Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_84">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Free Tier</th>
+<th>Paid Starting</th>
+<th>Social Logins</th>
+<th>Phone Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Firebase Auth</strong></td>
+<td>10K verifications/mo</td>
+<td>Pay-per-use</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Auth0</strong></td>
+<td>7,500 MAU</td>
+<td>$23/mo</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Supabase Auth</strong></td>
+<td>50K MAU</td>
+<td>$25/mo (includes DB)</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Clerk</strong></td>
+<td>10K MAU</td>
+<td>$25/mo</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>AWS Cognito</strong></td>
+<td>50K MAU</td>
+<td>Pay-per-use</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Custom</strong></td>
+<td>N/A</td>
+<td>Dev cost only</td>
+<td>Manual integration</td>
+<td>Manual</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="5-features-functionality">5. Features &amp; Functionality</h2><button class="section-scope-btn" data-sec-id="sec_85">+ Add to Scope</button></div>
+<p>The core functionality that defines the app's purpose and value.</p>
+<div class="section-scope-header"><h3 id="parameters_24">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_86">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Options</th>
+<th>Complexity</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>User Feed/Timeline</strong></td>
+<td>None / Chronological / Algorithmic</td>
+<td>Medium–High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Search</strong></td>
+<td>None / Basic (local) / Advanced (server-side + filters)</td>
+<td>Medium–High</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Chat/Messaging</strong></td>
+<td>None / 1-to-1 / Group / Multimedia (images, files)</td>
+<td>High–Very High</td>
+<td>$2,000–$15,000</td>
+</tr>
+<tr>
+<td><strong>Voice/Video Call</strong></td>
+<td>None / Voice only / Video only / Both</td>
+<td>Very High</td>
+<td>$5,000–$25,000</td>
+</tr>
+<tr>
+<td><strong>Social Features</strong></td>
+<td>None / Like / Like + Comment / Full social (follow, share, report)</td>
+<td>Medium–High</td>
+<td>$1,000–$8,000</td>
+</tr>
+<tr>
+<td><strong>Content Posting</strong></td>
+<td>None / Text / Text + Images / Text + Images + Video</td>
+<td>Medium–High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Stories/Status</strong></td>
+<td>None / Image stories / Video stories (24-hr disappearing)</td>
+<td>High</td>
+<td>$3,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>Maps &amp; Geolocation</strong></td>
+<td>None / Show location on map / Real-time tracking / Navigation</td>
+<td>Medium–Very High</td>
+<td>$500–$10,000</td>
+</tr>
+<tr>
+<td><strong>QR Code</strong></td>
+<td>None / Scanner / Generator / Both</td>
+<td>Low–Medium</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Barcode Scanner</strong></td>
+<td>None / 1D barcodes / 2D barcodes / Both</td>
+<td>Low–Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Calendar/Events</strong></td>
+<td>None / View only / Create + RSVP / Full calendar management</td>
+<td>Medium–High</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Booking/Scheduling</strong></td>
+<td>None / Time slot booking / Calendar-based / Service booking</td>
+<td>High</td>
+<td>$2,000–$8,000</td>
+</tr>
+<tr>
+<td><strong>File Management</strong></td>
+<td>None / Upload / Upload + Download + View / Full document management</td>
+<td>Medium–High</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Order Management</strong></td>
+<td>None / Basic (status tracking) / Full (history, reorder, returns)</td>
+<td>Medium–High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Reviews &amp; Ratings</strong></td>
+<td>None / Star rating / Rating + Review / Verified + Photos</td>
+<td>Medium</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Wishlist/Favorites</strong></td>
+<td>None / Simple save / Organized collections</td>
+<td>Low–Medium</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Referral System</strong></td>
+<td>None / Share code / Full affiliate with rewards</td>
+<td>Medium–High</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Gamification</strong></td>
+<td>None / Points/XP / Badges / Leaderboard / Levels</td>
+<td>Medium–High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Subscription/Membership</strong></td>
+<td>None / Tiers / Paywalled content</td>
+<td>Medium–High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Multi-Language (i18n)</strong></td>
+<td>Single language / 2–3 / 5–10 / 10+</td>
+<td>Low–Medium</td>
+<td>$200–$500/language</td>
+</tr>
+<tr>
+<td><strong>Accessibility</strong></td>
+<td>None / Basic / Full (screen readers, haptics)</td>
+<td>Medium</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Deep Linking</strong></td>
+<td>None / Basic / Universal/App links / Deferred deep links</td>
+<td>Low–Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Share Functionality</strong></td>
+<td>None / System share sheet / Custom share cards</td>
+<td>Low</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td><strong>In-App Browser</strong></td>
+<td>None / WebView / Chrome Custom Tabs / SafariVC</td>
+<td>Low</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Data Export</strong></td>
+<td>None / PDF / CSV / Both</td>
+<td>Medium</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Surveys/Polls</strong></td>
+<td>None / Simple polls / Full survey forms</td>
+<td>Medium</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Task/Todo Management</strong></td>
+<td>None / Basic list / Full (categories, priorities, reminders)</td>
+<td>Medium–High</td>
+<td>$1,000–$4,000</td>
+</tr>
+<tr>
+<td><strong>Dashboard/Analytics</strong></td>
+<td>None / Basic charts / Full analytics dashboard</td>
+<td>Medium–High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Admin Panel (Web)</strong></td>
+<td>None / Basic / Full admin dashboard (web-based)</td>
+<td>High</td>
+<td>$3,000–$15,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="6-backend-api">6. Backend &amp; API</h2><button class="section-scope-btn" data-sec-id="sec_87">+ Add to Scope</button></div>
+<p>The server-side infrastructure that powers the app.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_12">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_88">+ Add to Scope</button></div>
+<ul>
+<li>Is there an existing backend/API?</li>
+<li>What is the expected user base (now and future)?</li>
+<li>Are real-time features needed?</li>
+<li>Is a web admin panel needed alongside the mobile app?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_25">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_89">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend Type</strong></td>
+<td>Custom Backend / BaaS (Firebase, Supabase) / Serverless</td>
+<td>Custom = highest cost</td>
+</tr>
+<tr>
+<td><strong>Backend Language</strong></td>
+<td>Node.js / Python / Java / Go / Rust / PHP / C#</td>
+<td>Language affects dev time</td>
+</tr>
+<tr>
+<td><strong>Backend Framework</strong></td>
+<td>Express.js / NestJS / Django / FastAPI / Spring Boot / Laravel / Gin</td>
+<td>Framework affects speed</td>
+</tr>
+<tr>
+<td><strong>API Type</strong></td>
+<td>REST / GraphQL / gRPC / WebSocket</td>
+<td>GraphQL = +20% dev time</td>
+</tr>
+<tr>
+<td><strong>API Documentation</strong></td>
+<td>None / Swagger/OpenAPI / Postman collection</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Real-Time Communication</strong></td>
+<td>None / WebSocket / Server-Sent Events / Firebase Realtime</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>File Upload/Storage</strong></td>
+<td>None / Local server / AWS S3 / Firebase Storage / Cloudinary</td>
+<td>$200–$1,000 + storage cost</td>
+</tr>
+<tr>
+<td><strong>Image Processing</strong></td>
+<td>None / Resize/Compress / Thumbnails / Filters</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Video Processing</strong></td>
+<td>None / Compression / Transcoding / Streaming</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Background Jobs</strong></td>
+<td>None / Email queue / Image processing / Report generation</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Cron Jobs</strong></td>
+<td>None / Data cleanup / Notifications / Reports</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Rate Limiting</strong></td>
+<td>None / Basic / Advanced (per user, per endpoint)</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>API Versioning</strong></td>
+<td>None / URL versioning / Header versioning</td>
+<td>$200–$400</td>
+</tr>
+<tr>
+<td><strong>Microservices</strong></td>
+<td>Monolith / 2–3 services / Full microservices</td>
+<td>Each service = +$5,000–$20,000</td>
+</tr>
+<tr>
+<td><strong>Message Queue</strong></td>
+<td>None / RabbitMQ / Apache Kafka / AWS SQS</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Containerization</strong></td>
+<td>None / Docker / Kubernetes</td>
+<td>Docker = $500, K8s = $2,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>CI/CD</strong></td>
+<td>None / GitHub Actions / GitLab CI / Jenkins</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Hosting</strong></td>
+<td>Shared / VPS / Cloud (AWS/GCP/Azure) / Serverless</td>
+<td>$10–$1,000+/month</td>
+</tr>
+<tr>
+<td><strong>Auto-Scaling</strong></td>
+<td>None / Horizontal / Vertical</td>
+<td>Cloud with auto-scaling</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="backend-service-comparison">Backend Service Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_90">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Type</th>
+<th>Best For</th>
+<th>Monthly Cost</th>
+<th>Dev Time Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Firebase</strong></td>
+<td>BaaS</td>
+<td>Quick launch, real-time, small-medium apps</td>
+<td>Free–$100+</td>
+<td>0.5x</td>
+</tr>
+<tr>
+<td><strong>Supabase</strong></td>
+<td>BaaS</td>
+<td>Firebase alternative with SQL</td>
+<td>Free–$25+</td>
+<td>0.5x</td>
+</tr>
+<tr>
+<td><strong>AWS Amplify</strong></td>
+<td>BaaS</td>
+<td>AWS ecosystem integration</td>
+<td>Pay-per-use</td>
+<td>0.6x</td>
+</tr>
+<tr>
+<td><strong>Custom (Node.js)</strong></td>
+<td>Custom</td>
+<td>Full control, complex logic</td>
+<td>Server cost</td>
+<td>1x</td>
+</tr>
+<tr>
+<td><strong>Custom (Django/Python)</strong></td>
+<td>Custom</td>
+<td>Data-heavy, ML integration</td>
+<td>Server cost</td>
+<td>1.1x</td>
+</tr>
+<tr>
+<td><strong>Serverless (Lambda)</strong></td>
+<td>Serverless</td>
+<td>Event-driven, variable traffic</td>
+<td>Pay-per-use</td>
+<td>0.8x</td>
+</tr>
+<tr>
+<td><strong>Appwrite</strong></td>
+<td>BaaS</td>
+<td>Self-hosted BaaS</td>
+<td>Free (self-hosted)</td>
+<td>0.5x</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="7-database-storage">7. Database &amp; Storage</h2><button class="section-scope-btn" data-sec-id="sec_91">+ Add to Scope</button></div>
+<p>Data management strategy for the mobile application.</p>
+<div class="section-scope-header"><h3 id="parameters_26">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_92">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cloud Database</strong></td>
+<td>Firebase Firestore / Supabase (PostgreSQL) / MongoDB Atlas / AWS DynamoDB / PlanetScale</td>
+<td>Service cost varies</td>
+</tr>
+<tr>
+<td><strong>Local Database</strong></td>
+<td>None / SQLite / Hive / ObjectBox / Realm / Room (Android) / Core Data (iOS)</td>
+<td>Built into app</td>
+</tr>
+<tr>
+<td><strong>Offline-First Database</strong></td>
+<td>None / WatermelonDB / Realm / PouchDB + CouchDB</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Data Sync</strong></td>
+<td>None / One-way (cloud → device) / Two-way sync</td>
+<td>Two-way = +$2,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Caching Strategy</strong></td>
+<td>None / In-memory / Disk cache / Hybrid</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>File Storage</strong></td>
+<td>None / App internal / AWS S3 / Firebase Storage / Cloudinary</td>
+<td>$100–$500 + storage cost</td>
+</tr>
+<tr>
+<td><strong>Media Storage Size</strong></td>
+<td>&lt;1GB / 1–10GB / 10–100GB / 100GB+</td>
+<td>Storage cost = $0.023–$0.2/GB/month</td>
+</tr>
+<tr>
+<td><strong>Data Encryption</strong></td>
+<td>None / At rest / In transit / Both</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Data Migration</strong></td>
+<td>None / From existing system</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Seed Data</strong></td>
+<td>None / Static / Dynamic</td>
+<td>Initial data population</td>
+</tr>
+<tr>
+<td><strong>Data Backup</strong></td>
+<td>None / Daily / Real-time</td>
+<td>$10–$100/month</td>
+</tr>
+<tr>
+<td><strong>Search (Full-Text)</strong></td>
+<td>None / Local search / Algolia / Elasticsearch</td>
+<td>$0–$100+/month</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="storage-cost-comparison">Storage Cost Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_93">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Free Tier</th>
+<th>Cost per GB/month</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Firebase Storage</strong></td>
+<td>5GB</td>
+<td>$0.026/GB</td>
+<td>Small-medium apps</td>
+</tr>
+<tr>
+<td><strong>AWS S3</strong></td>
+<td>5GB (12 months)</td>
+<td>$0.023/GB</td>
+<td>Large-scale storage</td>
+</tr>
+<tr>
+<td><strong>Supabase Storage</strong></td>
+<td>1GB</td>
+<td>$0.021/GB</td>
+<td>Supabase ecosystem</td>
+</tr>
+<tr>
+<td><strong>Cloudinary</strong></td>
+<td>25GB bandwidth</td>
+<td>$0.05/GB (bandwidth)</td>
+<td>Image/video processing</td>
+</tr>
+<tr>
+<td><strong>DigitalOcean Spaces</strong></td>
+<td>N/A</td>
+<td>$0.02/GB</td>
+<td>Simple object storage</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="8-push-notifications">8. Push Notifications</h2><button class="section-scope-btn" data-sec-id="sec_94">+ Add to Scope</button></div>
+<p>Push notifications are critical for user engagement and retention.</p>
+<div class="section-scope-header"><h3 id="parameters_27">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_95">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Push Notification Service</strong></td>
+<td>None / FCM (Firebase) / APNs + FCM / OneSignal / Pusher</td>
+<td>$0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>Notification Types</strong></td>
+<td>None / Basic (text) / Rich (images, actions, deep links)</td>
+<td>Rich = +$500–$1,000</td>
+</tr>
+<tr>
+<td><strong>Targeting</strong></td>
+<td>None / All users / Segments / Individual</td>
+<td>Segment-based = +$300–$800</td>
+</tr>
+<tr>
+<td><strong>Scheduled Notifications</strong></td>
+<td>None / One-time / Recurring</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>In-App Notifications</strong></td>
+<td>None / Toast/Snackbar / Notification center / Badge counts</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Email Notifications</strong></td>
+<td>None / Transactional / Marketing</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>SMS Notifications</strong></td>
+<td>None / OTP only / Full</td>
+<td>SMS service cost + $300–$800</td>
+</tr>
+<tr>
+<td><strong>Notification Preferences</strong></td>
+<td>None / Category-based opt-in/opt-out</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td><strong>Silent Notifications</strong></td>
+<td>None / Data sync / Background updates</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Geofence Notifications</strong></td>
+<td>None / Location-based triggers</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Time-Zone Aware</strong></td>
+<td>No / Yes</td>
+<td>$200–$400</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="notification-service-comparison">Notification Service Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_96">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Free Tier</th>
+<th>Paid Starting</th>
+<th>Rich Notifications</th>
+<th>Analytics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FCM (Firebase)</strong></td>
+<td>Unlimited</td>
+<td>Free</td>
+<td>Yes</td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><strong>OneSignal</strong></td>
+<td>Unlimited</td>
+<td>$9/mo</td>
+<td>Yes</td>
+<td>Advanced</td>
+</tr>
+<tr>
+<td><strong>Pusher Beams</strong></td>
+<td>1K devices</td>
+<td>$29/mo</td>
+<td>Yes</td>
+<td>Advanced</td>
+</tr>
+<tr>
+<td><strong>Amazon SNS</strong></td>
+<td>1M publishes</td>
+<td>Pay-per-use</td>
+<td>Limited</td>
+<td>Basic</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="9-payment-monetization">9. Payment &amp; Monetization</h2><button class="section-scope-btn" data-sec-id="sec_97">+ Add to Scope</button></div>
+<p>How the app makes money and processes payments.</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_13">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_98">+ Add to Scope</button></div>
+<ul>
+<li>How will the app be monetized?</li>
+<li>Is it a paid app or free with in-app purchases?</li>
+<li>Are subscriptions needed?</li>
+<li>Will physical goods be sold (requiring external payment)?</li>
+<li>What regions will payments be accepted from?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_28">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_99">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>App Pricing Model</strong></td>
+<td>Free / Paid (one-time) / Freemium / Free with ads</td>
+<td>Affects store listing</td>
+</tr>
+<tr>
+<td><strong>In-App Purchases</strong></td>
+<td>None / Consumable / Non-consumable / Both</td>
+<td>$1,000–$5,000 per type</td>
+</tr>
+<tr>
+<td><strong>Subscriptions</strong></td>
+<td>None / Monthly / Annual / Multiple tiers</td>
+<td>$2,000–$8,000</td>
+</tr>
+<tr>
+<td><strong>Subscription Management</strong></td>
+<td>Custom / RevenueCat / Adapty / Glassfy</td>
+<td>Service = $0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>Payment Gateway (for physical goods)</strong></td>
+<td>None / Stripe / Razorpay / PayPal / Braintree</td>
+<td>$500–$2,000 per gateway</td>
+</tr>
+<tr>
+<td><strong>Wallet System</strong></td>
+<td>None / Simple balance / Full wallet (add money, withdraw)</td>
+<td>$2,000–$8,000</td>
+</tr>
+<tr>
+<td><strong>Ad Integration</strong></td>
+<td>None / Banner / Interstitial / Rewarded video / Native ads</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Ad Network</strong></td>
+<td>None / Google AdMob / Facebook Audience / Unity Ads / IronSource</td>
+<td>Usually Google AdMob</td>
+</tr>
+<tr>
+<td><strong>Tipping/Donations</strong></td>
+<td>None / Fixed amounts / Custom amounts</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Multi-Currency</strong></td>
+<td>No / Yes</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Invoice Generation</strong></td>
+<td>None / Basic / Tax-compliant</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Payout to Sellers/Drivers</strong></td>
+<td>None / Manual / Automated (Stripe Connect)</td>
+<td>$2,000–$8,000</td>
+</tr>
+<tr>
+<td><strong>Promo Codes/Coupons</strong></td>
+<td>None / Basic codes / Advanced (rules, limits, expiry)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Free Trial</strong></td>
+<td>None / Time-limited / Feature-limited</td>
+<td>Built into subscriptions</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="important-applegoogle-payment-rules">Important Apple/Google Payment Rules:</h3><button class="section-scope-btn" data-sec-id="sec_100">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Apple App Store</th>
+<th>Google Play Store</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Digital goods must use</strong></td>
+<td>Apple In-App Purchase</td>
+<td>Google Play Billing</td>
+</tr>
+<tr>
+<td><strong>Commission</strong></td>
+<td>30% (15% for Small Business Program &lt;$1M/yr)</td>
+<td>30% (15% for first $1M/yr)</td>
+</tr>
+<tr>
+<td><strong>Physical goods</strong></td>
+<td>Can use external payment (Stripe, etc.)</td>
+<td>Can use external payment</td>
+</tr>
+<tr>
+<td><strong>Services (ride, food delivery)</strong></td>
+<td>Can use external payment</td>
+<td>Can use external payment</td>
+</tr>
+<tr>
+<td><strong>Subscriptions commission</strong></td>
+<td>30% first year → 15% after</td>
+<td>30% first year → 15% after</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="subscription-integration-cost">Subscription Integration Cost:</h3><button class="section-scope-btn" data-sec-id="sec_101">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Setup Cost</th>
+<th>Monthly Cost</th>
+<th>Revenue Optimized</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Native (StoreKit + Google Billing)</strong></td>
+<td>$2,000–$5,000</td>
+<td>None</td>
+<td>Manual</td>
+</tr>
+<tr>
+<td><strong>RevenueCat</strong></td>
+<td>$1,000–$3,000</td>
+<td>$0–$120/mo</td>
+<td>Yes (paywalls, A/B testing)</td>
+</tr>
+<tr>
+<td><strong>Adapty</strong></td>
+<td>$1,000–$3,000</td>
+<td>$0–$99/mo</td>
+<td>Yes (analytics, paywalls)</td>
+</tr>
+<tr>
+<td><strong>Custom server</strong></td>
+<td>$3,000–$8,000</td>
+<td>Server cost</td>
+<td>Custom</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="10-media-content">10. Media &amp; Content</h2><button class="section-scope-btn" data-sec-id="sec_102">+ Add to Scope</button></div>
+<p>How media files (images, videos, audio) are handled in the app.</p>
+<div class="section-scope-header"><h3 id="parameters_29">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_103">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Image Handling</strong></td>
+<td>None / Display only / Upload + Display / Full (crop, filter, edit)</td>
+<td>$200–$2,000</td>
+</tr>
+<tr>
+<td><strong>Image Source</strong></td>
+<td>App assets only / Camera / Gallery / Both + Camera crop</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Image Compression</strong></td>
+<td>None / Client-side / Server-side / Both</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Video Handling</strong></td>
+<td>None / Playback only / Record + Upload + Stream</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Video Player</strong></td>
+<td>None / Basic / Custom controls / PiP (Picture-in-Picture)</td>
+<td>$200–$2,000</td>
+</tr>
+<tr>
+<td><strong>Video Streaming</strong></td>
+<td>None / Progressive download / HLS/DASH adaptive streaming</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Audio Handling</strong></td>
+<td>None / Playback / Record / Both</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Audio Player</strong></td>
+<td>None / Basic / Background playback / Lock screen controls</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>PDF Viewer</strong></td>
+<td>None / Basic / Annotate + Sign</td>
+<td>$200–$1,500</td>
+</tr>
+<tr>
+<td><strong>Document Scanner</strong></td>
+<td>None / Camera-based / OCR text extraction</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>AR Content</strong></td>
+<td>None / Face filters / 3D object placement / AR navigation</td>
+<td>$5,000–$30,000+</td>
+</tr>
+<tr>
+<td><strong>Image CDN</strong></td>
+<td>None / Cloudinary / Imgix / Cloudflare Images</td>
+<td>$0–$100+/month</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="11-device-features-hardware">11. Device Features &amp; Hardware</h2><button class="section-scope-btn" data-sec-id="sec_104">+ Add to Scope</button></div>
+<p>Mobile apps can leverage device hardware that websites cannot.</p>
+<div class="section-scope-header"><h3 id="parameters_30">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_105">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Camera</strong></td>
+<td>None / Photo capture / Video recording / Barcode/QR scan</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>GPS/Location</strong></td>
+<td>None / One-time location / Continuous tracking / Geofencing</td>
+<td>$300–$3,000</td>
+</tr>
+<tr>
+<td><strong>Contacts Access</strong></td>
+<td>None / Read contacts / Sync contacts</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Calendar Access</strong></td>
+<td>None / Read / Read + Write</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Bluetooth</strong></td>
+<td>None / BLE scanning / BLE communication / Classic Bluetooth</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>NFC</strong></td>
+<td>None / Read tags / Read + Write</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Biometrics</strong></td>
+<td>None / Fingerprint / Face recognition / Both</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Accelerometer/Gyroscope</strong></td>
+<td>None / Motion detection / Step counter / Gesture recognition</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Haptic Feedback</strong></td>
+<td>None / Basic vibration / Custom haptic patterns</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Clipboard</strong></td>
+<td>None / Copy / Copy + Paste</td>
+<td>$50–$200</td>
+</tr>
+<tr>
+<td><strong>Share Sheet</strong></td>
+<td>None / System share / Custom share targets</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>File System Access</strong></td>
+<td>None / Read / Read + Write</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Microphone</strong></td>
+<td>None / Voice recording / Voice recognition / Voice commands</td>
+<td>$300–$3,000</td>
+</tr>
+<tr>
+<td><strong>Phone Calls</strong></td>
+<td>None / Dial number / In-app VoIP</td>
+<td>VoIP = $3,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>SMS</strong></td>
+<td>None / Send SMS / Read SMS (OTP auto-fill)</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Health/Fitness Data</strong></td>
+<td>None / HealthKit (iOS) / Google Fit / Both</td>
+<td>$1,000–$5,000 per platform</td>
+</tr>
+<tr>
+<td><strong>Background Location</strong></td>
+<td>None / While in use / Always (requires justification)</td>
+<td>+$500–$1,000 (strict review)</td>
+</tr>
+<tr>
+<td><strong>Local Authentication</strong></td>
+<td>None / Passcode / Biometric / Both</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Widget Support</strong></td>
+<td>None / iOS Widget / Android Widget / Both</td>
+<td>$1,000–$3,000 per platform</td>
+</tr>
+<tr>
+<td><strong>App Clips (iOS) / Instant Apps (Android)</strong></td>
+<td>None / Basic / Full</td>
+<td>$2,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Siri/Google Assistant Integration</strong></td>
+<td>None / Basic shortcuts / Custom intents</td>
+<td>$1,000–$3,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="12-offline-capability">12. Offline Capability</h2><button class="section-scope-btn" data-sec-id="sec_106">+ Add to Scope</button></div>
+<p>Many apps need to work without internet connectivity.</p>
+<div class="section-scope-header"><h3 id="parameters_31">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_107">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Offline Mode</strong></td>
+<td>None (online only) / Read-only offline / Full offline + sync</td>
+<td>Full = $2,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>Offline Data</strong></td>
+<td>None / Cache last loaded / Configurable download</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Sync Strategy</strong></td>
+<td>None / Sync on connection / Manual sync / Real-time + offline fallback</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Conflict Resolution</strong></td>
+<td>None / Last write wins / Manual resolution / Custom merge</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Offline Media</strong></td>
+<td>None / Cached images / Downloaded media / Streaming cache</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Queue Actions</strong></td>
+<td>None / Queue form submissions / Queue all mutations</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Connectivity Status</strong></td>
+<td>None / Basic indicator / Detailed (WiFi/cellular/offline)</td>
+<td>$100–$300</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="13-security">13. Security</h2><button class="section-scope-btn" data-sec-id="sec_108">+ Add to Scope</button></div>
+<p>Mobile apps have unique security considerations.</p>
+<div class="section-scope-header"><h3 id="parameters_32">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_109">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data Encryption (at rest)</strong></td>
+<td>None / SQLCipher / Platform encryption</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Data Encryption (in transit)</strong></td>
+<td>HTTP (insecure) / HTTPS (TLS) / Certificate pinning</td>
+<td>Pinning = $300–$800</td>
+</tr>
+<tr>
+<td><strong>Certificate Pinning</strong></td>
+<td>None / Public key pinning / Certificate pinning</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td><strong>Secure Storage</strong></td>
+<td>SharedPreferences / Keychain (iOS) + Keystore (Android) / Encrypted storage</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Jailbreak/Root Detection</strong></td>
+<td>None / Detect and warn / Block app on rooted devices</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Code Obfuscation</strong></td>
+<td>None / ProGuard (Android) / Basic / Advanced (DexGuard, iXGuard)</td>
+<td>$200–$2,000</td>
+</tr>
+<tr>
+<td><strong>Tamper Detection</strong></td>
+<td>None / Basic / Advanced</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Biometric Security</strong></td>
+<td>None / App unlock / Transaction auth</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Session Security</strong></td>
+<td>Basic tokens / Rotating tokens / Encrypted tokens + session management</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>API Security</strong></td>
+<td>API key / OAuth 2.0 / JWT + refresh tokens</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Data Masking</strong></td>
+<td>None / Sensitive fields masked</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td><strong>Screenshot Prevention</strong></td>
+<td>None / Yes (for sensitive screens)</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Clipboard Security</strong></td>
+<td>None / Clear clipboard after paste</td>
+<td>$100–$200</td>
+</tr>
+<tr>
+<td><strong>Penetration Testing</strong></td>
+<td>None / Single test / Ongoing</td>
+<td>$2,000–$10,000 per test</td>
+</tr>
+<tr>
+<td><strong>OWASP Mobile Top 10</strong></td>
+<td>Not addressed / Partially / Fully compliant</td>
+<td>Full = +15–20% security dev</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="14-testing-quality-assurance">14. Testing &amp; Quality Assurance</h2><button class="section-scope-btn" data-sec-id="sec_110">+ Add to Scope</button></div>
+<p>Testing for mobile is more complex than web due to device fragmentation.</p>
+<div class="section-scope-header"><h3 id="parameters_33">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_111">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unit Testing</strong></td>
+<td>None / Critical paths / Comprehensive (&gt;80% coverage)</td>
+<td>+10–20% dev time</td>
+</tr>
+<tr>
+<td><strong>Widget/Component Testing</strong></td>
+<td>None / Key components / Comprehensive</td>
+<td>+10–15% dev time</td>
+</tr>
+<tr>
+<td><strong>Integration Testing</strong></td>
+<td>None / API tests / Full flow tests</td>
+<td>+10–20% dev time</td>
+</tr>
+<tr>
+<td><strong>E2E Testing</strong></td>
+<td>None / Happy paths / Comprehensive</td>
+<td>+15–25% dev time</td>
+</tr>
+<tr>
+<td><strong>E2E Testing Tool</strong></td>
+<td>None / Appium / Detox / Maestro / Patrol (Flutter)</td>
+<td>Tool setup + test writing</td>
+</tr>
+<tr>
+<td><strong>Manual Testing</strong></td>
+<td>Basic / Detailed test cases / Full regression suite</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Device Testing</strong></td>
+<td>Emulator only / 3–5 real devices / 10+ devices / Cloud device lab</td>
+<td>Cloud lab = $50–$500/month</td>
+</tr>
+<tr>
+<td><strong>Cloud Device Lab</strong></td>
+<td>None / BrowserStack / AWS Device Farm / Firebase Test Lab</td>
+<td>$0 (limited free) – $500/month</td>
+</tr>
+<tr>
+<td><strong>Performance Testing</strong></td>
+<td>None / Basic profiling / Load testing</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Crash Reporting</strong></td>
+<td>None / Firebase Crashlytics / Sentry / Bugsnag</td>
+<td>$0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>Beta Testing</strong></td>
+<td>None / Internal (TestFlight/Internal track) / External beta</td>
+<td>$200–$500 setup</td>
+</tr>
+<tr>
+<td><strong>Accessibility Testing</strong></td>
+<td>None / Automated scan / Manual audit</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Security Testing</strong></td>
+<td>None / Automated scan (MobSF) / Manual pentest</td>
+<td>$500–$10,000</td>
+</tr>
+<tr>
+<td><strong>User Acceptance Testing</strong></td>
+<td>None / Client tests / Structured UAT</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Regression Testing</strong></td>
+<td>None / Manual / Automated</td>
+<td>Automated = +$1,000–$3,000</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="testing-budget-rule">Testing Budget Rule:</h3><button class="section-scope-btn" data-sec-id="sec_112">+ Add to Scope</button></div>
+<ul>
+<li><strong>Minimum:</strong> 15–20% of development budget</li>
+<li><strong>Recommended:</strong> 25–30% of development budget</li>
+<li><strong>Critical apps (fintech, health):</strong> 30–40% of development budget</li>
+</ul>
+<hr />
+<div class="section-scope-header"><h2 id="15-performance-optimization">15. Performance Optimization</h2><button class="section-scope-btn" data-sec-id="sec_113">+ Add to Scope</button></div>
+<p>Mobile users expect fast, smooth apps with minimal resource usage.</p>
+<div class="section-scope-header"><h3 id="parameters_34">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_114">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>App Size</strong></td>
+<td>Unrestricted / &lt;50MB / &lt;25MB / &lt;10MB</td>
+<td>Smaller = better downloads</td>
+</tr>
+<tr>
+<td><strong>Launch Time</strong></td>
+<td>Unrestricted / &lt;3 seconds / &lt;2 seconds / &lt;1 second</td>
+<td>Cold start optimization</td>
+</tr>
+<tr>
+<td><strong>Frame Rate</strong></td>
+<td>30fps / 60fps / 120fps (ProMotion)</td>
+<td>60fps is standard target</td>
+</tr>
+<tr>
+<td><strong>Memory Management</strong></td>
+<td>Basic / Optimized / Aggressive (low-memory devices)</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Battery Optimization</strong></td>
+<td>Basic / Location optimization / Full battery profiling</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Network Optimization</strong></td>
+<td>None / Request batching / Compression / Caching</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Image Optimization</strong></td>
+<td>None / Lazy loading / Progressive / WebP/AVIF</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td><strong>List/Scroll Performance</strong></td>
+<td>Basic / Virtualized / Pagination (infinite scroll)</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Build Size Optimization</strong></td>
+<td>None / Tree-shaking / Code splitting / Asset optimization</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Startup Optimization</strong></td>
+<td>None / Deferred initialization / Splash screen preloading</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>ANR/Freeze Prevention</strong></td>
+<td>Basic / Background threading / Isolate heavy computations</td>
+<td>$200–$800</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="16-analytics-monitoring">16. Analytics &amp; Monitoring</h2><button class="section-scope-btn" data-sec-id="sec_115">+ Add to Scope</button></div>
+<p>Understanding user behavior and app health is critical for success.</p>
+<div class="section-scope-header"><h3 id="parameters_35">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_116">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Analytics Platform</strong></td>
+<td>None / Firebase Analytics / Mixpanel / Amplitude / CleverTap</td>
+<td>$0–$500+/month</td>
+</tr>
+<tr>
+<td><strong>Crash Reporting</strong></td>
+<td>None / Firebase Crashlytics / Sentry / Bugsnag</td>
+<td>$0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>Event Tracking</strong></td>
+<td>None / Basic (screen views, clicks) / Advanced (funnels, user properties)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>User Properties</strong></td>
+<td>None / Basic demographics / Custom properties</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Funnel Analysis</strong></td>
+<td>None / Registration funnel / Purchase funnel / Custom</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Retention Tracking</strong></td>
+<td>None / D1/D7/D30 / Cohort analysis</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>A/B Testing</strong></td>
+<td>None / Firebase Remote Config / Optimizely / LaunchDarkly</td>
+<td>$0–$200+/month</td>
+</tr>
+<tr>
+<td><strong>Feature Flags</strong></td>
+<td>None / Basic toggles / Full feature management</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Performance Monitoring</strong></td>
+<td>None / Firebase Performance / New Relic / Datadog</td>
+<td>$0–$300+/month</td>
+</tr>
+<tr>
+<td><strong>User Session Recording</strong></td>
+<td>None / Smartlook / LogRocket / UXCam</td>
+<td>$0–$200+/month</td>
+</tr>
+<tr>
+<td><strong>Heatmaps</strong></td>
+<td>None / Touch heatmaps / Scroll maps</td>
+<td>$0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>Revenue Analytics</strong></td>
+<td>None / Basic / RevenueCat / Custom dashboard</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Push Notification Analytics</strong></td>
+<td>None / Open rate / Full funnel</td>
+<td>Built into notification service</td>
+</tr>
+<tr>
+<td><strong>Custom Dashboard</strong></td>
+<td>None / Admin web dashboard / In-app analytics</td>
+<td>$1,000–$5,000</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="analytics-service-comparison">Analytics Service Comparison:</h3><button class="section-scope-btn" data-sec-id="sec_117">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Free Tier</th>
+<th>Paid Starting</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Firebase Analytics</strong></td>
+<td>Unlimited</td>
+<td>Free</td>
+<td>Basic analytics, Google ecosystem</td>
+</tr>
+<tr>
+<td><strong>Mixpanel</strong></td>
+<td>20M events/mo</td>
+<td>$20/mo</td>
+<td>Event-based analytics, funnels</td>
+</tr>
+<tr>
+<td><strong>Amplitude</strong></td>
+<td>10M events/mo</td>
+<td>$49/mo</td>
+<td>Product analytics, retention</td>
+</tr>
+<tr>
+<td><strong>CleverTap</strong></td>
+<td>Limited</td>
+<td>Custom pricing</td>
+<td>Marketing automation + analytics</td>
+</tr>
+<tr>
+<td><strong>PostHog</strong></td>
+<td>1M events/mo</td>
+<td>$0 (self-hosted)</td>
+<td>Open-source, feature flags</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="17-third-party-integrations">17. Third-Party Integrations</h2><button class="section-scope-btn" data-sec-id="sec_118">+ Add to Scope</button></div>
+<p>External services the mobile app needs to integrate with.</p>
+<div class="section-scope-header"><h3 id="parameters_36">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_119">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Integration</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Maps</strong></td>
+<td>None / Google Maps / Apple Maps / Mapbox / OpenStreetMap</td>
+<td>$200–$1,500 + API cost</td>
+</tr>
+<tr>
+<td><strong>Social Media Sharing</strong></td>
+<td>None / System share / Deep link sharing</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Social Media Login</strong></td>
+<td>None / Google / Apple / Facebook / Multiple</td>
+<td>$100–$300 per provider</td>
+</tr>
+<tr>
+<td><strong>SMS/OTP</strong></td>
+<td>None / Firebase Phone Auth / Twilio / MSG91</td>
+<td>$200–$500 + per-SMS cost</td>
+</tr>
+<tr>
+<td><strong>Email Service</strong></td>
+<td>None / SendGrid / Mailchimp / Amazon SES</td>
+<td>$200–$500 + service cost</td>
+</tr>
+<tr>
+<td><strong>Cloud Storage</strong></td>
+<td>None / AWS S3 / Firebase Storage / Cloudinary</td>
+<td>$100–$500 + storage cost</td>
+</tr>
+<tr>
+<td><strong>CDN</strong></td>
+<td>None / Cloudflare / CloudFront / Fastly</td>
+<td>$0–$200+/month</td>
+</tr>
+<tr>
+<td><strong>Machine Learning</strong></td>
+<td>None / Firebase ML / TensorFlow Lite / Core ML / OpenAI API</td>
+<td>$500–$10,000+</td>
+</tr>
+<tr>
+<td><strong>AR SDK</strong></td>
+<td>None / ARKit (iOS) / ARCore (Android) / Vuforia</td>
+<td>$2,000–$15,000</td>
+</tr>
+<tr>
+<td><strong>Payment SDK</strong></td>
+<td>None / Stripe / Razorpay / PayPal / Apple Pay / Google Pay</td>
+<td>$500–$2,000 per gateway</td>
+</tr>
+<tr>
+<td><strong>Chat SDK</strong></td>
+<td>None / Firebase / SendBird / Stream / GetStream</td>
+<td>$0–$500+/month</td>
+</tr>
+<tr>
+<td><strong>Video SDK</strong></td>
+<td>None / Agora / Twilio Video / Jitsi / Vonage</td>
+<td>$0–$500+/month</td>
+</tr>
+<tr>
+<td><strong>CRM Integration</strong></td>
+<td>None / Salesforce / HubSpot / Zoho</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>ERP Integration</strong></td>
+<td>None / SAP / Oracle / Custom</td>
+<td>$2,000–$15,000</td>
+</tr>
+<tr>
+<td><strong>IoT/Hardware</strong></td>
+<td>None / BLE devices / Smart home / Wearables</td>
+<td>$2,000–$20,000</td>
+</tr>
+<tr>
+<td><strong>WhatsApp Business</strong></td>
+<td>None / Share button / Full API</td>
+<td>$200–$2,000</td>
+</tr>
+<tr>
+<td><strong>Crash/Error Tracking</strong></td>
+<td>None / Sentry / Crashlytics / Bugsnag</td>
+<td>$0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>Deep Linking</strong></td>
+<td>None / Firebase Dynamic Links / Branch / Adjust</td>
+<td>$0–$500+/month</td>
+</tr>
+<tr>
+<td><strong>Attribution</strong></td>
+<td>None / Adjust / AppsFlyer / Branch</td>
+<td>$0–$500+/month</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="18-maintenance-support">18. Maintenance &amp; Support</h2><button class="section-scope-btn" data-sec-id="sec_120">+ Add to Scope</button></div>
+<p>Post-launch maintenance is crucial for mobile apps (more so than websites).</p>
+<div class="section-scope-header"><h3 id="key-questions-to-ask_14">Key Questions to Ask:</h3><button class="section-scope-btn" data-sec-id="sec_121">+ Add to Scope</button></div>
+<ul>
+<li>Who will submit app updates to the stores?</li>
+<li>How quickly should critical bugs be fixed?</li>
+<li>Are OS update compatibility fixes expected?</li>
+<li>Is crash monitoring needed?</li>
+</ul>
+<div class="section-scope-header"><h3 id="parameters_37">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_122">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Maintenance Contract</strong></td>
+<td>None / Monthly / Quarterly / Annual</td>
+<td>Monthly = $200–$2,000</td>
+</tr>
+<tr>
+<td><strong>Bug Fixes</strong></td>
+<td>Warranty only (30–90 days) / Ongoing</td>
+<td>Warranty = included</td>
+</tr>
+<tr>
+<td><strong>OS Updates</strong></td>
+<td>Not covered / Annual compatibility check / Proactive</td>
+<td>Annual = $1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>App Store Updates</strong></td>
+<td>Not covered / Quarterly / Monthly / As needed</td>
+<td>$200–$500/update</td>
+</tr>
+<tr>
+<td><strong>Framework/Library Updates</strong></td>
+<td>Not covered / Quarterly / As needed</td>
+<td>$200–$800/quarter</td>
+</tr>
+<tr>
+<td><strong>Security Patches</strong></td>
+<td>Not covered / Monthly / As needed</td>
+<td>$100–$500/patch</td>
+</tr>
+<tr>
+<td><strong>Performance Monitoring</strong></td>
+<td>Not included / Monthly report / Real-time</td>
+<td>$100–$500/month</td>
+</tr>
+<tr>
+<td><strong>Crash Monitoring</strong></td>
+<td>Not included / Alert on new crashes / Full analysis</td>
+<td>$50–$300/month</td>
+</tr>
+<tr>
+<td><strong>Feature Enhancements</strong></td>
+<td>Not included / Minor updates / Major features</td>
+<td>Separate quote/hourly</td>
+</tr>
+<tr>
+<td><strong>Support Hours</strong></td>
+<td>Business hours / Extended / 24/7</td>
+<td>Premium = 2–3x cost</td>
+</tr>
+<tr>
+<td><strong>Response Time SLA</strong></td>
+<td>48 hours / 24 hours / 4 hours / 1 hour</td>
+<td>Faster = premium</td>
+</tr>
+<tr>
+<td><strong>Support Channels</strong></td>
+<td>Email / Chat / Phone / Ticket</td>
+<td>Multi-channel = higher</td>
+</tr>
+<tr>
+<td><strong>Backup Management</strong></td>
+<td>Not included / Database backups / Full backup</td>
+<td>$50–$200/month</td>
+</tr>
+<tr>
+<td><strong>Hosting Management</strong></td>
+<td>Not included / Server maintenance / Full DevOps</td>
+<td>$100–$500/month</td>
+</tr>
+<tr>
+<td><strong>Analytics Reporting</strong></td>
+<td>Not included / Monthly / Weekly</td>
+<td>$100–$300/month</td>
+</tr>
+<tr>
+<td><strong>App Store Optimization (ongoing)</strong></td>
+<td>Not included / Quarterly review / Monthly optimization</td>
+<td>$200–$1,000/month</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="maintenance-plan-tiers_1">Maintenance Plan Tiers:</h3><button class="section-scope-btn" data-sec-id="sec_123">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Includes</th>
+<th>Monthly Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic</strong></td>
+<td>Bug fixes, crash monitoring, security patches</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Standard</strong></td>
+<td>Basic + OS updates, monthly report, email support</td>
+<td>$500–$1,000</td>
+</tr>
+<tr>
+<td><strong>Premium</strong></td>
+<td>Standard + performance monitoring, priority support, minor enhancements</td>
+<td>$1,000–$2,500</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>Premium + 24/7 support, SLA, dedicated account manager, analytics</td>
+<td>$2,500–$8,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="19-legal-compliance-app-store-policies">19. Legal, Compliance &amp; App Store Policies</h2><button class="section-scope-btn" data-sec-id="sec_124">+ Add to Scope</button></div>
+<p>Mobile apps have strict store policies and legal requirements.</p>
+<div class="section-scope-header"><h3 id="parameters_38">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_125">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Privacy Policy</strong></td>
+<td>Template / Custom / Lawyer-reviewed</td>
+<td>$100–$1,000</td>
+</tr>
+<tr>
+<td><strong>Terms of Service</strong></td>
+<td>Template / Custom / Lawyer-reviewed</td>
+<td>$100–$1,000</td>
+</tr>
+<tr>
+<td><strong>GDPR Compliance</strong></td>
+<td>Not applicable / Basic / Full</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>CCPA Compliance</strong></td>
+<td>Not applicable / Basic / Full</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>COPPA (Children's data)</strong></td>
+<td>Not applicable / Compliant</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>HIPAA (Health data)</strong></td>
+<td>Not applicable / Compliant</td>
+<td>$5,000–$20,000</td>
+</tr>
+<tr>
+<td><strong>App Tracking Transparency (iOS)</strong></td>
+<td>Not needed / ATT prompt implementation</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Data Safety (Google Play)</strong></td>
+<td>Required form completion</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>App Privacy (Apple)</strong></td>
+<td>Required privacy labels</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Account Deletion</strong></td>
+<td>Required (App Store policy since 2022)</td>
+<td>Must be implemented</td>
+</tr>
+<tr>
+<td><strong>Content Moderation</strong></td>
+<td>Not needed / Manual review / Automated</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>User-Generated Content Policy</strong></td>
+<td>Not applicable / Terms + reporting</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Export Compliance</strong></td>
+<td>Standard / Uses encryption (requires declaration)</td>
+<td>Declaration in store</td>
+</tr>
+<tr>
+<td><strong>Intellectual Property</strong></td>
+<td>Client owns all / Shared / Developer retains framework</td>
+<td>Define in contract</td>
+</tr>
+<tr>
+<td><strong>NDA</strong></td>
+<td>Not needed / Mutual NDA</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Source Code Escrow</strong></td>
+<td>Not needed / Yes</td>
+<td>$500–$2,000/year</td>
+</tr>
+<tr>
+<td><strong>Open Source Licenses</strong></td>
+<td>Audit required / Not important</td>
+<td>License audit $200–$500</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="common-app-store-rejection-reasons">Common App Store Rejection Reasons:</h3><button class="section-scope-btn" data-sec-id="sec_126">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>How to Avoid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bugs and crashes</strong></td>
+<td>Thorough testing on real devices</td>
+</tr>
+<tr>
+<td><strong>Broken links</strong></td>
+<td>Test all URLs before submission</td>
+</tr>
+<tr>
+<td><strong>Guideline 2.1 - Performance</strong></td>
+<td>No placeholder content, all features must work</td>
+</tr>
+<tr>
+<td><strong>Guideline 4.2 - Minimum Functionality</strong></td>
+<td>App must provide sufficient value (no thin wrappers)</td>
+</tr>
+<tr>
+<td><strong>Guideline 5.1.1 - Data Collection</strong></td>
+<td>Proper privacy policy, data handling disclosure</td>
+</tr>
+<tr>
+<td><strong>Guideline 3.1.1 - In-App Purchase</strong></td>
+<td>Digital goods must use IAP (Apple/Google)</td>
+</tr>
+<tr>
+<td><strong>Missing account deletion</strong></td>
+<td>Implement account deletion feature</td>
+</tr>
+<tr>
+<td><strong>Insufficient metadata</strong></td>
+<td>Complete descriptions, screenshots, privacy info</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="20-timeline-milestones-release">20. Timeline, Milestones &amp; Release</h2><button class="section-scope-btn" data-sec-id="sec_127">+ Add to Scope</button></div>
+<p>Mobile app timelines are typically longer than website timelines.</p>
+<div class="section-scope-header"><h3 id="parameters_39">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_128">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Timeline</strong></td>
+<td>1–2 months / 2–4 months / 4–6 months / 6–12 months / 12+ months</td>
+<td>Based on scope</td>
+</tr>
+<tr>
+<td><strong>Discovery &amp; Planning</strong></td>
+<td>1–2 weeks / 2–4 weeks</td>
+<td>Requirements, architecture</td>
+</tr>
+<tr>
+<td><strong>UI/UX Design</strong></td>
+<td>2–4 weeks / 4–8 weeks</td>
+<td>Wireframes + Mockups + Prototype</td>
+</tr>
+<tr>
+<td><strong>Development (MVP)</strong></td>
+<td>4–8 weeks / 8–16 weeks</td>
+<td>Core features</td>
+</tr>
+<tr>
+<td><strong>Development (Full)</strong></td>
+<td>8–16 weeks / 16–32 weeks</td>
+<td>All features</td>
+</tr>
+<tr>
+<td><strong>Backend Development</strong></td>
+<td>2–8 weeks / 8–16 weeks</td>
+<td>API, database, admin panel</td>
+</tr>
+<tr>
+<td><strong>Testing &amp; QA</strong></td>
+<td>2–4 weeks / 4–8 weeks</td>
+<td>All testing types</td>
+</tr>
+<tr>
+<td><strong>Beta Testing</strong></td>
+<td>1–2 weeks / 2–4 weeks</td>
+<td>TestFlight / Internal track</td>
+</tr>
+<tr>
+<td><strong>App Store Submission</strong></td>
+<td>1–2 weeks</td>
+<td>Review + potential rejections</td>
+</tr>
+<tr>
+<td><strong>Post-Launch Monitoring</strong></td>
+<td>2–4 weeks</td>
+<td>Bug fixes, performance tuning</td>
+</tr>
+<tr>
+<td><strong>Release Strategy</strong></td>
+<td>MVP → Full / Soft launch → Full / Big bang</td>
+<td>MVP recommended</td>
+</tr>
+<tr>
+<td><strong>MVP Scope</strong></td>
+<td>Core 3–5 features</td>
+<td>Launch fast, iterate</td>
+</tr>
+<tr>
+<td><strong>Feature Releases</strong></td>
+<td>Monthly / Bi-weekly / Sprint-based</td>
+<td>Agile approach</td>
+</tr>
+<tr>
+<td><strong>Payment Schedule</strong></td>
+<td>40/30/30 / 30/30/20/20 / Milestone-based</td>
+<td>Milestone-based recommended</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="recommended-milestone-structure_1">Recommended Milestone Structure:</h3><button class="section-scope-btn" data-sec-id="sec_129">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Deliverable</th>
+<th>Payment %</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Kickoff</strong></td>
+<td>Requirements doc, architecture, tech stack decision</td>
+<td>15%</td>
+<td>Week 1–2</td>
+</tr>
+<tr>
+<td><strong>Design Complete</strong></td>
+<td>All screens designed in Figma, prototype approved</td>
+<td>20%</td>
+<td>Week 3–6</td>
+</tr>
+<tr>
+<td><strong>Backend API Ready</strong></td>
+<td>API endpoints, database, authentication</td>
+<td>15%</td>
+<td>Week 4–8</td>
+</tr>
+<tr>
+<td><strong>App v1 (Alpha)</strong></td>
+<td>Core features working on staging</td>
+<td>20%</td>
+<td>Week 6–12</td>
+</tr>
+<tr>
+<td><strong>App v2 (Beta)</strong></td>
+<td>All features, bug fixes, beta testing</td>
+<td>15%</td>
+<td>Week 10–16</td>
+</tr>
+<tr>
+<td><strong>Store Submission</strong></td>
+<td>App approved and live on stores</td>
+<td>10%</td>
+<td>Week 14–18</td>
+</tr>
+<tr>
+<td><strong>Post-Launch Support</strong></td>
+<td>30-day monitoring, bug fixes, optimization</td>
+<td>5%</td>
+<td>Week 18–22</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="21-communication-project-management">21. Communication &amp; Project Management</h2><button class="section-scope-btn" data-sec-id="sec_130">+ Add to Scope</button></div>
+<p>Managing client communication throughout access development.</p>
+<div class="section-scope-header"><h3 id="parameters_40">Parameters:</h3><button class="section-scope-btn" data-sec-id="sec_131">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Management Tool</strong></td>
+<td>Trello / Jira / Asana / Notion / Linear / ClickUp</td>
+<td>Choose one</td>
+</tr>
+<tr>
+<td><strong>Sprint Duration</strong></td>
+<td>1 week / 2 weeks / 3 weeks</td>
+<td>2 weeks is standard</td>
+</tr>
+<tr>
+<td><strong>Communication Channel</strong></td>
+<td>Email / Slack / WhatsApp / Microsoft Teams</td>
+<td>Define primary</td>
+</tr>
+<tr>
+<td><strong>Status Updates</strong></td>
+<td>Daily / Weekly / Per sprint</td>
+<td>Weekly minimum</td>
+</tr>
+<tr>
+<td><strong>Demo/Review Meetings</strong></td>
+<td>Per milestone / Per sprint / Weekly</td>
+<td>Sprint demos recommended</td>
+</tr>
+<tr>
+<td><strong>Build Sharing</strong></td>
+<td>TestFlight / Firebase App Distribution / Direct APK</td>
+<td>Regular test builds</td>
+</tr>
+<tr>
+<td><strong>Bug Reporting Tool</strong></td>
+<td>Email / Jira / Linear / Notion / Custom form</td>
+<td>Structured reporting</td>
+</tr>
+<tr>
+<td><strong>Design Review</strong></td>
+<td>Figma comments / Meetings / Annotated screenshots</td>
+<td>Define process</td>
+</tr>
+<tr>
+<td><strong>Code Repository Access</strong></td>
+<td>No access / Read-only / Full access</td>
+<td>Depends on contract</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>None / API docs / User manual / Technical architecture</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Handover</strong></td>
+<td>Source code only / Code + docs + training / Full handover</td>
+<td>Define scope</td>
+</tr>
+<tr>
+<td><strong>Training</strong></td>
+<td>None / 1–2 hours / Full training program</td>
+<td>$100–$500/hour</td>
+</tr>
+<tr>
+<td><strong>Point of Contact</strong></td>
+<td>Single / Multiple stakeholders</td>
+<td>Single preferred</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="section-scope-header"><h2 id="quick-price-estimation-formula_1">📊 Quick Price Estimation Formula</h2><button class="section-scope-btn" data-sec-id="sec_132">+ Add to Scope</button></div>
+<pre><code>Total App Price = 
+    Platform Cost Multiplier
+  × (Design Cost + Development Cost + Backend Cost)
+  + App Store Setup Fee
+  + Testing &amp; QA (15–25% of dev cost)
+  + Third-Party Service Setup
+  + Project Management (5–10% of total)
+  + Contingency Buffer (15–25% of total)
+</code></pre>
+<div class="section-scope-header"><h3 id="platform-cost-multipliers">Platform Cost Multipliers:</h3><button class="section-scope-btn" data-sec-id="sec_133">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single platform (iOS or Android)</td>
+<td>1.0x</td>
+</tr>
+<tr>
+<td>Cross-platform (Flutter/React Native)</td>
+<td>1.3–1.5x</td>
+</tr>
+<tr>
+<td>Both native (Swift + Kotlin)</td>
+<td>1.8–2.0x</td>
+</tr>
+<tr>
+<td>Native + Web app</td>
+<td>2.2–2.5x</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="app-complexity-pricing-guide">App Complexity &amp; Pricing Guide:</h3><button class="section-scope-btn" data-sec-id="sec_134">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Complexity</th>
+<th>Screens</th>
+<th>Features</th>
+<th>Timeline</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Simple</strong></td>
+<td>5–10</td>
+<td>Auth, list/detail, basic CRUD</td>
+<td>1–2 months</td>
+<td>$3,000–$15,000</td>
+</tr>
+<tr>
+<td><strong>Medium</strong></td>
+<td>10–25</td>
+<td>Social features, payments, notifications</td>
+<td>2–4 months</td>
+<td>$15,000–$50,000</td>
+</tr>
+<tr>
+<td><strong>Complex</strong></td>
+<td>25–50</td>
+<td>Real-time, maps, chat, admin panel</td>
+<td>4–8 months</td>
+<td>$50,000–$150,000</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>50+</td>
+<td>Multi-tenant, offline, integrations, security</td>
+<td>8–18 months</td>
+<td>$150,000–$500,000+</td>
+</tr>
+</tbody>
+</table>
+<div class="section-scope-header"><h3 id="hourly-rate-reference_1">Hourly Rate Reference:</h3><button class="section-scope-btn" data-sec-id="sec_135">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Developer Level</th>
+<th>Hourly Rate (USD)</th>
+<th>Hourly Rate (INR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Junior</td>
+<td>$15–$30</td>
+<td>₹500–₹1,000</td>
+</tr>
+<tr>
+<td>Mid-Level</td>
+<td>$30–$60</td>
+<td>₹1,000–₹2,500</td>
+</tr>
+<tr>
+<td>Senior</td>
+<td>$60–$120</td>
+<td>₹2,500–₹5,000</td>
+</tr>
+<tr>
+<td>Expert/Agency</td>
+<td>$120–$250+</td>
+<td>₹5,000–₹15,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>This guide should be updated as new technologies and pricing standards emerge. Last updated: March 2026.</em></p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <p>&copy; 2026 Client Requirement Analysis • Interactive Web App</p>
+    </footer>
+  </div>
+
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/proposal.js"></script>
+  <script src="../assets/js/assistant.js"></script>
+  <script src="../assets/js/ai-engine.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/export.js"></script>
+</body>
+</html>

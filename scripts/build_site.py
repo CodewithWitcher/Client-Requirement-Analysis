@@ -85,10 +85,19 @@ def get_file_type_info(ext: str):
 
 
 def get_document_topics(file_path: Path):
-    """Classify document by domain topic (web, mobile, pricing)."""
+    """Classify document by domain topic (web, mobile, pricing, combined)."""
     rel_str = str(file_path).lower()
     topics = []
-    
+
+    # Combined documents (merged web + app into one file)
+    if "combined" in rel_str or str(file_path.parent).lower().endswith("combined"):
+        topics.append("combined")
+        topics.append("web")
+        topics.append("mobile")
+        if "pricing" in rel_str or "calculator" in rel_str or "proposal" in rel_str or "cost" in rel_str:
+            topics.append("pricing")
+        return topics
+
     if "website" in rel_str or "web" in rel_str:
         topics.append("web")
     if "application" in rel_str or "mobile" in rel_str or "app" in rel_str:
@@ -457,26 +466,32 @@ def render_doc_card_html(doc: dict, is_page_dir: bool = False) -> str:
 
 def generate_index_html(documents: list) -> str:
     """Build home index dashboard page (docs/index.html) with Smart Assistant Wizard, AI Analyzer, and API Key Config."""
-    
-    calc_docs = [d for d in documents if d['category'] == 'xlsx']
-    proposal_docs = [d for d in documents if d['category'] == 'docx' or 'pricing-parameters' in d['slug']]
-    questionnaire_docs = [d for d in documents if 'questionnaire' in d['slug']]
-    checklist_docs = [d for d in documents if 'checklist' in d['slug']]
-    guide_docs = [d for d in documents if d not in calc_docs and d not in proposal_docs and d not in questionnaire_docs and d not in checklist_docs]
 
+    # Combined full-stack documents get their own bucket
+    combined_docs = [d for d in documents if 'combined' in d['topics']]
+    non_combined = [d for d in documents if 'combined' not in d['topics']]
+
+    calc_docs = [d for d in non_combined if d['category'] == 'xlsx']
+    proposal_docs = [d for d in non_combined if d['category'] == 'docx' or 'pricing-parameters' in d['slug']]
+    questionnaire_docs = [d for d in non_combined if 'questionnaire' in d['slug']]
+    checklist_docs = [d for d in non_combined if 'checklist' in d['slug']]
+    guide_docs = [d for d in non_combined if d not in calc_docs and d not in proposal_docs and d not in questionnaire_docs and d not in checklist_docs]
+
+    combined_cards_html = "".join([render_doc_card_html(d) for d in combined_docs])
     calc_cards_html = "".join([render_doc_card_html(d) for d in calc_docs])
     proposal_cards_html = "".join([render_doc_card_html(d) for d in proposal_docs])
     quest_cards_html = "".join([render_doc_card_html(d) for d in questionnaire_docs])
     check_cards_html = "".join([render_doc_card_html(d) for d in checklist_docs])
     guide_cards_html = "".join([render_doc_card_html(d) for d in guide_docs])
+    combined_count = len(combined_docs)
 
     md_count = sum(1 for d in documents if d['category'] == 'md')
     docx_count = sum(1 for d in documents if d['category'] == 'docx')
     xlsx_count = sum(1 for d in documents if d['category'] == 'xlsx')
 
-    web_count = sum(1 for d in documents if 'web' in d['topics'])
-    mobile_count = sum(1 for d in documents if 'mobile' in d['topics'])
-    pricing_count = sum(1 for d in documents if 'pricing' in d['topics'])
+    web_count = sum(1 for d in non_combined if 'web' in d['topics'])
+    mobile_count = sum(1 for d in non_combined if 'mobile' in d['topics'])
+    pricing_count = sum(1 for d in non_combined if 'pricing' in d['topics'])
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -540,6 +555,7 @@ def generate_index_html(documents: list) -> str:
             <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects ({web_count})</button>
             <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps ({mobile_count})</button>
             <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & Calculators ({pricing_count})</button>
+            <button class="filter-btn topic-filter" data-topic="combined" style="background: linear-gradient(135deg, rgba(30,58,95,0.15), rgba(30,61,47,0.15)); border-color: #38bdf8; color: #38bdf8;">⚡ Full-Stack Combined ({combined_count})</button>
           </div>
         </div>
 
@@ -554,6 +570,20 @@ def generate_index_html(documents: list) -> str:
         </div>
       </div>
     </div>
+
+    <!-- BUCKET: Full-Stack Combined Documents -->
+    <section class="bucket-section combined-bucket">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: linear-gradient(135deg, rgba(30,58,95,0.15), rgba(30,61,47,0.15)); color: #38bdf8;">⚡</div>
+        <div>
+          <h2 class="bucket-title">Full-Stack Combined Documents <span style="font-size: 0.7rem; font-weight: 600; background: linear-gradient(135deg, #1e3a5f, #1e3d2f); color: #fff; padding: 2px 10px; border-radius: 99px; margin-left: 0.5rem; vertical-align: middle; letter-spacing: 0.08em;">WEB + APP</span></h2>
+          <p class="bucket-desc">Unified documents combining both Website and Mobile Application content — ideal for full-stack client engagements requiring a single comprehensive resource.</p>
+        </div>
+      </div>
+      <div class="card-grid">
+        {combined_cards_html}
+      </div>
+    </section>
 
     <!-- BUCKET 1: Pricing Calculators Container Box -->
     <section class="bucket-section">
@@ -1429,6 +1459,14 @@ def main():
                 if "docs" in file_path.parts and ("pages" in file_path.parts or "files" in file_path.parts):
                     continue
                 discovered_files.append(file_path)
+
+    # Also discover combined/ folder explicitly (in case not picked up above)
+    combined_dir = ROOT_DIR / "combined"
+    if combined_dir.exists():
+        for file_path in combined_dir.iterdir():
+            if file_path.suffix.lower() in SUPPORTED_EXTENSIONS and not file_path.name.startswith("."):
+                if file_path not in discovered_files:
+                    discovered_files.append(file_path)
 
     discovered_files.sort(key=lambda p: str(p).lower())
     print(f"\n[DISCOVERY] Found {len(discovered_files)} total document(s) in repository:\n")
