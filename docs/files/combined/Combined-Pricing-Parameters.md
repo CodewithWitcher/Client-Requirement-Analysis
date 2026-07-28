@@ -1,16 +1,8 @@
-# Combined Web + App Pricing Parameters
+# Pricing Parameters Reference
 
-> Unified pricing parameters reference covering all line items, cost factors, and configurable variables for both website and mobile application engagements.
+> Unified pricing parameters sheet covering all cost line items, complexity multipliers, and estimation formulas for both Website and Mobile Application engagements.
 
-> **Scope:** This document covers both **Web / Website Projects** and **Mobile Application Projects**. Use the relevant sections for your client's project type.
-
----
-
-## 🌐 Part 1: Website / Web Application
-
----
-
-> **Purpose:** A condensed pricing reference to quickly calculate project costs. Use after the Client Questionnaire to map requirements to prices.
+> **Covers:** 🌐 Website / Web App &nbsp;|&nbsp; 📱 Mobile Application
 
 ---
 
@@ -25,7 +17,19 @@
 
 ---
 
-## 1. Domain & SSL
+**📱 Application Additional:**
+
+1. Determine platform(s) — Android, iOS, or Both
+2. Choose development approach — Native, Flutter, React Native
+3. Go through each category and check applicable items
+4. Add up base costs + applicable add-ons
+5. Apply platform and complexity multipliers
+6. Add maintenance costs
+7. Present the final quote
+
+---
+
+## 🌐 1. Domain & SSL
 
 | Parameter | Options | Cost (INR) | Cost (USD) |
 |-----------|---------|------------|------------|
@@ -41,7 +45,9 @@
 
 ---
 
-## 2. Hosting
+---
+
+## 🌐 2. Hosting
 
 | Hosting Type | Monthly (INR) | Annual (INR) | Monthly (USD) | Best For |
 |-------------|---------------|--------------|---------------|----------|
@@ -66,7 +72,9 @@
 
 ---
 
-## 3. Database
+---
+
+## 🌐 3. Database
 
 | Database Service | Cost (INR/mo) | Cost (USD/mo) | Notes |
 |-----------------|---------------|---------------|-------|
@@ -93,7 +101,11 @@
 
 ---
 
+---
+
 ## 4. Design & UI/UX
+
+### 🌐 Website
 
 | Design Service | Cost (INR) | Cost (USD) | Deliverable |
 |---------------|------------|------------|-------------|
@@ -119,7 +131,41 @@
 
 ---
 
-## 5. Development — Per Page/Component Pricing
+### 📱 Mobile Application
+
+### Per-Screen Pricing
+
+| Screen Complexity | Design Cost (INR) | Design Cost (USD) | Dev Cost (INR) | Dev Cost (USD) |
+|------------------|-------------------|-------------------|----------------|----------------|
+| Simple Screen | ₹1,500–3,000 | $18–35 | ₹3,000–6,000 | $35–70 |
+| Medium Screen | ₹3,000–6,000 | $35–70 | ₹6,000–12,000 | $70–140 |
+| Complex Screen | ₹6,000–12,000 | $70–140 | ₹12,000–25,000 | $140–300 |
+
+> **Simple** = Static content, list, profile page
+> **Medium** = Forms, interactive elements, API data
+> **Complex** = Maps, charts, real-time data, custom components
+
+### Design Services
+
+| Service | Cost (INR) | Cost (USD) |
+|---------|------------|------------|
+| App Icon Design | ₹2,000–5,000 | $25–60 |
+| Splash Screen | ₹1,000–3,000 | $12–35 |
+| Onboarding Screens (3-5 screens) | ₹5,000–10,000 | $60–120 |
+| Complete UI Kit (10-20 screens) | ₹20,000–50,000 | $240–600 |
+| Complete UI Kit (20-50 screens) | ₹40,000–1,00,000 | $480–1,200 |
+| Wireframes (per screen) | ₹1,000–2,500 | $12–30 |
+| Interactive Prototype | ₹8,000–20,000 | $100–240 |
+| Dark Mode Design | ₹8,000–20,000 | $100–240 |
+| Tablet Layout Design | ₹10,000–25,000 | $120–300 |
+| Custom Animations (Lottie) | ₹3,000–8,000 per animation | $35–100 per animation |
+| Design System/Component Library | ₹15,000–30,000 | $180–360 |
+
+---
+
+---
+
+## 🌐 5. Development — Per Page/Component Pricing
 
 | Page / Component | Simple (INR) | Medium (INR) | Complex (INR) | Simple (USD) | Medium (USD) | Complex (USD) |
 |-----------------|-------------|-------------|--------------|-------------|-------------|--------------|
@@ -149,7 +195,9 @@
 
 ---
 
-## 6. Feature Pricing
+---
+
+## 🌐 6. Feature Pricing
 
 | Feature | Cost (INR) | Cost (USD) | Time Estimate |
 |---------|------------|------------|---------------|
@@ -190,7 +238,9 @@
 
 ---
 
-## 7. E-Commerce Specific
+---
+
+## 🌐 7. E-Commerce Specific
 
 | E-Commerce Feature | Cost (INR) | Cost (USD) |
 |--------------------|------------|------------|
@@ -214,7 +264,11 @@
 
 ---
 
+---
+
 ## 8. Payment Gateway Integration
+
+### 🌐 Website
 
 | Gateway | Integration Cost (INR) | Integration Cost (USD) | Transaction Fee |
 |---------|----------------------|----------------------|-----------------|
@@ -230,7 +284,36 @@
 
 ---
 
-## 9. SEO & Analytics
+### 📱 Mobile Application
+
+| Gateway | Integration Cost (INR) | Integration Cost (USD) | Transaction Fee | Notes |
+|---------|----------------------|----------------------|-----------------|-------|
+| Razorpay | ₹8,000–15,000 | $100–180 | 2% per txn | India popular |
+| Stripe | ₹8,000–15,000 | $100–180 | 2.9% + 30¢ | Global |
+| PayPal | ₹5,000–10,000 | $60–120 | 2.9% + fixed | International |
+| PhonePe/Paytm | ₹5,000–12,000 | $60–140 | 1–2% | India UPI |
+| In-App Purchase (iOS) | ₹10,000–20,000 | $120–240 | 15-30% Apple fee | Required for digital goods |
+| In-App Purchase (Android) | ₹10,000–20,000 | $120–240 | 15-30% Google fee | Required for digital goods |
+| Subscription (RevenueCat) | ₹10,000–20,000 | $120–240 | $0–$0.012/txn | Cross-platform |
+| Wallet/Credits System | ₹10,000–25,000 | $120–300 | N/A | In-app currency |
+| Multi-currency | ₹5,000–15,000 | $60–180 | Varies | Add-on |
+
+### Monetization Setup
+
+| Model | Setup Cost (INR) | Setup Cost (USD) |
+|-------|-----------------|-----------------|
+| Free (No monetization) | ₹0 | $0 |
+| Freemium | ₹10,000–20,000 | $120–240 |
+| Subscription (Apple + Google) | ₹15,000–35,000 | $180–420 |
+| Ads (AdMob) | ₹5,000–10,000 | $60–120 |
+| In-App Purchases | ₹10,000–20,000 | $120–240 |
+| Commission-based | ₹15,000–30,000 | $180–360 |
+
+---
+
+---
+
+## 🌐 9. SEO & Analytics
 
 | Service | Cost (INR) | Cost (USD) |
 |---------|------------|------------|
@@ -247,7 +330,9 @@
 
 ---
 
-## 10. Security
+---
+
+## 🌐 10. Security
 
 | Security Feature | Cost (INR) | Cost (USD) |
 |-----------------|------------|------------|
@@ -261,6 +346,8 @@
 | Security Audit | ₹10,000–30,000 | $120–360 |
 | GDPR Compliance Implementation | ₹8,000–20,000 | $100–240 |
 | Cookie Consent Banner | ₹2,000–5,000 | $25–60 |
+
+---
 
 ---
 
@@ -283,7 +370,25 @@
 
 ---
 
-## 12. CMS Setup
+**📱 Application Additional:**
+
+| Social Media SDK (Facebook, Twitter) | ₹3,000–8,000 | $35–100 |
+| WhatsApp API | ₹5,000–15,000 | $60–180 |
+| SMS Service (Twilio/MSG91) | ₹5,000–12,000 | $60–140 |
+| Email Service (SendGrid/SES) | ₹5,000–10,000 | $60–120 |
+| Maps SDK (Google Maps/Mapbox) | ₹8,000–15,000 | $100–180 |
+| Places/Autocomplete API | ₹5,000–10,000 | $60–120 |
+| Cloud Storage (S3/Firebase) | ₹5,000–10,000 | $60–120 |
+| CRM (HubSpot/Salesforce) | ₹10,000–25,000 | $120–300 |
+| Logistics API (Shiprocket/Delhivery) | ₹10,000–25,000 | $120–300 |
+| Video SDK (Agora/Twilio) | ₹15,000–35,000 | $180–420 |
+| AI/ML API (OpenAI, Google ML) | ₹10,000–30,000 | $120–360 |
+| Translation API | ₹5,000–10,000 | $60–120 |
+| Calendar API | ₹5,000–10,000 | $60–120 |
+
+---
+
+## 🌐 12. CMS Setup
 
 | CMS | Setup Cost (INR) | Setup Cost (USD) | Notes |
 |-----|-----------------|-----------------|-------|
@@ -297,7 +402,9 @@
 
 ---
 
-## 13. Content Services
+---
+
+## 🌐 13. Content Services
 
 | Service | Cost (INR) | Cost (USD) |
 |---------|------------|------------|
@@ -311,7 +418,11 @@
 
 ---
 
+---
+
 ## 14. Maintenance & Support Plans
+
+**🌐 Website**
 
 | Plan | Monthly (INR) | Monthly (USD) | Includes |
 |------|---------------|---------------|----------|
@@ -323,7 +434,34 @@
 
 ---
 
-## 15. Project Complexity Multipliers
+---
+
+**📱 Application**
+
+| Plan | Monthly (INR) | Monthly (USD) | Includes |
+|------|---------------|---------------|----------|
+| **Basic** | ₹5,000–8,000 | $60–100 | Bug fixes, crash monitoring, 3 hrs support |
+| **Standard** | ₹8,000–15,000 | $100–180 | Basic + OS updates, 5 hrs support, monthly report |
+| **Premium** | ₹15,000–30,000 | $180–360 | Standard + feature updates, 10 hrs, priority support |
+| **Enterprise** | ₹30,000–60,000 | $360–720 | Premium + 24/7, SLA, dedicated manager, hotfixes |
+| **On-Demand** | ₹1,000–2,000/hr | $12–25/hr | Pay per hour |
+
+### App Update Costs
+
+| Update Type | Cost (INR) | Cost (USD) |
+|-------------|------------|------------|
+| Bug Fix Release | ₹3,000–8,000 | $35–100 |
+| Minor Feature Update | ₹10,000–30,000 | $120–360 |
+| Major Version Update | ₹30,000–1,00,000 | $360–1,200 |
+| OS Compatibility Update | ₹5,000–15,000 | $60–180 |
+| Design Refresh | ₹20,000–50,000 | $240–600 |
+| App Store Compliance Fix | ₹5,000–15,000 | $60–180 |
+
+---
+
+---
+
+## 🌐 15. Project Complexity Multipliers
 
 | Project Type | Base Multiplier | Example |
 |-------------|----------------|---------|
@@ -339,7 +477,11 @@
 
 ---
 
+---
+
 ## Quick Estimation Formula
+
+### 🌐 Website
 
 ```
 TOTAL PROJECT COST = 
@@ -358,6 +500,30 @@ TOTAL PROJECT COST =
 
 ---
 
+### 📱 Mobile Application
+
+```
+TOTAL APP COST = 
+  (Sum of Screen Costs — Design + Development) 
+  + (Sum of Feature Costs) 
+  + (Auth System) 
+  + (Backend & API) 
+  + (Database Setup) 
+  + (Push Notifications) 
+  + (Payment Integration — if applicable) 
+  + (Third-Party Integrations) 
+  + (Security Implementation) 
+  + (Testing & QA — 15-25% of dev cost) 
+  + (Analytics Setup) 
+  × (Platform Multiplier) 
+  + (App Store Accounts + Submission) 
+  + (20% Buffer for unforeseen tasks)
+```
+
+---
+
+---
+
 ## Hourly Rate Reference
 
 | Developer Level | Rate (INR/hr) | Rate (USD/hr) |
@@ -371,7 +537,20 @@ TOTAL PROJECT COST =
 
 ---
 
+**📱 Application Additional:**
+
+| Junior Mobile Dev | ₹500–1,000 | $6–12 |
+| Mid-Level Mobile Dev | ₹1,000–2,000 | $12–25 |
+| Senior Mobile Dev | ₹2,000–4,000 | $25–50 |
+| Lead/Architect | ₹4,000–6,000 | $50–72 |
+| Freelancer (Average India) | ₹1,000–2,500 | $12–30 |
+| Agency Rate (India) | ₹2,000–5,000 | $25–60 |
+
+---
+
 ## Sample Project Estimates
+
+### 🌐 Website
 
 ### Example 1: Simple Business Website
 | Item | Cost (INR) |
@@ -425,29 +604,69 @@ TOTAL PROJECT COST =
 
 > **Remember:** These are reference prices. Adjust based on your experience, market, client budget, project urgency, and complexity.
 
+### 📱 Mobile Application
+
+### Example 1: Simple Business App (Android + iOS via Flutter)
+| Item | Cost (INR) |
+|------|------------|
+| Account Setup (Google + Apple) | ₹10,100 |
+| UI Design (12 screens) | ₹30,000 |
+| Development (12 screens) | ₹72,000 |
+| Auth (Email + Google) | ₹12,000 |
+| Push Notifications | ₹8,000 |
+| Backend (Firebase) | ₹15,000 |
+| Analytics + Crashlytics | ₹6,000 |
+| Testing (15%) | ₹21,000 |
+| App Store Submission | ₹10,000 |
+| × 1.3 Platform Multiplier | — |
+| **Total** | **₹1,80,000–2,40,000** |
+
+### Example 2: E-Commerce App (Both Platforms)
+| Item | Cost (INR) |
+|------|------------|
+| Account Setup | ₹10,100 |
+| UI/UX Design (30 screens) | ₹75,000 |
+| Development (30 screens) | ₹2,50,000 |
+| Auth System (Complete) | ₹40,000 |
+| Product Catalog + Cart + Checkout | ₹60,000 |
+| Payment (Razorpay + In-App) | ₹25,000 |
+| Backend + Admin Panel | ₹80,000 |
+| Push Notifications (Advanced) | ₹15,000 |
+| Order Tracking + History | ₹30,000 |
+| Reviews + Wishlist | ₹20,000 |
+| Analytics + Monitoring | ₹15,000 |
+| Security | ₹20,000 |
+| Testing (20%) | ₹1,00,000 |
+| App Store Submission + ASO | ₹25,000 |
+| **Total** | **₹5,50,000–7,50,000** |
+
+### Example 3: On-Demand Service App (Uber-like)
+| Item | Cost (INR) |
+|------|------------|
+| Account Setup | ₹10,100 |
+| UI/UX Design (50+ screens, 3 apps) | ₹1,50,000 |
+| Customer App Development | ₹3,00,000 |
+| Driver/Provider App Development | ₹2,50,000 |
+| Admin Dashboard (Web) | ₹1,00,000 |
+| Auth (Complete) | ₹50,000 |
+| Real-time Location + Maps + Navigation | ₹80,000 |
+| Chat + Calling | ₹60,000 |
+| Payment System | ₹40,000 |
+| Push Notifications (Advanced) | ₹20,000 |
+| Backend + APIs (Custom) | ₹1,50,000 |
+| Analytics + Monitoring | ₹25,000 |
+| Security | ₹35,000 |
+| Testing (20%) | ₹2,00,000 |
+| App Store Submission | ₹25,000 |
+| **Total** | **₹12,00,000–18,00,000** |
+
 ---
 
-## 📱 Part 2: Mobile Application
+> **Remember:** These are reference prices. Adjust based on your experience, market conditions, client budget, project urgency, and complexity.
 
 ---
 
-> **Purpose:** A condensed pricing reference to quickly calculate mobile app development costs. Use after the Client Questionnaire to map requirements to prices.
-
----
-
-## How to Use This Sheet
-
-1. Determine platform(s) — Android, iOS, or Both
-2. Choose development approach — Native, Flutter, React Native
-3. Go through each category and check applicable items
-4. Add up base costs + applicable add-ons
-5. Apply platform and complexity multipliers
-6. Add maintenance costs
-7. Present the final quote
-
----
-
-## 1. Platform & Development Approach
+## 📱 1. Platform & Development Approach
 
 ### Platform Cost Multipliers
 
@@ -473,7 +692,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 2. App Store & Deployment
+---
+
+## 📱 2. App Store & Deployment
 
 | Item | Cost (INR) | Cost (USD) | Frequency |
 |------|------------|------------|-----------|
@@ -490,39 +711,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 3. Design & UI/UX
-
-### Per-Screen Pricing
-
-| Screen Complexity | Design Cost (INR) | Design Cost (USD) | Dev Cost (INR) | Dev Cost (USD) |
-|------------------|-------------------|-------------------|----------------|----------------|
-| Simple Screen | ₹1,500–3,000 | $18–35 | ₹3,000–6,000 | $35–70 |
-| Medium Screen | ₹3,000–6,000 | $35–70 | ₹6,000–12,000 | $70–140 |
-| Complex Screen | ₹6,000–12,000 | $70–140 | ₹12,000–25,000 | $140–300 |
-
-> **Simple** = Static content, list, profile page
-> **Medium** = Forms, interactive elements, API data
-> **Complex** = Maps, charts, real-time data, custom components
-
-### Design Services
-
-| Service | Cost (INR) | Cost (USD) |
-|---------|------------|------------|
-| App Icon Design | ₹2,000–5,000 | $25–60 |
-| Splash Screen | ₹1,000–3,000 | $12–35 |
-| Onboarding Screens (3-5 screens) | ₹5,000–10,000 | $60–120 |
-| Complete UI Kit (10-20 screens) | ₹20,000–50,000 | $240–600 |
-| Complete UI Kit (20-50 screens) | ₹40,000–1,00,000 | $480–1,200 |
-| Wireframes (per screen) | ₹1,000–2,500 | $12–30 |
-| Interactive Prototype | ₹8,000–20,000 | $100–240 |
-| Dark Mode Design | ₹8,000–20,000 | $100–240 |
-| Tablet Layout Design | ₹10,000–25,000 | $120–300 |
-| Custom Animations (Lottie) | ₹3,000–8,000 per animation | $35–100 per animation |
-| Design System/Component Library | ₹15,000–30,000 | $180–360 |
-
 ---
 
-## 4. Authentication & User Management
+## 📱 4. Authentication & User Management
 
 | Feature | Cost (INR) | Cost (USD) | Time |
 |---------|------------|------------|------|
@@ -543,7 +734,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 5. Core Features Pricing
+---
+
+## 📱 5. Core Features Pricing
 
 | Feature | Cost (INR) | Cost (USD) | Time |
 |---------|------------|------------|------|
@@ -604,7 +797,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 6. Backend & API
+---
+
+## 📱 6. Backend & API
 
 | Service | Cost (INR) | Cost (USD) | Notes |
 |---------|------------|------------|-------|
@@ -635,7 +830,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 7. Database & Storage
+---
+
+## 📱 7. Database & Storage
 
 | Database | Setup (INR) | Monthly (INR) | Setup (USD) | Monthly (USD) |
 |----------|------------|---------------|-------------|---------------|
@@ -661,7 +858,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 8. Push Notification Services
+---
+
+## 📱 8. Push Notification Services
 
 | Service | Free Tier | Paid (INR/mo) | Paid (USD/mo) |
 |---------|-----------|---------------|---------------|
@@ -672,34 +871,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 9. Payment Integration
-
-| Gateway | Integration Cost (INR) | Integration Cost (USD) | Transaction Fee | Notes |
-|---------|----------------------|----------------------|-----------------|-------|
-| Razorpay | ₹8,000–15,000 | $100–180 | 2% per txn | India popular |
-| Stripe | ₹8,000–15,000 | $100–180 | 2.9% + 30¢ | Global |
-| PayPal | ₹5,000–10,000 | $60–120 | 2.9% + fixed | International |
-| PhonePe/Paytm | ₹5,000–12,000 | $60–140 | 1–2% | India UPI |
-| In-App Purchase (iOS) | ₹10,000–20,000 | $120–240 | 15-30% Apple fee | Required for digital goods |
-| In-App Purchase (Android) | ₹10,000–20,000 | $120–240 | 15-30% Google fee | Required for digital goods |
-| Subscription (RevenueCat) | ₹10,000–20,000 | $120–240 | $0–$0.012/txn | Cross-platform |
-| Wallet/Credits System | ₹10,000–25,000 | $120–300 | N/A | In-app currency |
-| Multi-currency | ₹5,000–15,000 | $60–180 | Varies | Add-on |
-
-### Monetization Setup
-
-| Model | Setup Cost (INR) | Setup Cost (USD) |
-|-------|-----------------|-----------------|
-| Free (No monetization) | ₹0 | $0 |
-| Freemium | ₹10,000–20,000 | $120–240 |
-| Subscription (Apple + Google) | ₹15,000–35,000 | $180–420 |
-| Ads (AdMob) | ₹5,000–10,000 | $60–120 |
-| In-App Purchases | ₹10,000–20,000 | $120–240 |
-| Commission-based | ₹15,000–30,000 | $180–360 |
-
 ---
 
-## 10. Security Features
+## 📱 10. Security Features
 
 | Feature | Cost (INR) | Cost (USD) | Time |
 |---------|------------|------------|------|
@@ -719,7 +893,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 11. Testing & QA
+---
+
+## 📱 11. Testing & QA
 
 | Testing Type | Cost (INR) | Cost (USD) | Notes |
 |-------------|------------|------------|-------|
@@ -738,7 +914,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 12. Analytics & Monitoring
+---
+
+## 📱 12. Analytics & Monitoring
 
 | Service | Setup Cost (INR) | Setup Cost (USD) | Monthly Cost |
 |---------|-----------------|-----------------|--------------|
@@ -754,51 +932,9 @@ TOTAL PROJECT COST =
 
 ---
 
-## 13. Third-Party Integrations
-
-| Integration | Cost (INR) | Cost (USD) |
-|------------|------------|------------|
-| Social Media SDK (Facebook, Twitter) | ₹3,000–8,000 | $35–100 |
-| WhatsApp API | ₹5,000–15,000 | $60–180 |
-| SMS Service (Twilio/MSG91) | ₹5,000–12,000 | $60–140 |
-| Email Service (SendGrid/SES) | ₹5,000–10,000 | $60–120 |
-| Maps SDK (Google Maps/Mapbox) | ₹8,000–15,000 | $100–180 |
-| Places/Autocomplete API | ₹5,000–10,000 | $60–120 |
-| Cloud Storage (S3/Firebase) | ₹5,000–10,000 | $60–120 |
-| CRM (HubSpot/Salesforce) | ₹10,000–25,000 | $120–300 |
-| Logistics API (Shiprocket/Delhivery) | ₹10,000–25,000 | $120–300 |
-| Video SDK (Agora/Twilio) | ₹15,000–35,000 | $180–420 |
-| AI/ML API (OpenAI, Google ML) | ₹10,000–30,000 | $120–360 |
-| Translation API | ₹5,000–10,000 | $60–120 |
-| Calendar API | ₹5,000–10,000 | $60–120 |
-| Custom API Integration | ₹5,000–20,000 | $60–240 |
-
 ---
 
-## 14. Maintenance & Support Plans
-
-| Plan | Monthly (INR) | Monthly (USD) | Includes |
-|------|---------------|---------------|----------|
-| **Basic** | ₹5,000–8,000 | $60–100 | Bug fixes, crash monitoring, 3 hrs support |
-| **Standard** | ₹8,000–15,000 | $100–180 | Basic + OS updates, 5 hrs support, monthly report |
-| **Premium** | ₹15,000–30,000 | $180–360 | Standard + feature updates, 10 hrs, priority support |
-| **Enterprise** | ₹30,000–60,000 | $360–720 | Premium + 24/7, SLA, dedicated manager, hotfixes |
-| **On-Demand** | ₹1,000–2,000/hr | $12–25/hr | Pay per hour |
-
-### App Update Costs
-
-| Update Type | Cost (INR) | Cost (USD) |
-|-------------|------------|------------|
-| Bug Fix Release | ₹3,000–8,000 | $35–100 |
-| Minor Feature Update | ₹10,000–30,000 | $120–360 |
-| Major Version Update | ₹30,000–1,00,000 | $360–1,200 |
-| OS Compatibility Update | ₹5,000–15,000 | $60–180 |
-| Design Refresh | ₹20,000–50,000 | $240–600 |
-| App Store Compliance Fix | ₹5,000–15,000 | $60–180 |
-
----
-
-## 15. App Complexity Guide & Total Estimates
+## 📱 15. App Complexity Guide & Total Estimates
 
 ### By App Complexity
 
@@ -831,97 +967,4 @@ TOTAL PROJECT COST =
 
 ---
 
-## Quick Estimation Formula
-
-```
-TOTAL APP COST = 
-  (Sum of Screen Costs — Design + Development) 
-  + (Sum of Feature Costs) 
-  + (Auth System) 
-  + (Backend & API) 
-  + (Database Setup) 
-  + (Push Notifications) 
-  + (Payment Integration — if applicable) 
-  + (Third-Party Integrations) 
-  + (Security Implementation) 
-  + (Testing & QA — 15-25% of dev cost) 
-  + (Analytics Setup) 
-  × (Platform Multiplier) 
-  + (App Store Accounts + Submission) 
-  + (20% Buffer for unforeseen tasks)
-```
-
 ---
-
-## Hourly Rate Reference
-
-| Developer Level | Rate (INR/hr) | Rate (USD/hr) |
-|----------------|---------------|---------------|
-| Junior Mobile Dev | ₹500–1,000 | $6–12 |
-| Mid-Level Mobile Dev | ₹1,000–2,000 | $12–25 |
-| Senior Mobile Dev | ₹2,000–4,000 | $25–50 |
-| Lead/Architect | ₹4,000–6,000 | $50–72 |
-| Freelancer (Average India) | ₹1,000–2,500 | $12–30 |
-| Agency Rate (India) | ₹2,000–5,000 | $25–60 |
-
----
-
-## Sample Project Estimates
-
-### Example 1: Simple Business App (Android + iOS via Flutter)
-| Item | Cost (INR) |
-|------|------------|
-| Account Setup (Google + Apple) | ₹10,100 |
-| UI Design (12 screens) | ₹30,000 |
-| Development (12 screens) | ₹72,000 |
-| Auth (Email + Google) | ₹12,000 |
-| Push Notifications | ₹8,000 |
-| Backend (Firebase) | ₹15,000 |
-| Analytics + Crashlytics | ₹6,000 |
-| Testing (15%) | ₹21,000 |
-| App Store Submission | ₹10,000 |
-| × 1.3 Platform Multiplier | — |
-| **Total** | **₹1,80,000–2,40,000** |
-
-### Example 2: E-Commerce App (Both Platforms)
-| Item | Cost (INR) |
-|------|------------|
-| Account Setup | ₹10,100 |
-| UI/UX Design (30 screens) | ₹75,000 |
-| Development (30 screens) | ₹2,50,000 |
-| Auth System (Complete) | ₹40,000 |
-| Product Catalog + Cart + Checkout | ₹60,000 |
-| Payment (Razorpay + In-App) | ₹25,000 |
-| Backend + Admin Panel | ₹80,000 |
-| Push Notifications (Advanced) | ₹15,000 |
-| Order Tracking + History | ₹30,000 |
-| Reviews + Wishlist | ₹20,000 |
-| Analytics + Monitoring | ₹15,000 |
-| Security | ₹20,000 |
-| Testing (20%) | ₹1,00,000 |
-| App Store Submission + ASO | ₹25,000 |
-| **Total** | **₹5,50,000–7,50,000** |
-
-### Example 3: On-Demand Service App (Uber-like)
-| Item | Cost (INR) |
-|------|------------|
-| Account Setup | ₹10,100 |
-| UI/UX Design (50+ screens, 3 apps) | ₹1,50,000 |
-| Customer App Development | ₹3,00,000 |
-| Driver/Provider App Development | ₹2,50,000 |
-| Admin Dashboard (Web) | ₹1,00,000 |
-| Auth (Complete) | ₹50,000 |
-| Real-time Location + Maps + Navigation | ₹80,000 |
-| Chat + Calling | ₹60,000 |
-| Payment System | ₹40,000 |
-| Push Notifications (Advanced) | ₹20,000 |
-| Backend + APIs (Custom) | ₹1,50,000 |
-| Analytics + Monitoring | ₹25,000 |
-| Security | ₹35,000 |
-| Testing (20%) | ₹2,00,000 |
-| App Store Submission | ₹25,000 |
-| **Total** | **₹12,00,000–18,00,000** |
-
----
-
-> **Remember:** These are reference prices. Adjust based on your experience, market conditions, client budget, project urgency, and complexity.

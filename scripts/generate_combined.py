@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Combined Document Generator
-Creates merged Web + Application versions of all document types:
-- Combined-Pricing-Calculator.xlsx (Web + App sheets merged)
-- Combined-Client-Proposal.docx
-- Combined-Requirements-Complete-Guide.md
-- Combined-Pricing-Parameters.md
-- Combined-Client-Questionnaire.md
-- Combined-Project-Checklist.md
-- Combined-Pricing-Module-Overview.md
-- Combined-Pricing-Quick-Guide.md
+Intelligent Combined Document Generator
+Programmatically merges Web + App document pairs by:
+  1. Splitting both files into sections (by ## heading)
+  2. Matching sections with normalized fuzzy keys
+  3. Merging matched sections side-by-side (showing both web + app data)
+  4. Keeping platform-unique sections with a [🌐 Web] or [📱 App] label
+  5. Removing all duplication
+
+Run: py scripts/generate_combined.py
 """
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -19,58 +19,237 @@ COMBINED_DIR = ROOT / "combined"
 COMBINED_DIR.mkdir(exist_ok=True)
 
 
-# ─── Markdown Merger ────────────────────────────────────────────────────────
+# ─── Section Parser ──────────────────────────────────────────────────────────
 
-def strip_h1(text: str) -> str:
-    """Remove the first H1 heading from a markdown document."""
-    lines = text.split("\n")
-    for i, line in enumerate(lines):
-        if line.strip().startswith("# "):
-            lines.pop(i)
-            while i < len(lines) and not lines[i].strip():
-                lines.pop(i)
-            break
-    return "\n".join(lines).strip()
+def parse_sections(text: str):
+    """Split markdown into (heading_line, body) pairs. Index 0 = intro (before first ##)."""
+    pattern = re.compile(r'^(## .+)$', re.MULTILINE)
+    parts = pattern.split(text)
+    # parts = [pre_content, heading1, body1, heading2, body2, ...]
+    sections = []
+    intro = parts[0].strip()
+    i = 1
+    while i < len(parts) - 1:
+        heading = parts[i].strip()
+        body = parts[i + 1].strip()
+        sections.append((heading, body))
+        i += 2
+    return intro, sections
 
 
-def merge_markdown(app_path: Path, web_path: Path, out_path: Path, title: str, description: str):
-    """Merge two markdown files (app + web) into one combined document."""
-    app_text = app_path.read_text(encoding="utf-8", errors="replace").strip()
-    web_text = web_path.read_text(encoding="utf-8", errors="replace").strip()
+def normalize_key(heading: str) -> str:
+    """Strip emojis, numbers, punctuation and lowercase for fuzzy matching."""
+    # Remove emoji unicode ranges
+    h = re.sub(r'[^\x20-\x7E]', '', heading)
+    # Remove leading numbering like "1." "20." etc
+    h = re.sub(r'^#+\s*', '', h)
+    h = re.sub(r'^\d+[\.\)]\s*', '', h)
+    # Remove special chars, lowercase
+    h = re.sub(r'[&/\\|]', ' ', h)
+    h = re.sub(r'[^a-z0-9\s]', '', h.lower())
+    h = re.sub(r'\s+', ' ', h).strip()
+    return h
 
-    app_body = strip_h1(app_text)
-    web_body = strip_h1(web_text)
 
-    combined = f"""# {title}
+def match_sections(web_sections, app_sections):
+    """
+    Match web sections to app sections by normalized heading key.
+    Returns:
+      matched: list of (web_heading, web_body, app_heading, app_body)
+      web_only: list of (heading, body)  — sections only in web
+      app_only: list of (heading, body)  — sections only in app
+    """
+    web_keys = [(normalize_key(h), h, b) for h, b in web_sections]
+    app_keys = [(normalize_key(h), h, b) for h, b in app_sections]
 
-> {description}
+    matched = []
+    used_app = set()
 
-> **Scope:** This document covers both **Web / Website Projects** and **Mobile Application Projects**. Use the relevant sections for your client's project type.
+    for wkey, wh, wb in web_keys:
+        best_match = None
+        best_score = 0
+        for i, (akey, ah, ab) in enumerate(app_keys):
+            if i in used_app:
+                continue
+            score = key_similarity(wkey, akey)
+            if score > best_score:
+                best_score = score
+                best_match = i
+        if best_score >= 0.55:
+            akey, ah, ab = app_keys[best_match]
+            matched.append((wh, wb, ah, ab))
+            used_app.add(best_match)
+        else:
+            matched.append((wh, wb, None, None))
 
----
+    app_only = [(ah, ab) for i, (akey, ah, ab) in enumerate(app_keys) if i not in used_app]
 
-## 🌐 Part 1: Website / Web Application
+    return matched, app_only
 
----
 
-{web_body}
+def key_similarity(a: str, b: str) -> float:
+    """Simple word-overlap similarity score between two normalized strings."""
+    if a == b:
+        return 1.0
+    wa = set(a.split())
+    wb = set(b.split())
+    if not wa or not wb:
+        return 0.0
+    intersection = wa & wb
+    return len(intersection) / max(len(wa), len(wb))
 
----
+# ─── Content Merger ──────────────────────────────────────────────────────────
 
-## 📱 Part 2: Mobile Application
+def merge_section_bodies(web_body: str, app_body: str, web_label="🌐 Website", app_label="📱 Application") -> str:
+    """
+    Intelligently merge two section bodies:
+    - If bodies are nearly identical (>80%) → keep one (de-duplicated)
+    - If moderate similarity (50-80%) → shared base + unique additions labeled
+    - If low similarity (<50%) → both shown fully with platform sub-headings
+    """
+    web_body = web_body.strip()
+    app_body = app_body.strip()
 
----
+    if not web_body:
+        return f"**{app_label}**\n\n{app_body}"
+    if not app_body:
+        return f"**{web_label}**\n\n{web_body}"
 
-{app_body}
-"""
+    sim = text_similarity(web_body, app_body)
+
+    # Nearly identical → de-duplicate, keep longer version
+    if sim >= 0.80:
+        return web_body if len(web_body) >= len(app_body) else app_body
+
+    # Moderately similar → shared base + platform-unique additions
+    if sim >= 0.50:
+        web_lines = web_body.splitlines()
+        app_lines_set = set(app_body.splitlines())
+        web_lines_set = set(web_lines)
+
+        app_unique = [l for l in app_body.splitlines() if l not in web_lines_set]
+        unique_text = "\n".join(app_unique).strip()
+
+        result = web_body
+        if unique_text:
+            result += f"\n\n**{app_label} Additional:**\n\n{unique_text}"
+        return result
+
+    # Low similarity → show both fully, clearly labeled
+    return (
+        f"**{web_label}**\n\n"
+        f"{web_body}\n\n"
+        f"---\n\n"
+        f"**{app_label}**\n\n"
+        f"{app_body}"
+    )
+
+
+
+def text_similarity(a: str, b: str) -> float:
+    """Word-level Jaccard similarity of two text bodies."""
+    wa = set(re.findall(r'\w+', a.lower()))
+    wb = set(re.findall(r'\w+', b.lower()))
+    if not wa or not wb:
+        return 0.0
+    return len(wa & wb) / len(wa | wb)
+
+
+def platform_label_heading(heading: str, platform: str) -> str:
+    """Add a platform badge to a heading."""
+    badge = "🌐" if platform == "web" else "📱"
+    clean_h = re.sub(r'^#+\s*', '', heading.strip())
+    return f"## {badge} {clean_h}"
+
+
+# ─── Full Document Builder ────────────────────────────────────────────────────
+
+def build_combined_md(
+    title: str,
+    description: str,
+    web_path: Path,
+    app_path: Path,
+    out_path: Path
+):
+    web_text = web_path.read_text(encoding="utf-8", errors="replace")
+    app_text = app_path.read_text(encoding="utf-8", errors="replace")
+
+    web_intro, web_sections = parse_sections(web_text)
+    app_intro, app_sections = parse_sections(app_text)
+
+    matched, app_only = match_sections(web_sections, app_sections)
+
+    lines = []
+
+    # ── Header ──
+    lines.append(f"# {title}\n")
+    lines.append(f"> {description}\n")
+    lines.append("> **Covers:** 🌐 Website / Web App &nbsp;|&nbsp; 📱 Mobile Application\n")
+    lines.append("---\n")
+
+    # ── Merged sections ──
+    for wh, wb, ah, ab in matched:
+        if ah is None:
+            # Web-only section — label it clearly
+            clean_wh = re.sub(r'^#+\s*', '', wh.strip())
+            lines.append(f"## 🌐 {clean_wh}")
+            lines.append("")
+            lines.append(wb.strip())
+            lines.append("\n---\n")
+        else:
+            sim = text_similarity(wb, ab)
+
+            # Build unified heading: merge both headings, removing platform-prefix words
+            wh_clean = re.sub(r'^#+\s*', '', wh.strip())
+            ah_clean = re.sub(r'^#+\s*', '', ah.strip())
+            # Use whichever heading is more descriptive (longer)
+            unified_h = wh_clean if len(wh_clean) >= len(ah_clean) else ah_clean
+
+            if sim >= 0.80:
+                # Nearly identical → single unified section, no labels needed
+                lines.append(f"## {unified_h}")
+                lines.append("")
+                body = wb if len(wb) >= len(ab) else ab
+                lines.append(body.strip())
+
+            elif sim >= 0.45:
+                # Moderately similar → unified heading + merged body with app additions
+                lines.append(f"## {unified_h}")
+                lines.append("")
+                merged_body = merge_section_bodies(wb, ab)
+                lines.append(merged_body.strip())
+
+            else:
+                # Very different content → show both with clear platform sub-headings
+                lines.append(f"## {unified_h}")
+                lines.append("")
+                lines.append(f"### 🌐 Website")
+                lines.append("")
+                lines.append(wb.strip())
+                lines.append("")
+                lines.append(f"### 📱 Mobile Application")
+                lines.append("")
+                lines.append(ab.strip())
+
+            lines.append("\n---\n")
+
+    # ── App-only sections ──
+    for ah, ab in app_only:
+        clean_ah = re.sub(r'^#+\s*', '', ah.strip())
+        lines.append(f"## 📱 {clean_ah}")
+        lines.append("")
+        lines.append(ab.strip())
+        lines.append("\n---\n")
+
+    combined = "\n".join(lines)
     out_path.write_text(combined, encoding="utf-8")
-    print(f"  [COMBINED-MD] Created: {out_path.relative_to(ROOT)}")
+    total_lines = combined.count("\n")
+    print(f"  [COMBINED-MD] {out_path.name}  ({total_lines} lines, {len(combined)//1024} KB)")
 
 
-# ─── Excel Merger ───────────────────────────────────────────────────────────
+# ─── Excel Merger ────────────────────────────────────────────────────────────
 
 def merge_excel(app_path: Path, web_path: Path, out_path: Path, title: str):
-    """Merge Web and App Excel files into a single workbook with prefixed sheets."""
     import openpyxl
     from openpyxl.styles import PatternFill, Font, Alignment
 
@@ -81,216 +260,257 @@ def merge_excel(app_path: Path, web_path: Path, out_path: Path, title: str):
     combined_wb.remove(combined_wb.active)
 
     # Summary sheet
-    summary_ws = combined_wb.create_sheet("Combined Summary", 0)
-    header_fill = PatternFill(start_color="0F172A", end_color="0F172A", fill_type="solid")
-    header_font = Font(name="Calibri", bold=True, color="FFFFFF", size=12)
-    cell_font = Font(name="Calibri", size=11)
-    center_align = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    s = combined_wb.create_sheet("Combined Summary", 0)
+    hdr_fill = PatternFill(start_color="0F172A", end_color="0F172A", fill_type="solid")
+    web_fill = PatternFill(start_color="1E3A5F", end_color="1E3A5F", fill_type="solid")
+    app_fill = PatternFill(start_color="1E3D2F", end_color="1E3D2F", fill_type="solid")
+    white_bold = Font(name="Calibri", bold=True, color="FFFFFF", size=12)
+    normal = Font(name="Calibri", size=11)
 
-    summary_ws.append([title])
-    summary_ws.append(["Combines pricing modules for both Website and Mobile Application projects."])
-    summary_ws.append([])
-    summary_ws.append(["Section", "Description", "Source Sheets"])
-    summary_ws.append(["WEB - Website Pricing", "All website project pricing line items", ", ".join(web_wb.sheetnames)])
-    summary_ws.append(["APP - Application Pricing", "All mobile app project pricing line items", ", ".join(app_wb.sheetnames)])
-    summary_ws.append([])
-    summary_ws.append(["Generated by:", "Client Requirement Analysis — Combined Document Suite"])
+    s["A1"] = title
+    s["A1"].fill = hdr_fill
+    s["A1"].font = white_bold
 
-    for row_idx, row in enumerate(summary_ws.iter_rows(min_row=1, max_row=8), start=1):
-        for cell in row:
-            cell.font = header_font if row_idx in (1, 4) else cell_font
-            if row_idx == 1:
-                cell.fill = PatternFill(start_color="1E3A5F", end_color="1E3A5F", fill_type="solid")
-            elif row_idx == 4:
-                cell.fill = header_fill
-                cell.alignment = center_align
+    s["A2"] = "Unified pricing calculator covering Website and Mobile Application projects."
+    s["A2"].font = normal
 
-    summary_ws.column_dimensions["A"].width = 35
-    summary_ws.column_dimensions["B"].width = 55
-    summary_ws.column_dimensions["C"].width = 40
+    s.append([])
+    s.append(["Section", "Source", "Sheets"])
+    for cell in s[4]:
+        cell.fill = hdr_fill
+        cell.font = white_bold
 
-    def copy_sheets(source_wb, prefix, fill_color):
-        fill = PatternFill(start_color=fill_color, end_color=fill_color, fill_type="solid")
+    s.append(["Website Pricing", "Website-Pricing-Calculator.xlsx", ", ".join(web_wb.sheetnames)])
+    s.append(["Application Pricing", "Application-Pricing-Calculator.xlsx", ", ".join(app_wb.sheetnames)])
+    s.column_dimensions["A"].width = 35
+    s.column_dimensions["B"].width = 45
+    s.column_dimensions["C"].width = 40
+
+    def copy_wb_sheets(src_wb, prefix, fill):
         bold_white = Font(name="Calibri", bold=True, color="FFFFFF", size=11)
-
-        for sheet_name in source_wb.sheetnames:
-            src_ws = source_wb[sheet_name]
-            dest_name = f"{prefix} - {sheet_name}"[:31]
-            dest_ws = combined_wb.create_sheet(dest_name)
-
-            for col_letter, col_dim in src_ws.column_dimensions.items():
-                dest_ws.column_dimensions[col_letter].width = col_dim.width
-            for row_num, row_dim in src_ws.row_dimensions.items():
-                dest_ws.row_dimensions[row_num].height = row_dim.height
-
-            for row in src_ws.iter_rows():
+        for name in src_wb.sheetnames:
+            src = src_wb[name]
+            dest_name = f"{prefix} - {name}"[:31]
+            dst = combined_wb.create_sheet(dest_name)
+            for col_l, col_d in src.column_dimensions.items():
+                dst.column_dimensions[col_l].width = col_d.width
+            for rn, rd in src.row_dimensions.items():
+                dst.row_dimensions[rn].height = rd.height
+            for row in src.iter_rows():
                 for cell in row:
-                    dest_cell = dest_ws.cell(row=cell.row, column=cell.column)
-                    dest_cell.value = cell.value
+                    dc = dst.cell(row=cell.row, column=cell.column)
+                    dc.value = cell.value
                     if cell.has_style:
                         try:
-                            dest_cell.font = cell.font.copy()
-                            dest_cell.border = cell.border.copy()
-                            dest_cell.fill = cell.fill.copy()
-                            dest_cell.number_format = cell.number_format
-                            dest_cell.alignment = cell.alignment.copy()
+                            dc.font = cell.font.copy()
+                            dc.border = cell.border.copy()
+                            dc.fill = cell.fill.copy()
+                            dc.number_format = cell.number_format
+                            dc.alignment = cell.alignment.copy()
                         except Exception:
                             pass
-
-            # Insert prefix header row at top
-            dest_ws.insert_rows(1)
-            h = dest_ws.cell(row=1, column=1)
-            h.value = f"{prefix}: {sheet_name}"
+            dst.insert_rows(1)
+            h = dst.cell(row=1, column=1)
+            h.value = f"{prefix}: {name}"
             h.fill = fill
             h.font = bold_white
             h.alignment = Alignment(horizontal="left", vertical="center")
 
-    copy_sheets(web_wb, "WEB", "1E3A5F")
-    copy_sheets(app_wb, "APP", "1E3D2F")
-
+    copy_wb_sheets(web_wb, "WEB", web_fill)
+    copy_wb_sheets(app_wb, "APP", app_fill)
     combined_wb.save(out_path)
-    print(f"  [COMBINED-XLSX] Created: {out_path.relative_to(ROOT)}")
+    print(f"  [COMBINED-XLSX] {out_path.name}")
 
 
-# ─── DOCX Merger ────────────────────────────────────────────────────────────
+# ─── DOCX Merger ─────────────────────────────────────────────────────────────
 
 def merge_docx(app_path: Path, web_path: Path, out_path: Path, title: str, description: str):
-    """Merge Web and App DOCX files into one combined Word document."""
+    """
+    Intelligently merge two DOCX files using python-docx.
+    Extracts paragraphs from both, groups by heading sections,
+    matches shared sections, merges unique sections with platform labels.
+    """
     import docx
     from docx.shared import Pt, RGBColor
     from docx.enum.text import WD_ALIGN_PARAGRAPH
-    from lxml import etree
-    import copy
+
+    def extract_sections_from_docx(path):
+        d = docx.Document(path)
+        sections = []
+        current_heading = None
+        current_paras = []
+        for para in d.paragraphs:
+            if para.style.name.startswith("Heading 1") and not current_heading:
+                # Skip document title
+                continue
+            elif para.style.name.startswith("Heading"):
+                if current_heading is not None:
+                    sections.append((current_heading, list(current_paras)))
+                current_heading = para.text.strip()
+                current_paras = []
+            else:
+                current_paras.append(para)
+        if current_heading:
+            sections.append((current_heading, list(current_paras)))
+        return sections
+
+    web_sections = extract_sections_from_docx(web_path)
+    app_sections = extract_sections_from_docx(app_path)
+
+    matched, app_only = match_sections(
+        [(h, "\n".join(p.text for p in ps)) for h, ps in web_sections],
+        [(h, "\n".join(p.text for p in ps)) for h, ps in app_sections]
+    )
 
     combined = docx.Document()
+    combined.styles["Normal"].font.name = "Calibri"
+    combined.styles["Normal"].font.size = Pt(11)
 
-    style = combined.styles["Normal"]
-    style.font.name = "Calibri"
-    style.font.size = Pt(11)
-
-    title_h = combined.add_heading(title, level=1)
-    title_h.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    # Title
+    t = combined.add_heading(title, level=1)
+    t.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     combined.add_paragraph(description)
     combined.add_paragraph(
-        "Scope: This document covers both Website / Web Application and Mobile Application projects. "
-        "Use the relevant section for your client's project type."
+        "Covers: Website / Web Application Projects | Mobile Application Projects"
     )
     combined.add_page_break()
 
-    def copy_doc_body(src_path: Path, section_heading: str, color: tuple):
-        h = combined.add_heading(section_heading, level=1)
-        if h.runs:
-            h.runs[0].font.color.rgb = RGBColor(*color)
+    # Build lookup: heading → paragraph list
+    web_para_map = {h: ps for h, ps in web_sections}
+    app_para_map = {h: ps for h, ps in app_sections}
 
-        src_doc = docx.Document(src_path)
-        first_para_skipped = False
-        for para in src_doc.paragraphs:
-            # Skip the first H1 (title) from source document
-            if not first_para_skipped and para.style.name.startswith("Heading 1"):
-                first_para_skipped = True
-                continue
-            new_para = combined.add_paragraph(para.text, style=para.style.name if para.style.name in combined.styles else "Normal")
-            for run, src_run in zip(new_para.runs, para.runs):
-                run.bold = src_run.bold
-                run.italic = src_run.italic
-                run.underline = src_run.underline
+    for wh, wb_text, ah, ab_text in matched:
+        if ah is None:
+            # Web-only
+            combined.add_heading(f"[WEB] {wh}", level=2)
+            for para in web_para_map.get(wh, []):
+                if para.text.strip():
+                    combined.add_paragraph(para.text, style="Normal")
+        else:
+            sim = text_similarity(wb_text, ab_text)
+            # Unified heading
+            clean_h = re.sub(r'[^\x20-\x7E]', '', wh).strip()
+            combined.add_heading(clean_h, level=2)
 
-    copy_doc_body(web_path, "Part 1: Website / Web Application", (0x1E, 0x3A, 0x5F))
-    combined.add_page_break()
-    copy_doc_body(app_path, "Part 2: Mobile Application", (0x1E, 0x3D, 0x2F))
+            if sim >= 0.75:
+                # Mostly same — use web version (longer/more complete)
+                base = web_para_map.get(wh, []) if len(wb_text) >= len(ab_text) else app_para_map.get(ah, [])
+                for para in base:
+                    if para.text.strip():
+                        combined.add_paragraph(para.text, style="Normal")
+            else:
+                # Show web content, then app-specific additions
+                combined.add_heading("Website", level=3)
+                for para in web_para_map.get(wh, []):
+                    if para.text.strip():
+                        combined.add_paragraph(para.text, style="Normal")
+                combined.add_heading("Mobile Application", level=3)
+                for para in app_para_map.get(ah, []):
+                    if para.text.strip():
+                        combined.add_paragraph(para.text, style="Normal")
+
+    for ah, _ in app_only:
+        combined.add_heading(f"[APP] {ah}", level=2)
+        for para in app_para_map.get(ah, []):
+            if para.text.strip():
+                combined.add_paragraph(para.text, style="Normal")
 
     combined.save(out_path)
-    print(f"  [COMBINED-DOCX] Created: {out_path.relative_to(ROOT)}")
+    print(f"  [COMBINED-DOCX] {out_path.name}")
 
 
-# ─── Main ───────────────────────────────────────────────────────────────────
+# ─── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
     print("=" * 60)
-    print("[COMBINED] Generating Combined Web + App Document Suite")
+    print("[SMART COMBINED] Generating Intelligently Merged Documents")
     print("=" * 60)
-
     COMBINED_DIR.mkdir(exist_ok=True)
 
-    # 1. Pricing Calculator (XLSX)
-    merge_excel(
-        app_path=ROOT / "Template" / "excel template" / "Application-Pricing-Calculator.xlsx",
-        web_path=ROOT / "Template" / "excel template" / "Website-Pricing-Calculator.xlsx",
-        out_path=COMBINED_DIR / "Combined-Pricing-Calculator.xlsx",
-        title="Combined Web + App Pricing Calculator"
-    )
+    tasks = [
+        # (type, title, description, web_path, app_path, out_filename)
+        ("md", "Pricing Module — Complete Overview",
+         "Comprehensive overview of the pricing module system for both Website and Mobile Application projects. Covers architecture, methodology, all parameter categories, and reference costs.",
+         ROOT / "overview/Website-Pricing-Module-Overview.md",
+         ROOT / "overview/Application-Pricing-Module-Overview.md",
+         "Combined-Pricing-Module-Overview.md"),
 
-    # 2. Client Proposal (DOCX)
-    merge_docx(
-        app_path=ROOT / "Template" / "word template" / "Application-Client-Proposal.docx",
-        web_path=ROOT / "Template" / "word template" / "Website-Client-Proposal.docx",
-        out_path=COMBINED_DIR / "Combined-Client-Proposal.docx",
-        title="Combined Web + App Client Proposal",
-        description="Full-stack client proposal covering both website and mobile application scope, pricing, and deliverables."
-    )
+        ("md", "Pricing Quick Reference Guide",
+         "Fast-reference pricing guide for full-stack client engagements covering pricing formulas, cost ranges, key drivers, technology recommendations, and common pitfalls for both Website and Mobile App projects.",
+         ROOT / "overview/Website-Pricing-Quick-Guide.md",
+         ROOT / "overview/Application-Pricing-Quick-Guide.md",
+         "Combined-Pricing-Quick-Guide.md"),
 
-    # 3. Requirements Complete Guide (MD)
-    merge_markdown(
-        app_path=ROOT / "docs" / "application" / "Application-Requirements-Complete-Guide.md",
-        web_path=ROOT / "docs" / "website" / "Website-Requirements-Complete-Guide.md",
-        out_path=COMBINED_DIR / "Combined-Requirements-Complete-Guide.md",
-        title="Combined Web + App Requirements Complete Guide",
-        description="Comprehensive requirements guide covering both website/web application and mobile application projects in a single reference document."
-    )
+        ("md", "Project Delivery Checklist",
+         "Full-scope project delivery checklist covering all phases — from client discovery through post-launch — for both Website and Mobile Application engagements.",
+         ROOT / "checklists/Website-Project-Checklist.md",
+         ROOT / "checklists/Application-Project-Checklist.md",
+         "Combined-Project-Checklist.md"),
 
-    # 4. Pricing Parameters (MD)
-    merge_markdown(
-        app_path=ROOT / "docs" / "application" / "Application-Pricing-Parameters.md",
-        web_path=ROOT / "docs" / "website" / "Website-Pricing-Parameters.md",
-        out_path=COMBINED_DIR / "Combined-Pricing-Parameters.md",
-        title="Combined Web + App Pricing Parameters",
-        description="Unified pricing parameters reference covering all line items, cost factors, and configurable variables for both website and mobile application engagements."
-    )
+        ("md", "Client Discovery Questionnaire",
+         "All-in-one structured client questionnaire for scoping both Website and Mobile Application projects in a single intake session. Covers business overview, technical requirements, design, features, integrations, and commercial terms.",
+         ROOT / "Questionnaire/website/Website-Client-Questionnaire.md",
+         ROOT / "Questionnaire/application/Application-Client-Questionnaire.md",
+         "Combined-Client-Questionnaire.md"),
 
-    # 5. Client Questionnaire (MD)
-    merge_markdown(
-        app_path=ROOT / "Questionnaire" / "application" / "Application-Client-Questionnaire.md",
-        web_path=ROOT / "Questionnaire" / "website" / "Website-Client-Questionnaire.md",
-        out_path=COMBINED_DIR / "Combined-Client-Questionnaire.md",
-        title="Combined Web + App Client Questionnaire",
-        description="All-in-one client discovery questionnaire. Send this when a client needs both a website and a mobile application, or when you want a single intake form to qualify both scopes."
-    )
+        ("md", "Requirements Complete Guide",
+         "Master reference guide documenting all technical requirement categories for both Website and Mobile Application projects — ideal for comprehensive scoping, proposal writing, and technical specification.",
+         ROOT / "docs/website/Website-Requirements-Complete-Guide.md",
+         ROOT / "docs/application/Application-Requirements-Complete-Guide.md",
+         "Combined-Requirements-Complete-Guide.md"),
 
-    # 6. Project Checklist (MD)
-    merge_markdown(
-        app_path=ROOT / "checklists" / "Application-Project-Checklist.md",
-        web_path=ROOT / "checklists" / "Website-Project-Checklist.md",
-        out_path=COMBINED_DIR / "Combined-Project-Checklist.md",
-        title="Combined Web + App Project Checklist",
-        description="Full-scope project delivery checklist covering all phases for both website and mobile application projects from discovery to launch."
-    )
+        ("md", "Pricing Parameters Reference",
+         "Unified pricing parameters sheet covering all cost line items, complexity multipliers, and estimation formulas for both Website and Mobile Application engagements.",
+         ROOT / "docs/website/Website-Pricing-Parameters.md",
+         ROOT / "docs/application/Application-Pricing-Parameters.md",
+         "Combined-Pricing-Parameters.md"),
+    ]
 
-    # 7. Pricing Module Overview (MD)
-    merge_markdown(
-        app_path=ROOT / "overview" / "Application-Pricing-Module-Overview.md",
-        web_path=ROOT / "overview" / "Website-Pricing-Module-Overview.md",
-        out_path=COMBINED_DIR / "Combined-Pricing-Module-Overview.md",
-        title="Combined Web + App Pricing Module Overview",
-        description="Consolidated pricing module overview documenting all pricing tiers, methodology, and structure for both website and mobile application engagements."
-    )
+    for task in tasks:
+        kind = task[0]
+        title, description, web_path, app_path, out_filename = task[1], task[2], task[3], task[4], task[5]
+        out_path = COMBINED_DIR / out_filename
+        print(f"\n  Processing: {out_filename}")
+        try:
+            build_combined_md(title, description, web_path, app_path, out_path)
+        except Exception as e:
+            print(f"  [ERROR] {out_filename}: {e}")
+            import traceback; traceback.print_exc()
 
-    # 8. Pricing Quick Guide (MD)
-    merge_markdown(
-        app_path=ROOT / "overview" / "Application-Pricing-Quick-Guide.md",
-        web_path=ROOT / "overview" / "Website-Pricing-Quick-Guide.md",
-        out_path=COMBINED_DIR / "Combined-Pricing-Quick-Guide.md",
-        title="Combined Web + App Pricing Quick Reference Guide",
-        description="Quick-reference pricing guide for full-stack engagements covering both website and mobile application pricing tiers at a glance."
-    )
+    # Excel — combined workbook (separate sheets per platform, no meaningful dedup possible)
+    print("\n  Processing: Combined-Pricing-Calculator.xlsx")
+    try:
+        merge_excel(
+            app_path=ROOT / "Template/excel template/Application-Pricing-Calculator.xlsx",
+            web_path=ROOT / "Template/excel template/Website-Pricing-Calculator.xlsx",
+            out_path=COMBINED_DIR / "Combined-Pricing-Calculator.xlsx",
+            title="Combined Web + App Pricing Calculator"
+        )
+    except Exception as e:
+        print(f"  [ERROR] Combined-Pricing-Calculator.xlsx: {e}")
+        import traceback; traceback.print_exc()
+
+    # DOCX Proposal — intelligent merge
+    print("\n  Processing: Combined-Client-Proposal.docx")
+    try:
+        merge_docx(
+            app_path=ROOT / "Template/word template/Application-Client-Proposal.docx",
+            web_path=ROOT / "Template/word template/Website-Client-Proposal.docx",
+            out_path=COMBINED_DIR / "Combined-Client-Proposal.docx",
+            title="Combined Web + App Client Proposal",
+            description="Full-stack client proposal covering Website and Mobile Application scope, pricing, deliverables, and terms in a single document."
+        )
+    except Exception as e:
+        print(f"  [ERROR] Combined-Client-Proposal.docx: {e}")
+        import traceback; traceback.print_exc()
 
     print("\n" + "=" * 60)
-    print(f"[SUCCESS] All combined documents generated in: {COMBINED_DIR}")
+    print(f"[SUCCESS] Combined documents written to: {COMBINED_DIR}")
     print("=" * 60)
-    print("\nFiles created:")
     for f in sorted(COMBINED_DIR.iterdir()):
-        size_kb = f.stat().st_size / 1024
-        print(f"  {f.name}  ({size_kb:.1f} KB)")
+        kb = f.stat().st_size / 1024
+        print(f"  {f.name:<50} {kb:>7.1f} KB")
 
 
 if __name__ == "__main__":

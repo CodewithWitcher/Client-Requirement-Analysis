@@ -1,16 +1,8 @@
-# Combined Web + App Project Checklist
+# Project Delivery Checklist
 
-> Full-scope project delivery checklist covering all phases for both website and mobile application projects from discovery to launch.
+> Full-scope project delivery checklist covering all phases — from client discovery through post-launch — for both Website and Mobile Application engagements.
 
-> **Scope:** This document covers both **Web / Website Projects** and **Mobile Application Projects**. Use the relevant sections for your client's project type.
-
----
-
-## 🌐 Part 1: Website / Web Application
-
----
-
-> **Purpose:** A step-by-step checklist to follow throughout the entire website project lifecycle. Use this to ensure nothing is missed from initial contact to post-launch support.
+> **Covers:** 🌐 Website / Web App &nbsp;|&nbsp; 📱 Mobile Application
 
 ---
 
@@ -51,7 +43,33 @@
 
 ---
 
+**📱 Application Additional:**
+
+- [ ] App purpose and goals documented
+- [ ] Target audience identified (age, geography, behavior)
+- [ ] Competitor apps analyzed (features, ratings, reviews)
+- [ ] Client's existing assets collected (logo, brand, API docs)
+- [ ] Reference/inspiration apps reviewed with client
+- [ ] Monetization strategy discussed
+- [ ] All screens/flows listed with descriptions
+- [ ] All features and functionalities listed with priority
+- [ ] Platform decided (Android / iOS / Both)
+- [ ] Development approach decided (Native / Flutter / React Native)
+- [ ] Backend approach decided (Custom / Firebase / Supabase / etc.)
+- [ ] Authentication methods decided
+- [ ] Payment requirements documented (if applicable)
+- [ ] Push notification requirements documented
+- [ ] Offline requirements documented
+- [ ] Device feature requirements (Camera, GPS, Bluetooth, etc.)
+- [ ] Security and compliance requirements noted
+- [ ] MVP vs Full scope decided
+- [ ] Feature roadmap created (Phase 1, Phase 2, etc.)
+
+---
+
 ## Phase 2: Setup & Infrastructure
+
+### 🌐 Website
 
 ### 2.1 Domain & Hosting
 - [ ] Domain name purchased / transferred
@@ -83,7 +101,58 @@
 
 ---
 
+### 📱 Mobile Application
+
+### 2.1 App Store Accounts
+- [ ] Google Play Developer account ready ($25 one-time)
+- [ ] Apple Developer account ready ($99/year)
+- [ ] Account ownership decided (Client / Developer)
+- [ ] Team members added to accounts (if needed)
+- [ ] App ID / Bundle ID reserved
+- [ ] Signing certificates generated
+- [ ] Provisioning profiles created (iOS)
+- [ ] Keystore created (Android)
+
+### 2.2 Development Environment
+- [ ] Git repository created
+- [ ] Branch strategy decided (main, develop, feature branches)
+- [ ] Flutter/React Native/Native project initialized
+- [ ] Project structure set up (folders, packages)
+- [ ] Code formatting & linting rules set up
+- [ ] CI/CD pipeline configured (GitHub Actions / Fastlane / Codemagic)
+- [ ] Automated build setup for Android
+- [ ] Automated build setup for iOS
+- [ ] Project management tool set up (Trello, Jira, Notion)
+- [ ] Communication channel set up (Slack, WhatsApp)
+- [ ] File sharing set up (Google Drive, Figma links)
+
+### 2.3 Backend & Database Setup
+- [ ] Backend project initialized / Firebase project created
+- [ ] Database set up and configured
+- [ ] Database schema / collections designed
+- [ ] Cloud storage configured (S3 / Firebase Storage / etc.)
+- [ ] API framework set up (Express, FastAPI, etc.)
+- [ ] Authentication service configured
+- [ ] Environment variables configured
+- [ ] Staging / development server deployed
+- [ ] API testing tool set up (Postman / Insomnia)
+
+### 2.4 Third-Party Services
+- [ ] Push notification service set up (FCM / OneSignal)
+- [ ] Analytics service set up (Firebase Analytics / Mixpanel)
+- [ ] Crash reporting set up (Crashlytics / Sentry)
+- [ ] Payment gateway developer account created
+- [ ] Maps API key obtained (if needed)
+- [ ] SMS/Email service configured (Twilio / SendGrid)
+- [ ] Other API keys obtained and documented
+
+---
+
+---
+
 ## Phase 3: Design
+
+### 🌐 Website
 
 ### 3.1 UI/UX Design
 - [ ] Sitemap / Information architecture created
@@ -112,7 +181,42 @@
 
 ---
 
+### 📱 Mobile Application
+
+### 3.1 UI/UX Design
+- [ ] User flows / User journeys mapped
+- [ ] Information architecture created
+- [ ] Wireframes created (low-fidelity)
+- [ ] Wireframes approved by client
+- [ ] High-fidelity mockups designed (Figma/XD)
+- [ ] All screens designed for primary platform
+- [ ] Screens adapted for secondary platform (if both)
+- [ ] Tablet layouts designed (if needed)
+- [ ] Dark mode designed (if needed)
+- [ ] Interactive prototype created
+- [ ] Prototype shared with client for review
+- [ ] Design revisions completed
+- [ ] Final design approved by client
+
+### 3.2 App Assets
+- [ ] App icon designed (all sizes)
+- [ ] Splash screen designed
+- [ ] Onboarding screens designed (if applicable)
+- [ ] Empty state illustrations created
+- [ ] Error state illustrations created
+- [ ] Custom icons created (if needed)
+- [ ] Lottie animations created (if applicable)
+- [ ] App store screenshots designed
+- [ ] App store feature graphic designed
+- [ ] Design system / Component library documented
+
+---
+
+---
+
 ## Phase 4: Development
+
+### 🌐 Website
 
 ### 4.1 Frontend Development
 - [ ] Project scaffolded (React / Next.js / Vue / HTML etc.)
@@ -191,401 +295,7 @@
 
 ---
 
-## Phase 5: Content
-
-### 5.1 Content Population
-- [ ] All page content added
-- [ ] All images optimized and uploaded
-- [ ] Alt text added to all images
-- [ ] Videos embedded / uploaded (if applicable)
-- [ ] Blog posts added (if applicable)
-- [ ] Product data imported (if applicable)
-- [ ] Team / staff information added (if applicable)
-- [ ] Testimonials / reviews added
-- [ ] FAQ content added (if applicable)
-- [ ] Contact information verified
-- [ ] Map location verified
-- [ ] Social media links verified
-
-### 5.2 Legal Pages
-- [ ] Privacy Policy page created
-- [ ] Terms & Conditions page created
-- [ ] Cookie Policy page created (if applicable)
-- [ ] Refund/Cancellation policy page (if applicable)
-- [ ] Disclaimer page (if applicable)
-- [ ] Accessibility statement (if applicable)
-
----
-
-## Phase 6: SEO & Analytics
-
-### 6.1 Technical SEO
-- [ ] Page titles set for all pages
-- [ ] Meta descriptions written for all pages
-- [ ] H1, H2, H3 hierarchy checked
-- [ ] URL structure is clean and SEO-friendly
-- [ ] Canonical URLs set
-- [ ] XML sitemap generated
-- [ ] robots.txt configured
-- [ ] Schema markup added (Organization, Product, Article, etc.)
-- [ ] Open Graph tags set for social sharing
-- [ ] Twitter Card tags set
-- [ ] Hreflang tags set (for multi-language)
-- [ ] Breadcrumbs implemented
-- [ ] Internal linking structure checked
-- [ ] Image optimization (WebP, lazy loading)
-- [ ] No broken links (404 check)
-- [ ] No duplicate content
-- [ ] Mobile-friendly test passed
-
-### 6.2 Analytics & Tracking
-- [ ] Google Analytics 4 (GA4) installed
-- [ ] Google Search Console set up
-- [ ] Sitemap submitted to Google Search Console
-- [ ] Google Tag Manager installed (if needed)
-- [ ] Facebook/Meta Pixel installed (if needed)
-- [ ] Conversion tracking set up (if applicable)
-- [ ] Event tracking configured (button clicks, form submissions, etc.)
-- [ ] Custom dashboard / reports set up (if needed)
-
----
-
-## Phase 7: Performance & Optimization
-
-### 7.1 Page Speed
-- [ ] Google PageSpeed Insights score > 90 (desktop)
-- [ ] Google PageSpeed Insights score > 80 (mobile)
-- [ ] Images compressed and in modern format (WebP/AVIF)
-- [ ] Lazy loading implemented for images & videos
-- [ ] CSS and JS minified
-- [ ] Unused CSS/JS removed
-- [ ] Font loading optimized (font-display: swap)
-- [ ] Critical CSS inlined (above the fold)
-- [ ] Gzip/Brotli compression enabled
-- [ ] Browser caching configured
-- [ ] CDN configured (if applicable)
-- [ ] Server response time < 200ms (TTFB)
-
-### 7.2 Core Web Vitals
-- [ ] LCP (Largest Contentful Paint) < 2.5s
-- [ ] FID (First Input Delay) < 100ms
-- [ ] CLS (Cumulative Layout Shift) < 0.1
-- [ ] INP (Interaction to Next Paint) < 200ms
-
----
-
-## Phase 8: Security
-
-### 8.1 Security Checklist
-- [ ] SSL/HTTPS working on all pages
-- [ ] HTTP to HTTPS redirect configured
-- [ ] Security headers set (X-Frame-Options, CSP, HSTS, etc.)
-- [ ] XSS protection implemented
-- [ ] CSRF protection implemented
-- [ ] SQL injection protection (parameterized queries)
-- [ ] Input validation on all forms
-- [ ] CAPTCHA on sensitive forms
-- [ ] Rate limiting on API / login endpoints
-- [ ] File upload restrictions (type, size)
-- [ ] Admin panel access restricted
-- [ ] Default credentials changed
-- [ ] Error messages don't expose sensitive info
-- [ ] Directory listing disabled
-- [ ] Backup files not accessible via URL
-- [ ] .env / config files not exposed
-
-### 8.2 Compliance
-- [ ] Cookie consent banner implemented (if needed)
-- [ ] GDPR compliance verified (if applicable)
-- [ ] Accessibility (WCAG 2.1 AA) checked (if applicable)
-- [ ] PCI-DSS compliance (if handling card data directly)
-
----
-
-## Phase 9: Testing
-
-### 9.1 Functional Testing
-- [ ] All links working (no broken links)
-- [ ] All forms submitting correctly
-- [ ] All buttons / CTAs working
-- [ ] Navigation working on all pages
-- [ ] Search working correctly
-- [ ] Login / logout working
-- [ ] Registration working
-- [ ] Password reset working
-- [ ] Payment flow tested (live & sandbox)
-- [ ] Email notifications receiving correctly
-- [ ] File upload / download working
-- [ ] Error pages showing correctly
-- [ ] Pagination working
-- [ ] Filters and sorting working
-- [ ] All CRUD operations tested
-- [ ] Admin panel functions tested
-
-### 9.2 Compatibility Testing
-- [ ] Chrome (latest) — Desktop & Mobile
-- [ ] Firefox (latest) — Desktop & Mobile
-- [ ] Safari (latest) — Desktop & Mobile (Mac/iOS)
-- [ ] Edge (latest) — Desktop
-- [ ] Samsung Internet — Mobile
-- [ ] iPhone (different sizes) tested
-- [ ] Android phones (different sizes) tested
-- [ ] Tablet tested (if applicable)
-- [ ] Different screen resolutions tested
-
-### 9.3 User Acceptance Testing (UAT)
-- [ ] UAT environment prepared
-- [ ] Client / stakeholders have access
-- [ ] Test scenarios provided
-- [ ] UAT feedback collected
-- [ ] UAT issues resolved
-- [ ] Final UAT sign-off received
-
----
-
-## Phase 10: Pre-Launch
-
-### 10.1 Pre-Launch Checklist
-- [ ] Favicon uploaded (all sizes: 16x16, 32x32, 180x180, 192x192, 512x512)
-- [ ] Apple touch icon set
-- [ ] Web app manifest (manifest.json) configured
-- [ ] 404 page tested
-- [ ] 500 error page configured
-- [ ] Sitemap.xml accessible
-- [ ] robots.txt properly configured
-- [ ] Print stylesheet added (if needed)
-- [ ] All TODO/FIXME comments resolved
-- [ ] Console errors cleared
-- [ ] Debug mode disabled
-- [ ] Environment variables set for production
-- [ ] Database backed up
-- [ ] DNS propagation checked
-- [ ] CDN configured and tested
-- [ ] Email delivery tested
-- [ ] Social media cards preview tested (LinkedIn, Twitter, Facebook)
-- [ ] Browser tab title correct on all pages
-- [ ] All dummy/placeholder content replaced
-
----
-
-## Phase 11: Launch
-
-### 11.1 Deployment
-- [ ] Production build created
-- [ ] Build tested on staging
-- [ ] DNS pointed to production server
-- [ ] SSL verified on production
-- [ ] Database migrated to production
-- [ ] Environment variables set for production
-- [ ] Website accessible on live URL
-- [ ] All pages loading correctly
-- [ ] All features working on production
-- [ ] Performance verified on production
-- [ ] Backup created post-deployment
-
-### 11.2 Post-Launch Verification
-- [ ] All pages accessible
-- [ ] Forms working
-- [ ] Payments working (live mode)
-- [ ] Emails being sent
-- [ ] Analytics collecting data
-- [ ] Search Console receiving data
-- [ ] No console errors
-- [ ] Mobile experience verified
-- [ ] Speed test on live site
-- [ ] SSL showing in browser
-
----
-
-## Phase 12: Post-Launch
-
-### 12.1 Handover
-- [ ] All credentials shared securely with client
-- [ ] Hosting access provided
-- [ ] Domain registrar access provided
-- [ ] CMS admin access provided
-- [ ] Admin panel walkthrough / training completed
-- [ ] User manual / documentation delivered
-- [ ] Source code access provided (if agreed)
-- [ ] Design files shared (if agreed)
-- [ ] All third-party account details shared
-- [ ] Client has list of all services, logins, and renewal dates
-
-### 12.2 Final Payment & Closure
-- [ ] Final payment received
-- [ ] Invoice sent
-- [ ] Client feedback collected
-- [ ] Testimonial requested
-- [ ] Project archived (code, docs, designs)
-- [ ] Maintenance plan discussed and agreed (if applicable)
-- [ ] Warranty / support period communicated
-
-### 12.3 Ongoing Maintenance (if applicable)
-- [ ] Monitoring set up (uptime, performance, errors)
-- [ ] Backup schedule configured
-- [ ] Security updates schedule set
-- [ ] Content update process documented
-- [ ] Support communication channel active
-- [ ] Monthly/quarterly check-in scheduled
-- [ ] Analytics report schedule set
-- [ ] Software/plugin updates schedule set
-
----
-
-## Quick Reference: Common Mistakes to Avoid
-
-| # | Mistake | Prevention |
-|---|---------|------------|
-| 1 | No contract/agreement | Always sign before starting |
-| 2 | Scope creep | Document scope clearly, charge for extras |
-| 3 | No advance payment | Take 30-50% advance before starting |
-| 4 | Skipping mobile testing | Test on real devices, not just browser resize |
-| 5 | No SEO from start | Build with SEO in mind from day 1 |
-| 6 | Poor image optimization | Compress all images, use WebP |
-| 7 | No backup before launch | Always backup before deploying |
-| 8 | Hardcoded sensitive data | Use environment variables |
-| 9 | No SSL | Always use HTTPS |
-| 10 | Skipping accessibility | At minimum, check contrast, alt text, keyboard nav |
-| 11 | No error handling | Handle 404, 500, form errors gracefully |
-| 12 | No analytics | Install analytics before launch |
-
----
-
-> **Tip:** Print this checklist or copy it to your project management tool at the start of every project. Check off items as you complete them.
-
----
-
-## 📱 Part 2: Mobile Application
-
----
-
-> **Purpose:** A step-by-step checklist to follow throughout the entire mobile app project lifecycle. Use this to ensure nothing is missed from initial contact to post-launch support.
-
----
-
-## Phase 1: Pre-Project (Discovery & Planning)
-
-### 1.1 Client Discovery
-- [ ] Initial client meeting/call completed
-- [ ] Client Questionnaire filled out
-- [ ] App purpose and goals documented
-- [ ] Target audience identified (age, geography, behavior)
-- [ ] Competitor apps analyzed (features, ratings, reviews)
-- [ ] Client's existing assets collected (logo, brand, API docs)
-- [ ] Reference/inspiration apps reviewed with client
-- [ ] Monetization strategy discussed
-
-### 1.2 Requirements Documentation
-- [ ] All screens/flows listed with descriptions
-- [ ] All features and functionalities listed with priority
-- [ ] Platform decided (Android / iOS / Both)
-- [ ] Development approach decided (Native / Flutter / React Native)
-- [ ] Backend approach decided (Custom / Firebase / Supabase / etc.)
-- [ ] Authentication methods decided
-- [ ] Third-party integrations identified
-- [ ] Payment requirements documented (if applicable)
-- [ ] Push notification requirements documented
-- [ ] Offline requirements documented
-- [ ] Device feature requirements (Camera, GPS, Bluetooth, etc.)
-- [ ] Security and compliance requirements noted
-- [ ] Multi-language requirements noted
-- [ ] Accessibility requirements noted
-
-### 1.3 Project Scope & Quotation
-- [ ] Pricing calculation completed (use Pricing Parameters sheet)
-- [ ] MVP vs Full scope decided
-- [ ] Feature roadmap created (Phase 1, Phase 2, etc.)
-- [ ] Project scope document prepared
-- [ ] Timeline with milestones created
-- [ ] Quotation / Proposal sent to client
-- [ ] Quotation approved by client
-- [ ] Payment terms agreed upon
-- [ ] Advance payment received
-- [ ] Contract / Agreement signed
-- [ ] NDA signed (if required)
-- [ ] Project start date confirmed
-
----
-
-## Phase 2: Setup & Infrastructure
-
-### 2.1 App Store Accounts
-- [ ] Google Play Developer account ready ($25 one-time)
-- [ ] Apple Developer account ready ($99/year)
-- [ ] Account ownership decided (Client / Developer)
-- [ ] Team members added to accounts (if needed)
-- [ ] App ID / Bundle ID reserved
-- [ ] Signing certificates generated
-- [ ] Provisioning profiles created (iOS)
-- [ ] Keystore created (Android)
-
-### 2.2 Development Environment
-- [ ] Git repository created
-- [ ] Branch strategy decided (main, develop, feature branches)
-- [ ] Flutter/React Native/Native project initialized
-- [ ] Project structure set up (folders, packages)
-- [ ] Code formatting & linting rules set up
-- [ ] CI/CD pipeline configured (GitHub Actions / Fastlane / Codemagic)
-- [ ] Automated build setup for Android
-- [ ] Automated build setup for iOS
-- [ ] Project management tool set up (Trello, Jira, Notion)
-- [ ] Communication channel set up (Slack, WhatsApp)
-- [ ] File sharing set up (Google Drive, Figma links)
-
-### 2.3 Backend & Database Setup
-- [ ] Backend project initialized / Firebase project created
-- [ ] Database set up and configured
-- [ ] Database schema / collections designed
-- [ ] Cloud storage configured (S3 / Firebase Storage / etc.)
-- [ ] API framework set up (Express, FastAPI, etc.)
-- [ ] Authentication service configured
-- [ ] Environment variables configured
-- [ ] Staging / development server deployed
-- [ ] API testing tool set up (Postman / Insomnia)
-
-### 2.4 Third-Party Services
-- [ ] Push notification service set up (FCM / OneSignal)
-- [ ] Analytics service set up (Firebase Analytics / Mixpanel)
-- [ ] Crash reporting set up (Crashlytics / Sentry)
-- [ ] Payment gateway developer account created
-- [ ] Maps API key obtained (if needed)
-- [ ] SMS/Email service configured (Twilio / SendGrid)
-- [ ] Other API keys obtained and documented
-
----
-
-## Phase 3: Design
-
-### 3.1 UI/UX Design
-- [ ] User flows / User journeys mapped
-- [ ] Information architecture created
-- [ ] Wireframes created (low-fidelity)
-- [ ] Wireframes approved by client
-- [ ] High-fidelity mockups designed (Figma/XD)
-- [ ] All screens designed for primary platform
-- [ ] Screens adapted for secondary platform (if both)
-- [ ] Tablet layouts designed (if needed)
-- [ ] Dark mode designed (if needed)
-- [ ] Interactive prototype created
-- [ ] Prototype shared with client for review
-- [ ] Design revisions completed
-- [ ] Final design approved by client
-
-### 3.2 App Assets
-- [ ] App icon designed (all sizes)
-- [ ] Splash screen designed
-- [ ] Onboarding screens designed (if applicable)
-- [ ] Empty state illustrations created
-- [ ] Error state illustrations created
-- [ ] Custom icons created (if needed)
-- [ ] Lottie animations created (if applicable)
-- [ ] App store screenshots designed
-- [ ] App store feature graphic designed
-- [ ] Design system / Component library documented
-
----
-
-## Phase 4: Development
+### 📱 Mobile Application
 
 ### 4.1 Core App Structure
 - [ ] Navigation / Routing set up
@@ -691,7 +401,37 @@
 
 ---
 
-## Phase 5: Testing
+---
+
+## Phase 5: Content
+
+### 🌐 Website
+
+### 5.1 Content Population
+- [ ] All page content added
+- [ ] All images optimized and uploaded
+- [ ] Alt text added to all images
+- [ ] Videos embedded / uploaded (if applicable)
+- [ ] Blog posts added (if applicable)
+- [ ] Product data imported (if applicable)
+- [ ] Team / staff information added (if applicable)
+- [ ] Testimonials / reviews added
+- [ ] FAQ content added (if applicable)
+- [ ] Contact information verified
+- [ ] Map location verified
+- [ ] Social media links verified
+
+### 5.2 Legal Pages
+- [ ] Privacy Policy page created
+- [ ] Terms & Conditions page created
+- [ ] Cookie Policy page created (if applicable)
+- [ ] Refund/Cancellation policy page (if applicable)
+- [ ] Disclaimer page (if applicable)
+- [ ] Accessibility statement (if applicable)
+
+---
+
+### 📱 Mobile Application
 
 ### 5.1 Unit & Integration Testing
 - [ ] Unit tests written for critical business logic
@@ -768,7 +508,364 @@
 
 ---
 
-## Phase 6: Pre-Launch Preparation
+---
+
+## 🌐 Phase 6: SEO & Analytics
+
+### 6.1 Technical SEO
+- [ ] Page titles set for all pages
+- [ ] Meta descriptions written for all pages
+- [ ] H1, H2, H3 hierarchy checked
+- [ ] URL structure is clean and SEO-friendly
+- [ ] Canonical URLs set
+- [ ] XML sitemap generated
+- [ ] robots.txt configured
+- [ ] Schema markup added (Organization, Product, Article, etc.)
+- [ ] Open Graph tags set for social sharing
+- [ ] Twitter Card tags set
+- [ ] Hreflang tags set (for multi-language)
+- [ ] Breadcrumbs implemented
+- [ ] Internal linking structure checked
+- [ ] Image optimization (WebP, lazy loading)
+- [ ] No broken links (404 check)
+- [ ] No duplicate content
+- [ ] Mobile-friendly test passed
+
+### 6.2 Analytics & Tracking
+- [ ] Google Analytics 4 (GA4) installed
+- [ ] Google Search Console set up
+- [ ] Sitemap submitted to Google Search Console
+- [ ] Google Tag Manager installed (if needed)
+- [ ] Facebook/Meta Pixel installed (if needed)
+- [ ] Conversion tracking set up (if applicable)
+- [ ] Event tracking configured (button clicks, form submissions, etc.)
+- [ ] Custom dashboard / reports set up (if needed)
+
+---
+
+---
+
+## 🌐 Phase 7: Performance & Optimization
+
+### 7.1 Page Speed
+- [ ] Google PageSpeed Insights score > 90 (desktop)
+- [ ] Google PageSpeed Insights score > 80 (mobile)
+- [ ] Images compressed and in modern format (WebP/AVIF)
+- [ ] Lazy loading implemented for images & videos
+- [ ] CSS and JS minified
+- [ ] Unused CSS/JS removed
+- [ ] Font loading optimized (font-display: swap)
+- [ ] Critical CSS inlined (above the fold)
+- [ ] Gzip/Brotli compression enabled
+- [ ] Browser caching configured
+- [ ] CDN configured (if applicable)
+- [ ] Server response time < 200ms (TTFB)
+
+### 7.2 Core Web Vitals
+- [ ] LCP (Largest Contentful Paint) < 2.5s
+- [ ] FID (First Input Delay) < 100ms
+- [ ] CLS (Cumulative Layout Shift) < 0.1
+- [ ] INP (Interaction to Next Paint) < 200ms
+
+---
+
+---
+
+## Phase 8: Post-Launch
+
+### 🌐 Website
+
+### 8.1 Security Checklist
+- [ ] SSL/HTTPS working on all pages
+- [ ] HTTP to HTTPS redirect configured
+- [ ] Security headers set (X-Frame-Options, CSP, HSTS, etc.)
+- [ ] XSS protection implemented
+- [ ] CSRF protection implemented
+- [ ] SQL injection protection (parameterized queries)
+- [ ] Input validation on all forms
+- [ ] CAPTCHA on sensitive forms
+- [ ] Rate limiting on API / login endpoints
+- [ ] File upload restrictions (type, size)
+- [ ] Admin panel access restricted
+- [ ] Default credentials changed
+- [ ] Error messages don't expose sensitive info
+- [ ] Directory listing disabled
+- [ ] Backup files not accessible via URL
+- [ ] .env / config files not exposed
+
+### 8.2 Compliance
+- [ ] Cookie consent banner implemented (if needed)
+- [ ] GDPR compliance verified (if applicable)
+- [ ] Accessibility (WCAG 2.1 AA) checked (if applicable)
+- [ ] PCI-DSS compliance (if handling card data directly)
+
+---
+
+### 📱 Mobile Application
+
+### 8.1 Monitoring (First 2 Weeks)
+- [ ] Crash rate monitored daily
+- [ ] App ratings and reviews monitored
+- [ ] User metrics tracked (DAU, MAU, retention)
+- [ ] Server / API performance monitored
+- [ ] Error rates monitored
+- [ ] User feedback collected
+- [ ] Critical bugs fixed immediately
+- [ ] Hotfix release pushed (if needed)
+
+### 8.2 Handover
+- [ ] All credentials shared securely with client
+- [ ] App store account access provided / transferred
+- [ ] Backend / server access provided
+- [ ] Database access provided
+- [ ] Firebase / Supabase project access provided
+- [ ] Source code access provided (if agreed)
+- [ ] Design files (Figma) access provided (if agreed)
+- [ ] API documentation shared
+- [ ] Third-party service credentials shared
+- [ ] All API keys and service accounts documented
+- [ ] Admin panel walkthrough / training completed
+- [ ] User manual / documentation delivered
+- [ ] Client has list of all services, logins, renewal dates
+
+### 8.3 Final Payment & Closure
+- [ ] Final payment received
+- [ ] Invoice sent
+- [ ] Client feedback collected
+- [ ] Testimonial requested
+- [ ] Project archived (code, docs, designs, credentials)
+- [ ] Case study created (for portfolio)
+- [ ] Maintenance plan agreed upon (if applicable)
+- [ ] Warranty / support period communicated
+
+### 8.4 Ongoing Maintenance (if applicable)
+- [ ] Crash monitoring active
+- [ ] Performance monitoring active
+- [ ] OS update compatibility checked (new Android/iOS versions)
+- [ ] Library / SDK updates scheduled
+- [ ] Security patches applied promptly
+- [ ] App store policy changes monitored
+- [ ] User feedback reviewed regularly
+- [ ] Analytics reports generated (monthly/quarterly)
+- [ ] Feature updates planned and deployed
+- [ ] App store listing updated for new features
+- [ ] Server costs monitored and optimized
+- [ ] Database maintained (cleanup, optimization)
+- [ ] Backup verified regularly
+- [ ] Support tickets responded to within SLA
+
+---
+
+---
+
+## 🌐 Phase 9: Testing
+
+### 9.1 Functional Testing
+- [ ] All links working (no broken links)
+- [ ] All forms submitting correctly
+- [ ] All buttons / CTAs working
+- [ ] Navigation working on all pages
+- [ ] Search working correctly
+- [ ] Login / logout working
+- [ ] Registration working
+- [ ] Password reset working
+- [ ] Payment flow tested (live & sandbox)
+- [ ] Email notifications receiving correctly
+- [ ] File upload / download working
+- [ ] Error pages showing correctly
+- [ ] Pagination working
+- [ ] Filters and sorting working
+- [ ] All CRUD operations tested
+- [ ] Admin panel functions tested
+
+### 9.2 Compatibility Testing
+- [ ] Chrome (latest) — Desktop & Mobile
+- [ ] Firefox (latest) — Desktop & Mobile
+- [ ] Safari (latest) — Desktop & Mobile (Mac/iOS)
+- [ ] Edge (latest) — Desktop
+- [ ] Samsung Internet — Mobile
+- [ ] iPhone (different sizes) tested
+- [ ] Android phones (different sizes) tested
+- [ ] Tablet tested (if applicable)
+- [ ] Different screen resolutions tested
+
+### 9.3 User Acceptance Testing (UAT)
+- [ ] UAT environment prepared
+- [ ] Client / stakeholders have access
+- [ ] Test scenarios provided
+- [ ] UAT feedback collected
+- [ ] UAT issues resolved
+- [ ] Final UAT sign-off received
+
+---
+
+---
+
+## 🌐 Phase 10: Pre-Launch
+
+### 10.1 Pre-Launch Checklist
+- [ ] Favicon uploaded (all sizes: 16x16, 32x32, 180x180, 192x192, 512x512)
+- [ ] Apple touch icon set
+- [ ] Web app manifest (manifest.json) configured
+- [ ] 404 page tested
+- [ ] 500 error page configured
+- [ ] Sitemap.xml accessible
+- [ ] robots.txt properly configured
+- [ ] Print stylesheet added (if needed)
+- [ ] All TODO/FIXME comments resolved
+- [ ] Console errors cleared
+- [ ] Debug mode disabled
+- [ ] Environment variables set for production
+- [ ] Database backed up
+- [ ] DNS propagation checked
+- [ ] CDN configured and tested
+- [ ] Email delivery tested
+- [ ] Social media cards preview tested (LinkedIn, Twitter, Facebook)
+- [ ] Browser tab title correct on all pages
+- [ ] All dummy/placeholder content replaced
+
+---
+
+---
+
+## Phase 11: Launch
+
+### 🌐 Website
+
+### 11.1 Deployment
+- [ ] Production build created
+- [ ] Build tested on staging
+- [ ] DNS pointed to production server
+- [ ] SSL verified on production
+- [ ] Database migrated to production
+- [ ] Environment variables set for production
+- [ ] Website accessible on live URL
+- [ ] All pages loading correctly
+- [ ] All features working on production
+- [ ] Performance verified on production
+- [ ] Backup created post-deployment
+
+### 11.2 Post-Launch Verification
+- [ ] All pages accessible
+- [ ] Forms working
+- [ ] Payments working (live mode)
+- [ ] Emails being sent
+- [ ] Analytics collecting data
+- [ ] Search Console receiving data
+- [ ] No console errors
+- [ ] Mobile experience verified
+- [ ] Speed test on live site
+- [ ] SSL showing in browser
+
+---
+
+### 📱 Mobile Application
+
+### 7.1 Build & Submit
+- [ ] Production build generated (Android — AAB)
+- [ ] Production build generated (iOS — Archive)
+- [ ] Build tested via TestFlight / Internal Testing
+- [ ] Android app submitted to Google Play
+- [ ] iOS app submitted to App Store Connect
+- [ ] App review status monitored
+- [ ] Review feedback addressed (if rejected)
+- [ ] App approved
+- [ ] Release date set / Published
+
+### 7.2 Post-Submission
+- [ ] App live and accessible on Play Store
+- [ ] App live and accessible on App Store
+- [ ] Download and install from store — verified working
+- [ ] All features working on production
+- [ ] Payments working in live mode
+- [ ] Push notifications working
+- [ ] Analytics receiving data
+- [ ] Crash reporting active
+- [ ] Backend / API performing well
+- [ ] No critical bugs in first 24-48 hours
+
+---
+
+---
+
+## 🌐 Phase 12: Post-Launch
+
+### 12.1 Handover
+- [ ] All credentials shared securely with client
+- [ ] Hosting access provided
+- [ ] Domain registrar access provided
+- [ ] CMS admin access provided
+- [ ] Admin panel walkthrough / training completed
+- [ ] User manual / documentation delivered
+- [ ] Source code access provided (if agreed)
+- [ ] Design files shared (if agreed)
+- [ ] All third-party account details shared
+- [ ] Client has list of all services, logins, and renewal dates
+
+### 12.2 Final Payment & Closure
+- [ ] Final payment received
+- [ ] Invoice sent
+- [ ] Client feedback collected
+- [ ] Testimonial requested
+- [ ] Project archived (code, docs, designs)
+- [ ] Maintenance plan discussed and agreed (if applicable)
+- [ ] Warranty / support period communicated
+
+### 12.3 Ongoing Maintenance (if applicable)
+- [ ] Monitoring set up (uptime, performance, errors)
+- [ ] Backup schedule configured
+- [ ] Security updates schedule set
+- [ ] Content update process documented
+- [ ] Support communication channel active
+- [ ] Monthly/quarterly check-in scheduled
+- [ ] Analytics report schedule set
+- [ ] Software/plugin updates schedule set
+
+---
+
+---
+
+## Quick Reference: Common Mistakes to Avoid
+
+| # | Mistake | Prevention |
+|---|---------|------------|
+| 1 | No contract/agreement | Always sign before starting |
+| 2 | Scope creep | Document scope clearly, charge for extras |
+| 3 | No advance payment | Take 30-50% advance before starting |
+| 4 | Skipping mobile testing | Test on real devices, not just browser resize |
+| 5 | No SEO from start | Build with SEO in mind from day 1 |
+| 6 | Poor image optimization | Compress all images, use WebP |
+| 7 | No backup before launch | Always backup before deploying |
+| 8 | Hardcoded sensitive data | Use environment variables |
+| 9 | No SSL | Always use HTTPS |
+| 10 | Skipping accessibility | At minimum, check contrast, alt text, keyboard nav |
+| 11 | No error handling | Handle 404, 500, form errors gracefully |
+| 12 | No analytics | Install analytics before launch |
+
+---
+
+> **Tip:** Print this checklist or copy it to your project management tool at the start of every project. Check off items as you complete them.
+
+**📱 Application Additional:**
+
+| 1 | No contract | Always sign before starting |
+| 2 | Scope creep | Document scope, charge for extras |
+| 3 | No advance payment | Take 30-50% advance |
+| 4 | Skipping design phase | Design first, develop second |
+| 5 | Not testing on real devices | Don't rely only on emulators |
+| 6 | Hardcoded API keys | Use environment variables |
+| 7 | No crash reporting | Set up Crashlytics/Sentry from day 1 |
+| 8 | No version control | Use Git from the start |
+| 9 | Ignoring app store guidelines | Read guidelines before development |
+| 10 | No backup strategy | Set up automated backups |
+| 11 | Poor error handling | Handle network, auth, server errors gracefully |
+| 13 | Forgetting account deletion | Apple requires it — build it in |
+| 14 | Not planning for updates | Build with maintainability in mind |
+> **Tip:** Copy this checklist into your project management tool at the start of every mobile app project. Check off items as you complete them.
+
+---
+
+## 📱 Phase 6: Pre-Launch Preparation
 
 ### 6.1 App Store Preparation — Google Play
 - [ ] App title finalized
@@ -824,89 +921,9 @@
 
 ---
 
-## Phase 7: Launch
-
-### 7.1 Build & Submit
-- [ ] Production build generated (Android — AAB)
-- [ ] Production build generated (iOS — Archive)
-- [ ] Build tested via TestFlight / Internal Testing
-- [ ] Android app submitted to Google Play
-- [ ] iOS app submitted to App Store Connect
-- [ ] App review status monitored
-- [ ] Review feedback addressed (if rejected)
-- [ ] App approved
-- [ ] Release date set / Published
-
-### 7.2 Post-Submission
-- [ ] App live and accessible on Play Store
-- [ ] App live and accessible on App Store
-- [ ] Download and install from store — verified working
-- [ ] All features working on production
-- [ ] Payments working in live mode
-- [ ] Push notifications working
-- [ ] Analytics receiving data
-- [ ] Crash reporting active
-- [ ] Backend / API performing well
-- [ ] No critical bugs in first 24-48 hours
-
 ---
 
-## Phase 8: Post-Launch
-
-### 8.1 Monitoring (First 2 Weeks)
-- [ ] Crash rate monitored daily
-- [ ] App ratings and reviews monitored
-- [ ] User metrics tracked (DAU, MAU, retention)
-- [ ] Server / API performance monitored
-- [ ] Error rates monitored
-- [ ] User feedback collected
-- [ ] Critical bugs fixed immediately
-- [ ] Hotfix release pushed (if needed)
-
-### 8.2 Handover
-- [ ] All credentials shared securely with client
-- [ ] App store account access provided / transferred
-- [ ] Backend / server access provided
-- [ ] Database access provided
-- [ ] Firebase / Supabase project access provided
-- [ ] Source code access provided (if agreed)
-- [ ] Design files (Figma) access provided (if agreed)
-- [ ] API documentation shared
-- [ ] Third-party service credentials shared
-- [ ] All API keys and service accounts documented
-- [ ] Admin panel walkthrough / training completed
-- [ ] User manual / documentation delivered
-- [ ] Client has list of all services, logins, renewal dates
-
-### 8.3 Final Payment & Closure
-- [ ] Final payment received
-- [ ] Invoice sent
-- [ ] Client feedback collected
-- [ ] Testimonial requested
-- [ ] Project archived (code, docs, designs, credentials)
-- [ ] Case study created (for portfolio)
-- [ ] Maintenance plan agreed upon (if applicable)
-- [ ] Warranty / support period communicated
-
-### 8.4 Ongoing Maintenance (if applicable)
-- [ ] Crash monitoring active
-- [ ] Performance monitoring active
-- [ ] OS update compatibility checked (new Android/iOS versions)
-- [ ] Library / SDK updates scheduled
-- [ ] Security patches applied promptly
-- [ ] App store policy changes monitored
-- [ ] User feedback reviewed regularly
-- [ ] Analytics reports generated (monthly/quarterly)
-- [ ] Feature updates planned and deployed
-- [ ] App store listing updated for new features
-- [ ] Server costs monitored and optimized
-- [ ] Database maintained (cleanup, optimization)
-- [ ] Backup verified regularly
-- [ ] Support tickets responded to within SLA
-
----
-
-## Quick Reference: Common App Rejection Reasons
+## 📱 Quick Reference: Common App Rejection Reasons
 
 ### Google Play Rejections
 | # | Reason | Prevention |
@@ -936,25 +953,4 @@
 
 ---
 
-## Quick Reference: Common Mistakes to Avoid
-
-| # | Mistake | Prevention |
-|---|---------|------------|
-| 1 | No contract | Always sign before starting |
-| 2 | Scope creep | Document scope, charge for extras |
-| 3 | No advance payment | Take 30-50% advance |
-| 4 | Skipping design phase | Design first, develop second |
-| 5 | Not testing on real devices | Don't rely only on emulators |
-| 6 | Hardcoded API keys | Use environment variables |
-| 7 | No crash reporting | Set up Crashlytics/Sentry from day 1 |
-| 8 | No version control | Use Git from the start |
-| 9 | Ignoring app store guidelines | Read guidelines before development |
-| 10 | No backup strategy | Set up automated backups |
-| 11 | Poor error handling | Handle network, auth, server errors gracefully |
-| 12 | No analytics | Install analytics before launch |
-| 13 | Forgetting account deletion | Apple requires it — build it in |
-| 14 | Not planning for updates | Build with maintainability in mind |
-
 ---
-
-> **Tip:** Copy this checklist into your project management tool at the start of every mobile app project. Check off items as you complete them.

@@ -1,16 +1,8 @@
-# Combined Web + App Pricing Module Overview
+# Pricing Module — Complete Overview
 
-> Consolidated pricing module overview documenting all pricing tiers, methodology, and structure for both website and mobile application engagements.
+> Comprehensive overview of the pricing module system for both Website and Mobile Application projects. Covers architecture, methodology, all parameter categories, and reference costs.
 
-> **Scope:** This document covers both **Web / Website Projects** and **Mobile Application Projects**. Use the relevant sections for your client's project type.
-
----
-
-## 🌐 Part 1: Website / Web Application
-
----
-
-> **Purpose:** This document provides a comprehensive overview of the Website Pricing Module system, designed to help freelancers and agencies accurately estimate website development costs. Use this to understand the module's structure, workflow, and pricing methodology.
+> **Covers:** 🌐 Website / Web App &nbsp;|&nbsp; 📱 Mobile Application
 
 ---
 
@@ -38,6 +30,16 @@ Website Pricing Module
 └── Pricing Calculator (Excel)
     └── Automated cost estimation tool
 ```
+
+---
+
+**📱 Application Additional:**
+
+The Application Pricing Module is a complete toolkit for pricing mobile application projects (iOS, Android, Cross-Platform). It covers every aspect from initial discovery to final proposal generation.
+Application Pricing Module
+├── Requirements Complete Guide (839 lines)
+│   └── 21 comprehensive categories covering all app aspects
+├── Pricing Parameters (497 lines)
 
 ---
 
@@ -89,7 +91,29 @@ Design → Development → Testing → Deployment → Launch → Handover
 
 ---
 
+**📱 Application Additional:**
+
+Client Inquiry → Discovery Meeting → Requirements Documentation → Technical Analysis
+- Use **Client Questionnaire** during initial meeting
+- Identify client needs across all 21 categories
+- Document technical and business requirements
+Requirements → Pricing Parameters → Calculator → Cost Breakdown
+- Apply platform and complexity multipliers
+- Generate itemized cost breakdown
+### **Phase 3: Proposal Generation**
+Cost Breakdown → Formal Proposal → Client Presentation → Negotiation
+- Present to client with visual aids
+- Finalize terms and sign contract
+### **Phase 4: Project Execution**
+Development → Testing → Deployment → Handover
+- Ensure all requirements are met
+- Complete client handover
+
+---
+
 ## 🏗️ 20 Core Parameter Categories
+
+### 🌐 Website
 
 ### **1. Domain**
 The web address foundation of the website.
@@ -587,367 +611,7 @@ Client collaboration and project tracking.
 
 ---
 
-## 💰 Pricing Methodology
-
-### **Step-by-Step Calculation Process**
-
-**Step 1: Determine Base Cost by Page Count**
-```
-Base Cost = (Number of Pages × Average Page Cost)
-
-Page Cost Ranges:
-- Static page: $60–$180
-- Dynamic page: $120–$360
-- Complex page: $240–$600
-```
-
-**Step 2: Add Feature Costs**
-```
-Feature Cost = Sum of all selected features
-(forms, search, user auth, booking, etc.)
-```
-
-**Step 3: Add E-Commerce (if applicable)**
-```
-E-Commerce Cost = Platform setup + features
-WooCommerce: $240–$960
-Shopify: $120–$480
-Custom: $2,400–$12,000+
-```
-
-**Step 4: Add Design Costs**
-```
-Design Cost = Design services + branding
-Template: 1.0x
-Custom: 2.0x–3.0x
-```
-
-**Step 5: Add Infrastructure**
-```
-Infrastructure = Domain + Hosting + SSL + Database
-Annual: $100–$1,000+
-Include first year in project cost
-```
-
-**Step 6: Add Integrations**
-```
-Integration Cost = Sum of third-party integrations
-(payments, CRM, email, maps, etc.)
-```
-
-**Step 7: Add SEO & Performance**
-```
-SEO Cost = On-page SEO + technical optimization
-Performance Cost = Speed optimization + CDN
-```
-
-**Step 8: Calculate Subtotal**
-```
-Subtotal = Base + Features + E-Commerce + Design + 
-           Infrastructure + Integrations + SEO + Performance
-```
-
-**Step 9: Apply Tech Stack Multiplier**
-```
-Tech Stack Multiplier:
-- WordPress/PHP: 1.0x (base)
-- Laravel/Django: 1.2x–1.5x
-- MERN/MEAN: 1.3x–1.6x
-- Custom framework: 1.4x–1.8x
-```
-
-**Step 10: Apply Complexity Multiplier**
-```
-Complexity Multiplier:
-- Simple (1-5 pages, static): 1.0x
-- Standard (6-15 pages, basic CMS): 1.2x
-- Medium (16-30 pages, advanced features): 1.4x–1.6x
-- Complex (31-50 pages, custom features): 1.8x–2.2x
-- Enterprise (50+ pages, integrations): 2.5x–4.0x
-```
-
-**Step 11: Add Project Management**
-```
-PM Cost = Subtotal × 10-15%
-```
-
-**Step 12: Add Testing & QA**
-```
-QA Cost = Subtotal × 10-15%
-```
-
-**Step 13: Calculate Pre-Profit Total**
-```
-Pre-Profit Total = Subtotal × (1 + Tech Multiplier) × 
-                   (1 + Complexity Multiplier) + PM + QA
-```
-
-**Step 14: Add Contingency & Profit**
-```
-Contingency: 10-15% (for unexpected requirements)
-Profit Margin: 20-40%
-
-Final Price = Pre-Profit Total × (1 + Contingency) × (1 + Profit)
-```
-
-**Step 15: Add Ongoing Costs (Quote Separately)**
-```
-Monthly Maintenance: $50–$1,200/month
-Annual Hosting: $100–$6,000/year
-Domain Renewal: $10–$60/year
-SSL Renewal: $0–$360/year
-```
-
----
-
-## 🎨 Excalidraw Diagram Suggestions
-
-### **Recommended Diagrams to Create:**
-
-1. **Complete Workflow Flowchart**
-   - Discovery → Estimation → Proposal → Development → Launch
-   - Include decision points and client touchpoints
-
-2. **20 Categories Mind Map**
-   - Central node: "Website Pricing Module"
-   - 20 branches for each category
-   - Sub-branches showing key components
-
-3. **Cost Calculation Flow Diagram**
-   - Visual representation of the 15-step pricing methodology
-   - Show how components aggregate to final price
-
-4. **Tech Stack Decision Tree**
-   - Start: "New Website Project"
-   - Branch by project type (Brochure/E-commerce/Web App)
-   - Show framework recommendations
-   - End nodes: Cost multipliers
-
-5. **Hosting Decision Matrix**
-   - X-axis: Traffic volume
-   - Y-axis: Technical complexity
-   - Quadrants: Hosting recommendations
-
-6. **E-Commerce Feature Map**
-   - Show relationships between catalog, cart, checkout, payments
-   - Display dependencies and optional features
-
-7. **Pricing Tiers Visual Comparison**
-   - Simple vs Standard vs Medium vs Complex vs Enterprise
-   - Feature checklist for each tier
-   - Visual cost ranges
-
-8. **Page Type Cost Matrix**
-   - X-axis: Page types (Static/Dynamic/Complex)
-   - Y-axis: Design quality (Template/Custom/Premium)
-   - Cells: Cost per page
-
-9. **Integration Ecosystem Diagram**
-   - Central website node
-   - Connected external services (payment, CRM, email, etc.)
-   - Show data flow and API connections
-
-10. **Timeline Gantt Chart**
-    - Project phases with dependencies
-    - Show parallel tasks
-    - Milestone markers
-
----
-
-## 📋 Key Takeaways
-
-### **For Estimators:**
-✅ Always clarify domain and hosting ownership upfront
-✅ WordPress is the default for simple sites (lowest cost)
-✅ E-commerce adds 50-200% to base website cost
-✅ Custom design typically doubles the project cost
-✅ Don't forget: hosting setup, domain, SSL, maintenance
-✅ Testing and PM should be 10-15% each of total cost
-
-### **For Clients:**
-✅ Template-based design reduces costs by 50-70%
-✅ WordPress + WooCommerce is most cost-effective for e-commerce
-✅ Maintenance is essential (budget $50-$200/month minimum)
-✅ Hosting quality directly impacts site speed and uptime
-✅ SEO is ongoing, not one-time (budget for monthly work)
-✅ Custom features significantly increase development time
-
-### **Common Pitfalls to Avoid:**
-❌ Underestimating content entry time
-❌ Forgetting about responsive design testing
-❌ Not accounting for browser compatibility
-❌ Ignoring hosting and domain renewal costs
-❌ Assuming "simple website" means "quick to build"
-❌ Not including admin training in the quote
-❌ Forgetting about email hosting setup
-❌ Not clarifying ongoing maintenance expectations
-
----
-
-## 📊 Quick Reference: Typical Project Costs
-
-| Website Type | Pages | Features | Timeline | Cost Range |
-|-------------|-------|----------|----------|-----------|
-| **Landing Page** | 1 | Contact form | 1-2 weeks | $500–$2,000 |
-| **Brochure Site** | 5-8 | Basic CMS, contact | 2-4 weeks | $1,500–$5,000 |
-| **Business Site** | 10-15 | CMS, blog, forms | 4-8 weeks | $3,000–$10,000 |
-| **Corporate Site** | 20-30 | CMS, blog, multi-user | 8-12 weeks | $8,000–$25,000 |
-| **E-Commerce (Small)** | 10-20 | < 50 products, cart | 6-10 weeks | $5,000–$15,000 |
-| **E-Commerce (Medium)** | 20-40 | 50-200 products | 10-16 weeks | $15,000–$40,000 |
-| **E-Commerce (Large)** | 40+ | 200+ products, custom | 16-24 weeks | $40,000–$100,000+ |
-| **Web Application** | Varies | Custom features, APIs | 12-24 weeks | $25,000–$150,000+ |
-| **Portal/Marketplace** | 50+ | Multi-user, advanced | 20-40 weeks | $100,000–$500,000+ |
-
----
-
-## 💡 Pricing by Website Category
-
-### **1. Informational/Brochure Websites**
-**Range:** $1,500–$10,000  
-**Includes:** 5-15 pages, responsive design, contact form, basic SEO  
-**Timeline:** 3-8 weeks
-
-### **2. Small Business Websites**
-**Range:** $3,000–$15,000  
-**Includes:** 10-20 pages, blog, CMS, forms, social integration  
-**Timeline:** 4-10 weeks
-
-### **3. E-Commerce Websites**
-**Range:** $5,000–$100,000+  
-**Includes:** Product catalog, cart, checkout, payments, inventory  
-**Timeline:** 6-24 weeks
-
-### **4. Custom Web Applications**
-**Range:** $25,000–$500,000+  
-**Includes:** User auth, dashboard, APIs, database, custom features  
-**Timeline:** 12-52 weeks
-
-### **5. Enterprise Portals**
-**Range:** $100,000–$1,000,000+  
-**Includes:** Multi-tenant, complex workflows, integrations, scalability  
-**Timeline:** 24-104 weeks
-
----
-
-## 🔗 Related Documents
-
-- **[Website Requirements Complete Guide](website/Website-Requirements-Complete-Guide.md)** — Full parameter details
-- **[Website Pricing Parameters](website/Website-Pricing-Parameters.md)** — Quick pricing reference
-- **[Website Client Questionnaire](../templates/website/Website-Client-Questionnaire.md)** — Discovery questions
-- **[Website Project Checklist](../checklists/Website-Project-Checklist.md)** — Development tracking
-
----
-
-## 📞 How to Use This Overview
-
-**For Team Onboarding:**
-- Read this overview to understand the pricing system
-- Then study specific sections in the complete guide
-- Practice with 3-5 sample projects using the calculator
-
-**For Client Presentations:**
-- Use diagrams to explain your pricing methodology
-- Show the 20 categories to demonstrate thoroughness
-- Reference typical project costs for budget discussions
-
-**For Excalidraw:**
-- Create flowcharts showing the development process
-- Make decision trees for tech stack and hosting selection
-- Design cost breakdown visualizations
-- Build interactive pricing tier comparisons
-
----
-
-**Last Updated:** March 3, 2026  
-**Version:** 1.0  
-**Maintained by:** Price Module Team
-
----
-
-## 📱 Part 2: Mobile Application
-
----
-
-> **Purpose:** This document provides a comprehensive overview of the Application Pricing Module system, designed to help freelancers and agencies accurately estimate mobile app development costs. Use this to understand the module's structure, workflow, and pricing methodology.
-
----
-
-## 🎯 Module Overview
-
-The Application Pricing Module is a complete toolkit for pricing mobile application projects (iOS, Android, Cross-Platform). It covers every aspect from initial discovery to final proposal generation.
-
-### Core Components
-
-```
-Application Pricing Module
-│
-├── Requirements Complete Guide (839 lines)
-│   └── 21 comprehensive categories covering all app aspects
-│
-├── Pricing Parameters (497 lines)
-│   └── Quick reference with specific cost breakdowns
-│
-├── Client Questionnaire
-│   └── Structured questions for discovery meetings
-│
-├── Project Checklist
-│   └── Development tracking and quality assurance
-│
-└── Pricing Calculator (Excel)
-    └── Automated cost estimation tool
-```
-
----
-
-## 📊 System Architecture & Workflow
-
-### **Phase 1: Discovery & Requirements Gathering**
-```
-Client Inquiry → Discovery Meeting → Requirements Documentation → Technical Analysis
-```
-
-**Key Actions:**
-- Use **Client Questionnaire** during initial meeting
-- Reference **Requirements Complete Guide** for comprehensive coverage
-- Identify client needs across all 21 categories
-- Document technical and business requirements
-
-### **Phase 2: Cost Estimation**
-```
-Requirements → Pricing Parameters → Calculator → Cost Breakdown
-```
-
-**Key Actions:**
-- Map requirements to **Pricing Parameters**
-- Input data into **Excel Calculator**
-- Apply platform and complexity multipliers
-- Generate itemized cost breakdown
-
-### **Phase 3: Proposal Generation**
-```
-Cost Breakdown → Formal Proposal → Client Presentation → Negotiation
-```
-
-**Key Actions:**
-- Create professional proposal document
-- Include scope, timeline, deliverables, and pricing
-- Present to client with visual aids
-- Finalize terms and sign contract
-
-### **Phase 4: Project Execution**
-```
-Development → Testing → Deployment → Handover
-```
-
-**Key Actions:**
-- Follow **Project Checklist** for quality assurance
-- Track milestones and deliverables
-- Ensure all requirements are met
-- Complete client handover
-
----
-
-## 🏗️ 21 Core Parameter Categories
+### 📱 Mobile Application
 
 ### **1. Platform & Technology Foundation**
 Determines the fundamental development approach and target platforms.
@@ -1317,7 +981,124 @@ Client collaboration and project tracking.
 
 ---
 
+---
+
 ## 💰 Pricing Methodology
+
+### 🌐 Website
+
+### **Step-by-Step Calculation Process**
+
+**Step 1: Determine Base Cost by Page Count**
+```
+Base Cost = (Number of Pages × Average Page Cost)
+
+Page Cost Ranges:
+- Static page: $60–$180
+- Dynamic page: $120–$360
+- Complex page: $240–$600
+```
+
+**Step 2: Add Feature Costs**
+```
+Feature Cost = Sum of all selected features
+(forms, search, user auth, booking, etc.)
+```
+
+**Step 3: Add E-Commerce (if applicable)**
+```
+E-Commerce Cost = Platform setup + features
+WooCommerce: $240–$960
+Shopify: $120–$480
+Custom: $2,400–$12,000+
+```
+
+**Step 4: Add Design Costs**
+```
+Design Cost = Design services + branding
+Template: 1.0x
+Custom: 2.0x–3.0x
+```
+
+**Step 5: Add Infrastructure**
+```
+Infrastructure = Domain + Hosting + SSL + Database
+Annual: $100–$1,000+
+Include first year in project cost
+```
+
+**Step 6: Add Integrations**
+```
+Integration Cost = Sum of third-party integrations
+(payments, CRM, email, maps, etc.)
+```
+
+**Step 7: Add SEO & Performance**
+```
+SEO Cost = On-page SEO + technical optimization
+Performance Cost = Speed optimization + CDN
+```
+
+**Step 8: Calculate Subtotal**
+```
+Subtotal = Base + Features + E-Commerce + Design + 
+           Infrastructure + Integrations + SEO + Performance
+```
+
+**Step 9: Apply Tech Stack Multiplier**
+```
+Tech Stack Multiplier:
+- WordPress/PHP: 1.0x (base)
+- Laravel/Django: 1.2x–1.5x
+- MERN/MEAN: 1.3x–1.6x
+- Custom framework: 1.4x–1.8x
+```
+
+**Step 10: Apply Complexity Multiplier**
+```
+Complexity Multiplier:
+- Simple (1-5 pages, static): 1.0x
+- Standard (6-15 pages, basic CMS): 1.2x
+- Medium (16-30 pages, advanced features): 1.4x–1.6x
+- Complex (31-50 pages, custom features): 1.8x–2.2x
+- Enterprise (50+ pages, integrations): 2.5x–4.0x
+```
+
+**Step 11: Add Project Management**
+```
+PM Cost = Subtotal × 10-15%
+```
+
+**Step 12: Add Testing & QA**
+```
+QA Cost = Subtotal × 10-15%
+```
+
+**Step 13: Calculate Pre-Profit Total**
+```
+Pre-Profit Total = Subtotal × (1 + Tech Multiplier) × 
+                   (1 + Complexity Multiplier) + PM + QA
+```
+
+**Step 14: Add Contingency & Profit**
+```
+Contingency: 10-15% (for unexpected requirements)
+Profit Margin: 20-40%
+
+Final Price = Pre-Profit Total × (1 + Contingency) × (1 + Profit)
+```
+
+**Step 15: Add Ongoing Costs (Quote Separately)**
+```
+Monthly Maintenance: $50–$1,200/month
+Annual Hosting: $100–$6,000/year
+Domain Renewal: $10–$60/year
+SSL Renewal: $0–$360/year
+```
+
+---
+
+### 📱 Mobile Application
 
 ### **Step-by-Step Calculation Process**
 
@@ -1383,40 +1164,87 @@ Final Price = Subtotal × (1 + Contingency) × (1 + Profit Margin)
 
 ---
 
+---
+
 ## 🎨 Excalidraw Diagram Suggestions
 
 ### **Recommended Diagrams to Create:**
 
+1. **Complete Workflow Flowchart**
+   - Discovery → Estimation → Proposal → Development → Launch
+   - Include decision points and client touchpoints
+
+2. **20 Categories Mind Map**
+   - Central node: "Website Pricing Module"
+   - 20 branches for each category
+   - Sub-branches showing key components
+
+3. **Cost Calculation Flow Diagram**
+   - Visual representation of the 15-step pricing methodology
+   - Show how components aggregate to final price
+
+4. **Tech Stack Decision Tree**
+   - Start: "New Website Project"
+   - Branch by project type (Brochure/E-commerce/Web App)
+   - Show framework recommendations
+   - End nodes: Cost multipliers
+
+5. **Hosting Decision Matrix**
+   - X-axis: Traffic volume
+   - Y-axis: Technical complexity
+   - Quadrants: Hosting recommendations
+
+6. **E-Commerce Feature Map**
+   - Show relationships between catalog, cart, checkout, payments
+   - Display dependencies and optional features
+
+7. **Pricing Tiers Visual Comparison**
+   - Simple vs Standard vs Medium vs Complex vs Enterprise
+   - Feature checklist for each tier
+   - Visual cost ranges
+
+8. **Page Type Cost Matrix**
+   - X-axis: Page types (Static/Dynamic/Complex)
+   - Y-axis: Design quality (Template/Custom/Premium)
+   - Cells: Cost per page
+
+9. **Integration Ecosystem Diagram**
+   - Central website node
+   - Connected external services (payment, CRM, email, etc.)
+   - Show data flow and API connections
+
+10. **Timeline Gantt Chart**
+    - Project phases with dependencies
+    - Show parallel tasks
+    - Milestone markers
+
+---
+
+**📱 Application Additional:**
+
 1. **System Architecture Flowchart**
    - Show the 4 phases: Discovery → Estimation → Proposal → Execution
    - Include decision points and feedback loops
-
 2. **21 Categories Mind Map**
    - Central node: "App Pricing Module"
    - 21 branches for each category
    - Sub-branches for key components
-
 3. **Cost Calculation Flow**
    - Visual representation of the 10-step pricing methodology
    - Show how different components add up to final price
-
 4. **Technology Decision Tree**
    - Start: "New Mobile App Project"
    - Branch 1: Platform choice (iOS/Android/Both)
    - Branch 2: Development approach (Native/Cross-platform)
    - Branch 3: Framework selection
-   - End nodes: Cost multipliers
-
 5. **Feature Cost Matrix**
    - X-axis: Feature categories (Auth, Payment, Chat, etc.)
    - Y-axis: Complexity levels (Simple, Medium, Complex)
    - Cells: Cost ranges
-
 6. **Timeline Gantt Chart**
    - Show typical project phases
    - Dependencies between phases
    - Milestone markers
-
 7. **Pricing Tiers Comparison**
    - Simple vs Medium vs Complex vs Enterprise
    - Visual comparison of included features
@@ -1425,6 +1253,38 @@ Final Price = Subtotal × (1 + Contingency) × (1 + Profit Margin)
 ---
 
 ## 📋 Key Takeaways
+
+### 🌐 Website
+
+### **For Estimators:**
+✅ Always clarify domain and hosting ownership upfront
+✅ WordPress is the default for simple sites (lowest cost)
+✅ E-commerce adds 50-200% to base website cost
+✅ Custom design typically doubles the project cost
+✅ Don't forget: hosting setup, domain, SSL, maintenance
+✅ Testing and PM should be 10-15% each of total cost
+
+### **For Clients:**
+✅ Template-based design reduces costs by 50-70%
+✅ WordPress + WooCommerce is most cost-effective for e-commerce
+✅ Maintenance is essential (budget $50-$200/month minimum)
+✅ Hosting quality directly impacts site speed and uptime
+✅ SEO is ongoing, not one-time (budget for monthly work)
+✅ Custom features significantly increase development time
+
+### **Common Pitfalls to Avoid:**
+❌ Underestimating content entry time
+❌ Forgetting about responsive design testing
+❌ Not accounting for browser compatibility
+❌ Ignoring hosting and domain renewal costs
+❌ Assuming "simple website" means "quick to build"
+❌ Not including admin training in the quote
+❌ Forgetting about email hosting setup
+❌ Not clarifying ongoing maintenance expectations
+
+---
+
+### 📱 Mobile Application
 
 ### **For Estimators:**
 ✅ Use the 21-category checklist for comprehensive requirement gathering
@@ -1450,7 +1310,27 @@ Final Price = Subtotal × (1 + Contingency) × (1 + Profit Margin)
 
 ---
 
+---
+
 ## 📊 Quick Reference: Typical Project Costs
+
+### 🌐 Website
+
+| Website Type | Pages | Features | Timeline | Cost Range |
+|-------------|-------|----------|----------|-----------|
+| **Landing Page** | 1 | Contact form | 1-2 weeks | $500–$2,000 |
+| **Brochure Site** | 5-8 | Basic CMS, contact | 2-4 weeks | $1,500–$5,000 |
+| **Business Site** | 10-15 | CMS, blog, forms | 4-8 weeks | $3,000–$10,000 |
+| **Corporate Site** | 20-30 | CMS, blog, multi-user | 8-12 weeks | $8,000–$25,000 |
+| **E-Commerce (Small)** | 10-20 | < 50 products, cart | 6-10 weeks | $5,000–$15,000 |
+| **E-Commerce (Medium)** | 20-40 | 50-200 products | 10-16 weeks | $15,000–$40,000 |
+| **E-Commerce (Large)** | 40+ | 200+ products, custom | 16-24 weeks | $40,000–$100,000+ |
+| **Web Application** | Varies | Custom features, APIs | 12-24 weeks | $25,000–$150,000+ |
+| **Portal/Marketplace** | 50+ | Multi-user, advanced | 20-40 weeks | $100,000–$500,000+ |
+
+---
+
+### 📱 Mobile Application
 
 | App Type | Complexity | Screens | Timeline | Cost Range |
 |----------|-----------|---------|----------|-----------|
@@ -1463,6 +1343,39 @@ Final Price = Subtotal × (1 + Contingency) × (1 + Profit Margin)
 
 ---
 
+---
+
+## 🌐 💡 Pricing by Website Category
+
+### **1. Informational/Brochure Websites**
+**Range:** $1,500–$10,000  
+**Includes:** 5-15 pages, responsive design, contact form, basic SEO  
+**Timeline:** 3-8 weeks
+
+### **2. Small Business Websites**
+**Range:** $3,000–$15,000  
+**Includes:** 10-20 pages, blog, CMS, forms, social integration  
+**Timeline:** 4-10 weeks
+
+### **3. E-Commerce Websites**
+**Range:** $5,000–$100,000+  
+**Includes:** Product catalog, cart, checkout, payments, inventory  
+**Timeline:** 6-24 weeks
+
+### **4. Custom Web Applications**
+**Range:** $25,000–$500,000+  
+**Includes:** User auth, dashboard, APIs, database, custom features  
+**Timeline:** 12-52 weeks
+
+### **5. Enterprise Portals**
+**Range:** $100,000–$1,000,000+  
+**Includes:** Multi-tenant, complex workflows, integrations, scalability  
+**Timeline:** 24-104 weeks
+
+---
+
+---
+
 ## 🔗 Related Documents
 
 - **[Application Requirements Complete Guide](application/Application-Requirements-Complete-Guide.md)** — Full parameter details
@@ -1472,25 +1385,42 @@ Final Price = Subtotal × (1 + Contingency) × (1 + Profit Margin)
 
 ---
 
+---
+
 ## 📞 How to Use This Overview
 
 **For Team Onboarding:**
-- Read this overview first to understand the system
-- Then dive into specific sections of the complete guide
-- Practice with sample projects using the calculator
+- Read this overview to understand the pricing system
+- Then study specific sections in the complete guide
+- Practice with 3-5 sample projects using the calculator
 
 **For Client Presentations:**
-- Use the diagrams to explain the pricing process
-- Show the 21 categories to demonstrate thoroughness
-- Reference typical project costs for budgeting discussions
+- Use diagrams to explain your pricing methodology
+- Show the 20 categories to demonstrate thoroughness
+- Reference typical project costs for budget discussions
 
 **For Excalidraw:**
-- Create visual diagrams based on the suggested diagram types
-- Use the flowcharts and decision trees provided
-- Add your own branding and color scheme
+- Create flowcharts showing the development process
+- Make decision trees for tech stack and hosting selection
+- Design cost breakdown visualizations
+- Build interactive pricing tier comparisons
 
 ---
 
 **Last Updated:** March 3, 2026  
 **Version:** 1.0  
 **Maintained by:** Price Module Team
+
+**📱 Application Additional:**
+
+- Read this overview first to understand the system
+- Then dive into specific sections of the complete guide
+- Practice with sample projects using the calculator
+- Use the diagrams to explain the pricing process
+- Show the 21 categories to demonstrate thoroughness
+- Reference typical project costs for budgeting discussions
+- Create visual diagrams based on the suggested diagram types
+- Use the flowcharts and decision trees provided
+- Add your own branding and color scheme
+
+---
