@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌐 Website Pricing — Quick Reference Guide — Requirement Analysis Hub</title>
+  <title>🌐 Website Pricing — Quick Reference Guide — Requirement Hub</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -15,9 +15,10 @@
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Requirement Analysis Hub</span>
+        <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
           <span class="breadcrumb-sep">&rsaquo;</span>
@@ -36,8 +37,8 @@
 
       <div class="doc-meta-row">
         <span>File Size: 12.0 KB</span>
-        <span>Metrics: 1,416 words</span>
-        <span>Reading Time: 7 min read</span>
+        <span>Metrics: 1,376 words</span>
+        <span>Reading Time: 6 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -67,7 +68,17 @@
 
     <!-- Document Preview Content -->
     <main class="doc-content-card">
-      <div class="rendered-markdown"><h1 id="website-pricing-quick-reference-guide">🌐 Website Pricing — Quick Reference Guide</h1>
+      <div class="rendered-markdown">
+        <div class="summary-card" style="margin-bottom: 2rem; background: rgba(59, 130, 246, 0.05);">
+          <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.5rem;">
+            <span>Task Checklist Progress</span>
+            <span id="checklist-progress-text">0 of 20 completed (0%)</span>
+          </div>
+          <div style="height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden;">
+            <div id="checklist-progress-bar" style="height: 100%; width: 0%; background: var(--accent-primary); transition: width 0.3s ease;"></div>
+          </div>
+        </div>
+        <h1 id="website-pricing-quick-reference-guide">🌐 Website Pricing — Quick Reference Guide</h1>
 <blockquote>
 <p><strong>Condensed version for quick sharing and presentations</strong></p>
 </blockquote>
@@ -765,27 +776,27 @@
 <hr />
 <h2 id="quick-checklist">✅ Quick Checklist</h2>
 <p><strong>Before Quoting:</strong><br />
-- [ ] Page count and types identified<br />
-- [ ] Design preference (template/custom)<br />
-- [ ] CMS requirements clear<br />
-- [ ] E-commerce needs (if any)<br />
-- [ ] Hosting expectations set<br />
-- [ ] Domain ownership clarified<br />
-- [ ] Content provider identified<br />
-- [ ] Timeline expectations discussed<br />
-- [ ] Maintenance plan needed<br />
-- [ ] Budget range known</p>
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-0" > Page count and types identified<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-1" > Design preference (template/custom)<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-2" > CMS requirements clear<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-3" > E-commerce needs (if any)<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-4" > Hosting expectations set<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-5" > Domain ownership clarified<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-6" > Content provider identified<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-7" > Timeline expectations discussed<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-8" > Maintenance plan needed<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-9" > Budget range known</p>
 <p><strong>Include in Every Quote:</strong><br />
-- [ ] Development cost breakdown<br />
-- [ ] Design costs<br />
-- [ ] Infrastructure (domain, hosting, SSL)<br />
-- [ ] Content entry (or client-provided)<br />
-- [ ] Testing and QA<br />
-- [ ] Training session<br />
-- [ ] First-year maintenance<br />
-- [ ] Payment milestones<br />
-- [ ] Timeline with phases<br />
-- [ ] Deliverables list</p>
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-10" > Development cost breakdown<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-11" > Design costs<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-12" > Infrastructure (domain, hosting, SSL)<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-13" > Content entry (or client-provided)<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-14" > Testing and QA<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-15" > Training session<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-16" > First-year maintenance<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-17" > Payment milestones<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-18" > Timeline with phases<br />
+- <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-19" > Deliverables list</p>
 <hr />
 <h2 id="pro-tips">💡 Pro Tips</h2>
 <p><strong>Save Costs:</strong><br />
@@ -848,10 +859,13 @@
 
     <!-- Site Footer -->
     <footer class="site-footer">
-      <p>&copy; 2026 Client Requirement Analysis • Hosted on GitHub Pages</p>
+      <p>&copy; 2026 Client Requirement Analysis • Interactive Web App</p>
     </footer>
   </div>
 
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/proposal.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/export.js"></script>
 </body>

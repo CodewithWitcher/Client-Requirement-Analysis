@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Document Hub & Static Site Generator
-Scans repository for .md, .xlsx, .xls, .doc, and .docx files, converts them into HTML,
-pre-generates multi-format exports, and builds a static web hub inside `docs/` suitable for GitHub Pages.
+Document Hub & Interactive Static Site Generator
+Scans repository for .md, .xlsx, .xls, .doc, and .docx files, converts them into web pages,
+embeds interactive client workspace engines, and builds a static web hub in `docs/` for GitHub Pages.
 
 Run:
   python scripts/build_site.py
@@ -35,7 +35,6 @@ ASSETS_DIR = OUTPUT_DIR / "assets"
 
 SUPPORTED_EXTENSIONS = {".md", ".docx", ".doc", ".xlsx", ".xls"}
 
-# Directory names to ignore during discovery
 IGNORE_DIRS = {
     ".git", ".github", ".gemini", "node_modules", "venv", "env",
     "__pycache__", "build", "dist", "site", ".pytest_cache"
@@ -76,21 +75,43 @@ def get_file_type_info(ext: str):
 # ─── Document Converters ──────────────────────────────────────────────────
 
 def parse_markdown_file(file_path: Path):
-    """Convert Markdown file to HTML, extract title, excerpt, and metadata."""
+    """Convert Markdown file to HTML with interactive checkboxes for checklists."""
     content = file_path.read_text(encoding="utf-8", errors="replace")
     
-    # Extract Title (first H1 or filename)
     title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
     if title_match:
         title = title_match.group(1).strip()
     else:
         title = file_path.stem.replace('-', ' ').replace('_', ' ').title()
 
-    # Generate HTML content using markdown parser with extensions
-    md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'attr_list', 'nl2br'])
-    rendered_html = md.convert(content)
+    # Convert task checkboxes (- [ ] / - [x]) into interactive HTML inputs
+    cb_count = 0
+    def replace_task_cb(match):
+        nonlocal cb_count
+        checked = 'checked' if match.group(1).lower() == 'x' else ''
+        cb_html = f'<input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-{cb_count}" {checked}>'
+        cb_count += 1
+        return cb_html
 
-    # Clean text for excerpt and word count
+    processed_content = re.sub(r'\[([ xX])\]', replace_task_cb, content)
+
+    md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'attr_list', 'nl2br'])
+    rendered_html = md.convert(processed_content)
+
+    progress_bar_html = ""
+    if cb_count > 0:
+        progress_bar_html = f'''
+        <div class="summary-card" style="margin-bottom: 2rem; background: rgba(59, 130, 246, 0.05);">
+          <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.5rem;">
+            <span>Task Checklist Progress</span>
+            <span id="checklist-progress-text">0 of {cb_count} completed (0%)</span>
+          </div>
+          <div style="height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden;">
+            <div id="checklist-progress-bar" style="height: 100%; width: 0%; background: var(--accent-primary); transition: width 0.3s ease;"></div>
+          </div>
+        </div>
+        '''
+
     clean_text = re.sub(r'<[^>]+>', ' ', rendered_html)
     clean_text = re.sub(r'\s+', ' ', clean_text).strip()
     words = clean_text.split()
@@ -99,7 +120,7 @@ def parse_markdown_file(file_path: Path):
 
     return {
         "title": title,
-        "html": f'<div class="rendered-markdown">{rendered_html}</div>',
+        "html": f'<div class="rendered-markdown">{progress_bar_html}{rendered_html}</div>',
         "excerpt": excerpt,
         "word_count": word_count,
         "meta_label": f"{word_count:,} words",
@@ -116,12 +137,10 @@ def parse_docx_file(file_path: Path):
             result = mammoth.convert_to_html(docx_file)
             raw_html = result.value
             
-            # Post-process tables to add doc-table styling
             processed_html = raw_html.replace('<table>', '<div class="table-responsive"><table class="doc-table">')
             processed_html = processed_html.replace('</table>', '</table></div>')
     except Exception as e:
         print(f"  [Warning] Mammoth conversion failed for {file_path.name}: {e}. Using fallback.")
-        # Fallback using python-docx
         try:
             doc = docx.Document(file_path)
             paragraphs_html = []
@@ -148,7 +167,7 @@ def parse_docx_file(file_path: Path):
 
 
 def parse_excel_file(file_path: Path):
-    """Convert Excel (.xlsx) sheets into interactive HTML data tables."""
+    """Convert Excel (.xlsx) sheets into live interactive pricing tables."""
     title = file_path.stem.replace('-', ' ').replace('_', ' ').title()
     
     try:
@@ -169,30 +188,53 @@ def parse_excel_file(file_path: Path):
                 f'📊 {html.escape(sheet_name)}</button>'
             )
 
-            # Build HTML table for sheet
             table_rows = []
             max_r = ws.max_row or 0
             max_c = ws.max_column or 0
-            
-            if max_r > 0:
-                total_rows += max_r
+            if max_r > 0: total_rows += max_r
 
-            for r_idx in range(1, min(max_r + 1, 500)):  # Cap at 500 rows for smooth UI
+            is_calculator_sheet = ("calculator" in sheet_name.lower()) or ("pricing" in sheet_name.lower())
+
+            for r_idx in range(1, min(max_r + 1, 300)):
                 row_cells = []
-                is_header = (r_idx == 1)
+                is_header = (r_idx == 1 or r_idx == 6)  # Typical header rows in calculator sheets
                 cell_tag = "th" if is_header else "td"
 
-                for c_idx in range(1, min(max_c + 1, 50)):
+                # Check if item row has an ID / parameter index
+                first_cell_val = ws.cell(row=r_idx, column=1).value
+                item_id = f"item_{r_idx}" if (is_calculator_sheet and isinstance(first_cell_val, (int, str)) and str(first_cell_val).isdigit()) else None
+
+                for c_idx in range(1, min(max_c + 1, 10)):
                     val = ws.cell(row=r_idx, column=c_idx).value
                     val_str = "" if val is None else str(val)
+
+                    # Replace cost (col 4) & qty (col 5) & req (col 7) with interactive controls
+                    if is_calculator_sheet and item_id and not is_header:
+                        if c_idx == 7:  # Required / Include Checkbox
+                            checked = "checked" if val_str.lower() in {"yes", "true", "1"} else ""
+                            row_cells.append(f'<{cell_tag} style="text-align: center;"><input type="checkbox" class="item-check" {checked}></{cell_tag}>')
+                            continue
+                        elif c_idx == 4 and val_str.isdigit():  # Unit cost
+                            row_cells.append(f'<{cell_tag}><input type="number" class="item-cost form-control" value="{val_str}"></{cell_tag}>')
+                            continue
+                        elif c_idx == 5 and val_str.isdigit():  # Qty
+                            row_cells.append(f'<{cell_tag}><input type="number" class="item-qty form-control" value="{val_str}"></{cell_tag}>')
+                            continue
+                        elif c_idx == 6:  # Calculated Row Total
+                            row_cells.append(f'<{cell_tag}><span class="item-row-total">₹{val_str}</span></{cell_tag}>')
+                            continue
+
                     row_cells.append(f'<{cell_tag}>{html.escape(val_str)}</{cell_tag}>')
 
-                table_rows.append(f'<tr>{"".join(row_cells)}</tr>')
+                tr_attr = f'data-item-id="{item_id}"' if item_id else ''
+                table_rows.append(f'<tr {tr_attr}>{"".join(row_cells)}</tr>')
+
+            calc_class = "interactive-calc-table" if is_calculator_sheet else ""
 
             pane_html = f'''
             <div id="{sheet_id}" class="sheet-pane {is_active}">
               <div class="table-responsive">
-                <table class="doc-table">
+                <table class="doc-table {calc_class}">
                   <tbody>
                     {"".join(table_rows)}
                   </tbody>
@@ -202,7 +244,31 @@ def parse_excel_file(file_path: Path):
             '''
             tab_panes.append(pane_html)
 
+        # Summary widget for calculations
+        summary_widget_html = '''
+        <div class="proposal-summary-grid" style="margin-top: 2rem;">
+          <div class="summary-card">
+            <h3>📊 Live Investment Calculation</h3>
+            <div class="summary-row"><span>Base Items Subtotal:</span><strong id="summary-subtotal">₹0</strong></div>
+            <div class="summary-row"><span>Adjusted (Platform + Complexity):</span><strong id="summary-adjusted">₹0</strong></div>
+            <div class="summary-row"><span>Discount Amount:</span><strong id="summary-discount">-₹0</strong></div>
+            <div class="summary-row"><span>Tax (GST 18%):</span><strong id="summary-gst">₹0</strong></div>
+            <div class="summary-row grand-total"><span>Grand Total Investment:</span><strong id="summary-grandtotal">₹0</strong></div>
+          </div>
+
+          <div class="summary-card">
+            <h3>💼 Payment Milestone Split</h3>
+            <div class="milestone-item"><span>Phase 1: Advance / Kickoff (35%)</span><strong id="milestone-advance">₹0</strong></div>
+            <div class="milestone-item"><span>Phase 2: Wireframes & Design (20%)</span><strong id="milestone-design">₹0</strong></div>
+            <div class="milestone-item"><span>Phase 3: Core Feature Build (30%)</span><strong id="milestone-dev">₹0</strong></div>
+            <div class="milestone-item"><span>Phase 4: Testing & Handover (15%)</span><strong id="milestone-handover">₹0</strong></div>
+          </div>
+        </div>
+        '''
+
         full_html = f'''
+        <div id="project-banner-container"></div>
+
         <div class="excel-viewer">
           <div class="sheet-tabs">
             {"".join(tab_buttons)}
@@ -211,9 +277,11 @@ def parse_excel_file(file_path: Path):
             {"".join(tab_panes)}
           </div>
         </div>
+
+        {summary_widget_html}
         '''
 
-        excerpt = f"Excel Spreadsheet containing {len(sheet_names)} sheet(s) and {total_rows:,} rows of data."
+        excerpt = f"Interactive Pricing Calculator with {len(sheet_names)} sheet(s) and {total_rows:,} configurable line-items."
 
         return {
             "title": title,
@@ -221,7 +289,7 @@ def parse_excel_file(file_path: Path):
             "excerpt": excerpt,
             "word_count": total_rows,
             "meta_label": f"{len(sheet_names)} Sheet(s) • {total_rows:,} Rows",
-            "read_time": "Data Sheet"
+            "read_time": "Interactive Tool"
         }
 
     except Exception as e:
@@ -243,20 +311,16 @@ def generate_export_files(doc_data: dict, file_path: Path, slug: str):
     file_rel_path = file_path.relative_to(ROOT_DIR)
     target_orig = FILES_DIR / file_rel_path
     target_orig.parent.mkdir(parents=True, exist_ok=True)
-    
-    # 1. Copy original file
     shutil.copy2(file_path, target_orig)
 
     ext = file_path.suffix.lower()
     
-    # 2. DOCX Export File Path
     docx_export_path = FILES_DIR / "exports" / f"{slug}.docx"
     docx_export_path.parent.mkdir(parents=True, exist_ok=True)
     
     if ext in {".docx", ".doc"}:
         shutil.copy2(file_path, docx_export_path)
     else:
-        # Create a DOCX export file using python-docx
         try:
             doc = docx.Document()
             doc.add_heading(doc_data["title"], level=1)
@@ -268,14 +332,12 @@ def generate_export_files(doc_data: dict, file_path: Path, slug: str):
         except Exception as e:
             print(f"  [Warning] Failed creating DOCX export for {slug}: {e}")
 
-    # 3. XLSX Export File Path
     xlsx_export_path = FILES_DIR / "exports" / f"{slug}.xlsx"
     xlsx_export_path.parent.mkdir(parents=True, exist_ok=True)
     
     if ext in {".xlsx", ".xls"}:
         shutil.copy2(file_path, xlsx_export_path)
     else:
-        # Create an XLSX export file using openpyxl
         try:
             wb = openpyxl.Workbook()
             ws = wb.active
@@ -320,7 +382,7 @@ def generate_index_html(documents: list) -> str:
               <span>{doc['meta_label']}</span>
             </div>
             <div class="view-link">
-              View Document &rarr;
+              Open Document &rarr;
             </div>
           </div>
         </a>
@@ -331,8 +393,8 @@ def generate_index_html(documents: list) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client Requirement Analysis — Document Hub</title>
-  <meta name="description" content="Centralized Hub for Client Requirement Analysis documents, calculators, proposals, and project guides.">
+  <title>Client Requirement Analysis — Interactive Workspace</title>
+  <meta name="description" content="Centralized Interactive Workspace for Client Requirements, Pricing Calculators, and Proposals.">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
@@ -347,6 +409,7 @@ def generate_index_html(documents: list) -> str:
         <span>Client Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <span class="breadcrumb">
           <span style="font-weight: 600; color: var(--text-main);">{len(documents)} Total Documents</span>
         </span>
@@ -355,9 +418,9 @@ def generate_index_html(documents: list) -> str:
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <h1>Requirement Analysis & Templates</h1>
+      <h1>Interactive Requirement Workspace & Proposal Generator</h1>
       <p class="hero-subtitle">
-        Explore questionnaires, pricing calculators, proposals, parameters, and guides formatted for web reading and instant multi-format export.
+        Scope projects, edit live pricing calculators, fill client questionnaires, auto-save state in browser, and export professional proposals.
       </p>
     </section>
 
@@ -389,10 +452,13 @@ def generate_index_html(documents: list) -> str:
 
     <!-- Site Footer -->
     <footer class="site-footer">
-      <p>&copy; {datetime.datetime.now().year} Client Requirement Analysis • Powered by Static Site Generator for GitHub Pages</p>
+      <p>&copy; {datetime.datetime.now().year} Client Requirement Analysis • Interactive Web App for GitHub Pages</p>
     </footer>
   </div>
 
+  <script src="./assets/js/storage.js"></script>
+  <script src="./assets/js/calculator.js"></script>
+  <script src="./assets/js/proposal.js"></script>
   <script src="./assets/js/main.js"></script>
   <script src="./assets/js/export.js"></script>
 </body>
@@ -407,7 +473,7 @@ def generate_doc_page_html(doc: dict) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(doc['title'])} — Requirement Analysis Hub</title>
+  <title>{html.escape(doc['title'])} — Requirement Hub</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -419,9 +485,10 @@ def generate_doc_page_html(doc: dict) -> str:
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Requirement Analysis Hub</span>
+        <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
           <span class="breadcrumb-sep">&rsaquo;</span>
@@ -476,12 +543,98 @@ def generate_doc_page_html(doc: dict) -> str:
 
     <!-- Site Footer -->
     <footer class="site-footer">
-      <p>&copy; {datetime.datetime.now().year} Client Requirement Analysis • Hosted on GitHub Pages</p>
+      <p>&copy; {datetime.datetime.now().year} Client Requirement Analysis • Interactive Web App</p>
     </footer>
   </div>
 
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/proposal.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/export.js"></script>
+</body>
+</html>
+'''
+
+
+def generate_proposal_builder_tool_html() -> str:
+    """Generate dedicated interactive proposal builder tool page (docs/pages/interactive-proposal-builder.html)."""
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Client Proposal Builder — Requirement Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="glass-header">
+      <div class="brand-title">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <span>Interactive Proposal Builder</span>
+      </div>
+      <nav class="nav-links">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep">&rsaquo;</span>
+          <span style="font-weight: 600; color: var(--text-main);">Proposal Generator</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Interactive Client Banner -->
+    <div id="project-banner-container"></div>
+
+    <!-- Proposal Actions Bar -->
+    <div class="glass-header" style="margin-bottom: 1.5rem;">
+      <div style="font-weight: 700;">Proposal Actions</div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="export-btn primary" onclick="ExportManager.exportPDF()">📄 Download PDF Proposal</button>
+        <button class="export-btn" onclick="ProjectStorage.exportJSON()">💾 Export Project JSON</button>
+        <label class="export-btn" style="cursor: pointer;">
+          📂 Import Project JSON
+          <input type="file" accept=".json" style="display: none;" onchange="handleImportFile(event)">
+        </label>
+      </div>
+    </div>
+
+    <!-- Rendered Proposal Document Output -->
+    <main class="doc-content-card" id="proposal-output-container">
+      <!-- Generated via proposal.js -->
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <p>&copy; {datetime.datetime.now().year} Client Requirement Analysis • Powered by Interactive Static Web App</p>
+    </footer>
+  </div>
+
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/proposal.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/export.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {{
+      ProposalGenerator.renderProposal('proposal-output-container');
+    }});
+
+    function handleImportFile(evt) {{
+      const file = evt.target.files[0];
+      if (file) {{
+        const reader = new FileReader();
+        reader.onload = function(e) {{
+          ProjectStorage.importJSON(e.target.result);
+        }};
+        reader.readAsText(file);
+      }}
+    }}
+  </script>
 </body>
 </html>
 '''
@@ -491,22 +644,18 @@ def generate_doc_page_html(doc: dict) -> str:
 
 def main():
     print("=" * 60)
-    print("[BUILD] Building Static Site & Document Hub")
+    print("[BUILD] Building Interactive Static Site & Document Hub")
     print("=" * 60)
 
-    # Clean / prepare output folders
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
     FILES_DIR.mkdir(parents=True, exist_ok=True)
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 
     discovered_files = []
 
-    # 1. Discover all candidate documents across repository
     for root, dirs, files in os.walk(ROOT_DIR):
-        # Skip ignored directories
         dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
 
-        # Prevent scanning into generated output folders inside docs
         rel_root = Path(root).relative_to(ROOT_DIR)
         if rel_root.parts and rel_root.parts[0] == "docs":
             if len(rel_root.parts) > 1 and rel_root.parts[1] in {"pages", "files", "assets"}:
@@ -517,7 +666,6 @@ def main():
             ext = file_path.suffix.lower()
 
             if ext in SUPPORTED_EXTENSIONS and not filename.startswith("."):
-                # Avoid generated output files
                 if "docs" in file_path.parts and ("pages" in file_path.parts or "files" in file_path.parts):
                     continue
                 discovered_files.append(file_path)
@@ -539,7 +687,6 @@ def main():
 
         print(f"  [CONVERT] Processing [{type_info['label']}] {rel_path} ...")
 
-        # Parse content by extension type
         if ext == ".md":
             parsed = parse_markdown_file(file_path)
         elif ext in {".docx", ".doc"}:
@@ -573,25 +720,28 @@ def main():
             "relative_path": str(rel_path)
         }
 
-        # Generate pre-exported download files (DOCX, XLSX, Original)
         export_urls = generate_export_files(doc_data, file_path, slug)
         doc_data.update(export_urls)
 
-        # Generate individual HTML page
         doc_page_html = generate_doc_page_html(doc_data)
         doc_page_path = PAGES_DIR / f"{slug}.html"
         doc_page_path.write_text(doc_page_html, encoding="utf-8")
 
         processed_docs.append(doc_data)
 
-    # 2. Build index.html
+    # Build Proposal Builder tool page
+    proposal_tool_html = generate_proposal_builder_tool_html()
+    (PAGES_DIR / "interactive-proposal-builder.html").write_text(proposal_tool_html, encoding="utf-8")
+
+    # Build index.html
     index_html = generate_index_html(processed_docs)
     (OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
     print("\n" + "=" * 60)
-    print(f"[SUCCESS] Static Site Successfully Built!")
+    print(f"[SUCCESS] Interactive Static Site Successfully Built!")
     print(f"[OUTPUT] Directory: {OUTPUT_DIR}")
     print(f"[INDEX] Main Index: {OUTPUT_DIR / 'index.html'}")
+    print(f"[TOOL] Proposal Builder: {PAGES_DIR / 'interactive-proposal-builder.html'}")
     print(f"[PAGES] Generated {len(processed_docs)} document pages in {PAGES_DIR}")
     print("=" * 60)
 

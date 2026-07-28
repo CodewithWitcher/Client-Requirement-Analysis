@@ -196,6 +196,144 @@ h4 { font-size: 1.15rem; }
   font-size: 0.8rem;
 }
 
+/* Interactive Client Project Banner */
+.project-banner-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 2rem;
+}
+
+.banner-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.form-control {
+  padding: 0.6rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  background: #ffffff;
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Interactive Calculator Tables */
+.interactive-calc-table td input[type="number"] {
+  width: 90px;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+}
+
+.interactive-calc-table td input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent-emerald);
+}
+
+.item-row-total {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Pricing Summary Grid */
+.proposal-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.summary-card {
+  background: #ffffff;
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.summary-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  border-bottom: 1px dashed #f1f5f9;
+}
+
+.summary-row.grand-total {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  border-bottom: none;
+  padding-top: 0.85rem;
+  margin-top: 0.5rem;
+  border-top: 2px solid #0f172a;
+}
+
+.milestone-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
 /* Hero Section */
 .hero-section {
   text-align: center;
@@ -505,63 +643,7 @@ h4 { font-size: 1.15rem; }
   min-height: 500px;
 }
 
-/* Rendered Markdown Styling */
-.rendered-markdown h1, .rendered-markdown h2, .rendered-markdown h3, .rendered-markdown h4 {
-  margin-top: 1.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.rendered-markdown p {
-  margin-bottom: 1.25rem;
-  color: var(--text-main);
-  font-size: 1.02rem;
-  line-height: 1.7;
-}
-
-.rendered-markdown ul, .rendered-markdown ol {
-  margin-bottom: 1.25rem;
-  padding-left: 1.75rem;
-}
-
-.rendered-markdown li {
-  margin-bottom: 0.4rem;
-}
-
-.rendered-markdown blockquote {
-  border-left: 4px solid var(--accent-primary);
-  padding: 0.75rem 1.25rem;
-  background: rgba(59, 130, 246, 0.05);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin: 1.5rem 0;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-.rendered-markdown code {
-  font-family: var(--font-mono);
-  font-size: 0.88em;
-  background: rgba(15, 23, 42, 0.06);
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  color: #c026d3;
-}
-
-.rendered-markdown pre {
-  background: #0f172a;
-  color: #f8fafc;
-  padding: 1.25rem;
-  border-radius: var(--radius-md);
-  overflow-x: auto;
-  margin: 1.5rem 0;
-}
-
-.rendered-markdown pre code {
-  background: transparent;
-  color: inherit;
-  padding: 0;
-}
-
-/* Rendered Data Tables (Markdown, Word & Excel) */
+/* Rendered Data Tables */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -599,7 +681,7 @@ table.doc-table tr:hover td {
   background: #f8fafc;
 }
 
-/* Excel Sheet Tabs */
+/* Sheet Tabs */
 .sheet-tabs {
   display: flex;
   gap: 0.35rem;
@@ -622,22 +704,32 @@ table.doc-table tr:hover td {
   white-space: nowrap;
 }
 
-.sheet-tab-btn:hover {
-  color: var(--accent-emerald);
+.sheet-tab-btn:hover { color: var(--accent-emerald); }
+.sheet-tab-btn.active { color: var(--accent-emerald); border-bottom-color: var(--accent-emerald); background: rgba(16, 185, 129, 0.05); }
+
+.sheet-pane { display: none; }
+.sheet-pane.active { display: block; }
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-.sheet-tab-btn.active {
-  color: var(--accent-emerald);
-  border-bottom-color: var(--accent-emerald);
-  background: rgba(16, 185, 129, 0.05);
-}
-
-.sheet-pane {
-  display: none;
-}
-
-.sheet-pane.active {
-  display: block;
+.modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* Toast Notifications */
@@ -666,44 +758,12 @@ table.doc-table tr:hover td {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Footer */
+/* Site Footer */
 .site-footer {
   text-align: center;
   padding: 3rem 1.5rem 1rem 1.5rem;
   color: var(--text-subtle);
   font-size: 0.85rem;
-}
-
-/* Empty State */
-.no-results {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 4rem 2rem;
-  background: var(--glass-bg);
-  border-radius: var(--radius-lg);
-  border: 1px dashed var(--glass-border-subtle);
-  color: var(--text-muted);
-}
-
-/* Print Stylesheet for Clean PDF Exports */
-@media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
-  .glass-header, .export-toolbar, .site-footer, .filter-bar, .breadcrumb, .toast-container {
-    display: none !important;
-  }
-  .app-container {
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-  .doc-header-card, .doc-content-card {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-  }
 }
 
 /* Responsive Breakpoints */
