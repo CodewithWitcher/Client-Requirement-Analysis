@@ -94,24 +94,21 @@ window.SmartAssistant = {
     const key = this.getApiKey();
     const hasKey = !!(key && key.trim().length > 0);
 
-    const btns = document.querySelectorAll('.header-api-key-btn, .export-btn, button');
+    const btns = document.querySelectorAll('#header-api-key-btn, .api-key-btn, .header-api-key-btn, button[onclick*="openApiKeyModal"]');
     btns.forEach(btn => {
-      const onclickAttr = btn.getAttribute('onclick') || '';
-      if (onclickAttr.includes('openApiKeyModal') || btn.classList.contains('header-api-key-btn')) {
-        btn.classList.add('header-api-key-btn');
-        if (hasKey) {
-          btn.innerHTML = '🟢 DeepSeek API Saved';
-          btn.style.background = 'rgba(16, 185, 129, 0.15)';
-          btn.style.borderColor = '#10b981';
-          btn.style.color = '#059669';
-          btn.style.fontWeight = '700';
-        } else {
-          btn.innerHTML = '🔑 DeepSeek Key';
-          btn.style.background = '';
-          btn.style.borderColor = '';
-          btn.style.color = '';
-          btn.style.fontWeight = '';
-        }
+      btn.classList.add('header-api-key-btn');
+      if (hasKey) {
+        btn.innerHTML = '🟢 DeepSeek API Saved';
+        btn.style.background = 'rgba(16, 185, 129, 0.15)';
+        btn.style.borderColor = '#10b981';
+        btn.style.color = '#059669';
+        btn.style.fontWeight = '700';
+      } else {
+        btn.innerHTML = '🔑 DeepSeek Key';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+        btn.style.fontWeight = '';
       }
     });
   },
@@ -448,10 +445,172 @@ async function testApiKeyFromModal() {
   } catch (err) {
     alert(`❌ Network or API Key error: ${err.message}`);
   }
+  /**
+   * Render Floating Robot Chatbot Button & Welcome Speech Bubble
+   */
+  renderFloatingRobotWidget() {
+    if (document.getElementById('floating-robot-btn')) return;
+
+    const widgetHtml = `
+      <div id="floating-robot-bubble" style="${sessionStorage.getItem('dismiss_robot_bubble') ? 'display:none;' : ''}">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem;">
+          <strong style="color: var(--accent-indigo); font-size: 0.9rem;">🤖 AI Workspace Assistant</strong>
+          <button style="background: none; border: none; font-size: 0.8rem; cursor: pointer; color: var(--text-subtle);" onclick="dismissRobotBubble(event)">✕</button>
+        </div>
+        <div>Need help scoping a project or analyzing a requirement document? Click me for AI recommendations & file analysis!</div>
+      </div>
+
+      <button id="floating-robot-btn" onclick="window.SmartAssistant.openAiSideDrawer()" title="Open AI Assistant Studio">
+        <div class="robot-pulse-ring"></div>
+        🤖
+      </button>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', widgetHtml);
+  },
+
+  /**
+   * Open Slide-out AI Side Drawer
+   */
+  openAiSideDrawer() {
+    document.getElementById('floating-robot-bubble')?.remove();
+
+    const isPage = window.location.pathname.includes('/pages/');
+    const prefix = isPage ? '' : 'pages/';
+
+    const hasKey = !!this.getApiKey();
+
+    const drawerHtml = `
+      <div id="ai-drawer-overlay" class="ai-drawer-overlay" onclick="closeAiSideDrawer(event)">
+        <div class="ai-drawer-card" onclick="event.stopPropagation()">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e2e8f0;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 1.5rem;">🤖</span>
+              <div>
+                <h3 style="margin: 0; font-family: var(--font-serif); font-size: 1.2rem;">AI Assistant & Tools Studio</h3>
+                <span style="font-size: 0.75rem; color: ${hasKey ? 'var(--accent-emerald)' : 'var(--accent-amber)'}; font-weight: 700;">
+                  ${hasKey ? '🟢 Client API Key Saved' : '⚪ Using Free Rule Engine'}
+                </span>
+              </div>
+            </div>
+            <button class="export-btn" onclick="closeAiSideDrawer()">✕ Close</button>
+          </div>
+
+          <!-- Section 1: Step-by-Step Recommender -->
+          <div style="background: #f8fafc; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 1.25rem;">
+            <h4 style="font-size: 1rem; color: var(--text-main); margin-bottom: 0.75rem;">🎯 Step-by-Step Tool Recommender</h4>
+            
+            <div class="form-group" style="margin-bottom: 0.75rem;">
+              <label style="font-size: 0.8rem;">Project Type:</label>
+              <select id="drawer-wizard-platform" class="form-control" style="font-size: 0.85rem;">
+                <option value="web">🌐 Website / Web Application</option>
+                <option value="app">📱 Mobile Application (iOS/Android)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0.75rem;">
+              <label style="font-size: 0.8rem;">Primary Goal:</label>
+              <select id="drawer-wizard-intent" class="form-control" style="font-size: 0.85rem;">
+                <option value="pricing">💰 Calculate Pricing & Costs</option>
+                <option value="interview">📋 Client Discovery Questionnaire</option>
+                <option value="proposal">📝 Generate Formal Proposal</option>
+                <option value="checklist">✅ Project Lifecycle Checklist</option>
+                <option value="guide">📖 Complete Requirement Guide</option>
+              </select>
+            </div>
+
+            <button class="export-btn primary" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.5rem;" onclick="handleDrawerRecommend()">
+              🚀 Recommend & Open Tool
+            </button>
+
+            <div id="drawer-recommend-output" style="margin-top: 0.75rem; display: none;"></div>
+          </div>
+
+          <!-- Section 2: AI Document Analyzer -->
+          <div style="background: #f8fafc; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h4 style="font-size: 1rem; color: var(--text-main); margin: 0;">📄 AI Document Requirement Analyzer</h4>
+              <button class="export-btn" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="window.SmartAssistant.openApiKeyModal()">🔑 Key</button>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0.75rem;">
+              <label style="font-size: 0.8rem;">Upload Client Requirement File (.txt, .md, .docx, .json):</label>
+              <input type="file" id="drawer-ai-file-input" class="form-control" accept=".txt,.md,.docx,.json" style="font-size: 0.8rem;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0.85rem;">
+              <label style="font-size: 0.8rem;">Client / Project Title:</label>
+              <input type="text" id="drawer-ai-client-title" class="form-control" placeholder="e.g. Acme App" style="font-size: 0.85rem;">
+            </div>
+
+            <button class="export-btn" style="width: 100%; justify-content: center; background: var(--accent-indigo); color: #fff; border-color: var(--accent-indigo); font-size: 0.85rem; padding: 0.5rem;" onclick="handleDrawerAiAnalyze()">
+              🤖 Analyze Document & Match Features
+            </button>
+          </div>
+
+          <!-- Section 3: Deep Technical Architecture Studio -->
+          <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(59, 130, 246, 0.04)); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.3);">
+            <h4 style="font-size: 1rem; color: var(--accent-indigo); margin-bottom: 0.5rem;">🧠 AI Technical Intelligence Studio</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.85rem;">
+              Generate complete Technical Architecture Specs, Deployment Pipelines, SEO Reports, REST API Contracts, and Risk Matrices automatically.
+            </p>
+            <a href="${prefix}ai-intelligence-engine.html" class="export-btn primary" style="width: 100%; justify-content: center; font-size: 0.85rem; background: var(--accent-indigo); border-color: var(--accent-indigo); text-decoration: none;">
+              ⚡ Launch Deep AI Technical Studio
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', drawerHtml);
+  }
+};
+
+function dismissRobotBubble(e) {
+  if (e) e.stopPropagation();
+  sessionStorage.setItem('dismiss_robot_bubble', 'true');
+  document.getElementById('floating-robot-bubble')?.remove();
+}
+
+function closeAiSideDrawer() {
+  document.getElementById('ai-drawer-overlay')?.remove();
+}
+
+function handleDrawerRecommend() {
+  const plat = document.getElementById('drawer-wizard-platform').value;
+  const intent = document.getElementById('drawer-wizard-intent').value;
+  const rec = window.SmartAssistant.getRecommendation(plat, intent);
+  const out = document.getElementById('drawer-recommend-output');
+
+  const isPage = window.location.pathname.includes('/pages/');
+  const prefix = isPage ? '' : 'pages/';
+
+  out.style.display = 'block';
+  out.innerHTML = `
+    <div style="background: rgba(16, 185, 129, 0.08); padding: 0.85rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3);">
+      <div style="font-weight: 700; color: var(--accent-emerald); font-size: 0.88rem;">Recommended: ${rec.title}</div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">${rec.desc}</p>
+      <a href="${prefix}${rec.slug}.html" class="export-btn primary" style="font-size: 0.78rem; padding: 0.35rem 0.65rem;">🚀 Open ${rec.title}</a>
+    </div>
+  `;
+}
+
+async function handleDrawerAiAnalyze() {
+  const fileInput = document.getElementById('drawer-ai-file-input');
+  const clientTitle = document.getElementById('drawer-ai-client-title').value.trim();
+
+  if (!fileInput.files || !fileInput.files[0]) {
+    alert("Please select a client requirement document file first.");
+    return;
+  }
+
+  closeAiSideDrawer();
+  await window.SmartAssistant.analyzeDocumentFile(fileInput.files[0], clientTitle, clientTitle);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   if (window.SmartAssistant) {
     window.SmartAssistant.updateHeaderApiKeyStatus();
+    window.SmartAssistant.renderFloatingRobotWidget();
   }
 });

@@ -2,6 +2,7 @@
  * Dynamic Client Proposal & Report Generator Module
  * Compiles active project state, selected requirements, line-item costs, GST rates, 
  * complexity multipliers, proposal dates, statuses, and custom payment milestone percentages into a live re-calculating proposal.
+ * Includes interactive "How It Works & Data Sources" guidance modal.
  */
 
 window.ProposalGenerator = {
@@ -82,14 +83,36 @@ window.ProposalGenerator = {
     });
 
     if (!selectedLineItems.length) {
-      rowsHtml = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">No custom line-items currently selected. Open a pricing calculator page to select project scope features.</td></tr>`;
+      rowsHtml = `
+        <tr>
+          <td colspan="5" style="padding: 2rem; background: rgba(99, 102, 241, 0.04); border: 1px dashed var(--accent-indigo);">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+              <span style="font-size: 2rem;">💡</span>
+              <h3 style="font-size: 1.1rem; color: var(--text-main); margin: 0.5rem 0;">No Custom Line-Items Selected Yet</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.25rem;">
+                Proposal items are populated automatically when you check features in pricing calculators or reference guides. Click below to open a calculator and select scope items:
+              </p>
+              <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+                <a href="template-excel-template-website-pricing-calculator.html" class="export-btn primary" style="font-size: 0.82rem;">📊 Website Calculator</a>
+                <a href="template-excel-template-application-pricing-calculator.html" class="export-btn primary" style="font-size: 0.82rem;">📊 App Calculator</a>
+                <button class="export-btn" style="font-size: 0.82rem;" onclick="ProposalGenerator.openHowItWorksModal()">❓ How Proposal Data Works</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
     }
 
     container.innerHTML = `
       <!-- Interactive Metadata & Financial Controls Bar -->
       <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
-        <div style="font-weight: 800; font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-main); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-          <span>⚙️ Proposal Metadata & Dynamic Settings</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="font-weight: 800; font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-main);">
+            ⚙️ Proposal Metadata & Dynamic Settings
+          </div>
+          <button class="export-btn" style="padding: 0.3rem 0.75rem; font-size: 0.8rem; background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo);" onclick="ProposalGenerator.openHowItWorksModal()">
+            ❓ How Proposal Data Works & Sources
+          </button>
         </div>
 
         <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
@@ -241,6 +264,83 @@ window.ProposalGenerator = {
         </div>
       </div>
     `;
+  },
+
+  /**
+   * Guidance Modal: How Proposal Builder Works & Data Sources
+   */
+  openHowItWorksModal: function() {
+    const modalHtml = `
+      <div id="proposal-help-overlay" class="modal-overlay">
+        <div class="modal-card" style="max-width: 680px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e2e8f0;">
+            <h3 style="font-family: var(--font-serif); font-size: 1.3rem;">💡 How Proposal Builder Works & Data Sources</h3>
+            <button class="export-btn" onclick="document.getElementById('proposal-help-overlay').remove()">✕ Close</button>
+          </div>
+
+          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+            The <strong>Interactive Proposal Builder</strong> aggregates live data from your client workspace. When you select features or check items in pricing calculators or requirement guides, they automatically flow into this proposal document!
+          </p>
+
+          <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--text-main);">🔗 Direct Links to Data Source Pages:</h4>
+          
+          <div style="display: grid; gap: 0.75rem; margin-bottom: 1.5rem;">
+            <a href="template-excel-template-website-pricing-calculator.html" class="explorer-item" style="text-decoration: none;">
+              <div>
+                <strong style="color: var(--text-main);">📊 Website Pricing Calculator</strong>
+                <div style="font-size: 0.8rem; color: var(--text-subtle);">Check website features & cost items to populate website proposal lines</div>
+              </div>
+              <span class="badge badge-xlsx">XLSX</span>
+            </a>
+
+            <a href="template-excel-template-application-pricing-calculator.html" class="explorer-item" style="text-decoration: none;">
+              <div>
+                <strong style="color: var(--text-main);">📊 Application Pricing Calculator</strong>
+                <div style="font-size: 0.8rem; color: var(--text-subtle);">Check mobile app features & cost items to populate app proposal lines</div>
+              </div>
+              <span class="badge badge-xlsx">XLSX</span>
+            </a>
+
+            <a href="docs-website-website-requirements-complete-guide.html" class="explorer-item" style="text-decoration: none;">
+              <div>
+                <strong style="color: var(--text-main);">📖 Website Requirements Guide</strong>
+                <div style="font-size: 0.8rem; color: var(--text-subtle);">Click "+ Add to Scope" on specific website requirement sections</div>
+              </div>
+              <span class="badge badge-md">MD</span>
+            </a>
+
+            <a href="docs-application-application-requirements-complete-guide.html" class="explorer-item" style="text-decoration: none;">
+              <div>
+                <strong style="color: var(--text-main);">📖 Application Requirements Guide</strong>
+                <div style="font-size: 0.8rem; color: var(--text-subtle);">Click "+ Add to Scope" on specific mobile app requirement sections</div>
+              </div>
+              <span class="badge badge-md">MD</span>
+            </a>
+
+            <a href="ai-intelligence-engine.html" class="explorer-item" style="text-decoration: none; background: rgba(99, 102, 241, 0.04); border-color: rgba(99, 102, 241, 0.3);">
+              <div>
+                <strong style="color: var(--accent-indigo);">🧠 AI Technical Intelligence Studio</strong>
+                <div style="font-size: 0.8rem; color: var(--text-subtle);">Upload client requirement PDF to generate AI architecture & auto-fill scope</div>
+              </div>
+              <span class="badge badge-md" style="background: var(--accent-indigo); color: #fff;">AI STUDIO</span>
+            </a>
+          </div>
+
+          <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--text-main);">⚡ 3-Step Simple Workflow:</h4>
+          <ol style="padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+            <li>Visit any of the calculator or guide pages linked above.</li>
+            <li>Check the boxes for the features your client needs.</li>
+            <li>Return to <strong>Proposal Builder</strong> — your tailored proposal, GST rates, and milestones will automatically update!</li>
+          </ol>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+            <button class="export-btn primary" onclick="document.getElementById('proposal-help-overlay').remove()">Got it! Close Guide</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
   },
 
   /**

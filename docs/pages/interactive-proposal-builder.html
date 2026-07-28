@@ -22,7 +22,7 @@
         <span>Interactive Proposal Builder</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
         <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <div class="breadcrumb">
@@ -40,6 +40,7 @@
     <div class="glass-header" style="margin-bottom: 1.5rem;">
       <div style="font-weight: 700;">Proposal Actions</div>
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;" onclick="ProposalGenerator.openHowItWorksModal()">❓ How It Works & Data Sources</button>
         <button class="export-btn primary" onclick="ExportManager.exportPDF()">📄 Download PDF Proposal</button>
         <button class="export-btn" onclick="ProjectStorage.exportJSON()">💾 Export Project JSON</button>
         <label class="export-btn" style="cursor: pointer;">

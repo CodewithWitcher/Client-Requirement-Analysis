@@ -501,7 +501,7 @@ def generate_index_html(documents: list) -> str:
         <span>Client Requirement Hub</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="pages/ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
         <a href="pages/file-explorer.html" class="export-btn">📁 File Explorer (All 18 Docs)</a>
         <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
@@ -514,78 +514,6 @@ def generate_index_html(documents: list) -> str:
       <p class="hero-subtitle">
         Scope projects, edit live pricing calculators, fill client questionnaires, auto-save state in browser, and export professional proposals.
       </p>
-    </section>
-
-    <!-- BUCKET AI & SMART ASSISTANT: Recommendation Wizard & AI Document Analyzer -->
-    <section class="bucket-section" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(238, 242, 255, 0.8)); border: 1px solid rgba(99, 102, 241, 0.3);">
-      <div class="bucket-header">
-        <div class="bucket-icon" style="background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); color: #ffffff;">🤖</div>
-        <div>
-          <h2 class="bucket-title">Smart Recommendation Assistant & AI Document Analyzer</h2>
-          <p class="bucket-desc">Get tailored tool recommendations or upload client requirement documents to generate AI estimation reports.</p>
-        </div>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-        
-        <!-- Option A: Smart Recommendation Wizard -->
-        <div style="background: #ffffff; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--glass-border-subtle); box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-          <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-main);">🎯 Step-by-Step Tool Recommender</h3>
-          
-          <div class="form-group" style="margin-bottom: 1rem;">
-            <label>1. Select Project Type:</label>
-            <select id="wizard-platform" class="form-control">
-              <option value="web">🌐 Website / Web Application</option>
-              <option value="app">📱 Mobile Application (iOS/Android)</option>
-            </select>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 1rem;">
-            <label>2. Select Primary Goal:</label>
-            <select id="wizard-intent" class="form-control">
-              <option value="pricing">💰 Calculate Pricing & Estimate Costs</option>
-              <option value="interview">📋 Conduct Client Discovery Interview</option>
-              <option value="proposal">📝 Generate Formal Client Proposal</option>
-              <option value="checklist">✅ Track Project Lifecycle Checklist</option>
-              <option value="guide">📖 Review Complete Requirement Guide</option>
-            </select>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 1.25rem;">
-            <label>3. Client Name (Optional):</label>
-            <input type="text" id="wizard-client-name" class="form-control" placeholder="e.g. Acme Corp">
-          </div>
-
-          <button class="export-btn primary" style="width: 100%; justify-content: center;" onclick="handleWizardRecommend()">
-            🚀 Recommend & Open Target Tool
-          </button>
-
-          <div id="wizard-recommend-output" style="margin-top: 1rem; display: none;"></div>
-        </div>
-
-        <!-- Option B: AI Client Requirement Document Analyzer -->
-        <div style="background: #ffffff; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--glass-border-subtle); box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-            <h3 style="font-size: 1.2rem; color: var(--text-main); margin: 0;">📄 Upload Doc for AI Analysis</h3>
-            <button class="export-btn" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="window.SmartAssistant.openApiKeyModal()">🔑 API Key</button>
-          </div>
-          
-          <div class="form-group" style="margin-bottom: 1rem;">
-            <label>Upload Client Requirement File (.txt, .md, .docx, .json):</label>
-            <input type="file" id="ai-file-input" class="form-control" accept=".txt,.md,.docx,.json">
-          </div>
-
-          <div class="form-group" style="margin-bottom: 1.25rem;">
-            <label>Client & Project Title:</label>
-            <input type="text" id="ai-client-title" class="form-control" placeholder="e.g. Nexus E-Commerce App">
-          </div>
-
-          <button class="export-btn" style="width: 100%; justify-content: center; background: var(--accent-indigo); color: #ffffff; border-color: var(--accent-indigo);" onclick="handleAiDocumentAnalyze()">
-            🤖 Analyze Document & Match Line-Items
-          </button>
-        </div>
-
-      </div>
     </section>
 
     <!-- Structured Filter & Search Controls -->
@@ -771,7 +699,7 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
         <span>Repository File Explorer</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="../index.html" class="export-btn">🏠 Main Workspace</a>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
@@ -886,7 +814,7 @@ def generate_doc_page_html(doc: dict) -> str:
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
         <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
@@ -995,7 +923,7 @@ def generate_proposal_builder_tool_html() -> str:
         <span>Interactive Proposal Builder</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
         <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <div class="breadcrumb">
@@ -1013,6 +941,7 @@ def generate_proposal_builder_tool_html() -> str:
     <div class="glass-header" style="margin-bottom: 1.5rem;">
       <div style="font-weight: 700;">Proposal Actions</div>
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;" onclick="ProposalGenerator.openHowItWorksModal()">❓ How It Works & Data Sources</button>
         <button class="export-btn primary" onclick="ExportManager.exportPDF()">📄 Download PDF Proposal</button>
         <button class="export-btn" onclick="ProjectStorage.exportJSON()">💾 Export Project JSON</button>
         <label class="export-btn" style="cursor: pointer;">
@@ -1086,7 +1015,7 @@ def generate_ai_intelligence_engine_html() -> str:
         <span>AI Technical Intelligence Studio</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
