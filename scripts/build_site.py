@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 Document Hub & Interactive Static Site Generator
-Scans repository for .md, .xlsx, .xls, .doc, and .docx files, filters out redundant markdown files 
-from the UI while preserving them in the repo, builds interactive web components, 2-column TOC layouts, 
-and builds a clean, non-repetitive static web hub inside `docs/`.
+Scans repository for .md, .xlsx, .xls, .doc, and .docx files, converts all 18 documents into HTML pages,
+builds a clean 11-tool primary working landing page (`docs/index.html`), and builds a full repository 
+File Explorer catalog page (`docs/pages/file-explorer.html`) containing all 18 documents.
 
 Run:
   python scripts/build_site.py
@@ -41,8 +41,8 @@ IGNORE_DIRS = {
     "__pycache__", "build", "dist", "site", ".pytest_cache"
 }
 
-# Redundant pricing markdown files to hide from UI (since interactive Excel calculators represent them)
-UI_EXCLUDE_FILENAMES = {
+# Secondary/Reference markdown filenames to exclude from the main landing page (but include in File Explorer)
+LANDING_EXCLUDE_FILENAMES = {
     "Application-Pricing-Parameters.md",
     "Website-Pricing-Parameters.md",
     "Application-Pricing-Module-Overview.md",
@@ -427,7 +427,7 @@ def generate_export_files(doc_data: dict, file_path: Path, slug: str):
 # ─── HTML Page Generator Templates ───────────────────────────────────────
 
 def generate_index_html(documents: list) -> str:
-    """Build home index dashboard page (docs/index.html)."""
+    """Build home index dashboard page (docs/index.html) with 11 primary working tools."""
     cards_html = []
     
     md_count = sum(1 for d in documents if d['category'] == 'md')
@@ -456,7 +456,7 @@ def generate_index_html(documents: list) -> str:
               <span>{doc['meta_label']}</span>
             </div>
             <div class="view-link">
-              Open Document &rarr;
+              Open Tool &rarr;
             </div>
           </div>
         </a>
@@ -483,11 +483,8 @@ def generate_index_html(documents: list) -> str:
         <span>Client Requirement Hub</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
+        <a href="pages/file-explorer.html" class="export-btn">📁 File Explorer (All 18 Docs)</a>
         <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
-        <span class="breadcrumb">
-          <span style="font-weight: 600; color: var(--text-main);">{len(documents)} Primary Tools</span>
-        </span>
       </nav>
     </header>
 
@@ -506,7 +503,7 @@ def generate_index_html(documents: list) -> str:
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" id="search-input" class="search-input" placeholder="Search primary tools by title or keyword..." aria-label="Search documents">
+        <input type="text" id="search-input" class="search-input" placeholder="Search primary tools by title or keyword..." aria-label="Search tools">
       </div>
 
       <!-- Domain / Topic Filters -->
@@ -553,6 +550,133 @@ def generate_index_html(documents: list) -> str:
 '''
 
 
+def generate_file_explorer_page_html(all_documents: list) -> str:
+    """Build dedicated File Explorer Catalog Page (docs/pages/file-explorer.html) listing ALL 18 documents."""
+    cards_html = []
+    
+    md_count = sum(1 for d in all_documents if d['category'] == 'md')
+    docx_count = sum(1 for d in all_documents if d['category'] == 'docx')
+    xlsx_count = sum(1 for d in all_documents if d['category'] == 'xlsx')
+
+    web_count = sum(1 for d in all_documents if 'web' in d['topics'])
+    mobile_count = sum(1 for d in all_documents if 'mobile' in d['topics'])
+    pricing_count = sum(1 for d in all_documents if 'pricing' in d['topics'])
+
+    for doc in all_documents:
+        topic_attr = " ".join(doc['topics'])
+        cards_html.append(f'''
+        <a href="{doc['slug']}.html" class="doc-card" data-type="{doc['category']}" data-topics="{topic_attr}" data-title="{html.escape(doc['title'])}">
+          <div class="card-header">
+            <div class="card-title">{html.escape(doc['title'])}</div>
+            <span class="badge {doc['badge_class']}">{doc['label']}</span>
+          </div>
+          <p class="card-excerpt">{html.escape(doc['excerpt'])}</p>
+          <div class="card-footer">
+            <div class="card-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>{doc['meta_label']}</span>
+            </div>
+            <div class="view-link">
+              Read Document &rarr;
+            </div>
+          </div>
+        </a>
+        ''')
+
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repository File Explorer — All 18 Documents</title>
+  <meta name="description" content="Complete repository catalog containing all Markdown reference guides, Excel calculators, Word proposals, and checklists.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="glass-header">
+      <div class="brand-title">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <span>Repository File Explorer</span>
+      </div>
+      <nav class="nav-links">
+        <a href="../index.html" class="export-btn">🏠 Main Workspace</a>
+        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
+        <div class="breadcrumb">
+          <span style="font-weight: 600; color: var(--text-main);">{len(all_documents)} Total Repository Files</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>📁 Repository File Explorer & Reference Catalog</h1>
+      <p class="hero-subtitle">
+        Browse, search, and read all 18 repository files — including pricing parameter markdowns, quick guides, overview documents, questionnaires, spreadsheets, and proposal templates.
+      </p>
+    </section>
+
+    <!-- Filter & Search Controls -->
+    <div class="filter-bar">
+      <div class="search-box">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" class="search-input" placeholder="Search all 18 repository files..." aria-label="Search all files">
+      </div>
+
+      <!-- Domain / Topic Filters -->
+      <div class="filter-tags" style="width: 100%; margin-top: 0.5rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">CATEGORY:</span>
+        <button class="filter-btn topic-filter active" data-topic="all">All Topics ({len(all_documents)})</button>
+        <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects ({web_count})</button>
+        <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps ({mobile_count})</button>
+        <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & References ({pricing_count})</button>
+      </div>
+
+      <!-- File Extension Filters -->
+      <div class="filter-tags" style="width: 100%; margin-top: 0.25rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">FORMAT:</span>
+        <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">{len(all_documents)}</span>)</button>
+        <button class="filter-btn type-filter" data-filter="md">Markdown ({md_count})</button>
+        <button class="filter-btn type-filter" data-filter="docx">Word ({docx_count})</button>
+        <button class="filter-btn type-filter" data-filter="xlsx">Excel ({xlsx_count})</button>
+      </div>
+    </div>
+
+    <!-- Document Card Grid -->
+    <main class="card-grid" id="card-grid">
+      {"".join(cards_html)}
+      <div id="no-results" class="no-results" style="display: none;">
+        <h3>No matching files found</h3>
+        <p>Try refining your search terms or selecting a different file category filter.</p>
+      </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <p>&copy; {datetime.datetime.now().year} Client Requirement Analysis • Repository File Catalog</p>
+    </footer>
+  </div>
+
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/proposal.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/export.js"></script>
+</body>
+</html>
+'''
+
+
 def generate_doc_page_html(doc: dict) -> str:
     """Build individual document view page (docs/pages/<slug>.html)."""
     layout_wrapper_start = '<div class="doc-layout-grid">' if doc.get('sidebar_toc') else '<div>'
@@ -578,7 +702,7 @@ def generate_doc_page_html(doc: dict) -> str:
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
+        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
@@ -679,7 +803,7 @@ def generate_proposal_builder_tool_html() -> str:
         <span>Interactive Proposal Builder</span>
       </div>
       <nav class="nav-links">
-        <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
+        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
           <span class="breadcrumb-sep">&rsaquo;</span>
@@ -769,17 +893,13 @@ def main():
             if ext in SUPPORTED_EXTENSIONS and not filename.startswith("."):
                 if "docs" in file_path.parts and ("pages" in file_path.parts or "files" in file_path.parts):
                     continue
-                # Exclude redundant markdown files from UI building
-                if filename in UI_EXCLUDE_FILENAMES:
-                    print(f"  [EXCLUDE FROM UI] Skipping duplicate pricing markdown: {filename}")
-                    continue
-
                 discovered_files.append(file_path)
 
     discovered_files.sort(key=lambda p: str(p).lower())
-    print(f"\n[DISCOVERY] Found {len(discovered_files)} primary tool document(s) for UI:\n")
+    print(f"\n[DISCOVERY] Found {len(discovered_files)} total document(s) in repository:\n")
 
-    processed_docs = []
+    all_processed_docs = []
+    landing_docs = []
 
     for file_path in discovered_files:
         rel_path = file_path.relative_to(ROOT_DIR)
@@ -835,24 +955,36 @@ def main():
         export_urls = generate_export_files(doc_data, file_path, slug)
         doc_data.update(export_urls)
 
+        # Build individual HTML page for EVERY document
         doc_page_html = generate_doc_page_html(doc_data)
         doc_page_path = PAGES_DIR / f"{slug}.html"
         doc_page_path.write_text(doc_page_html, encoding="utf-8")
 
-        processed_docs.append(doc_data)
+        all_processed_docs.append(doc_data)
 
+        # Only include non-excluded tools on primary landing page
+        if file_path.name not in LANDING_EXCLUDE_FILENAMES:
+            landing_docs.append(doc_data)
+
+    # 1. Build dedicated File Explorer catalog page listing ALL 18 documents
+    file_explorer_html = generate_file_explorer_page_html(all_processed_docs)
+    (PAGES_DIR / "file-explorer.html").write_text(file_explorer_html, encoding="utf-8")
+
+    # 2. Build Proposal Builder tool page
     proposal_tool_html = generate_proposal_builder_tool_html()
     (PAGES_DIR / "interactive-proposal-builder.html").write_text(proposal_tool_html, encoding="utf-8")
 
-    index_html = generate_index_html(processed_docs)
+    # 3. Build primary landing index.html with 11 primary tools
+    index_html = generate_index_html(landing_docs)
     (OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
     print("\n" + "=" * 60)
     print(f"[SUCCESS] Interactive Static Site Successfully Built!")
     print(f"[OUTPUT] Directory: {OUTPUT_DIR}")
     print(f"[INDEX] Main Index: {OUTPUT_DIR / 'index.html'}")
+    print(f"[EXPLORER] File Explorer Page: {PAGES_DIR / 'file-explorer.html'} ({len(all_processed_docs)} total files)")
     print(f"[TOOL] Proposal Builder: {PAGES_DIR / 'interactive-proposal-builder.html'}")
-    print(f"[PAGES] Generated {len(processed_docs)} primary tool pages in {PAGES_DIR}")
+    print(f"[PAGES] Generated {len(all_processed_docs)} total document pages in {PAGES_DIR}")
     print("=" * 60)
 
 
