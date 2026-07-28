@@ -32,7 +32,7 @@
       </p>
     </section>
 
-    <!-- Filter & Search Controls -->
+    <!-- Structured Filter & Search Controls -->
     <div class="filter-bar">
       <div class="search-box">
         <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -42,22 +42,26 @@
         <input type="text" id="search-input" class="search-input" placeholder="Search primary tools by title or keyword..." aria-label="Search tools">
       </div>
 
-      <!-- Domain / Topic Filters -->
-      <div class="filter-tags" style="width: 100%; margin-top: 0.5rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">CATEGORY:</span>
-        <button class="filter-btn topic-filter active" data-topic="all">All Topics</button>
-        <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects (5)</button>
-        <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps (5)</button>
-        <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & Calculators (4)</button>
-      </div>
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <span class="filter-label">Category:</span>
+          <div class="filter-tags">
+            <button class="filter-btn topic-filter active" data-topic="all">All Topics</button>
+            <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects (5)</button>
+            <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps (5)</button>
+            <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & Calculators (4)</button>
+          </div>
+        </div>
 
-      <!-- File Extension Filters -->
-      <div class="filter-tags" style="width: 100%; margin-top: 0.25rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">FORMAT:</span>
-        <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">11</span>)</button>
-        <button class="filter-btn type-filter" data-filter="md">Markdown (7)</button>
-        <button class="filter-btn type-filter" data-filter="docx">Word (2)</button>
-        <button class="filter-btn type-filter" data-filter="xlsx">Excel (2)</button>
+        <div class="filter-group">
+          <span class="filter-label">Format:</span>
+          <div class="filter-tags">
+            <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">11</span>)</button>
+            <button class="filter-btn type-filter" data-filter="md">Markdown (7)</button>
+            <button class="filter-btn type-filter" data-filter="docx">Word (2)</button>
+            <button class="filter-btn type-filter" data-filter="xlsx">Excel (2)</button>
+          </div>
+        </div>
       </div>
     </div>
 

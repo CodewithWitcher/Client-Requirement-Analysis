@@ -496,7 +496,7 @@ def generate_index_html(documents: list) -> str:
       </p>
     </section>
 
-    <!-- Filter & Search Controls -->
+    <!-- Structured Filter & Search Controls -->
     <div class="filter-bar">
       <div class="search-box">
         <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -506,22 +506,26 @@ def generate_index_html(documents: list) -> str:
         <input type="text" id="search-input" class="search-input" placeholder="Search primary tools by title or keyword..." aria-label="Search tools">
       </div>
 
-      <!-- Domain / Topic Filters -->
-      <div class="filter-tags" style="width: 100%; margin-top: 0.5rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">CATEGORY:</span>
-        <button class="filter-btn topic-filter active" data-topic="all">All Topics</button>
-        <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects ({web_count})</button>
-        <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps ({mobile_count})</button>
-        <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & Calculators ({pricing_count})</button>
-      </div>
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <span class="filter-label">Category:</span>
+          <div class="filter-tags">
+            <button class="filter-btn topic-filter active" data-topic="all">All Topics</button>
+            <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects ({web_count})</button>
+            <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps ({mobile_count})</button>
+            <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & Calculators ({pricing_count})</button>
+          </div>
+        </div>
 
-      <!-- File Extension Filters -->
-      <div class="filter-tags" style="width: 100%; margin-top: 0.25rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">FORMAT:</span>
-        <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">{len(documents)}</span>)</button>
-        <button class="filter-btn type-filter" data-filter="md">Markdown ({md_count})</button>
-        <button class="filter-btn type-filter" data-filter="docx">Word ({docx_count})</button>
-        <button class="filter-btn type-filter" data-filter="xlsx">Excel ({xlsx_count})</button>
+        <div class="filter-group">
+          <span class="filter-label">Format:</span>
+          <div class="filter-tags">
+            <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">{len(documents)}</span>)</button>
+            <button class="filter-btn type-filter" data-filter="md">Markdown ({md_count})</button>
+            <button class="filter-btn type-filter" data-filter="docx">Word ({docx_count})</button>
+            <button class="filter-btn type-filter" data-filter="xlsx">Excel ({xlsx_count})</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -623,7 +627,7 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
       </p>
     </section>
 
-    <!-- Filter & Search Controls -->
+    <!-- Structured Filter & Search Controls -->
     <div class="filter-bar">
       <div class="search-box">
         <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -633,22 +637,26 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
         <input type="text" id="search-input" class="search-input" placeholder="Search all 18 repository files..." aria-label="Search all files">
       </div>
 
-      <!-- Domain / Topic Filters -->
-      <div class="filter-tags" style="width: 100%; margin-top: 0.5rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">CATEGORY:</span>
-        <button class="filter-btn topic-filter active" data-topic="all">All Topics ({len(all_documents)})</button>
-        <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects ({web_count})</button>
-        <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps ({mobile_count})</button>
-        <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & References ({pricing_count})</button>
-      </div>
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <span class="filter-label">Category:</span>
+          <div class="filter-tags">
+            <button class="filter-btn topic-filter active" data-topic="all">All Topics ({len(all_documents)})</button>
+            <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects ({web_count})</button>
+            <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps ({mobile_count})</button>
+            <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & References ({pricing_count})</button>
+          </div>
+        </div>
 
-      <!-- File Extension Filters -->
-      <div class="filter-tags" style="width: 100%; margin-top: 0.25rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">FORMAT:</span>
-        <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">{len(all_documents)}</span>)</button>
-        <button class="filter-btn type-filter" data-filter="md">Markdown ({md_count})</button>
-        <button class="filter-btn type-filter" data-filter="docx">Word ({docx_count})</button>
-        <button class="filter-btn type-filter" data-filter="xlsx">Excel ({xlsx_count})</button>
+        <div class="filter-group">
+          <span class="filter-label">Format:</span>
+          <div class="filter-tags">
+            <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">{len(all_documents)}</span>)</button>
+            <button class="filter-btn type-filter" data-filter="md">Markdown ({md_count})</button>
+            <button class="filter-btn type-filter" data-filter="docx">Word ({docx_count})</button>
+            <button class="filter-btn type-filter" data-filter="xlsx">Excel ({xlsx_count})</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -955,26 +963,21 @@ def main():
         export_urls = generate_export_files(doc_data, file_path, slug)
         doc_data.update(export_urls)
 
-        # Build individual HTML page for EVERY document
         doc_page_html = generate_doc_page_html(doc_data)
         doc_page_path = PAGES_DIR / f"{slug}.html"
         doc_page_path.write_text(doc_page_html, encoding="utf-8")
 
         all_processed_docs.append(doc_data)
 
-        # Only include non-excluded tools on primary landing page
         if file_path.name not in LANDING_EXCLUDE_FILENAMES:
             landing_docs.append(doc_data)
 
-    # 1. Build dedicated File Explorer catalog page listing ALL 18 documents
     file_explorer_html = generate_file_explorer_page_html(all_processed_docs)
     (PAGES_DIR / "file-explorer.html").write_text(file_explorer_html, encoding="utf-8")
 
-    # 2. Build Proposal Builder tool page
     proposal_tool_html = generate_proposal_builder_tool_html()
     (PAGES_DIR / "interactive-proposal-builder.html").write_text(proposal_tool_html, encoding="utf-8")
 
-    # 3. Build primary landing index.html with 11 primary tools
     index_html = generate_index_html(landing_docs)
     (OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
