@@ -1,0 +1,2491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌐 Website Requirements — Complete Guide — Requirement Analysis Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header & Breadcrumb Navigation -->
+    <header class="glass-header">
+      <div class="brand-title">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <span>Requirement Analysis Hub</span>
+      </div>
+      <nav class="nav-links">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep">&rsaquo;</span>
+          <span style="font-weight: 600; color: var(--text-main);">🌐 Website Requirements — Complete Guide</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Document Header Info Card -->
+    <section class="doc-header-card">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <span class="badge badge-md">MD</span>
+        <span style="font-size: 0.85rem; color: var(--text-subtle);">docs\website\Website-Requirements-Complete-Guide.md</span>
+      </div>
+      <h1>🌐 Website Requirements — Complete Guide</h1>
+
+      <div class="doc-meta-row">
+        <span>File Size: 41.3 KB</span>
+        <span>Metrics: 5,040 words</span>
+        <span>Reading Time: 25 min read</span>
+        <span>Last Modified: Jul 28, 2026</span>
+      </div>
+
+      <!-- Export & Download Action Bar -->
+      <div class="export-toolbar">
+        <button class="export-btn primary" onclick="ExportManager.exportPDF()">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Export as PDF
+        </button>
+
+        <button class="export-btn" onclick="ExportManager.exportDOCX('../files/exports/docs-website-website-requirements-complete-guide.docx', 'docs-website-website-requirements-complete-guide.docx')">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Export as Word (.docx)
+        </button>
+
+        <button class="export-btn" onclick="ExportManager.exportXLSX('../files/exports/docs-website-website-requirements-complete-guide.xlsx', 'docs-website-website-requirements-complete-guide.xlsx')">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Export as Excel (.xlsx)
+        </button>
+
+        <button class="export-btn" onclick="ExportManager.downloadFile('../files/docs/website/Website-Requirements-Complete-Guide.md', 'Website-Requirements-Complete-Guide.md')">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Original (MD)
+        </button>
+      </div>
+    </section>
+
+    <!-- Document Preview Content -->
+    <main class="doc-content-card">
+      <div class="rendered-markdown"><h1 id="website-requirements-complete-guide">🌐 Website Requirements — Complete Guide</h1>
+<blockquote>
+<p>This is the master reference document for every parameter you need to discuss, evaluate, and price when building a website for a client. Use this guide during discovery calls and proposal preparation.</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-domain">Domain</a></li>
+<li><a href="#2-hosting">Hosting</a></li>
+<li><a href="#3-ssl-certificate--security">SSL Certificate &amp; Security</a></li>
+<li><a href="#4-database">Database</a></li>
+<li><a href="#5-tech-stack">Tech Stack</a></li>
+<li><a href="#6-design--user-experience">Design &amp; User Experience</a></li>
+<li><a href="#7-pages--site-structure">Pages &amp; Site Structure</a></li>
+<li><a href="#8-features--functionality">Features &amp; Functionality</a></li>
+<li><a href="#9-e-commerce">E-Commerce</a></li>
+<li><a href="#10-payment-integration">Payment Integration</a></li>
+<li><a href="#11-content-management">Content Management</a></li>
+<li><a href="#12-seo--analytics">SEO &amp; Analytics</a></li>
+<li><a href="#13-performance--traffic">Performance &amp; Traffic</a></li>
+<li><a href="#14-security--compliance">Security &amp; Compliance</a></li>
+<li><a href="#15-third-party-integrations">Third-Party Integrations</a></li>
+<li><a href="#16-maintenance--support">Maintenance &amp; Support</a></li>
+<li><a href="#17-timeline-milestones--release">Timeline, Milestones &amp; Release</a></li>
+<li><a href="#18-legal--compliance">Legal &amp; Compliance</a></li>
+<li><a href="#19-branding--assets">Branding &amp; Assets</a></li>
+<li><a href="#20-communication--project-management">Communication &amp; Project Management</a></li>
+</ol>
+<hr />
+<h2 id="1-domain">1. Domain</h2>
+<p>The domain is the web address (URL) of the website. Clarify who owns, registers, and manages it.</p>
+<h3 id="key-questions-to-ask">Key Questions to Ask:</h3>
+<ul>
+<li>Does the client already have a domain? If yes, what is it?</li>
+<li>Who is the current registrar? (GoDaddy, Namecheap, Google Domains, etc.)</li>
+<li>Does the client want a new domain? What name and extension?</li>
+<li>Will there be multiple domains (redirects)?</li>
+</ul>
+<h3 id="parameters">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Domain Registration</strong></td>
+<td>Client provides / Developer registers</td>
+<td>If developer registers — include cost ($10–$50/year)</td>
+</tr>
+<tr>
+<td><strong>Domain Extension</strong></td>
+<td>.com, .in, .org, .io, .co, .net, .tech, .store, .app</td>
+<td>Premium extensions cost more (.io = $30–$60/year)</td>
+</tr>
+<tr>
+<td><strong>Domain Privacy Protection</strong></td>
+<td>Enabled / Disabled</td>
+<td>WHOIS privacy ($5–$15/year)</td>
+</tr>
+<tr>
+<td><strong>Domain Transfer</strong></td>
+<td>Required / Not required</td>
+<td>Transfer fees and DNS migration time</td>
+</tr>
+<tr>
+<td><strong>Subdomain Setup</strong></td>
+<td>blog.site.com, shop.site.com, app.site.com</td>
+<td>Additional DNS configuration</td>
+</tr>
+<tr>
+<td><strong>Custom Email</strong></td>
+<td>info@domain.com, support@domain.com</td>
+<td>Google Workspace / Zoho Mail ($6–$12/user/month)</td>
+</tr>
+<tr>
+<td><strong>Domain Renewal</strong></td>
+<td>Annual / Multi-year</td>
+<td>Long-term registration discounts</td>
+</tr>
+<tr>
+<td><strong>DNS Management</strong></td>
+<td>Developer-managed / Client-managed</td>
+<td>Ongoing management responsibility</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pricing-considerations">Pricing Considerations:</h3>
+<ul>
+<li>If you handle domain registration, charge the domain cost + a setup fee ($20–$50).</li>
+<li>If the client provides the domain, ensure you get DNS access or nameserver delegation.</li>
+<li>Custom email setup is a separate line item.</li>
+</ul>
+<hr />
+<h2 id="2-hosting">2. Hosting</h2>
+<p>Hosting is where the website files, database, and media live. This is one of the most critical pricing factors.</p>
+<h3 id="key-questions-to-ask_1">Key Questions to Ask:</h3>
+<ul>
+<li>Does the client have existing hosting? If yes, what provider?</li>
+<li>What type of hosting does the project require?</li>
+<li>What is the expected traffic volume?</li>
+<li>Are there geographic requirements for the server?</li>
+<li>Does the client need email hosting as well?</li>
+</ul>
+<h3 id="parameters_1">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hosting Type</strong></td>
+<td>Shared / VPS / Dedicated / Cloud / Managed</td>
+<td>Shared = $3–$15/mo, VPS = $20–$100/mo, Cloud = $50–$500+/mo</td>
+</tr>
+<tr>
+<td><strong>Hosting Provider</strong></td>
+<td>AWS, DigitalOcean, Hostinger, Bluehost, GoDaddy, Vercel, Netlify, Railway, Render</td>
+<td>Provider choice affects cost and features</td>
+</tr>
+<tr>
+<td><strong>Server OS</strong></td>
+<td>Linux (Ubuntu/CentOS) / Windows Server</td>
+<td>Linux is standard; Windows for .NET</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>5GB / 10GB / 50GB / 100GB / Unlimited</td>
+<td>Based on media files, database size</td>
+</tr>
+<tr>
+<td><strong>Bandwidth</strong></td>
+<td>100GB / 500GB / 1TB / Unlimited</td>
+<td>Based on expected traffic</td>
+</tr>
+<tr>
+<td><strong>RAM</strong></td>
+<td>512MB / 1GB / 2GB / 4GB / 8GB+</td>
+<td>Higher for dynamic applications</td>
+</tr>
+<tr>
+<td><strong>CPU</strong></td>
+<td>1 Core / 2 Cores / 4 Cores / 8 Cores</td>
+<td>Higher for compute-heavy applications</td>
+</tr>
+<tr>
+<td><strong>Server Location</strong></td>
+<td>US / Europe / India / Asia-Pacific / Multi-region</td>
+<td>Affects latency for target audience</td>
+</tr>
+<tr>
+<td><strong>Uptime SLA</strong></td>
+<td>99.9% / 99.95% / 99.99%</td>
+<td>Higher SLA = higher cost</td>
+</tr>
+<tr>
+<td><strong>Backup Frequency</strong></td>
+<td>Daily / Weekly / Monthly / None</td>
+<td>Automated backups add cost</td>
+</tr>
+<tr>
+<td><strong>Managed vs Unmanaged</strong></td>
+<td>Managed (provider handles updates) / Unmanaged (you handle)</td>
+<td>Managed = higher monthly cost</td>
+</tr>
+<tr>
+<td><strong>Email Hosting</strong></td>
+<td>Included / Separate (Google Workspace, Zoho)</td>
+<td>$5–$12/user/month if separate</td>
+</tr>
+<tr>
+<td><strong>Staging Environment</strong></td>
+<td>Yes / No</td>
+<td>Separate staging server adds cost</td>
+</tr>
+<tr>
+<td><strong>CDN Included</strong></td>
+<td>Yes / No / Separate (Cloudflare, AWS CloudFront)</td>
+<td>Free tier available, premium = $20+/mo</td>
+</tr>
+<tr>
+<td><strong>Auto-Scaling</strong></td>
+<td>Yes / No</td>
+<td>Cloud hosting with auto-scaling for traffic spikes</td>
+</tr>
+<tr>
+<td><strong>Containerization</strong></td>
+<td>Docker / Kubernetes / None</td>
+<td>Adds complexity and cost</td>
+</tr>
+<tr>
+<td><strong>CI/CD Pipeline</strong></td>
+<td>Yes / No</td>
+<td>GitHub Actions, GitLab CI, Jenkins setup</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hosting-type-comparison">Hosting Type Comparison:</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Best For</th>
+<th>Monthly Cost</th>
+<th>Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shared Hosting</strong></td>
+<td>Small sites, blogs, portfolios</td>
+<td>$3–$15</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>VPS (Virtual Private Server)</strong></td>
+<td>Medium businesses, moderate traffic</td>
+<td>$20–$100</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Cloud Hosting (AWS/GCP/Azure)</strong></td>
+<td>Scalable applications, high traffic</td>
+<td>$50–$500+</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Dedicated Server</strong></td>
+<td>Enterprise applications, maximum control</td>
+<td>$100–$500+</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>Managed WordPress</strong></td>
+<td>WordPress sites (WP Engine, Kinsta)</td>
+<td>$25–$100</td>
+<td>Medium-High</td>
+</tr>
+<tr>
+<td><strong>Static Hosting (Vercel/Netlify)</strong></td>
+<td>Static sites, JAMstack, Next.js</td>
+<td>Free–$20</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Serverless (AWS Lambda, Vercel)</strong></td>
+<td>API-driven, microservices</td>
+<td>Pay-per-use</td>
+<td>Variable</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pricing-considerations_1">Pricing Considerations:</h3>
+<ul>
+<li>Always clarify who pays the ongoing hosting bill — client or you.</li>
+<li>If you manage hosting, charge a monthly management fee ($50–$200/month).</li>
+<li>Setup fee for server configuration ($100–$500 one-time).</li>
+<li>Include hosting cost in the first year and quote renewals separately.</li>
+</ul>
+<hr />
+<h2 id="3-ssl-certificate-security">3. SSL Certificate &amp; Security</h2>
+<p>SSL secures data transmission between the browser and server.</p>
+<h3 id="parameters_2">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSL Type</strong></td>
+<td>Free (Let's Encrypt) / Domain Validated / Organization Validated / Extended Validation</td>
+<td>Free–$300/year</td>
+</tr>
+<tr>
+<td><strong>Wildcard SSL</strong></td>
+<td>Yes (covers subdomains) / No</td>
+<td>$50–$200/year</td>
+</tr>
+<tr>
+<td><strong>SSL Provider</strong></td>
+<td>Let's Encrypt, Cloudflare, Comodo, DigiCert, GeoTrust</td>
+<td>Varies significantly</td>
+</tr>
+<tr>
+<td><strong>Auto-Renewal</strong></td>
+<td>Enabled / Manual</td>
+<td>Setup for auto-renewal</td>
+</tr>
+<tr>
+<td><strong>HTTPS Redirect</strong></td>
+<td>Forced HTTPS / Mixed content</td>
+<td>Configuration effort</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-database">4. Database</h2>
+<p>The database stores all dynamic content, user data, orders, and application state.</p>
+<h3 id="key-questions-to-ask_2">Key Questions to Ask:</h3>
+<ul>
+<li>What type of data will be stored?</li>
+<li>How much data is expected over 1 year? 5 years?</li>
+<li>Is real-time data access needed?</li>
+<li>Are there existing databases to migrate from?</li>
+<li>What are the data backup and recovery requirements?</li>
+</ul>
+<h3 id="parameters_3">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Database Type</strong></td>
+<td>Relational (SQL) / Non-Relational (NoSQL) / Both</td>
+<td>Architecture choice</td>
+</tr>
+<tr>
+<td><strong>Database Engine</strong></td>
+<td>MySQL / PostgreSQL / MongoDB / Firebase / Supabase / DynamoDB / SQLite</td>
+<td>Engine affects hosting options</td>
+</tr>
+<tr>
+<td><strong>Database Size</strong></td>
+<td>Small (&lt;1GB) / Medium (1–10GB) / Large (10–100GB) / Enterprise (100GB+)</td>
+<td>Storage costs scale</td>
+</tr>
+<tr>
+<td><strong>Number of Tables/Collections</strong></td>
+<td>&lt;10 / 10–50 / 50–100 / 100+</td>
+<td>Complexity indicator</td>
+</tr>
+<tr>
+<td><strong>Read/Write Ratio</strong></td>
+<td>Read-heavy / Write-heavy / Balanced</td>
+<td>Affects optimization strategy</td>
+</tr>
+<tr>
+<td><strong>Backup Strategy</strong></td>
+<td>Daily automated / Weekly / On-demand / None</td>
+<td>$10–$100/month for managed backups</td>
+</tr>
+<tr>
+<td><strong>Backup Retention</strong></td>
+<td>7 days / 30 days / 90 days / 1 year</td>
+<td>Longer retention = higher cost</td>
+</tr>
+<tr>
+<td><strong>Replication</strong></td>
+<td>Single instance / Read replicas / Multi-region</td>
+<td>High availability adds cost</td>
+</tr>
+<tr>
+<td><strong>Data Migration</strong></td>
+<td>No migration / Simple import / Complex ETL</td>
+<td>$200–$2,000 based on complexity</td>
+</tr>
+<tr>
+<td><strong>Database Hosting</strong></td>
+<td>Same server / Managed service (RDS, Atlas, PlanetScale)</td>
+<td>Managed services = $15–$200+/month</td>
+</tr>
+<tr>
+<td><strong>Connection Pooling</strong></td>
+<td>Yes / No</td>
+<td>For high-concurrency apps</td>
+</tr>
+<tr>
+<td><strong>Caching Layer</strong></td>
+<td>None / Redis / Memcached</td>
+<td>Performance boost, $15–$50/month</td>
+</tr>
+<tr>
+<td><strong>Search Engine</strong></td>
+<td>None / Elasticsearch / Algolia / Meilisearch</td>
+<td>Full-text search capability $0–$100+/month</td>
+</tr>
+</tbody>
+</table>
+<h3 id="database-engine-comparison">Database Engine Comparison:</h3>
+<table>
+<thead>
+<tr>
+<th>Engine</th>
+<th>Type</th>
+<th>Best For</th>
+<th>Managed Service Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MySQL</strong></td>
+<td>SQL</td>
+<td>Traditional web apps, WordPress, PHP</td>
+<td>$15–$100/mo</td>
+</tr>
+<tr>
+<td><strong>PostgreSQL</strong></td>
+<td>SQL</td>
+<td>Complex queries, data integrity, analytics</td>
+<td>$15–$100/mo</td>
+</tr>
+<tr>
+<td><strong>MongoDB</strong></td>
+<td>NoSQL</td>
+<td>Flexible schema, real-time, JSON-heavy</td>
+<td>$57+/mo (Atlas)</td>
+</tr>
+<tr>
+<td><strong>Firebase Firestore</strong></td>
+<td>NoSQL</td>
+<td>Real-time apps, mobile backends</td>
+<td>Free–$100+/mo</td>
+</tr>
+<tr>
+<td><strong>Supabase</strong></td>
+<td>SQL (Postgres)</td>
+<td>Open-source Firebase alternative</td>
+<td>Free–$25+/mo</td>
+</tr>
+<tr>
+<td><strong>SQLite</strong></td>
+<td>SQL</td>
+<td>Small apps, prototypes, embedded</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>DynamoDB</strong></td>
+<td>NoSQL</td>
+<td>Serverless, AWS ecosystem</td>
+<td>Pay-per-use</td>
+</tr>
+<tr>
+<td><strong>Redis</strong></td>
+<td>In-memory</td>
+<td>Caching, sessions, real-time leaderboards</td>
+<td>$15–$50/mo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pricing-considerations_2">Pricing Considerations:</h3>
+<ul>
+<li>Database design and schema creation: $200–$1,000</li>
+<li>Data migration from existing system: $300–$2,000</li>
+<li>Database optimization and indexing: $100–$500</li>
+<li>Ongoing database management: $50–$200/month</li>
+</ul>
+<hr />
+<h2 id="5-tech-stack">5. Tech Stack</h2>
+<p>The technology stack determines the tools, languages, and frameworks used to build the website.</p>
+<h3 id="key-questions-to-ask_3">Key Questions to Ask:</h3>
+<ul>
+<li>Is there a preferred technology? (Often tied to existing systems)</li>
+<li>Does the team have in-house developers for maintenance?</li>
+<li>What is the expected lifespan of the website?</li>
+<li>Any requirement for a specific CMS?</li>
+<li>Are there SEO requirements that affect framework choice?</li>
+</ul>
+<h3 id="parameters_4">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontend Framework</strong></td>
+<td>HTML/CSS/JS (Vanilla) / React / Next.js / Vue.js / Angular / Svelte / Astro</td>
+<td>Framework complexity affects dev time</td>
+</tr>
+<tr>
+<td><strong>CSS Framework</strong></td>
+<td>Tailwind CSS / Bootstrap / Material UI / Custom CSS / Shadcn UI</td>
+<td>$0–$500 for custom styling</td>
+</tr>
+<tr>
+<td><strong>Backend Language</strong></td>
+<td>Node.js / Python / PHP / Java / C# / Ruby / Go</td>
+<td>Language choice affects hosting</td>
+</tr>
+<tr>
+<td><strong>Backend Framework</strong></td>
+<td>Express.js / Django / Laravel / Spring Boot / ASP.NET / Rails / FastAPI</td>
+<td>Framework affects development speed</td>
+</tr>
+<tr>
+<td><strong>CMS</strong></td>
+<td>None (Custom) / WordPress / Strapi / Contentful / Sanity / Ghost / Drupal</td>
+<td>CMS licensing and customization costs</td>
+</tr>
+<tr>
+<td><strong>Static Site Generator</strong></td>
+<td>Next.js / Gatsby / Hugo / Astro / 11ty</td>
+<td>Good for blogs, portfolios, docs</td>
+</tr>
+<tr>
+<td><strong>API Architecture</strong></td>
+<td>REST / GraphQL / tRPC / None</td>
+<td>GraphQL adds 20–30% dev time</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Custom / Firebase Auth / Auth0 / Clerk / NextAuth / Supabase Auth</td>
+<td>Auth service = $0–$100+/month</td>
+</tr>
+<tr>
+<td><strong>State Management</strong></td>
+<td>None / Redux / Zustand / Jotai / Context API</td>
+<td>Complexity for frontend</td>
+</tr>
+<tr>
+<td><strong>Package Manager</strong></td>
+<td>npm / yarn / pnpm / bun</td>
+<td>Developer preference</td>
+</tr>
+<tr>
+<td><strong>Build Tool</strong></td>
+<td>Vite / Webpack / Turbopack / esbuild</td>
+<td>Modern tools improve DX</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>None / Jest / Playwright / Cypress / Vitest</td>
+<td>Testing adds 15–25% dev time</td>
+</tr>
+<tr>
+<td><strong>Version Control</strong></td>
+<td>Git (GitHub / GitLab / Bitbucket)</td>
+<td>Standard for all projects</td>
+</tr>
+<tr>
+<td><strong>TypeScript</strong></td>
+<td>Yes / No</td>
+<td>Adds 10–15% dev time, better quality</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tech-stack-comparison-common-combinations">Tech Stack Comparison (Common Combinations):</h3>
+<table>
+<thead>
+<tr>
+<th>Stack</th>
+<th>Components</th>
+<th>Best For</th>
+<th>Dev Time Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WordPress</strong></td>
+<td>PHP + MySQL + Themes</td>
+<td>Blogs, small businesses, content sites</td>
+<td>1x (fastest)</td>
+</tr>
+<tr>
+<td><strong>MERN</strong></td>
+<td>MongoDB + Express + React + Node.js</td>
+<td>Full-stack web apps</td>
+<td>1.5x</td>
+</tr>
+<tr>
+<td><strong>MEAN</strong></td>
+<td>MongoDB + Express + Angular + Node.js</td>
+<td>Enterprise web apps</td>
+<td>1.7x</td>
+</tr>
+<tr>
+<td><strong>Next.js Full-Stack</strong></td>
+<td>Next.js + PostgreSQL + Prisma</td>
+<td>Modern web apps, SEO-critical</td>
+<td>1.3x</td>
+</tr>
+<tr>
+<td><strong>LAMP</strong></td>
+<td>Linux + Apache + MySQL + PHP</td>
+<td>Traditional web apps</td>
+<td>1x</td>
+</tr>
+<tr>
+<td><strong>Django</strong></td>
+<td>Python + Django + PostgreSQL</td>
+<td>Data-heavy apps, dashboards</td>
+<td>1.4x</td>
+</tr>
+<tr>
+<td><strong>Laravel</strong></td>
+<td>PHP + Laravel + MySQL</td>
+<td>E-commerce, SaaS, CRM</td>
+<td>1.3x</td>
+</tr>
+<tr>
+<td><strong>JAMstack</strong></td>
+<td>Static (Astro/Hugo) + Headless CMS + CDN</td>
+<td>Static sites, blogs, portfolios</td>
+<td>0.8x</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pricing-considerations_3">Pricing Considerations:</h3>
+<ul>
+<li>WordPress site (theme-based): $500–$3,000</li>
+<li>WordPress (custom theme): $2,000–$10,000</li>
+<li>Custom-coded site (React/Next.js): $3,000–$25,000+</li>
+<li>Full-stack application: $10,000–$100,000+</li>
+<li>Technology consulting fee (stack recommendation): $200–$500</li>
+</ul>
+<hr />
+<h2 id="6-design-user-experience">6. Design &amp; User Experience</h2>
+<p>Design is one of the highest-value components and often the first thing clients care about.</p>
+<h3 id="key-questions-to-ask_4">Key Questions to Ask:</h3>
+<ul>
+<li>Does the client have existing branding (logo, colors, fonts)?</li>
+<li>Is there any design inspiration or reference websites?</li>
+<li>Do they want custom design or are they okay with a template?</li>
+<li>How many design revisions are expected?</li>
+<li>Is a mobile-first approach needed?</li>
+<li>Do they need prototyping or wireframing?</li>
+</ul>
+<h3 id="parameters_5">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Design Approach</strong></td>
+<td>Custom Design / Template/Theme-based / Hybrid</td>
+<td>Custom = 3–5x more expensive</td>
+</tr>
+<tr>
+<td><strong>Wireframing</strong></td>
+<td>Yes (Low-fidelity) / Yes (High-fidelity) / No</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Prototyping</strong></td>
+<td>Interactive prototype in Figma/Adobe XD / No</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>UI Design Tool</strong></td>
+<td>Figma / Adobe XD / Sketch / Canva</td>
+<td>Figma is industry standard</td>
+</tr>
+<tr>
+<td><strong>Responsive Design</strong></td>
+<td>Desktop only / Desktop + Tablet / Desktop + Tablet + Mobile</td>
+<td>Mobile-responsive is standard</td>
+</tr>
+<tr>
+<td><strong>Number of Unique Page Designs</strong></td>
+<td>3–5 / 5–10 / 10–20 / 20+</td>
+<td>Each unique page = $200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Design Revisions</strong></td>
+<td>2 rounds / 3 rounds / Unlimited</td>
+<td>Unlimited revisions = higher cost</td>
+</tr>
+<tr>
+<td><strong>Dark Mode</strong></td>
+<td>Yes / No</td>
+<td>+10–15% design/dev effort</td>
+</tr>
+<tr>
+<td><strong>Animations &amp; Micro-interactions</strong></td>
+<td>None / Subtle / Heavy (parallax, scroll effects)</td>
+<td>Heavy = +20–40% dev time</td>
+</tr>
+<tr>
+<td><strong>Accessibility (WCAG)</strong></td>
+<td>Level A / Level AA / Level AAA / None</td>
+<td>AA is recommended, AAA is rare</td>
+</tr>
+<tr>
+<td><strong>Icon Set</strong></td>
+<td>Free (Heroicons, Lucide) / Premium (FontAwesome Pro) / Custom</td>
+<td>Custom icons = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Typography</strong></td>
+<td>Google Fonts (free) / Adobe Fonts / Custom fonts</td>
+<td>Custom fonts = licensing fee</td>
+</tr>
+<tr>
+<td><strong>Image Style</strong></td>
+<td>Stock photos / Custom photography / Illustrations / AI-generated</td>
+<td>Custom photography = $500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Design System</strong></td>
+<td>None / Basic style guide / Full design system</td>
+<td>Full design system = $2,000–$10,000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pricing-tiers-for-design">Pricing Tiers for Design:</h3>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Includes</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic</strong></td>
+<td>Template-based, minor color/font changes, responsive</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Standard</strong></td>
+<td>Semi-custom, wireframes, 5–8 unique pages, 2 revisions</td>
+<td>$1,000–$3,000</td>
+</tr>
+<tr>
+<td><strong>Premium</strong></td>
+<td>Fully custom, prototyping, animations, 10+ pages, 3 revisions</td>
+<td>$3,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>Full design system, user research, A/B testing, unlimited revisions</td>
+<td>$10,000–$50,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-pages-site-structure">7. Pages &amp; Site Structure</h2>
+<p>Understanding the site map is critical for accurate pricing.</p>
+<h3 id="key-questions-to-ask_5">Key Questions to Ask:</h3>
+<ul>
+<li>How many pages does the website need?</li>
+<li>Which pages are static and which are dynamic?</li>
+<li>Is there a blog or news section?</li>
+<li>Is there a user dashboard or admin panel?</li>
+<li>Do they need multi-language support?</li>
+</ul>
+<h3 id="parameters_6">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Pages</strong></td>
+<td>1–5 / 5–10 / 10–25 / 25–50 / 50+</td>
+<td>Each page = $100–$500</td>
+</tr>
+<tr>
+<td><strong>Static Pages</strong></td>
+<td>Home, About, Contact, Services, Portfolio</td>
+<td>Simpler to build</td>
+</tr>
+<tr>
+<td><strong>Dynamic Pages</strong></td>
+<td>Product listings, blog posts, user profiles</td>
+<td>Require database integration</td>
+</tr>
+<tr>
+<td><strong>Landing Pages</strong></td>
+<td>0 / 1–3 / 3–5 / 5+</td>
+<td>Marketing-optimized pages</td>
+</tr>
+<tr>
+<td><strong>Blog Section</strong></td>
+<td>No / Basic (posts only) / Advanced (categories, tags, search, comments)</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Admin Dashboard</strong></td>
+<td>No / Basic / Advanced (analytics, user management)</td>
+<td>$1,000–$10,000</td>
+</tr>
+<tr>
+<td><strong>User Dashboard</strong></td>
+<td>No / Profile only / Full dashboard (orders, settings, notifications)</td>
+<td>$1,000–$8,000</td>
+</tr>
+<tr>
+<td><strong>Multi-Language</strong></td>
+<td>No / 2 languages / 3–5 languages / 10+ languages</td>
+<td>Each language adds 30–50% content cost</td>
+</tr>
+<tr>
+<td><strong>Sitemap</strong></td>
+<td>Auto-generated / Custom</td>
+<td>Usually auto-generated</td>
+</tr>
+<tr>
+<td><strong>URL Structure</strong></td>
+<td>Simple / SEO-optimized / Custom</td>
+<td>SEO-optimized URLs are standard</td>
+</tr>
+<tr>
+<td><strong>Breadcrumbs</strong></td>
+<td>Yes / No</td>
+<td>Minor effort</td>
+</tr>
+<tr>
+<td><strong>404 Custom Page</strong></td>
+<td>Yes / No</td>
+<td>Custom branded 404 page</td>
+</tr>
+<tr>
+<td><strong>Search Functionality</strong></td>
+<td>No / Basic search / Advanced (filters, faceted search)</td>
+<td>$200–$2,000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="common-page-types-pricing">Common Page Types &amp; Pricing:</h3>
+<table>
+<thead>
+<tr>
+<th>Page Type</th>
+<th>Complexity</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home Page</td>
+<td>High (hero, features, testimonials, CTA)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td>About Us</td>
+<td>Low–Medium</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td>Contact Page (with form)</td>
+<td>Low–Medium</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td>Services/Products Page</td>
+<td>Medium</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td>Individual Service Page</td>
+<td>Medium</td>
+<td>$150–$500</td>
+</tr>
+<tr>
+<td>Blog Listing Page</td>
+<td>Medium</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td>Blog Post Template</td>
+<td>Medium</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td>Portfolio/Gallery</td>
+<td>Medium–High</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td>FAQ Page</td>
+<td>Low</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td>Pricing Page</td>
+<td>Medium</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td>Testimonials Page</td>
+<td>Low–Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Team/Staff Page</td>
+<td>Low–Medium</td>
+<td>$150–$400</td>
+</tr>
+<tr>
+<td>Login/Register Page</td>
+<td>Medium–High</td>
+<td>$300–$800</td>
+</tr>
+<tr>
+<td>User Dashboard</td>
+<td>High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td>Admin Panel</td>
+<td>Very High</td>
+<td>$2,000–$10,000</td>
+</tr>
+<tr>
+<td>Product Detail Page</td>
+<td>Medium–High</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td>Cart &amp; Checkout</td>
+<td>Very High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td>Order Tracking</td>
+<td>High</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td>Terms &amp; Privacy</td>
+<td>Low</td>
+<td>$50–$200</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-features-functionality">8. Features &amp; Functionality</h2>
+<p>This is where the scope can balloon quickly. Be very specific about what's included.</p>
+<h3 id="parameters_7">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Options</th>
+<th>Complexity</th>
+<th>Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Contact Form</strong></td>
+<td>Basic / Advanced (file upload, conditional fields)</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>User Registration</strong></td>
+<td>Email/Password / Social login / Phone OTP</td>
+<td>Medium–High</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>User Authentication</strong></td>
+<td>Session-based / JWT / OAuth 2.0</td>
+<td>Medium</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Role-Based Access</strong></td>
+<td>None / 2 roles / Multiple roles</td>
+<td>Medium–High</td>
+<td>$500–$2,500</td>
+</tr>
+<tr>
+<td><strong>Email Notifications</strong></td>
+<td>None / Transactional / Marketing</td>
+<td>Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>SMS Notifications</strong></td>
+<td>None / OTP only / Full SMS</td>
+<td>Medium</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Push Notifications (Web)</strong></td>
+<td>None / Basic / Advanced</td>
+<td>Medium</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Live Chat</strong></td>
+<td>None / Third-party (Crisp, Tawk.to) / Custom</td>
+<td>Low–High</td>
+<td>$0–$3,000</td>
+</tr>
+<tr>
+<td><strong>Chatbot</strong></td>
+<td>None / Rule-based / AI-powered</td>
+<td>Medium–Very High</td>
+<td>$500–$10,000+</td>
+</tr>
+<tr>
+<td><strong>Newsletter Subscription</strong></td>
+<td>None / Basic / Integration (Mailchimp, SendGrid)</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Social Media Sharing</strong></td>
+<td>None / Share buttons / Auto-post</td>
+<td>Low</td>
+<td>$50–$300</td>
+</tr>
+<tr>
+<td><strong>Social Media Feed</strong></td>
+<td>None / Instagram / Twitter / Facebook</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Review &amp; Ratings</strong></td>
+<td>None / Basic / Advanced (verified, photos)</td>
+<td>Medium</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Booking/Appointment</strong></td>
+<td>None / Calendar-based / Full booking system</td>
+<td>Medium–High</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>File Upload</strong></td>
+<td>None / Images only / Multi-file / Large files</td>
+<td>Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>PDF Generation</strong></td>
+<td>None / Invoices / Reports / Certificates</td>
+<td>Medium</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Maps Integration</strong></td>
+<td>None / Google Maps embed / Interactive maps</td>
+<td>Low–Medium</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Video Player</strong></td>
+<td>None / YouTube/Vimeo embed / Custom player</td>
+<td>Low–Medium</td>
+<td>$100–$800</td>
+</tr>
+<tr>
+<td><strong>Image Gallery</strong></td>
+<td>None / Basic grid / Lightbox / Masonry</td>
+<td>Low–Medium</td>
+<td>$100–$600</td>
+</tr>
+<tr>
+<td><strong>Drag &amp; Drop</strong></td>
+<td>None / Kanban board / Page builder / File upload</td>
+<td>Medium–High</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Real-Time Features</strong></td>
+<td>None / Chat / Notifications / Collaboration</td>
+<td>High</td>
+<td>$1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Data Export</strong></td>
+<td>None / CSV / Excel / PDF</td>
+<td>Medium</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Data Import</strong></td>
+<td>None / CSV upload / API sync / Bulk import</td>
+<td>Medium–High</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Multi-Tenant</strong></td>
+<td>No / Yes</td>
+<td>Very High</td>
+<td>$5,000–$20,000+</td>
+</tr>
+<tr>
+<td><strong>Cron Jobs / Scheduled Tasks</strong></td>
+<td>None / Email digests / Report generation / Data cleanup</td>
+<td>Medium</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Wishlist/Favorites</strong></td>
+<td>None / Basic / With notifications</td>
+<td>Low–Medium</td>
+<td>$200–$600</td>
+</tr>
+<tr>
+<td><strong>Comparison Feature</strong></td>
+<td>None / Side-by-side / Table view</td>
+<td>Medium</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Referral System</strong></td>
+<td>None / Basic codes / Full affiliate</td>
+<td>Medium–High</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Notification Center</strong></td>
+<td>None / In-app / In-app + Email + SMS</td>
+<td>Medium–High</td>
+<td>$500–$2,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-e-commerce">9. E-Commerce</h2>
+<p>If the website is an online store, this section is critical.</p>
+<h3 id="key-questions-to-ask_6">Key Questions to Ask:</h3>
+<ul>
+<li>How many products will be listed (now and in the future)?</li>
+<li>Are products physical, digital, or both?</li>
+<li>Is there a subscription model?</li>
+<li>Shipping — domestic, international, or both?</li>
+<li>Tax calculation requirements?</li>
+<li>Inventory management needs?</li>
+</ul>
+<h3 id="parameters_8">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E-Commerce Type</strong></td>
+<td>None / Simple (few products) / Full store / Marketplace</td>
+<td>Marketplace = highest complexity</td>
+</tr>
+<tr>
+<td><strong>Product Count</strong></td>
+<td>1–10 / 10–100 / 100–1,000 / 1,000+</td>
+<td>Affects catalog design</td>
+</tr>
+<tr>
+<td><strong>Product Type</strong></td>
+<td>Physical / Digital / Service / Subscription / Mixed</td>
+<td>Each type has different logic</td>
+</tr>
+<tr>
+<td><strong>Product Variants</strong></td>
+<td>None / Size/Color / Multiple attributes</td>
+<td>Variant management adds complexity</td>
+</tr>
+<tr>
+<td><strong>Product Reviews</strong></td>
+<td>None / Basic / Verified purchase / With photos</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Inventory Management</strong></td>
+<td>None / Basic stock tracking / Advanced (warehouse, multi-location)</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Shopping Cart</strong></td>
+<td>Simple / Persistent / Multi-vendor</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Wishlist</strong></td>
+<td>Yes / No</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Checkout Process</strong></td>
+<td>Single page / Multi-step / Guest checkout</td>
+<td>Multi-step = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Order Management</strong></td>
+<td>Basic / Advanced (status tracking, notifications)</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Shipping Calculation</strong></td>
+<td>Free / Flat rate / Weight-based / API-based (FedEx, UPS)</td>
+<td>API integration = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Tax Calculation</strong></td>
+<td>None / Manual / Automated (tax API)</td>
+<td>Automated = $200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Coupon/Discount System</strong></td>
+<td>None / Basic codes / Advanced (rules, tiers, auto-apply)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Invoice Generation</strong></td>
+<td>None / Basic / Branded / Tax-compliant</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Return/Refund Management</strong></td>
+<td>None / Basic / Full (RMA process)</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Vendor/Seller Management</strong></td>
+<td>None / Single vendor / Multi-vendor marketplace</td>
+<td>Marketplace = $10,000–$50,000+</td>
+</tr>
+<tr>
+<td><strong>Product Comparison</strong></td>
+<td>None / Yes</td>
+<td>$300–$1,000</td>
+</tr>
+<tr>
+<td><strong>Recently Viewed</strong></td>
+<td>None / Yes</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Product Recommendations</strong></td>
+<td>None / Manual / AI-powered</td>
+<td>$200–$5,000</td>
+</tr>
+<tr>
+<td><strong>Abandoned Cart Recovery</strong></td>
+<td>None / Email reminders / Full flow</td>
+<td>$300–$1,500</td>
+</tr>
+</tbody>
+</table>
+<h3 id="e-commerce-platform-comparison">E-Commerce Platform Comparison:</h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Best For</th>
+<th>Cost</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WooCommerce</strong></td>
+<td>WordPress stores</td>
+<td>Free (+ plugins)</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Shopify</strong></td>
+<td>All-in-one stores</td>
+<td>$29–$399/mo</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Custom (Next.js + DB)</strong></td>
+<td>Unique requirements</td>
+<td>Dev cost only</td>
+<td>Full</td>
+</tr>
+<tr>
+<td><strong>Medusa.js</strong></td>
+<td>Headless e-commerce</td>
+<td>Free (open-source)</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>Saleor</strong></td>
+<td>Enterprise headless</td>
+<td>Free–$2,000/mo</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>BigCommerce</strong></td>
+<td>Large catalogs</td>
+<td>$29–$299/mo</td>
+<td>Medium</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-payment-integration">10. Payment Integration</h2>
+<p>Payment processing is where money flows — get this right.</p>
+<h3 id="parameters_9">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Payment Gateway</strong></td>
+<td>Stripe / Razorpay / PayPal / Square / Braintree / PayU / CCAvenue</td>
+<td>Each gateway = $300–$1,000 to integrate</td>
+</tr>
+<tr>
+<td><strong>Number of Gateways</strong></td>
+<td>1 / 2 / 3+</td>
+<td>Each additional = +$300–$500</td>
+</tr>
+<tr>
+<td><strong>Payment Methods</strong></td>
+<td>Credit/Debit cards / UPI / Net Banking / Wallets / EMI / BNPL</td>
+<td>Each method within gateway</td>
+</tr>
+<tr>
+<td><strong>Multi-Currency</strong></td>
+<td>No / Yes (2–5 currencies) / Yes (global)</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Recurring Payments</strong></td>
+<td>No / Monthly subscriptions / Annual / Custom intervals</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Invoice Payments</strong></td>
+<td>No / Yes (pay via link)</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Split Payments</strong></td>
+<td>No / Yes (marketplace commission)</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Refund Handling</strong></td>
+<td>Manual / Automated / Partial refunds</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Payment Security</strong></td>
+<td>PCI DSS compliant / 3D Secure / Tokenization</td>
+<td>Usually handled by gateway</td>
+</tr>
+<tr>
+<td><strong>Webhook Integration</strong></td>
+<td>Yes / No</td>
+<td>Payment status callbacks $200–$500</td>
+</tr>
+<tr>
+<td><strong>Test Environment</strong></td>
+<td>Sandbox / Test mode</td>
+<td>Standard for all integrations</td>
+</tr>
+<tr>
+<td><strong>Payment Analytics</strong></td>
+<td>Basic / Advanced dashboard</td>
+<td>$200–$1,000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="payment-gateway-comparison">Payment Gateway Comparison:</h3>
+<table>
+<thead>
+<tr>
+<th>Gateway</th>
+<th>Best For</th>
+<th>Transaction Fee</th>
+<th>Regions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stripe</strong></td>
+<td>Global, developers</td>
+<td>2.9% + $0.30</td>
+<td>Global</td>
+</tr>
+<tr>
+<td><strong>Razorpay</strong></td>
+<td>India</td>
+<td>2%</td>
+<td>India</td>
+</tr>
+<tr>
+<td><strong>PayPal</strong></td>
+<td>International payments</td>
+<td>3.49% + $0.49</td>
+<td>Global</td>
+</tr>
+<tr>
+<td><strong>Square</strong></td>
+<td>In-person + online</td>
+<td>2.6% + $0.10</td>
+<td>US, UK, CA, AU, JP</td>
+</tr>
+<tr>
+<td><strong>Braintree</strong></td>
+<td>PayPal-owned, enterprise</td>
+<td>2.59% + $0.49</td>
+<td>Global</td>
+</tr>
+<tr>
+<td><strong>PayU</strong></td>
+<td>India, emerging markets</td>
+<td>2%</td>
+<td>India, LatAm, EMEA</td>
+</tr>
+<tr>
+<td><strong>CCAvenue</strong></td>
+<td>India</td>
+<td>2–3%</td>
+<td>India</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-content-management">11. Content Management</h2>
+<p>Content is what makes the website valuable. Clarify who creates and manages it.</p>
+<h3 id="parameters_10">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Content Provider</strong></td>
+<td>Client provides all / Developer creates / Mix</td>
+<td>Content writing = $50–$200/page</td>
+</tr>
+<tr>
+<td><strong>CMS Needed</strong></td>
+<td>No (static) / Yes (client can edit)</td>
+<td>CMS adds $500–$3,000 to project</td>
+</tr>
+<tr>
+<td><strong>CMS Type</strong></td>
+<td>WordPress / Strapi / Contentful / Sanity / Custom admin</td>
+<td>See CMS comparison</td>
+</tr>
+<tr>
+<td><strong>Content Types</strong></td>
+<td>Text / Images / Videos / Documents / Audio</td>
+<td>Rich content types need more setup</td>
+</tr>
+<tr>
+<td><strong>Content Volume</strong></td>
+<td>&lt;10 pages / 10–50 / 50–200 / 200+</td>
+<td>Affects content entry time</td>
+</tr>
+<tr>
+<td><strong>Content Migration</strong></td>
+<td>No / From old website / From documents / From database</td>
+<td>$300–$5,000</td>
+</tr>
+<tr>
+<td><strong>Media Management</strong></td>
+<td>Basic upload / DAM (Digital Asset Management)</td>
+<td>DAM = $1,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Content Workflow</strong></td>
+<td>Direct publish / Draft → Review → Publish</td>
+<td>Approval workflow = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Content Versioning</strong></td>
+<td>No / Yes</td>
+<td>Built into most CMS</td>
+</tr>
+<tr>
+<td><strong>Multi-Language Content</strong></td>
+<td>No / 2 languages / 5+ languages</td>
+<td>Translation management system</td>
+</tr>
+<tr>
+<td><strong>SEO Content Fields</strong></td>
+<td>None / Meta titles/descriptions / Full schema</td>
+<td>Usually included in CMS</td>
+</tr>
+<tr>
+<td><strong>Content Scheduling</strong></td>
+<td>No / Yes (publish at future date)</td>
+<td>$200–$500</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-seo-analytics">12. SEO &amp; Analytics</h2>
+<p>Search visibility and data tracking are critical for business websites.</p>
+<h3 id="parameters_11">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>On-Page SEO</strong></td>
+<td>None / Basic (meta tags, headings) / Advanced (schema, structured data)</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Technical SEO</strong></td>
+<td>None / Sitemap + robots.txt / Full (speed, crawlability, Core Web Vitals)</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Google Analytics</strong></td>
+<td>Not needed / GA4 setup / GA4 + Custom events + Conversions</td>
+<td>$100–$1,000</td>
+</tr>
+<tr>
+<td><strong>Google Search Console</strong></td>
+<td>Not needed / Setup + Configuration</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Google Tag Manager</strong></td>
+<td>Not needed / Setup</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Heatmaps &amp; Session Recording</strong></td>
+<td>None / Hotjar / Microsoft Clarity / FullStory</td>
+<td>$0–$100/mo</td>
+</tr>
+<tr>
+<td><strong>A/B Testing</strong></td>
+<td>None / Google Optimize / VWO / Custom</td>
+<td>$0–$500/mo</td>
+</tr>
+<tr>
+<td><strong>Page Speed Optimization</strong></td>
+<td>Basic / Advanced (lazy loading, code splitting, image optimization)</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Sitemap</strong></td>
+<td>Auto-generated / Custom</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td><strong>Schema Markup</strong></td>
+<td>None / Basic / Advanced (product, FAQ, article, breadcrumb)</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Open Graph Tags</strong></td>
+<td>None / Basic / Full (with images)</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Canonical URLs</strong></td>
+<td>Yes / No</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td><strong>Redirect Management</strong></td>
+<td>None / 301 redirects from old site</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Local SEO</strong></td>
+<td>None / Google Business Profile / Full local setup</td>
+<td>$200–$1,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-performance-traffic">13. Performance &amp; Traffic</h2>
+<p>Understanding expected traffic helps determine infrastructure requirements.</p>
+<h3 id="key-questions-to-ask_7">Key Questions to Ask:</h3>
+<ul>
+<li>How many visitors do you expect per month?</li>
+<li>Are there seasonal traffic spikes?</li>
+<li>Where is the target audience located?</li>
+<li>What should the page load time target be?</li>
+</ul>
+<h3 id="parameters_12">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Expected Monthly Traffic</strong></td>
+<td>&lt;1,000 / 1,000–10,000 / 10,000–100,000 / 100,000+</td>
+<td>Determines hosting tier</td>
+</tr>
+<tr>
+<td><strong>Traffic Spikes</strong></td>
+<td>No / Occasional (sales, events) / Regular (media coverage)</td>
+<td>Auto-scaling needed</td>
+</tr>
+<tr>
+<td><strong>CDN (Content Delivery Network)</strong></td>
+<td>None / Cloudflare Free / Cloudflare Pro / AWS CloudFront</td>
+<td>$0–$200+/month</td>
+</tr>
+<tr>
+<td><strong>Image Optimization</strong></td>
+<td>None / Compression / WebP/AVIF conversion / Responsive images</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Code Optimization</strong></td>
+<td>None / Minification / Tree-shaking / Code splitting</td>
+<td>Standard good practice</td>
+</tr>
+<tr>
+<td><strong>Caching Strategy</strong></td>
+<td>None / Browser caching / Server caching / Full-page caching / Redis</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Lazy Loading</strong></td>
+<td>None / Images / Images + Components</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Load Balancing</strong></td>
+<td>None / Application load balancer / Multi-server</td>
+<td>$50–$300/month</td>
+</tr>
+<tr>
+<td><strong>Database Optimization</strong></td>
+<td>None / Indexing / Query optimization / Read replicas</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Performance Monitoring</strong></td>
+<td>None / Lighthouse / New Relic / Datadog</td>
+<td>$0–$500/month</td>
+</tr>
+<tr>
+<td><strong>Target Load Time</strong></td>
+<td>&lt;5 seconds / &lt;3 seconds / &lt;1 second (LCP)</td>
+<td>Faster = more optimization effort</td>
+</tr>
+<tr>
+<td><strong>Core Web Vitals</strong></td>
+<td>Not prioritized / Passing scores / Excellent scores</td>
+<td>$300–$1,500</td>
+</tr>
+<tr>
+<td><strong>Compression</strong></td>
+<td>None / Gzip / Brotli</td>
+<td>Server configuration</td>
+</tr>
+<tr>
+<td><strong>HTTP/2 or HTTP/3</strong></td>
+<td>HTTP/1.1 / HTTP/2 / HTTP/3</td>
+<td>Modern hosting includes this</td>
+</tr>
+</tbody>
+</table>
+<h3 id="traffic-hosting-recommendations">Traffic &amp; Hosting Recommendations:</h3>
+<table>
+<thead>
+<tr>
+<th>Monthly Visitors</th>
+<th>Recommended Hosting</th>
+<th>Est. Monthly Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;1,000</td>
+<td>Shared hosting / Static hosting</td>
+<td>$3–$15</td>
+</tr>
+<tr>
+<td>1,000–10,000</td>
+<td>VPS / Managed hosting</td>
+<td>$20–$50</td>
+</tr>
+<tr>
+<td>10,000–50,000</td>
+<td>Cloud VPS / Managed cloud</td>
+<td>$50–$150</td>
+</tr>
+<tr>
+<td>50,000–200,000</td>
+<td>Cloud hosting with CDN</td>
+<td>$150–$500</td>
+</tr>
+<tr>
+<td>200,000–1,000,000</td>
+<td>Auto-scaling cloud + Load balancer</td>
+<td>$500–$2,000</td>
+</tr>
+<tr>
+<td>1,000,000+</td>
+<td>Multi-region cloud, dedicated infrastructure</td>
+<td>$2,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-security-compliance">14. Security &amp; Compliance</h2>
+<p>Security is non-negotiable, especially for sites handling user data or payments.</p>
+<h3 id="parameters_13">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSL Certificate</strong></td>
+<td>Free (Let's Encrypt) / Paid (OV/EV)</td>
+<td>$0–$300/year</td>
+</tr>
+<tr>
+<td><strong>Web Application Firewall (WAF)</strong></td>
+<td>None / Cloudflare / AWS WAF / Sucuri</td>
+<td>$20–$200/month</td>
+</tr>
+<tr>
+<td><strong>DDoS Protection</strong></td>
+<td>None / Basic (Cloudflare Free) / Advanced</td>
+<td>$0–$200/month</td>
+</tr>
+<tr>
+<td><strong>Rate Limiting</strong></td>
+<td>None / API rate limiting / Login attempt limiting</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Input Validation</strong></td>
+<td>Basic / Advanced (XSS, SQL injection prevention)</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Content Security Policy (CSP)</strong></td>
+<td>None / Basic / Strict</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Two-Factor Authentication</strong></td>
+<td>None / Email / SMS / Authenticator app</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Password Policy</strong></td>
+<td>Basic / Advanced (complexity, expiry, breached check)</td>
+<td>$100–$400</td>
+</tr>
+<tr>
+<td><strong>Activity Logging</strong></td>
+<td>None / Login logs / Full audit trail</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Data Encryption</strong></td>
+<td>At rest / In transit / Both</td>
+<td>Standard for sensitive data</td>
+</tr>
+<tr>
+<td><strong>Security Headers</strong></td>
+<td>None / Basic / Full (HSTS, X-Frame, X-Content-Type)</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Vulnerability Scanning</strong></td>
+<td>None / Monthly / Continuous</td>
+<td>$50–$500/month</td>
+</tr>
+<tr>
+<td><strong>Backup &amp; Disaster Recovery</strong></td>
+<td>None / Daily backups / Full DR plan</td>
+<td>$50–$500/month</td>
+</tr>
+<tr>
+<td><strong>CAPTCHA</strong></td>
+<td>None / reCAPTCHA / hCaptcha</td>
+<td>$0–$100</td>
+</tr>
+<tr>
+<td><strong>IP Blocking</strong></td>
+<td>None / Geo-blocking / Rate-based</td>
+<td>$100–$300</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="15-third-party-integrations">15. Third-Party Integrations</h2>
+<p>External services that the website needs to connect with.</p>
+<h3 id="parameters_14">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Integration</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Email Service</strong></td>
+<td>None / SMTP / SendGrid / Mailchimp / Amazon SES</td>
+<td>$100–$500 + service costs</td>
+</tr>
+<tr>
+<td><strong>CRM</strong></td>
+<td>None / HubSpot / Salesforce / Zoho / Custom</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>ERP</strong></td>
+<td>None / SAP / Tally / Custom</td>
+<td>$2,000–$15,000</td>
+</tr>
+<tr>
+<td><strong>Social Media Login</strong></td>
+<td>None / Google / Facebook / Apple / GitHub</td>
+<td>$200–$500 per provider</td>
+</tr>
+<tr>
+<td><strong>Google Maps</strong></td>
+<td>None / Embed / Interactive / Route planning</td>
+<td>$100–$1,000</td>
+</tr>
+<tr>
+<td><strong>Shipping Provider</strong></td>
+<td>None / FedEx / UPS / DHL / Shiprocket / Delhivery</td>
+<td>$500–$2,000 per provider</td>
+</tr>
+<tr>
+<td><strong>SMS Provider</strong></td>
+<td>None / Twilio / MSG91 / AWS SNS</td>
+<td>$200–$800</td>
+</tr>
+<tr>
+<td><strong>Cloud Storage</strong></td>
+<td>None / AWS S3 / Google Cloud Storage / Cloudinary</td>
+<td>$100–$500 + storage costs</td>
+</tr>
+<tr>
+<td><strong>Video Conferencing</strong></td>
+<td>None / Zoom / Google Meet / Custom (WebRTC)</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Calendar Integration</strong></td>
+<td>None / Google Calendar / Calendly / Custom</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Accounting Software</strong></td>
+<td>None / QuickBooks / Xero / Tally</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Marketing Automation</strong></td>
+<td>None / Mailchimp / ActiveCampaign / HubSpot</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Webhook/API Integration</strong></td>
+<td>None / 1–3 APIs / 3–10 APIs / 10+ APIs</td>
+<td>Each API = $200–$1,000</td>
+</tr>
+<tr>
+<td><strong>AI/ML Services</strong></td>
+<td>None / OpenAI / Google AI / Custom model</td>
+<td>$500–$10,000+</td>
+</tr>
+<tr>
+<td><strong>WhatsApp Business</strong></td>
+<td>None / Chat button / Full API integration</td>
+<td>$200–$2,000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="16-maintenance-support">16. Maintenance &amp; Support</h2>
+<p>Post-launch maintenance is a significant recurring revenue opportunity.</p>
+<h3 id="key-questions-to-ask_8">Key Questions to Ask:</h3>
+<ul>
+<li>Does the client need ongoing maintenance?</li>
+<li>Who will handle content updates?</li>
+<li>What is the expected response time for issues?</li>
+<li>Is 24/7 support required?</li>
+</ul>
+<h3 id="parameters_15">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Maintenance Contract</strong></td>
+<td>None / Monthly / Quarterly / Annual</td>
+<td>Monthly = $100–$1,000</td>
+</tr>
+<tr>
+<td><strong>Bug Fixes</strong></td>
+<td>Warranty period only / Ongoing</td>
+<td>Warranty = 30–90 days free</td>
+</tr>
+<tr>
+<td><strong>Content Updates</strong></td>
+<td>Client self-service / Developer handles</td>
+<td>$50–$200/month</td>
+</tr>
+<tr>
+<td><strong>Plugin/Dependency Updates</strong></td>
+<td>No / Monthly / Weekly</td>
+<td>$100–$300/month</td>
+</tr>
+<tr>
+<td><strong>Security Patches</strong></td>
+<td>No / Monthly / As needed</td>
+<td>$100–$300/month</td>
+</tr>
+<tr>
+<td><strong>Uptime Monitoring</strong></td>
+<td>No / Basic / Advanced (with alerts)</td>
+<td>$10–$50/month</td>
+</tr>
+<tr>
+<td><strong>Performance Monitoring</strong></td>
+<td>No / Monthly report / Real-time</td>
+<td>$50–$200/month</td>
+</tr>
+<tr>
+<td><strong>Backup Management</strong></td>
+<td>No / Automated + Verified</td>
+<td>$30–$100/month</td>
+</tr>
+<tr>
+<td><strong>Support Hours</strong></td>
+<td>Business hours / Extended / 24/7</td>
+<td>24/7 = premium pricing</td>
+</tr>
+<tr>
+<td><strong>Response Time SLA</strong></td>
+<td>48 hours / 24 hours / 4 hours / 1 hour</td>
+<td>Faster SLA = higher cost</td>
+</tr>
+<tr>
+<td><strong>Support Channels</strong></td>
+<td>Email / Phone / Chat / Ticket system</td>
+<td>Multi-channel = higher cost</td>
+</tr>
+<tr>
+<td><strong>Feature Enhancements</strong></td>
+<td>Not included / Minor updates / Major updates</td>
+<td>Separate quote or hourly rate</td>
+</tr>
+<tr>
+<td><strong>Hosting Management</strong></td>
+<td>Not included / Included</td>
+<td>$50–$200/month</td>
+</tr>
+<tr>
+<td><strong>Training</strong></td>
+<td>None / Documentation / Video / Live sessions</td>
+<td>$200–$1,000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintenance-plan-tiers">Maintenance Plan Tiers:</h3>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Includes</th>
+<th>Monthly Price Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic</strong></td>
+<td>Bug fixes, security updates, backups</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Standard</strong></td>
+<td>Basic + content updates, monthly report, email support</td>
+<td>$300–$600</td>
+</tr>
+<tr>
+<td><strong>Premium</strong></td>
+<td>Standard + performance monitoring, priority support, minor enhancements</td>
+<td>$600–$1,500</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>Premium + 24/7 support, SLA, dedicated account manager</td>
+<td>$1,500–$5,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="17-timeline-milestones-release">17. Timeline, Milestones &amp; Release</h2>
+<p>Setting clear timelines prevents scope creep and manages expectations.</p>
+<h3 id="parameters_16">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Timeline</strong></td>
+<td>2–4 weeks / 1–2 months / 2–4 months / 4–6 months / 6+ months</td>
+<td>Based on scope</td>
+</tr>
+<tr>
+<td><strong>Discovery Phase</strong></td>
+<td>1–2 weeks / Not needed</td>
+<td>Requirements gathering</td>
+</tr>
+<tr>
+<td><strong>Design Phase</strong></td>
+<td>1–3 weeks / 2–6 weeks</td>
+<td>Wireframes + Mockups + Revisions</td>
+</tr>
+<tr>
+<td><strong>Development Phase</strong></td>
+<td>2–8 weeks / 2–4 months</td>
+<td>Core development</td>
+</tr>
+<tr>
+<td><strong>Testing Phase</strong></td>
+<td>1–2 weeks / 2–4 weeks</td>
+<td>QA and bug fixing</td>
+</tr>
+<tr>
+<td><strong>Content Entry</strong></td>
+<td>Client handles / Developer handles (1–2 weeks)</td>
+<td>Content population</td>
+</tr>
+<tr>
+<td><strong>Launch Preparation</strong></td>
+<td>3–5 days</td>
+<td>DNS, SSL, final checks</td>
+</tr>
+<tr>
+<td><strong>Release Strategy</strong></td>
+<td>Big bang (all at once) / Phased / Soft launch → Full launch</td>
+<td>Phased reduces risk</td>
+</tr>
+<tr>
+<td><strong>Milestones</strong></td>
+<td>3–5 key milestones / Weekly deliverables</td>
+<td>Payment tied to milestones</td>
+</tr>
+<tr>
+<td><strong>Payment Schedule</strong></td>
+<td>50/50 / 30/30/40 / Monthly / Milestone-based</td>
+<td>Milestone-based recommended</td>
+</tr>
+<tr>
+<td><strong>Change Request Process</strong></td>
+<td>Formal (written + approval) / Informal</td>
+<td>Formal process prevents disputes</td>
+</tr>
+<tr>
+<td><strong>Revision Policy</strong></td>
+<td>2 rounds / 3 rounds / Unlimited / Per revision cost</td>
+<td>Define clearly in contract</td>
+</tr>
+<tr>
+<td><strong>Post-Launch Support</strong></td>
+<td>15 days / 30 days / 60 days / 90 days</td>
+<td>Free bug fix period</td>
+</tr>
+</tbody>
+</table>
+<h3 id="recommended-milestone-structure">Recommended Milestone Structure:</h3>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Deliverable</th>
+<th>Payment %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Kickoff</strong></td>
+<td>Requirements document, sitemap, wireframes</td>
+<td>20%</td>
+</tr>
+<tr>
+<td><strong>Design Approval</strong></td>
+<td>UI/UX mockups (all pages)</td>
+<td>20%</td>
+</tr>
+<tr>
+<td><strong>Development Complete</strong></td>
+<td>Functional website on staging</td>
+<td>30%</td>
+</tr>
+<tr>
+<td><strong>Testing &amp; Revisions</strong></td>
+<td>Bug-free, client-approved</td>
+<td>20%</td>
+</tr>
+<tr>
+<td><strong>Launch &amp; Handover</strong></td>
+<td>Live website + documentation</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="18-legal-compliance">18. Legal &amp; Compliance</h2>
+<p>Never ignore legal requirements — they can have serious consequences.</p>
+<h3 id="parameters_17">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Privacy Policy</strong></td>
+<td>Not needed / Template / Custom (lawyer-reviewed)</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Terms of Service</strong></td>
+<td>Not needed / Template / Custom</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Cookie Consent</strong></td>
+<td>Not needed / Basic banner / GDPR-compliant with preferences</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>GDPR Compliance</strong></td>
+<td>Not applicable / Basic / Full (DPO, data mapping)</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>CCPA Compliance</strong></td>
+<td>Not applicable / Basic / Full</td>
+<td>$500–$3,000</td>
+</tr>
+<tr>
+<td><strong>ADA/WCAG Accessibility</strong></td>
+<td>Not required / Level A / Level AA / Level AAA</td>
+<td>$500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Data Retention Policy</strong></td>
+<td>Not needed / Basic / Custom</td>
+<td>$200–$1,000</td>
+</tr>
+<tr>
+<td><strong>Copyright Notices</strong></td>
+<td>Yes / No</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td><strong>Intellectual Property</strong></td>
+<td>Client owns all / Developer retains license / Shared</td>
+<td>Define in contract</td>
+</tr>
+<tr>
+<td><strong>NDA (Non-Disclosure Agreement)</strong></td>
+<td>Not needed / Mutual NDA</td>
+<td>Standard practice</td>
+</tr>
+<tr>
+<td><strong>Disclaimer Pages</strong></td>
+<td>Not needed / Yes</td>
+<td>$100–$300</td>
+</tr>
+<tr>
+<td><strong>Age Verification</strong></td>
+<td>Not needed / Yes</td>
+<td>$200–$500</td>
+</tr>
+<tr>
+<td><strong>Data Processing Agreement</strong></td>
+<td>Not needed / Yes</td>
+<td>For GDPR compliance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="19-branding-assets">19. Branding &amp; Assets</h2>
+<p>Understand what branding materials the client has or needs.</p>
+<h3 id="parameters_18">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Pricing Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Logo</strong></td>
+<td>Client provides / Need new logo / Redesign existing</td>
+<td>New logo = $200–$2,000</td>
+</tr>
+<tr>
+<td><strong>Brand Colors</strong></td>
+<td>Defined / Needs creation</td>
+<td>Color palette creation = $100–$500</td>
+</tr>
+<tr>
+<td><strong>Typography</strong></td>
+<td>Defined / Needs selection</td>
+<td>Font selection + licensing</td>
+</tr>
+<tr>
+<td><strong>Brand Guidelines</strong></td>
+<td>Existing / Need creation</td>
+<td>Brand guide = $500–$2,000</td>
+</tr>
+<tr>
+<td><strong>Photography</strong></td>
+<td>Client provides / Stock photos / Custom shoot</td>
+<td>Custom = $500–$5,000</td>
+</tr>
+<tr>
+<td><strong>Video Content</strong></td>
+<td>Not needed / Client provides / Need production</td>
+<td>Production = $1,000–$10,000+</td>
+</tr>
+<tr>
+<td><strong>Illustrations</strong></td>
+<td>Not needed / Stock / Custom</td>
+<td>Custom = $500–$3,000</td>
+</tr>
+<tr>
+<td><strong>Favicon</strong></td>
+<td>Client provides / Create from logo</td>
+<td>$50–$100</td>
+</tr>
+<tr>
+<td><strong>Social Media Assets</strong></td>
+<td>Not needed / Cover images + Profile pictures</td>
+<td>$100–$500</td>
+</tr>
+<tr>
+<td><strong>Print Materials</strong></td>
+<td>Not needed / Business cards / Brochures / Flyers</td>
+<td>$200–$1,000 per item</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="20-communication-project-management">20. Communication &amp; Project Management</h2>
+<p>How the project will be managed and how client communication will work.</p>
+<h3 id="parameters_19">Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Options</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project Management Tool</strong></td>
+<td>None / Trello / Jira / Asana / Notion / ClickUp</td>
+<td>Choose one and share with client</td>
+</tr>
+<tr>
+<td><strong>Communication Channel</strong></td>
+<td>Email / WhatsApp / Slack / Microsoft Teams / Phone</td>
+<td>Define primary channel</td>
+</tr>
+<tr>
+<td><strong>Status Updates</strong></td>
+<td>Weekly / Bi-weekly / Daily standups</td>
+<td>Weekly is standard</td>
+</tr>
+<tr>
+<td><strong>Demo/Review Meetings</strong></td>
+<td>Per milestone / Weekly / Bi-weekly</td>
+<td>Schedule in advance</td>
+</tr>
+<tr>
+<td><strong>Staging Access</strong></td>
+<td>Shared URL / Password-protected / VPN</td>
+<td>Client should review on staging</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>None / User manual / Technical docs / Video tutorials</td>
+<td>$300–$2,000</td>
+</tr>
+<tr>
+<td><strong>Source Code Access</strong></td>
+<td>Not provided / GitHub repository / Full handover</td>
+<td>Define in contract</td>
+</tr>
+<tr>
+<td><strong>Training Sessions</strong></td>
+<td>None / 1 hour / 3 hours / Full training program</td>
+<td>$100–$500/hour</td>
+</tr>
+<tr>
+<td><strong>Point of Contact</strong></td>
+<td>Single / Multiple stakeholders</td>
+<td>Multiple = longer review cycles</td>
+</tr>
+<tr>
+<td><strong>Feedback Format</strong></td>
+<td>Written (email/document) / Annotated screenshots / Loom videos</td>
+<td>Define expectations early</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="quick-price-estimation-formula">📊 Quick Price Estimation Formula</h2>
+<pre><code>Total Website Price = 
+    Domain &amp; Hosting Setup Fee
+  + Design Cost (based on pages × complexity)
+  + Development Cost (hourly rate × estimated hours)
+  + Feature Cost (sum of individual features)
+  + Integration Cost (per integration)
+  + Content Cost (per page if developer handles)
+  + Testing &amp; QA (10–15% of dev cost)
+  + Project Management (5–10% of total)
+  + Contingency Buffer (10–20% of total)
+</code></pre>
+<h3 id="hourly-rate-reference">Hourly Rate Reference:</h3>
+<table>
+<thead>
+<tr>
+<th>Developer Level</th>
+<th>Hourly Rate (USD)</th>
+<th>Hourly Rate (INR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Junior</td>
+<td>$15–$30</td>
+<td>₹500–₹1,000</td>
+</tr>
+<tr>
+<td>Mid-Level</td>
+<td>$30–$60</td>
+<td>₹1,000–₹2,500</td>
+</tr>
+<tr>
+<td>Senior</td>
+<td>$60–$120</td>
+<td>₹2,500–₹5,000</td>
+</tr>
+<tr>
+<td>Expert/Agency</td>
+<td>$120–$250+</td>
+<td>₹5,000–₹15,000+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>This guide should be updated as new technologies and pricing standards emerge. Last updated: March 2026.</em></p></div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <p>&copy; 2026 Client Requirement Analysis • Hosted on GitHub Pages</p>
+    </footer>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/export.js"></script>
+</body>
+</html>
