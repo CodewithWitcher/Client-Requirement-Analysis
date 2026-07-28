@@ -43,18 +43,30 @@
         </svg>
         <input type="text" id="search-input" class="search-input" placeholder="Search documents by title or keyword..." aria-label="Search documents">
       </div>
-      <div class="filter-tags">
-        <button class="filter-btn active" data-filter="all">All (<span id="visible-count">18</span>)</button>
-        <button class="filter-btn" data-filter="md">Markdown (14)</button>
-        <button class="filter-btn" data-filter="docx">Word (2)</button>
-        <button class="filter-btn" data-filter="xlsx">Excel (2)</button>
+
+      <!-- Domain / Topic Filters -->
+      <div class="filter-tags" style="width: 100%; margin-top: 0.5rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">CATEGORY:</span>
+        <button class="filter-btn topic-filter active" data-topic="all">All Topics</button>
+        <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects (8)</button>
+        <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps (8)</button>
+        <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & Calculators (10)</button>
+      </div>
+
+      <!-- File Extension Filters -->
+      <div class="filter-tags" style="width: 100%; margin-top: 0.25rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">FORMAT:</span>
+        <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">18</span>)</button>
+        <button class="filter-btn type-filter" data-filter="md">Markdown (14)</button>
+        <button class="filter-btn type-filter" data-filter="docx">Word (2)</button>
+        <button class="filter-btn type-filter" data-filter="xlsx">Excel (2)</button>
       </div>
     </div>
 
     <!-- Document Card Grid -->
     <main class="card-grid" id="card-grid">
       
-        <a href="pages/checklists-application-project-checklist.html" class="doc-card" data-type="md" data-title="✅ Mobile Application Project Checklist">
+        <a href="pages/checklists-application-project-checklist.html" class="doc-card" data-type="md" data-topics="mobile" data-title="✅ Mobile Application Project Checklist">
           <div class="card-header">
             <div class="card-title">✅ Mobile Application Project Checklist</div>
             <span class="badge badge-md">MD</span>
@@ -74,7 +86,7 @@
           </div>
         </a>
         
-        <a href="pages/checklists-website-project-checklist.html" class="doc-card" data-type="md" data-title="✅ Website Project Checklist">
+        <a href="pages/checklists-website-project-checklist.html" class="doc-card" data-type="md" data-topics="web" data-title="✅ Website Project Checklist">
           <div class="card-header">
             <div class="card-title">✅ Website Project Checklist</div>
             <span class="badge badge-md">MD</span>
@@ -94,7 +106,7 @@
           </div>
         </a>
         
-        <a href="pages/docs-application-application-pricing-parameters.html" class="doc-card" data-type="md" data-title="📱 Application Pricing Parameters — Quick Reference Sheet">
+        <a href="pages/docs-application-application-pricing-parameters.html" class="doc-card" data-type="md" data-topics="mobile pricing" data-title="📱 Application Pricing Parameters — Quick Reference Sheet">
           <div class="card-header">
             <div class="card-title">📱 Application Pricing Parameters — Quick Reference Sheet</div>
             <span class="badge badge-md">MD</span>
@@ -114,7 +126,7 @@
           </div>
         </a>
         
-        <a href="pages/docs-application-application-requirements-complete-guide.html" class="doc-card" data-type="md" data-title="📱 Mobile Application Requirements — Complete Guide">
+        <a href="pages/docs-application-application-requirements-complete-guide.html" class="doc-card" data-type="md" data-topics="mobile" data-title="📱 Mobile Application Requirements — Complete Guide">
           <div class="card-header">
             <div class="card-title">📱 Mobile Application Requirements — Complete Guide</div>
             <span class="badge badge-md">MD</span>
@@ -134,7 +146,7 @@
           </div>
         </a>
         
-        <a href="pages/docs-website-website-pricing-parameters.html" class="doc-card" data-type="md" data-title="🌐 Website Pricing Parameters — Quick Reference Sheet">
+        <a href="pages/docs-website-website-pricing-parameters.html" class="doc-card" data-type="md" data-topics="web pricing" data-title="🌐 Website Pricing Parameters — Quick Reference Sheet">
           <div class="card-header">
             <div class="card-title">🌐 Website Pricing Parameters — Quick Reference Sheet</div>
             <span class="badge badge-md">MD</span>
@@ -154,7 +166,7 @@
           </div>
         </a>
         
-        <a href="pages/docs-website-website-requirements-complete-guide.html" class="doc-card" data-type="md" data-title="🌐 Website Requirements — Complete Guide">
+        <a href="pages/docs-website-website-requirements-complete-guide.html" class="doc-card" data-type="md" data-topics="web" data-title="🌐 Website Requirements — Complete Guide">
           <div class="card-header">
             <div class="card-title">🌐 Website Requirements — Complete Guide</div>
             <span class="badge badge-md">MD</span>
@@ -174,7 +186,7 @@
           </div>
         </a>
         
-        <a href="pages/overview-application-pricing-module-overview.html" class="doc-card" data-type="md" data-title="📱 Application Pricing Module — Detailed Overview">
+        <a href="pages/overview-application-pricing-module-overview.html" class="doc-card" data-type="md" data-topics="mobile pricing" data-title="📱 Application Pricing Module — Detailed Overview">
           <div class="card-header">
             <div class="card-title">📱 Application Pricing Module — Detailed Overview</div>
             <span class="badge badge-md">MD</span>
@@ -194,7 +206,7 @@
           </div>
         </a>
         
-        <a href="pages/overview-application-pricing-quick-guide.html" class="doc-card" data-type="md" data-title="📱 Application Pricing — Quick Reference Guide">
+        <a href="pages/overview-application-pricing-quick-guide.html" class="doc-card" data-type="md" data-topics="mobile pricing" data-title="📱 Application Pricing — Quick Reference Guide">
           <div class="card-header">
             <div class="card-title">📱 Application Pricing — Quick Reference Guide</div>
             <span class="badge badge-md">MD</span>
@@ -214,7 +226,7 @@
           </div>
         </a>
         
-        <a href="pages/overview-website-pricing-module-overview.html" class="doc-card" data-type="md" data-title="🌐 Website Pricing Module — Detailed Overview">
+        <a href="pages/overview-website-pricing-module-overview.html" class="doc-card" data-type="md" data-topics="web pricing" data-title="🌐 Website Pricing Module — Detailed Overview">
           <div class="card-header">
             <div class="card-title">🌐 Website Pricing Module — Detailed Overview</div>
             <span class="badge badge-md">MD</span>
@@ -234,7 +246,7 @@
           </div>
         </a>
         
-        <a href="pages/overview-website-pricing-quick-guide.html" class="doc-card" data-type="md" data-title="🌐 Website Pricing — Quick Reference Guide">
+        <a href="pages/overview-website-pricing-quick-guide.html" class="doc-card" data-type="md" data-topics="web pricing" data-title="🌐 Website Pricing — Quick Reference Guide">
           <div class="card-header">
             <div class="card-title">🌐 Website Pricing — Quick Reference Guide</div>
             <span class="badge badge-md">MD</span>
@@ -254,7 +266,7 @@
           </div>
         </a>
         
-        <a href="pages/questionnaire-application-application-client-questionnaire.html" class="doc-card" data-type="md" data-title="📱 Mobile Application Project — Client Discovery Questionnaire">
+        <a href="pages/questionnaire-application-application-client-questionnaire.html" class="doc-card" data-type="md" data-topics="mobile" data-title="📱 Mobile Application Project — Client Discovery Questionnaire">
           <div class="card-header">
             <div class="card-title">📱 Mobile Application Project — Client Discovery Questionnaire</div>
             <span class="badge badge-md">MD</span>
@@ -274,7 +286,7 @@
           </div>
         </a>
         
-        <a href="pages/questionnaire-website-website-client-questionnaire.html" class="doc-card" data-type="md" data-title="🌐 Website Project — Client Discovery Questionnaire">
+        <a href="pages/questionnaire-website-website-client-questionnaire.html" class="doc-card" data-type="md" data-topics="web" data-title="🌐 Website Project — Client Discovery Questionnaire">
           <div class="card-header">
             <div class="card-title">🌐 Website Project — Client Discovery Questionnaire</div>
             <span class="badge badge-md">MD</span>
@@ -294,7 +306,7 @@
           </div>
         </a>
         
-        <a href="pages/readme.html" class="doc-card" data-type="md" data-title="💼 Price Module — Client Project Pricing &amp; Requirements Toolkit">
+        <a href="pages/readme.html" class="doc-card" data-type="md" data-topics="general" data-title="💼 Price Module — Client Project Pricing &amp; Requirements Toolkit">
           <div class="card-header">
             <div class="card-title">💼 Price Module — Client Project Pricing &amp; Requirements Toolkit</div>
             <span class="badge badge-md">MD</span>
@@ -306,7 +318,7 @@
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
               </svg>
-              <span>699 words</span>
+              <span>391 words</span>
             </div>
             <div class="view-link">
               Open Document &rarr;
@@ -314,7 +326,7 @@
           </div>
         </a>
         
-        <a href="pages/readme1.html" class="doc-card" data-type="md" data-title="🔍 Complete SEO Framework &amp; Tech Stack Guide (2026)">
+        <a href="pages/readme1.html" class="doc-card" data-type="md" data-topics="general" data-title="🔍 Complete SEO Framework &amp; Tech Stack Guide (2026)">
           <div class="card-header">
             <div class="card-title">🔍 Complete SEO Framework &amp; Tech Stack Guide (2026)</div>
             <span class="badge badge-md">MD</span>
@@ -334,7 +346,7 @@
           </div>
         </a>
         
-        <a href="pages/template-excel-template-application-pricing-calculator.html" class="doc-card" data-type="xlsx" data-title="Application Pricing Calculator">
+        <a href="pages/template-excel-template-application-pricing-calculator.html" class="doc-card" data-type="xlsx" data-topics="mobile pricing" data-title="Application Pricing Calculator">
           <div class="card-header">
             <div class="card-title">Application Pricing Calculator</div>
             <span class="badge badge-xlsx">XLSX</span>
@@ -354,7 +366,7 @@
           </div>
         </a>
         
-        <a href="pages/template-excel-template-website-pricing-calculator.html" class="doc-card" data-type="xlsx" data-title="Website Pricing Calculator">
+        <a href="pages/template-excel-template-website-pricing-calculator.html" class="doc-card" data-type="xlsx" data-topics="web pricing" data-title="Website Pricing Calculator">
           <div class="card-header">
             <div class="card-title">Website Pricing Calculator</div>
             <span class="badge badge-xlsx">XLSX</span>
@@ -374,7 +386,7 @@
           </div>
         </a>
         
-        <a href="pages/template-word-template-application-client-proposal.html" class="doc-card" data-type="docx" data-title="Application Client Proposal">
+        <a href="pages/template-word-template-application-client-proposal.html" class="doc-card" data-type="docx" data-topics="mobile pricing" data-title="Application Client Proposal">
           <div class="card-header">
             <div class="card-title">Application Client Proposal</div>
             <span class="badge badge-docx">DOCX</span>
@@ -394,7 +406,7 @@
           </div>
         </a>
         
-        <a href="pages/template-word-template-website-client-proposal.html" class="doc-card" data-type="docx" data-title="Website Client Proposal">
+        <a href="pages/template-word-template-website-client-proposal.html" class="doc-card" data-type="docx" data-topics="web pricing" data-title="Website Client Proposal">
           <div class="card-header">
             <div class="card-title">Website Client Proposal</div>
             <span class="badge badge-docx">DOCX</span>

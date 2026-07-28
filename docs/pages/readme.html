@@ -36,9 +36,9 @@
       <h1>💼 Price Module — Client Project Pricing &amp; Requirements Toolkit</h1>
 
       <div class="doc-meta-row">
-        <span>File Size: 5.5 KB</span>
-        <span>Metrics: 699 words</span>
-        <span>Reading Time: 3 min read</span>
+        <span>File Size: 2.7 KB</span>
+        <span>Metrics: 391 words</span>
+        <span>Reading Time: 1 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -70,17 +70,19 @@
     <main class="doc-content-card">
       <div class="rendered-markdown"><h1 id="price-module-client-project-pricing-requirements-toolkit">💼 Price Module — Client Project Pricing &amp; Requirements Toolkit</h1>
 <blockquote>
-<p>A comprehensive toolkit for freelance developers and agencies to gather client requirements, estimate pricing, and deliver professional proposals for <strong>Website</strong> and <strong>Mobile Application</strong> projects — with an integrated <strong>Web Document Hub</strong> and <strong>Static Site Generator</strong> for GitHub Pages.</p>
+<p>A comprehensive toolkit for freelance developers and agencies to gather client requirements, estimate pricing, and deliver professional proposals for <strong>Website</strong> and <strong>Mobile Application</strong> projects — with an integrated <strong>Interactive Web Document Hub</strong> and <strong>Static Site Generator</strong> for GitHub Pages.</p>
 </blockquote>
 <hr />
-<h2 id="static-web-hub-documentation-site">🌐 Static Web Hub &amp; Documentation Site</h2>
-<p>This repository features a static site generator in Python that compiles all Markdown (<code>.md</code>), Word (<code>.docx</code>), and Excel (<code>.xlsx</code>) documents into an interactive, glassy web interface with Boska typography and multi-format exports.</p>
+<h2 id="interactive-web-hub-documentation-site">🌐 Interactive Web Hub &amp; Documentation Site</h2>
+<p>This repository features a static site generator in Python that compiles all Markdown (<code>.md</code>), Word (<code>.docx</code>), and Excel (<code>.xlsx</code>) documents into an interactive, glassy web interface with <strong>Cabinet Grotesk</strong> typography and multi-format exports.</p>
 <h3 id="key-web-features">🌟 Key Web Features</h3>
 <ul>
 <li><strong>All-in-One Dashboard (<code>docs/index.html</code>)</strong>: Clickable document cards with real-time live search and file-type badges (<code>MD</code>, <code>DOCX</code>, <code>XLSX</code>).</li>
 <li><strong>Interactive Document Views</strong>: Rendered Markdown text, formatted Word documents, and multi-sheet tabbed Excel spreadsheets.</li>
-<li><strong>Multi-Format Content Exports</strong>: One-click extraction as PDF, Word (.docx), Excel (.xlsx), or Original file downloads.</li>
-<li><strong>Modern Light Glassmorphism UI</strong>: High accessibility contrast, Boska font typography, backdrop blur cards, and responsive mobile layout.</li>
+<li><strong>Cabinet Grotesk Typography</strong>: Premium headline &amp; brand font loaded via Fontshare.</li>
+<li><strong>Browser LocalStorage Auto-Save</strong>: Save client details, checked features, custom unit rates, and checklist states directly in the browser.</li>
+<li><strong>Custom Proposal Builder</strong>: Create client proposals with automatic tax (GST 18%), discount, platform multiplier, and milestone payment schedules.</li>
+<li><strong>Multi-Format Content Exports</strong>: One-click extraction as PDF, Word (.docx), Excel (.xlsx), or JSON Project File.</li>
 <li><strong>GitHub Pages Ready</strong>: 100% static output stored in <code>/docs</code> — zero backend runtime needed.</li>
 </ul>
 <hr />
@@ -114,124 +116,7 @@
 <li><strong>Branch</strong>: Select <code>main</code> and set the folder to <code>/docs</code>.</li>
 <li>Click <strong>Save</strong>.</li>
 <li>Within 1–2 minutes, your website will be live at <code>https://&lt;username&gt;.github.io/&lt;repository-name&gt;/</code>.</li>
-</ol>
-<hr />
-<h2 id="repository-structure">📁 Repository Structure</h2>
-<pre><code>Client-Requirement-Analysis/
-│
-├── README.md                          ← You are here
-├── requirements.txt                   ← Python dependencies
-│
-├── scripts/                           ← Python generators &amp; build scripts
-│   ├── build_site.py                  ← Main static site generator command
-│   ├── generate_excel.py              ← Excel spreadsheet generator
-│   └── generate_word.py               ← Word proposal generator
-│
-├── docs/                              ← Generated static website (GitHub Pages publish folder)
-│   ├── index.html                     ← Main Hub index page with search &amp; filter
-│   ├── pages/                         ← Converted document preview pages (.html)
-│   ├── assets/                        ← Shared CSS (Boska fonts, glassmorphism) &amp; JS
-│   └── files/                         ← Preserved original &amp; export download files
-│
-├── Questionnaire/                     ← Client-facing questionnaires
-│   ├── website/
-│   └── application/
-│
-├── checklists/                        ← Pre-project &amp; post-project checklists
-│
-├── Template/                          ← Excel calculators &amp; Word proposal templates
-│   ├── excel template/
-│   └── word template/
-│
-└── overview/                          ← Module overview guides
-</code></pre>
-<hr />
-<h2 id="whats-covered">📋 What's Covered</h2>
-<h3 id="for-websites">For Websites</h3>
-<table>
-<thead>
-<tr>
-<th>Category</th>
-<th>Parameters</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Domain &amp; Hosting</td>
-<td>Domain registration, SSL, hosting type, CDN, server location</td>
-</tr>
-<tr>
-<td>Database</td>
-<td>Type, size, backups, migrations, scaling</td>
-</tr>
-<tr>
-<td>Tech Stack</td>
-<td>Frontend, backend, CMS, frameworks, languages</td>
-</tr>
-<tr>
-<td>Design &amp; UX</td>
-<td>Custom vs template, responsive, wireframes, revisions</td>
-</tr>
-<tr>
-<td>Pages &amp; Features</td>
-<td>Static/dynamic pages, forms, search, auth, dashboards</td>
-</tr>
-<tr>
-<td>E-Commerce</td>
-<td>Product catalog, cart, checkout, inventory, shipping</td>
-</tr>
-<tr>
-<td>Payment Integration</td>
-<td>Gateways, multi-currency, subscriptions, invoicing</td>
-</tr>
-<tr>
-<td>SEO &amp; Analytics</td>
-<td>On-page SEO, tracking, sitemap, schema markup</td>
-</tr>
-<tr>
-<td>Security</td>
-<td>SSL, firewalls, DDoS, GDPR, data protection</td>
-</tr>
-</tbody>
-</table>
-<h3 id="for-mobile-applications">For Mobile Applications</h3>
-<table>
-<thead>
-<tr>
-<th>Category</th>
-<th>Parameters</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Platform</td>
-<td>iOS, Android, cross-platform, PWA</td>
-</tr>
-<tr>
-<td>App Store &amp; Deployment</td>
-<td>Play Store, App Store, ASO, developer accounts</td>
-</tr>
-<tr>
-<td>Design &amp; UX</td>
-<td>Platform guidelines, animations, dark mode, theming</td>
-</tr>
-<tr>
-<td>Features</td>
-<td>Auth, notifications, chat, geolocation, camera, offline</td>
-</tr>
-<tr>
-<td>Backend &amp; API</td>
-<td>Custom backend, BaaS, real-time, file storage</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="export-formats-supported">📄 Export Formats Supported</h2>
-<p>Each document page includes top action buttons allowing users to export or download content:<br />
-- 📄 <strong>Export as PDF</strong>: Triggers clean printable document layout optimized for PDF saving.<br />
-- 📝 <strong>Export as Word (.docx)</strong>: Pre-formatted downloadable Word document.<br />
-- 📊 <strong>Export as Excel (.xlsx)</strong>: Pre-formatted downloadable Excel spreadsheet.<br />
-- 💾 <strong>Download Original</strong>: Downloads the source Markdown, Word, or Excel file preserved in the repo.</p></div>
+</ol></div>
     </main>
 
     <!-- Site Footer -->

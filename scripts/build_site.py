@@ -72,6 +72,24 @@ def get_file_type_info(ext: str):
     return {"category": "other", "badge_class": "badge-md", "label": ext.upper().strip('.')}
 
 
+def get_document_topics(file_path: Path):
+    """Classify document by domain topic (web, mobile, pricing)."""
+    rel_str = str(file_path).lower()
+    topics = []
+    
+    if "website" in rel_str or "web" in rel_str:
+        topics.append("web")
+    if "application" in rel_str or "mobile" in rel_str or "app" in rel_str:
+        topics.append("mobile")
+    if "pricing" in rel_str or "calculator" in rel_str or "proposal" in rel_str or "cost" in rel_str:
+        topics.append("pricing")
+
+    if not topics:
+        topics.append("general")
+
+    return topics
+
+
 # ─── Document Converters ──────────────────────────────────────────────────
 
 def parse_markdown_file(file_path: Path):
@@ -84,7 +102,6 @@ def parse_markdown_file(file_path: Path):
     else:
         title = file_path.stem.replace('-', ' ').replace('_', ' ').title()
 
-    # Convert task checkboxes (- [ ] / - [x]) into interactive HTML inputs
     cb_count = 0
     def replace_task_cb(match):
         nonlocal cb_count
@@ -197,10 +214,9 @@ def parse_excel_file(file_path: Path):
 
             for r_idx in range(1, min(max_r + 1, 300)):
                 row_cells = []
-                is_header = (r_idx == 1 or r_idx == 6)  # Typical header rows in calculator sheets
+                is_header = (r_idx == 1 or r_idx == 6)
                 cell_tag = "th" if is_header else "td"
 
-                # Check if item row has an ID / parameter index
                 first_cell_val = ws.cell(row=r_idx, column=1).value
                 item_id = f"item_{r_idx}" if (is_calculator_sheet and isinstance(first_cell_val, (int, str)) and str(first_cell_val).isdigit()) else None
 
@@ -208,19 +224,18 @@ def parse_excel_file(file_path: Path):
                     val = ws.cell(row=r_idx, column=c_idx).value
                     val_str = "" if val is None else str(val)
 
-                    # Replace cost (col 4) & qty (col 5) & req (col 7) with interactive controls
                     if is_calculator_sheet and item_id and not is_header:
-                        if c_idx == 7:  # Required / Include Checkbox
+                        if c_idx == 7:
                             checked = "checked" if val_str.lower() in {"yes", "true", "1"} else ""
                             row_cells.append(f'<{cell_tag} style="text-align: center;"><input type="checkbox" class="item-check" {checked}></{cell_tag}>')
                             continue
-                        elif c_idx == 4 and val_str.isdigit():  # Unit cost
+                        elif c_idx == 4 and val_str.isdigit():
                             row_cells.append(f'<{cell_tag}><input type="number" class="item-cost form-control" value="{val_str}"></{cell_tag}>')
                             continue
-                        elif c_idx == 5 and val_str.isdigit():  # Qty
+                        elif c_idx == 5 and val_str.isdigit():
                             row_cells.append(f'<{cell_tag}><input type="number" class="item-qty form-control" value="{val_str}"></{cell_tag}>')
                             continue
-                        elif c_idx == 6:  # Calculated Row Total
+                        elif c_idx == 6:
                             row_cells.append(f'<{cell_tag}><span class="item-row-total">₹{val_str}</span></{cell_tag}>')
                             continue
 
@@ -244,7 +259,6 @@ def parse_excel_file(file_path: Path):
             '''
             tab_panes.append(pane_html)
 
-        # Summary widget for calculations
         summary_widget_html = '''
         <div class="proposal-summary-grid" style="margin-top: 2rem;">
           <div class="summary-card">
@@ -358,16 +372,21 @@ def generate_export_files(doc_data: dict, file_path: Path, slug: str):
 # ─── HTML Page Generator Templates ───────────────────────────────────────
 
 def generate_index_html(documents: list) -> str:
-    """Build home index dashboard page (docs/index.html)."""
+    """Build home index dashboard page (docs/index.html) with Web, Mobile, Pricing & File-type filters."""
     cards_html = []
     
     md_count = sum(1 for d in documents if d['category'] == 'md')
     docx_count = sum(1 for d in documents if d['category'] == 'docx')
     xlsx_count = sum(1 for d in documents if d['category'] == 'xlsx')
 
+    web_count = sum(1 for d in documents if 'web' in d['topics'])
+    mobile_count = sum(1 for d in documents if 'mobile' in d['topics'])
+    pricing_count = sum(1 for d in documents if 'pricing' in d['topics'])
+
     for doc in documents:
+        topic_attr = " ".join(doc['topics'])
         cards_html.append(f'''
-        <a href="pages/{doc['slug']}.html" class="doc-card" data-type="{doc['category']}" data-title="{html.escape(doc['title'])}">
+        <a href="pages/{doc['slug']}.html" class="doc-card" data-type="{doc['category']}" data-topics="{topic_attr}" data-title="{html.escape(doc['title'])}">
           <div class="card-header">
             <div class="card-title">{html.escape(doc['title'])}</div>
             <span class="badge {doc['badge_class']}">{doc['label']}</span>
@@ -433,11 +452,23 @@ def generate_index_html(documents: list) -> str:
         </svg>
         <input type="text" id="search-input" class="search-input" placeholder="Search documents by title or keyword..." aria-label="Search documents">
       </div>
-      <div class="filter-tags">
-        <button class="filter-btn active" data-filter="all">All (<span id="visible-count">{len(documents)}</span>)</button>
-        <button class="filter-btn" data-filter="md">Markdown ({md_count})</button>
-        <button class="filter-btn" data-filter="docx">Word ({docx_count})</button>
-        <button class="filter-btn" data-filter="xlsx">Excel ({xlsx_count})</button>
+
+      <!-- Domain / Topic Filters -->
+      <div class="filter-tags" style="width: 100%; margin-top: 0.5rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">CATEGORY:</span>
+        <button class="filter-btn topic-filter active" data-topic="all">All Topics</button>
+        <button class="filter-btn topic-filter" data-topic="web">🌐 Web Projects ({web_count})</button>
+        <button class="filter-btn topic-filter" data-topic="mobile">📱 Mobile Apps ({mobile_count})</button>
+        <button class="filter-btn topic-filter" data-topic="pricing">💰 Pricing & Calculators ({pricing_count})</button>
+      </div>
+
+      <!-- File Extension Filters -->
+      <div class="filter-tags" style="width: 100%; margin-top: 0.25rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-subtle); display: flex; align-items: center; margin-right: 0.5rem;">FORMAT:</span>
+        <button class="filter-btn type-filter active" data-filter="all">All Formats (<span id="visible-count">{len(documents)}</span>)</button>
+        <button class="filter-btn type-filter" data-filter="md">Markdown ({md_count})</button>
+        <button class="filter-btn type-filter" data-filter="docx">Word ({docx_count})</button>
+        <button class="filter-btn type-filter" data-filter="xlsx">Excel ({xlsx_count})</button>
       </div>
     </div>
 
@@ -679,13 +710,14 @@ def main():
         rel_path = file_path.relative_to(ROOT_DIR)
         ext = file_path.suffix.lower()
         type_info = get_file_type_info(ext)
+        topics = get_document_topics(file_path)
         slug = slugify(str(rel_path.with_suffix('')))
         
         stat = file_path.stat()
         file_size = stat.st_size
         last_mod = datetime.datetime.fromtimestamp(stat.st_mtime).strftime('%b %d, %Y')
 
-        print(f"  [CONVERT] Processing [{type_info['label']}] {rel_path} ...")
+        print(f"  [CONVERT] Processing [{type_info['label']}] ({','.join(topics)}) {rel_path} ...")
 
         if ext == ".md":
             parsed = parse_markdown_file(file_path)
@@ -708,6 +740,7 @@ def main():
             "filename": file_path.name,
             "title": parsed["title"],
             "category": type_info["category"],
+            "topics": topics,
             "label": type_info["label"],
             "badge_class": type_info["badge_class"],
             "excerpt": parsed["excerpt"],
@@ -729,11 +762,9 @@ def main():
 
         processed_docs.append(doc_data)
 
-    # Build Proposal Builder tool page
     proposal_tool_html = generate_proposal_builder_tool_html()
     (PAGES_DIR / "interactive-proposal-builder.html").write_text(proposal_tool_html, encoding="utf-8")
 
-    # Build index.html
     index_html = generate_index_html(processed_docs)
     (OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
