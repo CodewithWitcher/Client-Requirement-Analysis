@@ -1,17 +1,190 @@
 /**
  * Document Hub - Interactive JavaScript
- * Multi-dimensional search, File Explorer Drawer, Section Scope Selector, TOC ScrollSpy, Sheet Tabs,
- * and Live WYSIWYG Document Editor & Persistence Engine.
+ * Multi-Client Profile Switcher, Interactive Task Checklists, Multi-dimensional search, File Explorer Drawer, 
+ * Section Scope Selector, TOC ScrollSpy, Sheet Tabs, and Live WYSIWYG Document Editor & Persistence Engine.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  renderClientProfileSwitcher();
   initSearchAndFilter();
   initSheetTabs();
   initCopyButtons();
   initSectionScopeSelectors();
   initTocScrollSpy();
   initLiveDocumentEditor();
+  initInteractiveTaskChecklists();
 });
+
+/**
+ * Render Interactive Multi-Client Profile Switcher Bar & Warning Notice
+ */
+function renderClientProfileSwitcher() {
+  const container = document.getElementById('project-banner-container');
+  const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+  if (!project) return;
+
+  const allProjects = window.ProjectStorage.getAllProjects();
+  const activeId = window.ProjectStorage.getActiveProjectId();
+
+  let optionsHtml = '';
+  Object.keys(allProjects).forEach(id => {
+    const p = allProjects[id];
+    const isSel = (id === activeId) ? 'selected' : '';
+    optionsHtml += `<option value="${p.id}" ${isSel}>👤 ${escapeHtml(p.clientName)} — ${escapeHtml(p.projectName)}</option>`;
+  });
+
+  const bannerHtml = `
+    <div class="project-banner-card">
+      <div class="banner-title-row">
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <span style="font-weight: 800; font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-main);">Client Workspace Profile:</span>
+          <select id="client-profile-select" class="form-control" style="font-weight: 700; max-width: 320px; border-color: var(--accent-primary);" onchange="switchClientProfile(this.value)">
+            ${optionsHtml}
+          </select>
+          <button class="export-btn" style="padding: 0.4rem 0.85rem; font-size: 0.82rem;" onclick="promptNewClientProfile()">+ New Client Profile</button>
+          <button class="export-btn" style="padding: 0.4rem 0.85rem; font-size: 0.82rem; color: #ef4444; border-color: #ef4444;" onclick="deleteCurrentClientProfile()">🗑️ Delete</button>
+        </div>
+
+        <div class="banner-actions">
+          <button class="export-btn primary" style="background: var(--accent-emerald); border-color: var(--accent-emerald);" onclick="ExportManager.downloadCompleteClientWorkspace()">
+            📦 Download Complete Client Workspace
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Client Info Editing Bar -->
+      <div class="form-grid" style="margin-top: 1rem;">
+        <div class="form-group">
+          <label>Client Name:</label>
+          <input type="text" id="client-input-name" class="form-control" value="${escapeHtml(project.clientName)}" onchange="updateClientInfo('clientName', this.value)">
+        </div>
+        <div class="form-group">
+          <label>Project Scope Title:</label>
+          <input type="text" id="client-input-project" class="form-control" value="${escapeHtml(project.projectName)}" onchange="updateClientInfo('projectName', this.value)">
+        </div>
+        <div class="form-group">
+          <label>Prepared By / Agency:</label>
+          <input type="text" id="client-input-agency" class="form-control" value="${escapeHtml(project.preparedBy)}" onchange="updateClientInfo('preparedBy', this.value)">
+        </div>
+        <div class="form-group">
+          <label>Target Platform:</label>
+          <select id="client-input-platform" class="form-control" onchange="updateClientInfo('platform', this.value)">
+            <option value="Both" ${project.platform === 'Both' ? 'selected' : ''}>🌐 Both Website & Mobile App</option>
+            <option value="Website" ${project.platform === 'Website' ? 'selected' : ''}>🌐 Website Only</option>
+            <option value="Mobile" ${project.platform === 'Mobile' ? 'selected' : ''}>📱 Mobile App Only</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Storage Warning Notice -->
+      <div style="margin-top: 1rem; padding: 0.65rem 1rem; background: rgba(245, 158, 11, 0.08); border: 1px dashed var(--accent-amber); border-radius: 8px; font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+        <span>⚠️ <strong>Browser Storage Warning:</strong> Client profiles, checkboxes, and customized estimates are saved locally in your browser memory. Clearing browser history/cache will erase unsaved data.</span>
+        <button class="export-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;" onclick="window.ProjectStorage.exportJSON()">💾 Backup Project JSON</button>
+      </div>
+    </div>
+  `;
+
+  if (container) {
+    container.innerHTML = bannerHtml;
+  }
+}
+
+function switchClientProfile(id) {
+  if (window.ProjectStorage) {
+    window.ProjectStorage.setActiveProjectId(id);
+    if (window.showToast) window.showToast('Switched active client profile!', 'info');
+    setTimeout(() => location.reload(), 300);
+  }
+}
+
+function promptNewClientProfile() {
+  const clientName = prompt('Enter New Client Name:', 'Beta Corp');
+  if (!clientName) return;
+  const projectName = prompt('Enter Project Scope Title:', 'Mobile App Development');
+  if (window.ProjectStorage) {
+    window.ProjectStorage.createClientProfile(clientName, projectName);
+    if (window.showToast) window.showToast(`Created new client profile for ${clientName}!`, 'success');
+    setTimeout(() => location.reload(), 400);
+  }
+}
+
+function deleteCurrentClientProfile() {
+  const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+  if (!project) return;
+  if (!confirm(`Are you sure you want to delete client profile "${project.clientName}"?`)) return;
+
+  if (window.ProjectStorage.deleteClientProfile(project.id)) {
+    if (window.showToast) window.showToast('Client profile deleted.', 'info');
+    setTimeout(() => location.reload(), 400);
+  }
+}
+
+function updateClientInfo(field, val) {
+  if (window.ProjectStorage) {
+    const proj = window.ProjectStorage.getProject();
+    proj[field] = val;
+    window.ProjectStorage.saveProject(proj);
+    if (window.showToast) window.showToast('Updated client profile details!', 'info');
+  }
+}
+
+/**
+ * Handle interactive task checkboxes in Markdown files (Checklists & Questionnaires)
+ */
+function initInteractiveTaskChecklists() {
+  const checkboxes = document.querySelectorAll('.interactive-checklist-item, .rendered-markdown input[type="checkbox"]');
+  if (!checkboxes.length) return;
+
+  const pageSlug = getPageSlug();
+  const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+  const savedChecklist = project ? (project.checklists[pageSlug] || {}) : {};
+
+  let totalCount = checkboxes.length;
+  let checkedCount = 0;
+
+  checkboxes.forEach((cb, idx) => {
+    const cbId = cb.getAttribute('data-cb-id') || `cb-${idx}`;
+    cb.setAttribute('data-cb-id', cbId);
+
+    // Restore saved state
+    if (savedChecklist[cbId]) {
+      cb.checked = true;
+      checkedCount++;
+    } else if (cb.checked) {
+      checkedCount++;
+    }
+
+    // Toggle click listener
+    cb.addEventListener('change', () => {
+      const isChecked = cb.checked;
+
+      if (window.ProjectStorage) {
+        const curProj = window.ProjectStorage.getProject();
+        if (!curProj.checklists[pageSlug]) curProj.checklists[pageSlug] = {};
+        curProj.checklists[pageSlug][cbId] = isChecked;
+        window.ProjectStorage.saveProject(curProj);
+      }
+
+      updateChecklistProgressBar();
+    });
+  });
+
+  updateChecklistProgressBar();
+
+  function updateChecklistProgressBar() {
+    let currentChecked = 0;
+    checkboxes.forEach(cb => {
+      if (cb.checked) currentChecked++;
+    });
+
+    const percent = Math.round((currentChecked / totalCount) * 100) || 0;
+    const textEl = document.getElementById('checklist-progress-text');
+    const barEl = document.getElementById('checklist-progress-bar');
+
+    if (textEl) textEl.textContent = `${currentChecked} of ${totalCount} completed (${percent}%)`;
+    if (barEl) barEl.style.width = `${percent}%`;
+  }
+}
 
 /**
  * Filter document cards on main dashboard
@@ -88,7 +261,8 @@ function initLiveDocumentEditor() {
   if (!contentCard || !exportToolbar) return;
 
   const pageSlug = getPageSlug();
-  const storageKey = 'edited_doc_' + pageSlug;
+  const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+  const storageKey = `edited_doc_${project ? project.id : 'default'}_${pageSlug}`;
 
   // Restore saved edits if present in localStorage
   const savedHtml = localStorage.getItem(storageKey);
@@ -177,7 +351,8 @@ function saveDocumentEdits() {
   if (banner) banner.remove();
 
   const pageSlug = getPageSlug();
-  const storageKey = 'edited_doc_' + pageSlug;
+  const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+  const storageKey = `edited_doc_${project ? project.id : 'default'}_${pageSlug}`;
 
   localStorage.setItem(storageKey, contentCard.innerHTML);
 
@@ -189,7 +364,8 @@ function resetDocumentEdits() {
   if (!confirm('Are you sure you want to reset this proposal to its original template text? Custom changes will be lost.')) return;
 
   const pageSlug = getPageSlug();
-  const storageKey = 'edited_doc_' + pageSlug;
+  const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+  const storageKey = `edited_doc_${project ? project.id : 'default'}_${pageSlug}`;
 
   localStorage.removeItem(storageKey);
   window.location.reload();
@@ -385,3 +561,7 @@ window.toggleLiveEditMode = toggleLiveEditMode;
 window.disableLiveEditMode = disableLiveEditMode;
 window.saveDocumentEdits = saveDocumentEdits;
 window.resetDocumentEdits = resetDocumentEdits;
+window.switchClientProfile = switchClientProfile;
+window.promptNewClientProfile = promptNewClientProfile;
+window.deleteCurrentClientProfile = deleteCurrentClientProfile;
+window.updateClientInfo = updateClientInfo;

@@ -1,7 +1,7 @@
 /**
- * Project Storage Engine
- * Auto-saves client project profiles, calculator states, questionnaires, and checklists in LocalStorage.
- * Includes JSON project export and import functions.
+ * Project & Multi-Client Storage Engine
+ * Auto-saves client project profiles, calculator states, questionnaires, task checklists, and live document edits in LocalStorage.
+ * Includes multi-client profile management, warning banners, JSON backups, and workspace exports.
  */
 
 window.ProjectStorage = {
@@ -14,7 +14,30 @@ window.ProjectStorage = {
   getAllProjects: function() {
     try {
       const data = localStorage.getItem(this.STORAGE_KEY);
-      return data ? JSON.parse(data) : {};
+      const obj = data ? JSON.parse(data) : {};
+      if (!Object.keys(obj).length) {
+        // Create default initial client profile
+        const defaultId = 'client_default';
+        obj[defaultId] = {
+          id: defaultId,
+          clientName: 'Acme Corporation',
+          projectName: 'Website & App Solution',
+          preparedBy: 'Agency Team',
+          date: new Date().toISOString().split('T')[0],
+          platform: 'Both',
+          complexity: '1.0',
+          discount: 0,
+          gstRate: 18,
+          calculators: {},
+          questionnaires: {},
+          checklists: {},
+          editedDocs: {},
+          checkedItems: {},
+          updatedAt: new Date().toISOString()
+        };
+        this.saveProjects(obj);
+      }
+      return obj;
     } catch (e) {
       console.error('Error reading LocalStorage:', e);
       return {};
@@ -25,7 +48,7 @@ window.ProjectStorage = {
    * Get active project ID
    */
   getActiveProjectId: function() {
-    return localStorage.getItem(this.ACTIVE_KEY) || 'default_project';
+    return localStorage.getItem(this.ACTIVE_KEY) || 'client_default';
   },
 
   /**
@@ -36,7 +59,7 @@ window.ProjectStorage = {
   },
 
   /**
-   * Get data for a specific project
+   * Get data for active project profile
    */
   getProject: function(id) {
     const projects = this.getAllProjects();
@@ -44,9 +67,9 @@ window.ProjectStorage = {
     if (!projects[activeId]) {
       projects[activeId] = {
         id: activeId,
-        clientName: 'Client Name',
-        projectName: 'New Project Proposal',
-        preparedBy: 'Your Agency Name',
+        clientName: 'New Client',
+        projectName: 'Requirement Scope & Pricing',
+        preparedBy: 'Agency Team',
         date: new Date().toISOString().split('T')[0],
         platform: 'Both',
         complexity: '1.0',
@@ -55,6 +78,8 @@ window.ProjectStorage = {
         calculators: {},
         questionnaires: {},
         checklists: {},
+        editedDocs: {},
+        checkedItems: {},
         updatedAt: new Date().toISOString()
       };
       this.saveProjects(projects);
@@ -84,6 +109,53 @@ window.ProjectStorage = {
   },
 
   /**
+   * Create new Client Profile
+   */
+  createClientProfile: function(clientName, projectName) {
+    const projects = this.getAllProjects();
+    const newId = 'client_' + Date.now();
+    projects[newId] = {
+      id: newId,
+      clientName: clientName || 'New Client',
+      projectName: projectName || 'Client Project Scope',
+      preparedBy: 'Agency Team',
+      date: new Date().toISOString().split('T')[0],
+      platform: 'Both',
+      complexity: '1.0',
+      discount: 0,
+      gstRate: 18,
+      calculators: {},
+      questionnaires: {},
+      checklists: {},
+      editedDocs: {},
+      checkedItems: {},
+      updatedAt: new Date().toISOString()
+    };
+    this.saveProjects(projects);
+    this.setActiveProjectId(newId);
+    return projects[newId];
+  },
+
+  /**
+   * Delete Client Profile
+   */
+  deleteClientProfile: function(id) {
+    const projects = this.getAllProjects();
+    if (Object.keys(projects).length <= 1) {
+      if (window.showToast) window.showToast('Cannot delete the last remaining client profile.', 'warning');
+      return false;
+    }
+
+    delete projects[id];
+    this.saveProjects(projects);
+    
+    // Switch to first remaining client
+    const nextId = Object.keys(projects)[0];
+    this.setActiveProjectId(nextId);
+    return true;
+  },
+
+  /**
    * Export project as downloadable JSON backup file
    */
   exportJSON: function(projectId) {
@@ -91,11 +163,11 @@ window.ProjectStorage = {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(project, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `project_${slugifyStr(project.projectName)}_${project.date}.json`);
+    downloadAnchor.setAttribute("download", `client_${slugifyStr(project.clientName)}_${project.date}.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
-    if (window.showToast) window.showToast('Project configuration exported as JSON!', 'success');
+    if (window.showToast) window.showToast('Client project configuration exported as JSON!', 'success');
   },
 
   /**
@@ -104,13 +176,13 @@ window.ProjectStorage = {
   importJSON: function(jsonString) {
     try {
       const project = JSON.parse(jsonString);
-      if (!project.id || !project.projectName) {
-        throw new Error('Invalid project JSON file structure.');
+      if (!project.id || !project.clientName) {
+        throw new Error('Invalid client project JSON file structure.');
       }
       project.id = 'imported_' + Date.now();
       this.saveProject(project);
       this.setActiveProjectId(project.id);
-      if (window.showToast) window.showToast(`Imported project: ${project.projectName}`, 'success');
+      if (window.showToast) window.showToast(`Imported profile: ${project.clientName}`, 'success');
       setTimeout(() => location.reload(), 800);
     } catch (e) {
       if (window.showToast) window.showToast(`Import failed: ${e.message}`, 'error');
