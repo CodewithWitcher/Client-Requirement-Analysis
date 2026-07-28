@@ -2,8 +2,8 @@
 """
 Document Hub & Interactive Static Site Generator
 Scans repository for .md, .xlsx, .xls, .doc, and .docx files, converts all 18 documents into HTML pages,
-builds a clean 11-tool primary working landing page (`docs/index.html`), and builds a full repository 
-File Explorer catalog page (`docs/pages/file-explorer.html`) containing all 18 documents.
+builds a categorized, bucket-structured landing page (`docs/index.html`), and builds a full repository 
+File Explorer catalog page (`docs/pages/file-explorer.html`) with Soria serif typography.
 
 Run:
   python scripts/build_site.py
@@ -426,10 +426,46 @@ def generate_export_files(doc_data: dict, file_path: Path, slug: str):
 
 # ─── HTML Page Generator Templates ───────────────────────────────────────
 
+def render_doc_card_html(doc: dict, is_page_dir: bool = False) -> str:
+    """Render single glass document card HTML."""
+    prefix = "" if is_page_dir else "pages/"
+    topic_attr = " ".join(doc['topics'])
+    return f'''
+    <a href="{prefix}{doc['slug']}.html" class="doc-card" data-type="{doc['category']}" data-topics="{topic_attr}" data-title="{html.escape(doc['title'])}">
+      <div class="card-header">
+        <div class="card-title">{html.escape(doc['title'])}</div>
+        <span class="badge {doc['badge_class']}">{doc['label']}</span>
+      </div>
+      <p class="card-excerpt">{html.escape(doc['excerpt'])}</p>
+      <div class="card-footer">
+        <div class="card-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span>{doc['meta_label']}</span>
+        </div>
+        <div class="view-link">
+          Open Tool &rarr;
+        </div>
+      </div>
+    </a>
+    '''
+
+
 def generate_index_html(documents: list) -> str:
-    """Build home index dashboard page (docs/index.html) with 11 primary working tools."""
-    cards_html = []
+    """Build home index dashboard page (docs/index.html) with Soria Display Serif typography & Bucket containers."""
     
+    calc_proposal_docs = [d for d in documents if d['category'] in {'xlsx', 'docx'}]
+    questionnaire_docs = [d for d in documents if 'questionnaire' in d['slug']]
+    checklist_docs = [d for d in documents if 'checklist' in d['slug']]
+    guide_docs = [d for d in documents if d not in calc_proposal_docs and d not in questionnaire_docs and d not in checklist_docs]
+
+    calc_cards_html = "".join([render_doc_card_html(d) for d in calc_proposal_docs])
+    quest_cards_html = "".join([render_doc_card_html(d) for d in questionnaire_docs])
+    check_cards_html = "".join([render_doc_card_html(d) for d in checklist_docs])
+    guide_cards_html = "".join([render_doc_card_html(d) for d in guide_docs])
+
     md_count = sum(1 for d in documents if d['category'] == 'md')
     docx_count = sum(1 for d in documents if d['category'] == 'docx')
     xlsx_count = sum(1 for d in documents if d['category'] == 'xlsx')
@@ -438,30 +474,6 @@ def generate_index_html(documents: list) -> str:
     mobile_count = sum(1 for d in documents if 'mobile' in d['topics'])
     pricing_count = sum(1 for d in documents if 'pricing' in d['topics'])
 
-    for doc in documents:
-        topic_attr = " ".join(doc['topics'])
-        cards_html.append(f'''
-        <a href="pages/{doc['slug']}.html" class="doc-card" data-type="{doc['category']}" data-topics="{topic_attr}" data-title="{html.escape(doc['title'])}">
-          <div class="card-header">
-            <div class="card-title">{html.escape(doc['title'])}</div>
-            <span class="badge {doc['badge_class']}">{doc['label']}</span>
-          </div>
-          <p class="card-excerpt">{html.escape(doc['excerpt'])}</p>
-          <div class="card-footer">
-            <div class="card-meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-              </svg>
-              <span>{doc['meta_label']}</span>
-            </div>
-            <div class="view-link">
-              Open Tool &rarr;
-            </div>
-          </div>
-        </a>
-        ''')
-
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -469,6 +481,10 @@ def generate_index_html(documents: list) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Client Requirement Analysis — Interactive Workspace</title>
   <meta name="description" content="Centralized Interactive Workspace for Client Requirements, Pricing Calculators, and Proposals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
@@ -529,14 +545,66 @@ def generate_index_html(documents: list) -> str:
       </div>
     </div>
 
-    <!-- Document Card Grid -->
-    <main class="card-grid" id="card-grid">
-      {"".join(cards_html)}
-      <div id="no-results" class="no-results" style="display: none;">
-        <h3>No matching tools found</h3>
-        <p>Try refining your search terms or selecting a different file category filter.</p>
+    <!-- BUCKET 1: Interactive Calculators & Proposals Container Box -->
+    <section class="bucket-section">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-emerald);">📊</div>
+        <div>
+          <h2 class="bucket-title">Interactive Pricing Calculators & Proposals</h2>
+          <p class="bucket-desc">Live spreadsheets with real-time GST computation, complexity multipliers, and formal Word proposals.</p>
+        </div>
       </div>
-    </main>
+      <div class="card-grid">
+        {calc_cards_html}
+      </div>
+    </section>
+
+    <!-- BUCKET 2: Client Questionnaires Container Box -->
+    <section class="bucket-section">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--accent-primary);">📋</div>
+        <div>
+          <h2 class="bucket-title">Client Discovery Questionnaires</h2>
+          <p class="bucket-desc">Interactive requirement gathering questionnaires to conduct structured discovery calls with clients.</p>
+        </div>
+      </div>
+      <div class="card-grid">
+        {quest_cards_html}
+      </div>
+    </section>
+
+    <!-- BUCKET 3: Project Checklists Container Box -->
+    <section class="bucket-section">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--accent-indigo);">✅</div>
+        <div>
+          <h2 class="bucket-title">Project Lifecycle Checklists</h2>
+          <p class="bucket-desc">300+ interactive task checklists tracking pre-project kickoff, design, build, and handover tasks.</p>
+        </div>
+      </div>
+      <div class="card-grid">
+        {check_cards_html}
+      </div>
+    </section>
+
+    <!-- BUCKET 4: Master Requirement Reference Guides Container Box -->
+    <section class="bucket-section">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--accent-amber);">📖</div>
+        <div>
+          <h2 class="bucket-title">Master Requirement Reference Guides</h2>
+          <p class="bucket-desc">Comprehensive reference guides with sticky table-of-contents and parameter scope selection tools.</p>
+        </div>
+      </div>
+      <div class="card-grid">
+        {guide_cards_html}
+      </div>
+    </section>
+
+    <div id="no-results" class="no-results" style="display: none; text-align: center; padding: 3rem 1.5rem;">
+      <h3>No matching tools found</h3>
+      <p>Try refining your search terms or selecting a different file category filter.</p>
+    </div>
 
     <!-- Site Footer -->
     <footer class="site-footer">
@@ -555,8 +623,8 @@ def generate_index_html(documents: list) -> str:
 
 
 def generate_file_explorer_page_html(all_documents: list) -> str:
-    """Build dedicated File Explorer Catalog Page (docs/pages/file-explorer.html) listing ALL 18 documents."""
-    cards_html = []
+    """Build dedicated File Explorer Catalog Page (docs/pages/file-explorer.html) with Soria Display Serif typography."""
+    cards_html = "".join([render_doc_card_html(d, is_page_dir=True) for d in all_documents])
     
     md_count = sum(1 for d in all_documents if d['category'] == 'md')
     docx_count = sum(1 for d in all_documents if d['category'] == 'docx')
@@ -566,30 +634,6 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
     mobile_count = sum(1 for d in all_documents if 'mobile' in d['topics'])
     pricing_count = sum(1 for d in all_documents if 'pricing' in d['topics'])
 
-    for doc in all_documents:
-        topic_attr = " ".join(doc['topics'])
-        cards_html.append(f'''
-        <a href="{doc['slug']}.html" class="doc-card" data-type="{doc['category']}" data-topics="{topic_attr}" data-title="{html.escape(doc['title'])}">
-          <div class="card-header">
-            <div class="card-title">{html.escape(doc['title'])}</div>
-            <span class="badge {doc['badge_class']}">{doc['label']}</span>
-          </div>
-          <p class="card-excerpt">{html.escape(doc['excerpt'])}</p>
-          <div class="card-footer">
-            <div class="card-meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-              </svg>
-              <span>{doc['meta_label']}</span>
-            </div>
-            <div class="view-link">
-              Read Document &rarr;
-            </div>
-          </div>
-        </a>
-        ''')
-
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -597,6 +641,10 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Repository File Explorer — All 18 Documents</title>
   <meta name="description" content="Complete repository catalog containing all Markdown reference guides, Excel calculators, Word proposals, and checklists.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -660,14 +708,24 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
       </div>
     </div>
 
-    <!-- Document Card Grid -->
-    <main class="card-grid" id="card-grid">
-      {"".join(cards_html)}
-      <div id="no-results" class="no-results" style="display: none;">
-        <h3>No matching files found</h3>
-        <p>Try refining your search terms or selecting a different file category filter.</p>
+    <!-- Complete Repository Files Bucket Container Box -->
+    <section class="bucket-section">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--accent-primary);">📁</div>
+        <div>
+          <h2 class="bucket-title">All Repository Documents & Reference Files</h2>
+          <p class="bucket-desc">Complete catalog of all 18 markdown documents, questionnaires, spreadsheets, and proposals in the repository.</p>
+        </div>
       </div>
-    </main>
+      <div class="card-grid" id="card-grid">
+        {cards_html}
+      </div>
+    </section>
+
+    <div id="no-results" class="no-results" style="display: none; text-align: center; padding: 3rem 1.5rem;">
+      <h3>No matching files found</h3>
+      <p>Try refining your search terms or selecting a different file category filter.</p>
+    </div>
 
     <!-- Site Footer -->
     <footer class="site-footer">
@@ -696,6 +754,10 @@ def generate_doc_page_html(doc: dict) -> str:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(doc['title'])} — Requirement Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -797,6 +859,10 @@ def generate_proposal_builder_tool_html() -> str:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Client Proposal Builder — Requirement Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -877,7 +943,7 @@ def generate_proposal_builder_tool_html() -> str:
 
 def main():
     print("=" * 60)
-    print("[BUILD] Building Interactive Static Site & Document Hub")
+    print("[BUILD] Building Interactive Static Site with Soria Serif Typography")
     print("=" * 60)
 
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -982,7 +1048,7 @@ def main():
     (OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
     print("\n" + "=" * 60)
-    print(f"[SUCCESS] Interactive Static Site Successfully Built!")
+    print(f"[SUCCESS] Soria Serif Site Successfully Built!")
     print(f"[OUTPUT] Directory: {OUTPUT_DIR}")
     print(f"[INDEX] Main Index: {OUTPUT_DIR / 'index.html'}")
     print(f"[EXPLORER] File Explorer Page: {PAGES_DIR / 'file-explorer.html'} ({len(all_processed_docs)} total files)")

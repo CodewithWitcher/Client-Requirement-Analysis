@@ -1,10 +1,10 @@
 /* ==========================================================================
    DOCUMENT HUB & STATIC SITE GENERATOR - STYLESHEET
-   Design Theme: Clean Professional Light Glassmorphism with Cabinet Grotesk Typography
+   Design Theme: Clean Professional Light Glassmorphism with Soria Serif Typography
    ========================================================================== */
 
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@900,800,700,500,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.cdnfonts.com/css/soria');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   /* Color Palette */
@@ -14,8 +14,8 @@
   --mesh-glow-2: rgba(14, 165, 233, 0.08);
   --mesh-glow-3: rgba(16, 185, 129, 0.06);
 
-  --glass-bg: rgba(255, 255, 255, 0.76);
-  --glass-bg-hover: rgba(255, 255, 255, 0.92);
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
   --glass-border: rgba(255, 255, 255, 0.9);
   --glass-border-subtle: rgba(226, 232, 240, 0.8);
   --glass-shadow: 0 12px 32px 0 rgba(15, 23, 42, 0.05), 0 2px 6px 0 rgba(15, 23, 42, 0.03);
@@ -46,8 +46,8 @@
   --badge-xlsx-text: #047857;
   --badge-xlsx-border: #a7f3d0;
 
-  /* Typography */
-  --font-serif: 'Cabinet Grotesk', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Soria Display Serif Typography & Fallbacks */
+  --font-serif: 'Soria', 'Playfair Display', 'Didot', 'Bodoni MT', 'Cinzel', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', Consolas, monospace;
 
@@ -100,17 +100,17 @@ a:hover {
   color: var(--accent-primary-hover);
 }
 
-/* Typography Headings */
+/* Typography Headings in Soria Modern Serif */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   color: var(--text-main);
-  line-height: 1.2;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 
-h1 { font-size: 2.65rem; font-weight: 900; }
-h2 { font-size: 1.95rem; font-weight: 800; }
+h1 { font-size: 2.65rem; font-weight: 800; }
+h2 { font-size: 1.95rem; font-weight: 700; }
 h3 { font-size: 1.45rem; font-weight: 700; }
 h4 { font-size: 1.2rem; font-weight: 700; }
 
@@ -145,10 +145,10 @@ h4 { font-size: 1.2rem; font-weight: 700; }
   align-items: center;
   gap: 0.75rem;
   font-family: var(--font-serif);
-  font-size: 1.55rem;
-  font-weight: 800;
+  font-size: 1.65rem;
+  font-weight: 700;
   color: var(--text-main);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .brand-icon {
@@ -227,7 +227,7 @@ h4 { font-size: 1.2rem; font-weight: 700; }
   border-radius: var(--radius-lg);
   padding: 1.25rem 1.5rem;
   box-shadow: var(--glass-shadow);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -325,22 +325,67 @@ h4 { font-size: 1.2rem; font-weight: 700; }
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
 }
 
-/* Card Grid */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.75rem;
-}
-
-/* Glass Document Card */
-.doc-card {
+/* Categorized Section Buckets / Container Boxes */
+.bucket-section {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: 2rem;
   box-shadow: var(--glass-shadow);
+  margin-bottom: 2.5rem;
+}
+
+.bucket-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--glass-border-subtle);
+}
+
+.bucket-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.bucket-title {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.bucket-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* Card Grid Inside Buckets */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Glass Document Card */
+.doc-card {
+  background: #ffffff;
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -367,10 +412,9 @@ h4 { font-size: 1.2rem; font-weight: 700; }
 .doc-card[data-type="xlsx"]::before { background: linear-gradient(90deg, #059669, #34d399); }
 
 .doc-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--glass-shadow-hover);
-  background: var(--glass-bg-hover);
-  border-color: rgba(255, 255, 255, 1);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  border-color: var(--accent-primary);
 }
 
 .card-header {
@@ -383,11 +427,11 @@ h4 { font-size: 1.2rem; font-weight: 700; }
 
 .card-title {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: var(--text-main);
   line-height: 1.25;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 /* Badges */
@@ -409,7 +453,7 @@ h4 { font-size: 1.2rem; font-weight: 700; }
 .badge-xlsx { background: var(--badge-xlsx-bg); color: var(--badge-xlsx-text); border: 1px solid var(--badge-xlsx-border); }
 
 .card-excerpt {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
   line-height: 1.5;
   margin-bottom: 1.25rem;
@@ -469,8 +513,8 @@ h4 { font-size: 1.2rem; font-weight: 700; }
 
 .toc-title {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
@@ -560,14 +604,12 @@ h4 { font-size: 1.2rem; font-weight: 700; }
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-main);
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: #ffffff;
   border: 1px solid var(--glass-border-subtle);
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: var(--glass-shadow);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
 }
 
 .export-btn:hover {
@@ -709,7 +751,7 @@ table.doc-table th {
   background: #f1f5f9;
   color: var(--text-main);
   font-family: var(--font-serif);
-  font-weight: 800;
+  font-weight: 700;
   padding: 0.85rem 1rem;
   border-bottom: 2px solid #cbd5e1;
   white-space: nowrap;
