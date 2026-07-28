@@ -108,7 +108,7 @@ window.ProposalGenerator = {
       <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <div style="font-weight: 800; font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-main);">
-            ⚙️ Proposal Metadata & Dynamic Settings
+            Proposal Metadata & System Parameters
           </div>
           <button class="export-btn" style="padding: 0.3rem 0.75rem; font-size: 0.8rem; background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo);" onclick="ProposalGenerator.openHowItWorksModal()">
             ❓ How Proposal Data Works & Sources

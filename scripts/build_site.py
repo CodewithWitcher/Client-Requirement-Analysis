@@ -458,12 +458,14 @@ def render_doc_card_html(doc: dict, is_page_dir: bool = False) -> str:
 def generate_index_html(documents: list) -> str:
     """Build home index dashboard page (docs/index.html) with Smart Assistant Wizard, AI Analyzer, and API Key Config."""
     
-    calc_proposal_docs = [d for d in documents if d['category'] in {'xlsx', 'docx'}]
+    calc_docs = [d for d in documents if d['category'] == 'xlsx']
+    proposal_docs = [d for d in documents if d['category'] == 'docx' or 'pricing-parameters' in d['slug']]
     questionnaire_docs = [d for d in documents if 'questionnaire' in d['slug']]
     checklist_docs = [d for d in documents if 'checklist' in d['slug']]
-    guide_docs = [d for d in documents if d not in calc_proposal_docs and d not in questionnaire_docs and d not in checklist_docs]
+    guide_docs = [d for d in documents if d not in calc_docs and d not in proposal_docs and d not in questionnaire_docs and d not in checklist_docs]
 
-    calc_cards_html = "".join([render_doc_card_html(d) for d in calc_proposal_docs])
+    calc_cards_html = "".join([render_doc_card_html(d) for d in calc_docs])
+    proposal_cards_html = "".join([render_doc_card_html(d) for d in proposal_docs])
     quest_cards_html = "".join([render_doc_card_html(d) for d in questionnaire_docs])
     check_cards_html = "".join([render_doc_card_html(d) for d in checklist_docs])
     guide_cards_html = "".join([render_doc_card_html(d) for d in guide_docs])
@@ -481,8 +483,8 @@ def generate_index_html(documents: list) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client Requirement Analysis — Interactive Workspace</title>
-  <meta name="description" content="Centralized Interactive Workspace for Client Requirements, Pricing Calculators, and Proposals.">
+  <title>Client Requirement Analysis — Scoping System</title>
+  <meta name="description" content="Centralized Client Requirement Scoping, Pricing Calculators, and Proposal Management System.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
@@ -507,16 +509,16 @@ def generate_index_html(documents: list) -> str:
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="index.html" class="nav-pill active">🏠 Workspace</a>
         <a href="pages/file-explorer.html" class="nav-pill">📁 File Explorer</a>
-        <a href="pages/interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="pages/interactive-proposal-builder.html" class="nav-pill">Proposal Builder</a>
         <a href="pages/ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <h1>Interactive Requirement Workspace & Proposal Generator</h1>
+      <h1>Client Requirement Scoping & Proposal Management System</h1>
       <p class="hero-subtitle">
-        Scope projects, edit live pricing calculators, fill client questionnaires, auto-save state in browser, and export professional proposals.
+        Scope software projects, evaluate pricing parameters, conduct discovery questionnaires, and generate client proposals.
       </p>
     </section>
 
@@ -553,17 +555,31 @@ def generate_index_html(documents: list) -> str:
       </div>
     </div>
 
-    <!-- BUCKET 1: Interactive Calculators & Proposals Container Box -->
+    <!-- BUCKET 1: Pricing Calculators Container Box -->
     <section class="bucket-section">
       <div class="bucket-header">
         <div class="bucket-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-emerald);">📊</div>
         <div>
-          <h2 class="bucket-title">Interactive Pricing Calculators & Proposals</h2>
-          <p class="bucket-desc">Live spreadsheets with real-time GST computation, complexity multipliers, and formal Word proposals.</p>
+          <h2 class="bucket-title">Pricing Calculators</h2>
+          <p class="bucket-desc">Spreadsheets with real-time tax computation, complexity multipliers, and payment milestone splits.</p>
         </div>
       </div>
       <div class="card-grid">
         {calc_cards_html}
+      </div>
+    </section>
+
+    <!-- BUCKET 2: Proposal Parameters Container Box -->
+    <section class="bucket-section">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--accent-indigo);">📄</div>
+        <div>
+          <h2 class="bucket-title">Proposal Parameters & Templates</h2>
+          <p class="bucket-desc">Formal Word proposal templates and pricing parameter reference specifications.</p>
+        </div>
+      </div>
+      <div class="card-grid">
+        {proposal_cards_html}
       </div>
     </section>
 
