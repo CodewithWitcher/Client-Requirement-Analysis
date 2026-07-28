@@ -2,6 +2,7 @@
  * Smart Recommendation Assistant & AI Requirement Document Analyzer
  * 1. Wizard-style Smart Tool Recommender based on user goals
  * 2. Client Requirement Document Parser (DeepSeek API + Heuristic Keyword Engine)
+ * 3. Client-Provided API Key Manager (LocalStorage Persistent & Test Connection)
  */
 
 window.SmartAssistant = {
@@ -70,13 +71,22 @@ window.SmartAssistant = {
     }
   },
 
-  // DeepSeek API Configuration
+  // DeepSeek API Configuration (Stored locally in client browser)
   deepseekApiKey: localStorage.getItem('deepseek_api_key') || '',
 
   setApiKey(key) {
-    this.deepseekApiKey = key.trim();
-    localStorage.setItem('deepseek_api_key', this.deepseekApiKey);
-    if (window.showToast) window.showToast('DeepSeek API Key saved securely in browser!');
+    this.deepseekApiKey = (key || '').trim();
+    if (this.deepseekApiKey) {
+      localStorage.setItem('deepseek_api_key', this.deepseekApiKey);
+      if (window.showToast) window.showToast('DeepSeek API Key saved securely in your browser!', 'success');
+    } else {
+      localStorage.removeItem('deepseek_api_key');
+      if (window.showToast) window.showToast('DeepSeek API Key cleared.', 'info');
+    }
+  },
+
+  getApiKey() {
+    return this.deepseekApiKey || localStorage.getItem('deepseek_api_key') || '';
   },
 
   /**
@@ -111,12 +121,14 @@ window.SmartAssistant = {
     if (window.showToast) window.showToast("Analyzing client requirements...", "info");
 
     let matchedAnalysis = null;
+    const apiKey = this.getApiKey();
 
-    if (this.deepseekApiKey) {
+    if (apiKey) {
       try {
-        matchedAnalysis = await this.callDeepSeekAPI(text);
+        matchedAnalysis = await this.callDeepSeekAPI(text, apiKey);
       } catch (err) {
         console.warn("DeepSeek API Call failed, falling back to local analysis engine:", err);
+        if (window.showToast) window.showToast("DeepSeek API call failed. Using built-in rule engine fallback.", "warning");
         matchedAnalysis = this.heuristicAnalysisEngine(text);
       }
     } else {
@@ -144,7 +156,7 @@ window.SmartAssistant = {
   },
 
   /**
-   * Extract raw text from file (.txt, .md, .json, .docx, .pdf text)
+   * Extract raw text from file (.txt, .md, .json, .docx)
    */
   extractTextFromFile(file) {
     return new Promise((resolve) => {
@@ -159,7 +171,7 @@ window.SmartAssistant = {
   /**
    * Call DeepSeek API (https://api.deepseek.com/v1/chat/completions)
    */
-  async callDeepSeekAPI(documentText) {
+  async callDeepSeekAPI(documentText, apiKey) {
     const prompt = `You are a Senior Technical Project Estimator. Analyze this client requirement document and extract key features, recommended tech stack, estimated complexity (Low, Medium, High), and line-item requirement tags.
 
 Client Document Text:
@@ -181,7 +193,7 @@ Return JSON format strictly:
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${this.deepseekApiKey}`
+        "Authorization": `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model: "deepseek-chat",
@@ -303,7 +315,110 @@ Return JSON format strictly:
     document.body.insertAdjacentHTML('beforeend', modalHtml);
   },
 
+  /**
+   * Modal Dialog for Managing Client-Provided DeepSeek API Key
+   */
+  openApiKeyModal() {
+    const existingKey = this.getApiKey();
+    const hasKey = !!existingKey;
+
+    const modalHtml = `
+      <div id="api-key-overlay" class="modal-overlay">
+        <div class="modal-card" style="max-width: 540px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e2e8f0;">
+            <h3>🔑 Configure DeepSeek API Key</h3>
+            <button class="export-btn" onclick="document.getElementById('api-key-overlay').remove()">✕ Close</button>
+          </div>
+
+          <div style="background: ${hasKey ? 'rgba(16, 185, 129, 0.08)' : 'rgba(245, 158, 11, 0.08)'}; border: 1px solid ${hasKey ? 'rgba(16, 185, 129, 0.3)' : 'rgba(245, 158, 11, 0.3)'}; padding: 0.85rem 1.25rem; border-radius: 10px; margin-bottom: 1.25rem; font-size: 0.88rem; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <span style="font-weight: 700;">Active AI Status:</span>
+              <span style="color: ${hasKey ? 'var(--accent-emerald)' : 'var(--accent-amber)'}; font-weight: 700;">
+                ${hasKey ? '🟢 Client API Key Saved' : '⚪ Using Built-in Free Rule Engine'}
+              </span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.5;">
+            Enter your personal DeepSeek API key (e.g. <code>sk-...</code>). Your key is stored <strong>100% locally in your own browser's LocalStorage</strong> and is never sent to any server except directly to <code>api.deepseek.com</code>.
+          </p>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label>DeepSeek API Key:</label>
+            <div style="position: relative;">
+              <input type="password" id="modal-deepseek-key-input" class="form-control" placeholder="sk-..." value="${this.escapeHtml(existingKey)}" style="padding-right: 4.5rem;">
+              <button class="export-btn" style="position: absolute; right: 4px; top: 4px; padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="toggleApiKeyVisibility()">👁️ Show</button>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+            ${hasKey ? '<button class="export-btn" style="color: #ef4444; border-color: #ef4444;" onclick="clearApiKeyFromModal()">🗑️ Clear Saved Key</button>' : ''}
+            <button class="export-btn" onclick="testApiKeyFromModal()">🧪 Test Connection</button>
+            <button class="export-btn primary" onclick="saveApiKeyFromModal()">💾 Save API Key</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+  },
+
   escapeHtml(str) {
     return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 };
+
+function toggleApiKeyVisibility() {
+  const input = document.getElementById('modal-deepseek-key-input');
+  if (input) {
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+}
+
+function saveApiKeyFromModal() {
+  const input = document.getElementById('modal-deepseek-key-input');
+  if (input) {
+    window.SmartAssistant.setApiKey(input.value);
+    document.getElementById('api-key-overlay')?.remove();
+  }
+}
+
+function clearApiKeyFromModal() {
+  window.SmartAssistant.setApiKey('');
+  document.getElementById('api-key-overlay')?.remove();
+}
+
+async function testApiKeyFromModal() {
+  const input = document.getElementById('modal-deepseek-key-input');
+  const key = input ? input.value.trim() : '';
+
+  if (!key) {
+    alert("Please enter an API key to test.");
+    return;
+  }
+
+  if (window.showToast) window.showToast("Testing DeepSeek API connection...", "info");
+
+  try {
+    const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${key}`
+      },
+      body: JSON.stringify({
+        model: "deepseek-chat",
+        messages: [{ role: "user", content: "Reply with JSON: {\"status\": \"ok\"}" }],
+        response_format: { type: "json_object" }
+      })
+    });
+
+    if (res.ok) {
+      alert("✅ DeepSeek API Key connection successful!");
+    } else {
+      alert(`❌ API Key test failed (HTTP ${res.status}). Please check your key.`);
+    }
+  } catch (err) {
+    alert(`❌ Network or API Key error: ${err.message}`);
+  }
+}

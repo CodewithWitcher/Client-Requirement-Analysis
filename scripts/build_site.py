@@ -2,8 +2,8 @@
 """
 Document Hub & Interactive Static Site Generator
 Scans repository for .md, .xlsx, .xls, .doc, and .docx files, converts all 18 documents into HTML pages,
-builds a categorized, bucket-structured landing page (`docs/index.html`) with Smart Assistant Wizard & AI Document Analyzer,
-and builds a full repository File Explorer catalog page (`docs/pages/file-explorer.html`).
+builds a categorized, bucket-structured landing page (`docs/index.html`) with Smart Assistant Wizard, AI Document Analyzer,
+and Client-Provided API Key Manager.
 
 Run:
   python scripts/build_site.py
@@ -454,7 +454,7 @@ def render_doc_card_html(doc: dict, is_page_dir: bool = False) -> str:
 
 
 def generate_index_html(documents: list) -> str:
-    """Build home index dashboard page (docs/index.html) with Smart Assistant Wizard & AI Analyzer."""
+    """Build home index dashboard page (docs/index.html) with Smart Assistant Wizard, AI Analyzer, and API Key Config."""
     
     calc_proposal_docs = [d for d in documents if d['category'] in {'xlsx', 'docx'}]
     questionnaire_docs = [d for d in documents if 'questionnaire' in d['slug']]
@@ -499,6 +499,7 @@ def generate_index_html(documents: list) -> str:
         <span>Client Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="pages/file-explorer.html" class="export-btn">📁 File Explorer (All 18 Docs)</a>
         <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
       </nav>
@@ -561,21 +562,19 @@ def generate_index_html(documents: list) -> str:
 
         <!-- Option B: AI Client Requirement Document Analyzer -->
         <div style="background: #ffffff; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--glass-border-subtle); box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-          <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-main);">📄 Upload Requirement Doc for AI Analysis</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 1.2rem; color: var(--text-main); margin: 0;">📄 Upload Doc for AI Analysis</h3>
+            <button class="export-btn" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="window.SmartAssistant.openApiKeyModal()">🔑 API Key</button>
+          </div>
           
           <div class="form-group" style="margin-bottom: 1rem;">
             <label>Upload Client Requirement File (.txt, .md, .docx, .json):</label>
             <input type="file" id="ai-file-input" class="form-control" accept=".txt,.md,.docx,.json">
           </div>
 
-          <div class="form-group" style="margin-bottom: 1rem;">
+          <div class="form-group" style="margin-bottom: 1.25rem;">
             <label>Client & Project Title:</label>
             <input type="text" id="ai-client-title" class="form-control" placeholder="e.g. Nexus E-Commerce App">
-          </div>
-
-          <div class="form-group" style="margin-bottom: 1.25rem;">
-            <label>DeepSeek API Key (Optional for Cloud AI):</label>
-            <input type="password" id="ai-deepseek-key" class="form-control" placeholder="sk-..." value="">
           </div>
 
           <button class="export-btn" style="width: 100%; justify-content: center; background: var(--accent-indigo); color: #ffffff; border-color: var(--accent-indigo);" onclick="handleAiDocumentAnalyze()">
@@ -718,15 +717,10 @@ def generate_index_html(documents: list) -> str:
     async function handleAiDocumentAnalyze() {{
       const fileInput = document.getElementById('ai-file-input');
       const clientTitle = document.getElementById('ai-client-title').value.trim();
-      const apiKey = document.getElementById('ai-deepseek-key').value.trim();
 
       if (!fileInput.files || !fileInput.files[0]) {{
         alert("Please select a client requirement document file first.");
         return;
-      }}
-
-      if (apiKey) {{
-        window.SmartAssistant.setApiKey(apiKey);
       }}
 
       await window.SmartAssistant.analyzeDocumentFile(fileInput.files[0], clientTitle, clientTitle);
@@ -774,6 +768,7 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
         <span>Repository File Explorer</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="../index.html" class="export-btn">🏠 Main Workspace</a>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
@@ -888,6 +883,7 @@ def generate_doc_page_html(doc: dict) -> str:
         <span>Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <div class="breadcrumb">
@@ -994,6 +990,7 @@ def generate_proposal_builder_tool_html() -> str:
         <span>Interactive Proposal Builder</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
@@ -1061,7 +1058,7 @@ def generate_proposal_builder_tool_html() -> str:
 
 def main():
     print("=" * 60)
-    print("[BUILD] Building Interactive Site with Smart Assistant & AI Analyzer")
+    print("[BUILD] Building Interactive Site with Client-Provided API Key Manager")
     print("=" * 60)
 
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -1166,7 +1163,7 @@ def main():
     (OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
 
     print("\n" + "=" * 60)
-    print(f"[SUCCESS] Smart Assistant & AI Analyzer Site Successfully Built!")
+    print(f"[SUCCESS] Client-Provided API Key Manager Site Successfully Built!")
     print(f"[OUTPUT] Directory: {OUTPUT_DIR}")
     print(f"[INDEX] Main Index: {OUTPUT_DIR / 'index.html'}")
     print(f"[EXPLORER] File Explorer Page: {PAGES_DIR / 'file-explorer.html'} ({len(all_processed_docs)} total files)")

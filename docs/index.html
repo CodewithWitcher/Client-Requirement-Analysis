@@ -23,6 +23,7 @@
         <span>Client Requirement Hub</span>
       </div>
       <nav class="nav-links">
+        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="pages/file-explorer.html" class="export-btn">📁 File Explorer (All 18 Docs)</a>
         <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
       </nav>
@@ -85,21 +86,19 @@
 
         <!-- Option B: AI Client Requirement Document Analyzer -->
         <div style="background: #ffffff; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--glass-border-subtle); box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-          <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-main);">📄 Upload Requirement Doc for AI Analysis</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 1.2rem; color: var(--text-main); margin: 0;">📄 Upload Doc for AI Analysis</h3>
+            <button class="export-btn" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="window.SmartAssistant.openApiKeyModal()">🔑 API Key</button>
+          </div>
           
           <div class="form-group" style="margin-bottom: 1rem;">
             <label>Upload Client Requirement File (.txt, .md, .docx, .json):</label>
             <input type="file" id="ai-file-input" class="form-control" accept=".txt,.md,.docx,.json">
           </div>
 
-          <div class="form-group" style="margin-bottom: 1rem;">
+          <div class="form-group" style="margin-bottom: 1.25rem;">
             <label>Client & Project Title:</label>
             <input type="text" id="ai-client-title" class="form-control" placeholder="e.g. Nexus E-Commerce App">
-          </div>
-
-          <div class="form-group" style="margin-bottom: 1.25rem;">
-            <label>DeepSeek API Key (Optional for Cloud AI):</label>
-            <input type="password" id="ai-deepseek-key" class="form-control" placeholder="sk-..." value="">
           </div>
 
           <button class="export-btn" style="width: 100%; justify-content: center; background: var(--accent-indigo); color: #ffffff; border-color: var(--accent-indigo);" onclick="handleAiDocumentAnalyze()">
@@ -462,15 +461,10 @@
     async function handleAiDocumentAnalyze() {
       const fileInput = document.getElementById('ai-file-input');
       const clientTitle = document.getElementById('ai-client-title').value.trim();
-      const apiKey = document.getElementById('ai-deepseek-key').value.trim();
 
       if (!fileInput.files || !fileInput.files[0]) {
         alert("Please select a client requirement document file first.");
         return;
-      }
-
-      if (apiKey) {
-        window.SmartAssistant.setApiKey(apiKey);
       }
 
       await window.SmartAssistant.analyzeDocumentFile(fileInput.files[0], clientTitle, clientTitle);
