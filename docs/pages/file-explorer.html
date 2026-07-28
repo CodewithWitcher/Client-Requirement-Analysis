@@ -16,19 +16,21 @@
   <div class="app-container">
     <!-- Header -->
     <header class="glass-header">
-      <div class="brand-title">
+      <a href="../index.html" class="brand-title">
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Repository File Explorer</span>
-      </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">FILE CATALOG</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="../index.html" class="export-btn">🏠 Main Workspace</a>
-        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
-        <div class="breadcrumb">
-          <span style="font-weight: 600; color: var(--text-main);">18 Total Repository Files</span>
-        </div>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill active">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 

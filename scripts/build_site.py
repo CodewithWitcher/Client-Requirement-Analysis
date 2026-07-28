@@ -494,17 +494,21 @@ def generate_index_html(documents: list) -> str:
   <div class="app-container">
     <!-- Header -->
     <header class="glass-header">
-      <div class="brand-title">
+      <a href="index.html" class="brand-title">
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Client Requirement Hub</span>
-      </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">PRO v2.4</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="pages/ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
-        <a href="pages/file-explorer.html" class="export-btn">📁 File Explorer (All 18 Docs)</a>
-        <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
+        <a href="index.html" class="nav-pill active">🏠 Workspace</a>
+        <a href="pages/file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="pages/interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="pages/ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 
@@ -692,19 +696,21 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
   <div class="app-container">
     <!-- Header -->
     <header class="glass-header">
-      <div class="brand-title">
+      <a href="../index.html" class="brand-title">
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Repository File Explorer</span>
-      </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">FILE CATALOG</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="../index.html" class="export-btn">🏠 Main Workspace</a>
-        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
-        <div class="breadcrumb">
-          <span style="font-weight: 600; color: var(--text-main);">{len(all_documents)} Total Repository Files</span>
-        </div>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill active">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 
@@ -807,22 +813,21 @@ def generate_doc_page_html(doc: dict) -> str:
   <div class="app-container">
     <!-- Header & Breadcrumb Navigation -->
     <header class="glass-header">
-      <div class="brand-title">
+      <a href="../index.html" class="brand-title">
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Requirement Hub</span>
-      </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">DOC VIEW</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
-        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
-        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
-        <div class="breadcrumb">
-          <a href="../index.html">Home</a>
-          <span class="breadcrumb-sep">&rsaquo;</span>
-          <span style="font-weight: 600; color: var(--text-main);">{html.escape(doc['title'])}</span>
-        </div>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 
@@ -916,21 +921,21 @@ def generate_proposal_builder_tool_html() -> str:
   <div class="app-container">
     <!-- Header -->
     <header class="glass-header">
-      <div class="brand-title">
+      <a href="../index.html" class="brand-title">
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Interactive Proposal Builder</span>
-      </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">PROPOSAL SCOPER</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
-        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
-        <div class="breadcrumb">
-          <a href="../index.html">Home</a>
-          <span class="breadcrumb-sep">&rsaquo;</span>
-          <span style="font-weight: 600; color: var(--text-main);">Proposal Generator</span>
-        </div>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill active">✨ Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 
@@ -939,12 +944,14 @@ def generate_proposal_builder_tool_html() -> str:
 
     <!-- Proposal Actions Bar -->
     <div class="glass-header" style="margin-bottom: 1.5rem;">
-      <div style="font-weight: 700;">Proposal Actions</div>
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        <button class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;" onclick="ProposalGenerator.openHowItWorksModal()">❓ How It Works & Data Sources</button>
-        <button class="export-btn primary" onclick="ExportManager.exportPDF()">📄 Download PDF Proposal</button>
-        <button class="export-btn" onclick="ProjectStorage.exportJSON()">💾 Export Project JSON</button>
-        <label class="export-btn" style="cursor: pointer;">
+      <div style="font-weight: 800; font-size: 1.1rem; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+        <span>⚡ Proposal Actions</span>
+      </div>
+      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+        <button class="nav-pill ai-pill" onclick="ProposalGenerator.openHowItWorksModal()">❓ How It Works & Data Sources</button>
+        <button class="nav-pill active" style="background: linear-gradient(135deg, #10b981, #059669); border-color: #10b981; color: #ffffff; font-weight: 700;" onclick="ExportManager.exportPDF()">📄 Download PDF Proposal</button>
+        <button class="nav-pill" style="color: #ffffff;" onclick="ProjectStorage.exportJSON()">💾 Export Project JSON</button>
+        <label class="nav-pill" style="color: #ffffff; cursor: pointer;">
           📂 Import Project JSON
           <input type="file" accept=".json" style="display: none;" onchange="handleImportFile(event)">
         </label>
@@ -1010,19 +1017,19 @@ def generate_ai_intelligence_engine_html() -> str:
   <div class="app-container">
     <!-- Header -->
     <header class="glass-header">
-      <div class="brand-title">
-        <div class="brand-icon" style="background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); color: #fff;">🧠</div>
-        <span>AI Technical Intelligence Studio</span>
-      </div>
+      <a href="../index.html" class="brand-title">
+        <div class="brand-icon" style="background: linear-gradient(135deg, var(--accent-indigo), #ec4899); color: #fff;">🧠</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">AI Technical Intelligence Studio</span>
+          <span class="version-badge">DEEP AI</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
-        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
-        <div class="breadcrumb">
-          <a href="../index.html">Home</a>
-          <span class="breadcrumb-sep">&rsaquo;</span>
-          <span style="font-weight: 600; color: var(--text-main);">AI Studio</span>
-        </div>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill active">🧠 AI Studio</a>
       </nav>
     </header>
 

@@ -15,22 +15,21 @@
   <div class="app-container">
     <!-- Header & Breadcrumb Navigation -->
     <header class="glass-header">
-      <div class="brand-title">
+      <a href="../index.html" class="brand-title">
         <div class="brand-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </div>
-        <span>Requirement Hub</span>
-      </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">DOC VIEW</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="ai-intelligence-engine.html" class="export-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;">🧠 AI Studio</a>
-        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
-        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
-        <div class="breadcrumb">
-          <a href="../index.html">Home</a>
-          <span class="breadcrumb-sep">&rsaquo;</span>
-          <span style="font-weight: 600; color: var(--text-main);">🌐 Website Pricing — Quick Reference Guide</span>
-        </div>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 

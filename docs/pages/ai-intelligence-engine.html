@@ -16,19 +16,19 @@
   <div class="app-container">
     <!-- Header -->
     <header class="glass-header">
-      <div class="brand-title">
-        <div class="brand-icon" style="background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); color: #fff;">🧠</div>
-        <span>AI Technical Intelligence Studio</span>
-      </div>
+      <a href="../index.html" class="brand-title">
+        <div class="brand-icon" style="background: linear-gradient(135deg, var(--accent-indigo), #ec4899); color: #fff;">🧠</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">AI Technical Intelligence Studio</span>
+          <span class="version-badge">DEEP AI</span>
+        </div>
+      </a>
       <nav class="nav-links">
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
-        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
-        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
-        <div class="breadcrumb">
-          <a href="../index.html">Home</a>
-          <span class="breadcrumb-sep">&rsaquo;</span>
-          <span style="font-weight: 600; color: var(--text-main);">AI Studio</span>
-        </div>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill active">🧠 AI Studio</a>
       </nav>
     </header>
 

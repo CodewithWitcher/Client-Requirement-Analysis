@@ -3,6 +3,7 @@
  * 1. Wizard-style Smart Tool Recommender based on user goals
  * 2. Client Requirement Document Parser (DeepSeek API + Heuristic Keyword Engine)
  * 3. Client-Provided API Key Manager (LocalStorage Persistent & Test Connection)
+ * 4. Floating Robot Chatbot Widget & Slide-Out AI Side Drawer
  */
 
 window.SmartAssistant = {
@@ -97,6 +98,11 @@ window.SmartAssistant = {
     const btns = document.querySelectorAll('#header-api-key-btn, .api-key-btn, .header-api-key-btn, button[onclick*="openApiKeyModal"]');
     btns.forEach(btn => {
       btn.classList.add('header-api-key-btn');
+      btn.onclick = (e) => {
+        if (e) e.preventDefault();
+        window.SmartAssistant.openApiKeyModal();
+      };
+
       if (hasKey) {
         btn.innerHTML = '🟢 DeepSeek API Saved';
         btn.style.background = 'rgba(16, 185, 129, 0.15)';
@@ -193,7 +199,7 @@ window.SmartAssistant = {
   },
 
   /**
-   * Call DeepSeek API (https://api.deepseek.com/v1/chat/completions)
+   * Call DeepSeek API
    */
   async callDeepSeekAPI(documentText, apiKey) {
     const prompt = `You are a Senior Technical Project Estimator. Analyze this client requirement document and extract key features, recommended tech stack, estimated complexity (Low, Medium, High), and line-item requirement tags.
@@ -232,7 +238,7 @@ Return JSON format strictly:
   },
 
   /**
-   * Built-in Heuristic Analysis Engine (Fallback when no DeepSeek key provided)
+   * Built-in Heuristic Analysis Engine
    */
   heuristicAnalysisEngine(text) {
     const lowerText = text.toLowerCase();
@@ -289,6 +295,7 @@ Return JSON format strictly:
    * Render Analysis Modal
    */
   renderAnalysisResultModal(analysis, clientName, projectTitle) {
+    document.getElementById('ai-analysis-overlay')?.remove();
     const modalHtml = `
       <div id="ai-analysis-overlay" class="modal-overlay">
         <div class="modal-card" style="max-width: 720px;">
@@ -343,6 +350,7 @@ Return JSON format strictly:
    * Modal Dialog for Managing Client-Provided DeepSeek API Key
    */
   openApiKeyModal() {
+    document.getElementById('api-key-overlay')?.remove();
     const existingKey = this.getApiKey();
     const hasKey = !!existingKey;
 
@@ -387,64 +395,6 @@ Return JSON format strictly:
     document.body.insertAdjacentHTML('beforeend', modalHtml);
   },
 
-  escapeHtml(str) {
-    return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
-};
-
-function toggleApiKeyVisibility() {
-  const input = document.getElementById('modal-deepseek-key-input');
-  if (input) {
-    input.type = input.type === 'password' ? 'text' : 'password';
-  }
-}
-
-function saveApiKeyFromModal() {
-  const input = document.getElementById('modal-deepseek-key-input');
-  if (input) {
-    window.SmartAssistant.setApiKey(input.value);
-    document.getElementById('api-key-overlay')?.remove();
-  }
-}
-
-function clearApiKeyFromModal() {
-  window.SmartAssistant.setApiKey('');
-  document.getElementById('api-key-overlay')?.remove();
-}
-
-async function testApiKeyFromModal() {
-  const input = document.getElementById('modal-deepseek-key-input');
-  const key = input ? input.value.trim() : '';
-
-  if (!key) {
-    alert("Please enter an API key to test.");
-    return;
-  }
-
-  if (window.showToast) window.showToast("Testing DeepSeek API connection...", "info");
-
-  try {
-    const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${key}`
-      },
-      body: JSON.stringify({
-        model: "deepseek-chat",
-        messages: [{ role: "user", content: "Reply with JSON: {\"status\": \"ok\"}" }],
-        response_format: { type: "json_object" }
-      })
-    });
-
-    if (res.ok) {
-      alert("✅ DeepSeek API Key connection successful!");
-    } else {
-      alert(`❌ API Key test failed (HTTP ${res.status}). Please check your key.`);
-    }
-  } catch (err) {
-    alert(`❌ Network or API Key error: ${err.message}`);
-  }
   /**
    * Render Floating Robot Chatbot Button & Welcome Speech Bubble
    */
@@ -454,8 +404,8 @@ async function testApiKeyFromModal() {
     const widgetHtml = `
       <div id="floating-robot-bubble" style="${sessionStorage.getItem('dismiss_robot_bubble') ? 'display:none;' : ''}">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem;">
-          <strong style="color: var(--accent-indigo); font-size: 0.9rem;">🤖 AI Workspace Assistant</strong>
-          <button style="background: none; border: none; font-size: 0.8rem; cursor: pointer; color: var(--text-subtle);" onclick="dismissRobotBubble(event)">✕</button>
+          <strong style="color: var(--accent-indigo, #6366f1); font-size: 0.9rem;">🤖 AI Workspace Assistant</strong>
+          <button style="background: none; border: none; font-size: 0.8rem; cursor: pointer; color: #64748b;" onclick="dismissRobotBubble(event)">✕</button>
         </div>
         <div>Need help scoping a project or analyzing a requirement document? Click me for AI recommendations & file analysis!</div>
       </div>
@@ -474,6 +424,7 @@ async function testApiKeyFromModal() {
    */
   openAiSideDrawer() {
     document.getElementById('floating-robot-bubble')?.remove();
+    document.getElementById('ai-drawer-overlay')?.remove();
 
     const isPage = window.location.pathname.includes('/pages/');
     const prefix = isPage ? '' : 'pages/';
@@ -543,18 +494,18 @@ async function testApiKeyFromModal() {
               <input type="text" id="drawer-ai-client-title" class="form-control" placeholder="e.g. Acme App" style="font-size: 0.85rem;">
             </div>
 
-            <button class="export-btn" style="width: 100%; justify-content: center; background: var(--accent-indigo); color: #fff; border-color: var(--accent-indigo); font-size: 0.85rem; padding: 0.5rem;" onclick="handleDrawerAiAnalyze()">
+            <button class="export-btn" style="width: 100%; justify-content: center; background: var(--accent-indigo, #6366f1); color: #fff; border-color: var(--accent-indigo, #6366f1); font-size: 0.85rem; padding: 0.5rem;" onclick="handleDrawerAiAnalyze()">
               🤖 Analyze Document & Match Features
             </button>
           </div>
 
           <!-- Section 3: Deep Technical Architecture Studio -->
           <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(59, 130, 246, 0.04)); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.3);">
-            <h4 style="font-size: 1rem; color: var(--accent-indigo); margin-bottom: 0.5rem;">🧠 AI Technical Intelligence Studio</h4>
-            <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.85rem;">
+            <h4 style="font-size: 1rem; color: var(--accent-indigo, #6366f1); margin-bottom: 0.5rem;">🧠 AI Technical Intelligence Studio</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted, #64748b); line-height: 1.5; margin-bottom: 0.85rem;">
               Generate complete Technical Architecture Specs, Deployment Pipelines, SEO Reports, REST API Contracts, and Risk Matrices automatically.
             </p>
-            <a href="${prefix}ai-intelligence-engine.html" class="export-btn primary" style="width: 100%; justify-content: center; font-size: 0.85rem; background: var(--accent-indigo); border-color: var(--accent-indigo); text-decoration: none;">
+            <a href="${prefix}ai-intelligence-engine.html" class="export-btn primary" style="width: 100%; justify-content: center; font-size: 0.85rem; background: var(--accent-indigo, #6366f1); border-color: var(--accent-indigo, #6366f1); text-decoration: none;">
               ⚡ Launch Deep AI Technical Studio
             </a>
           </div>
@@ -563,8 +514,67 @@ async function testApiKeyFromModal() {
     `;
 
     document.body.insertAdjacentHTML('beforeend', drawerHtml);
+  },
+
+  escapeHtml(str) {
+    return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 };
+
+function toggleApiKeyVisibility() {
+  const input = document.getElementById('modal-deepseek-key-input');
+  if (input) {
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+}
+
+function saveApiKeyFromModal() {
+  const input = document.getElementById('modal-deepseek-key-input');
+  if (input) {
+    window.SmartAssistant.setApiKey(input.value);
+    document.getElementById('api-key-overlay')?.remove();
+  }
+}
+
+function clearApiKeyFromModal() {
+  window.SmartAssistant.setApiKey('');
+  document.getElementById('api-key-overlay')?.remove();
+}
+
+async function testApiKeyFromModal() {
+  const input = document.getElementById('modal-deepseek-key-input');
+  const key = input ? input.value.trim() : '';
+
+  if (!key) {
+    alert("Please enter an API key to test.");
+    return;
+  }
+
+  if (window.showToast) window.showToast("Testing DeepSeek API connection...", "info");
+
+  try {
+    const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${key}`
+      },
+      body: JSON.stringify({
+        model: "deepseek-chat",
+        messages: [{ role: "user", content: "Reply with JSON: {\"status\": \"ok\"}" }],
+        response_format: { type: "json_object" }
+      })
+    });
+
+    if (res.ok) {
+      alert("✅ DeepSeek API Key connection successful!");
+    } else {
+      alert(`❌ API Key test failed (HTTP ${res.status}). Please check your key.`);
+    }
+  } catch (err) {
+    alert(`❌ Network or API Key error: ${err.message}`);
+  }
+}
 
 function dismissRobotBubble(e) {
   if (e) e.stopPropagation();
@@ -572,7 +582,10 @@ function dismissRobotBubble(e) {
   document.getElementById('floating-robot-bubble')?.remove();
 }
 
-function closeAiSideDrawer() {
+function closeAiSideDrawer(e) {
+  if (e && e.target && e.target.id !== 'ai-drawer-overlay' && !e.target.classList.contains('export-btn')) {
+    return;
+  }
   document.getElementById('ai-drawer-overlay')?.remove();
 }
 
@@ -614,3 +627,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.SmartAssistant.renderFloatingRobotWidget();
   }
 });
+
+window.openApiKeyModal = function() {
+  if (window.SmartAssistant) {
+    window.SmartAssistant.openApiKeyModal();
+  }
+};
