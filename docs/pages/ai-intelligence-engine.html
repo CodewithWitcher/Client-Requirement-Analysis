@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Requirement Intelligence Engine — DeepSeek Technical Document Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="glass-header">
+      <div class="brand-title">
+        <div class="brand-icon" style="background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); color: #fff;">🧠</div>
+        <span>AI Technical Intelligence Studio</span>
+      </div>
+      <nav class="nav-links">
+        <button class="export-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <a href="file-explorer.html" class="export-btn">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep">&rsaquo;</span>
+          <span style="font-weight: 600; color: var(--text-main);">AI Studio</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Interactive Client Banner -->
+    <div id="project-banner-container"></div>
+
+    <!-- AI Studio Hero Header -->
+    <section class="doc-header-card" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(59, 130, 246, 0.04)); border: 1px solid rgba(99, 102, 241, 0.3);">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <span class="badge badge-md" style="background: var(--accent-indigo); color: #fff;">DEEPSEEK AI STUDIO</span>
+        <span style="font-size: 0.85rem; color: var(--text-subtle);">Automated Technical Architecture & Document Generator</span>
+      </div>
+      <h1 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--text-main);">AI Requirement Intelligence Studio</h1>
+      <p style="color: var(--text-muted); font-size: 1rem; max-width: 800px; margin-top: 0.5rem; line-height: 1.6;">
+        Upload a client requirement document (PDF, DOCX, TXT), answer clarifying technical intake questions, and let DeepSeek AI generate complete technical architecture specifications, deployment guides, SEO reports, tech stack analyses, and REST API contracts automatically!
+      </p>
+    </section>
+
+    <!-- Step 1 & 2: Interactive Intake Wizard Form -->
+    <main class="doc-content-card" style="margin-bottom: 2rem;">
+      <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span>📋 Step 1: Technical Requirement Intake Wizard</span>
+      </h2>
+
+      <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+        <div class="form-group">
+          <label>Target Project Platform:</label>
+          <select id="ai-wizard-platform" class="form-control" onchange="toggleWizardFields(this.value)">
+            <option value="Website">🌐 Website / Web Application</option>
+            <option value="Mobile">📱 Mobile Application (iOS/Android)</option>
+            <option value="Both">⚡ Full-Stack Web & Mobile Solution</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Target Industry / Business Domain:</label>
+          <input type="text" id="ai-wizard-industry" class="form-control" placeholder="e.g. E-Commerce, SaaS, Healthcare, Fintech">
+        </div>
+
+        <div class="form-group" id="group-seo">
+          <label>SEO & Marketing Growth Priority:</label>
+          <select id="ai-wizard-seo" class="form-control">
+            <option value="High (Local & National SEO + Schema.org + OpenGraph)">🚀 High (Local/National SEO + Schema.org)</option>
+            <option value="Medium (Standard On-Page Meta & Sitemap)">Standard Meta Tags & Sitemap</option>
+            <option value="Internal Tool (No SEO Needed)">Internal Platform (No Public SEO)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Cloud Infrastructure & Hosting Preference:</label>
+          <select id="ai-wizard-hosting" class="form-control">
+            <option value="AWS Cloud Container Stack">AWS (ECS / RDS / S3)</option>
+            <option value="Vercel + Managed Postgres">Vercel / Netlify + Supabase</option>
+            <option value="DigitalOcean App Platform">DigitalOcean App Platform</option>
+            <option value="Google Cloud Platform (GCP)">Google Cloud Platform (GCP)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Expected Traffic / Active User Scale:</label>
+          <select id="ai-wizard-traffic" class="form-control">
+            <option value="10,000+ monthly active users">10,000+ monthly active users</option>
+            <option value="100,000+ monthly active users">100,000+ high concurrency users</option>
+            <option value="Startup Initial Launch (<5k users)">Startup Launch (<5,000 users)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Delivery Timeline Urgency:</label>
+          <select id="ai-wizard-timeline" class="form-control">
+            <option value="Standard Sprint Delivery (4–8 Weeks)">Standard Sprint Delivery (4–8 Weeks)</option>
+            <option value="Fast-Track MVP (2–4 Weeks)">Fast-Track MVP (2–4 Weeks)</option>
+            <option value="Enterprise Multi-Phase Roadmap">Enterprise Multi-Phase Roadmap</option>
+          </select>
+        </div>
+      </div>
+    </main>
+
+    <!-- Step 3: Document Upload Area -->
+    <main class="doc-content-card" style="margin-bottom: 2rem;">
+      <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1.25rem;">
+        📄 Step 2: Upload Client Requirement File
+      </h2>
+
+      <div style="border: 2px dashed var(--accent-indigo); padding: 2rem; border-radius: 12px; text-align: center; background: rgba(99, 102, 241, 0.03);">
+        <input type="file" id="ai-doc-file" accept=".pdf,.docx,.txt,.md" style="display: none;" onchange="updateFileLabel(this)">
+        <button class="export-btn primary" onclick="document.getElementById('ai-doc-file').click()" style="padding: 0.75rem 1.5rem; font-size: 1rem; margin-bottom: 0.75rem;">
+          📁 Choose File (PDF, DOCX, TXT, MD)
+        </button>
+        <div id="ai-file-name-label" style="font-weight: 600; color: var(--text-subtle);">No file chosen yet. (Optional — AI can build documents using intake parameters alone!)</div>
+      </div>
+    </main>
+
+    <!-- Step 4: Deliverables Generator Selector -->
+    <main class="doc-content-card" style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin: 0;">
+          🛠️ Step 3: Select Technical Documents for AI to Generate
+        </h2>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="export-btn" onclick="selectAllDocTypes(true)">Check All (10 Docs)</button>
+          <button class="export-btn" onclick="selectAllDocTypes(false)">Clear Selection</button>
+        </div>
+      </div>
+
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem;" id="ai-doc-type-grid">
+        <!-- Rendered via JS script below -->
+      </div>
+
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end;">
+        <button class="export-btn primary" style="padding: 0.85rem 2rem; font-size: 1.1rem; background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); border: none; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);" onclick="startAiGenerationPipeline()">
+          🚀 Generate Selected AI Documents & Auto-Fill Workspace
+        </button>
+      </div>
+    </main>
+
+    <!-- Step 5: Live Generation Dashboard Overlay / Container -->
+    <div id="ai-progress-container" class="doc-content-card" style="display: none; margin-bottom: 2rem; background: rgba(99, 102, 241, 0.05); border: 1px solid var(--accent-indigo);">
+      <h3 style="font-size: 1.2rem; color: var(--accent-indigo); margin-bottom: 0.75rem;">⚡ AI Document Generation Pipeline Running...</h3>
+      <div id="ai-progress-status" style="font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem;">Preparing pipeline...</div>
+      <div style="height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden; margin-bottom: 1rem;">
+        <div id="ai-progress-bar-inner" style="height: 100%; width: 0%; background: var(--accent-indigo); transition: width 0.4s ease;"></div>
+      </div>
+    </div>
+
+    <!-- Output Deliverables Cards Container -->
+    <div id="ai-results-container"></div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <p>&copy; 2026 Client Requirement Analysis • AI Technical Intelligence Studio</p>
+    </footer>
+  </div>
+
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/proposal.js"></script>
+  <script src="../assets/js/assistant.js"></script>
+  <script src="../assets/js/ai-engine.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/export.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDocTypeSelectionGrid();
+    });
+
+    function toggleWizardFields(val) {
+      const seoGroup = document.getElementById('group-seo');
+      if (seoGroup) {
+        seoGroup.style.display = (val === 'Mobile') ? 'none' : 'block';
+      }
+    }
+
+    function updateFileLabel(input) {
+      const lbl = document.getElementById('ai-file-name-label');
+      if (input.files && input.files[0]) {
+        lbl.textContent = `📄 Selected File: ${input.files[0].name} (${(input.files[0].size / 1024).toFixed(1)} KB)`;
+        lbl.style.color = 'var(--accent-emerald)';
+      }
+    }
+
+    function renderDocTypeSelectionGrid() {
+      const grid = document.getElementById('ai-doc-type-grid');
+      if (!grid || !window.AIEngine) return;
+
+      let html = '';
+      Object.keys(window.AIEngine.docTypes).forEach(id => {
+        const d = window.AIEngine.docTypes[id];
+        html += `
+          <div style="background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span style="font-size: 1.5rem;">${d.icon}</span>
+                <input type="checkbox" class="ai-doc-checkbox" data-doc-id="${d.id}" checked style="width: 18px; height: 18px; cursor: pointer;">
+              </div>
+              <div style="font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: 0.25rem;">${d.title}</div>
+              <span class="badge badge-md" style="margin-bottom: 0.5rem; font-size: 0.7rem;">${d.category}</span>
+              <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">${d.desc}</p>
+            </div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+
+    function selectAllDocTypes(check) {
+      document.querySelectorAll('.ai-doc-checkbox').forEach(cb => cb.checked = check);
+    }
+
+    async function startAiGenerationPipeline() {
+      const selected = [];
+      document.querySelectorAll('.ai-doc-checkbox:checked').forEach(cb => {
+        selected.push(cb.getAttribute('data-doc-id'));
+      });
+
+      if (!selected.length) {
+        alert("Please select at least one technical document to generate.");
+        return;
+      }
+
+      const fileInput = document.getElementById('ai-doc-file');
+      let docText = "";
+
+      if (fileInput.files && fileInput.files[0]) {
+        if (window.showToast) window.showToast("Extracting document text...", "info");
+        docText = await window.AIEngine.extractTextFromPDF(fileInput.files[0]);
+      }
+
+      const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : {};
+
+      const context = {
+        clientName: proj.clientName || 'Client',
+        projectName: proj.projectName || 'Project',
+        projectType: document.getElementById('ai-wizard-platform').value,
+        docText: docText,
+        answers: {
+          industry: document.getElementById('ai-wizard-industry').value,
+          seoPriority: document.getElementById('ai-wizard-seo')?.value || 'Standard',
+          hostingPreference: document.getElementById('ai-wizard-hosting').value,
+          trafficScale: document.getElementById('ai-wizard-traffic').value,
+          timeline: document.getElementById('ai-wizard-timeline').value
+        }
+      };
+
+      const progressContainer = document.getElementById('ai-progress-container');
+      const progressStatus = document.getElementById('ai-progress-status');
+      const progressBar = document.getElementById('ai-progress-bar-inner');
+      const resultsContainer = document.getElementById('ai-results-container');
+
+      progressContainer.style.display = 'block';
+
+      const results = await window.AIEngine.generateAllSelected(selected, context, (current, total, title) => {
+        const pct = Math.round((current / total) * 100);
+        progressBar.style.width = `${pct}%`;
+        progressStatus.textContent = `Generating (${current} of ${total}): ${title}...`;
+      });
+
+      progressContainer.style.display = 'none';
+
+      // Render Deliverables Summary Cards
+      let resultsHtml = `<main class="doc-content-card"><h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1.25rem;">✨ Generated Technical Deliverables</h2><div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;"><button class="export-btn primary" onclick="downloadAllAiDeliverables()">📦 Download All AI Deliverables</button></div><div style="display: grid; gap: 1.5rem;">`;
+
+      results.forEach(doc => {
+        resultsHtml += `
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h3 style="font-size: 1.2rem; color: var(--text-main); margin: 0;">${doc.icon} ${doc.title}</h3>
+              <a href="${doc.targetSlug}.html" class="export-btn" style="font-size: 0.8rem;">🚀 Open Auto-Filled Page</a>
+            </div>
+            <pre style="background: #ffffff; padding: 1rem; border-radius: 8px; border: 1px solid #cbd5e1; max-height: 250px; overflow-y: auto; font-size: 0.85rem; line-height: 1.5;">${escapeHtml(doc.markdown)}</pre>
+          </div>
+        `;
+      });
+
+      resultsHtml += `</div></main>`;
+      resultsContainer.innerHTML = resultsHtml;
+
+      if (window.showToast) window.showToast(`Generated ${results.length} technical documents and auto-filled workspace pages!`, "success");
+    }
+
+    function downloadAllAiDeliverables() {
+      const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+      if (!proj || !proj.aiGeneratedDocs) {
+        alert("No AI deliverables generated yet.");
+        return;
+      }
+
+      let fullContent = `# AI Technical Deliverables Package
+Client: ${proj.clientName}
+
+`;
+      Object.keys(proj.aiGeneratedDocs).forEach(id => {
+        const doc = proj.aiGeneratedDocs[id];
+        fullContent += `
+
+================================================
+# ${doc.title}
+================================================
+
+${doc.markdown}
+`;
+      });
+
+      const blob = new Blob([fullContent], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `AI_Deliverables_${proj.clientName.replace(/[^a-z0-9]+/gi, '_')}.md`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
