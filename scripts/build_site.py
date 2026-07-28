@@ -915,7 +915,7 @@ def generate_doc_page_html(doc: dict) -> str:
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
+<body class="{'full-width-layout' if doc.get('category') == 'xlsx' else ''}">
 
   <div class="app-container">
     <!-- Header & Breadcrumb Navigation -->
