@@ -259,6 +259,22 @@ window.ExportManager = {
     link.click();
     document.body.removeChild(link);
     window.showToast(`Downloading original file: ${fileName}`, 'info');
+  },
+
+  /**
+   * Copy current document content text to clipboard
+   */
+  copyContentToClipboard: function() {
+    const contentCard = document.querySelector('.doc-content-card');
+    if (!contentCard) {
+      return window.showToast('No content found to copy.', 'error');
+    }
+    const text = contentCard.innerText || contentCard.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      window.showToast('Document content copied to clipboard!', 'success');
+    }).catch(err => {
+      window.showToast('Failed to copy content.', 'error');
+    });
   }
 };
 

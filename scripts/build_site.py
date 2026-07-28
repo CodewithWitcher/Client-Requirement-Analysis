@@ -807,10 +807,91 @@ def generate_file_explorer_page_html(all_documents: list) -> str:
 '''
 
 
+def render_export_toolbar_html(doc: dict) -> str:
+    category = doc['category'] # 'md', 'xlsx', 'docx'
+    filename = doc['filename']
+    slug = doc['slug']
+    original_url = doc['original_url']
+
+    buttons = []
+
+    if category == 'xlsx':
+        # Excel Calculator Page - Only show relevant Excel/PDF downloads
+        buttons.append(f'''
+        <button class="export-btn primary" onclick="ExportManager.downloadFile('{original_url}', '{filename}')">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Excel Spreadsheet ({filename})
+        </button>
+        ''')
+        buttons.append(f'''
+        <button class="export-btn" onclick="ExportManager.exportXLSX('{original_url}', '{slug}.csv')">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Export Table Data (.csv)
+        </button>
+        ''')
+        buttons.append(f'''
+        <button class="export-btn" onclick="ExportManager.exportPDF()">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Print / Save PDF Summary
+        </button>
+        ''')
+
+    elif category == 'docx':
+        # Word Proposal Page - Only show relevant Word/PDF downloads
+        buttons.append(f'''
+        <button class="export-btn primary" onclick="ExportManager.downloadFile('{original_url}', '{filename}')">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Word Document ({filename})
+        </button>
+        ''')
+        buttons.append(f'''
+        <button class="export-btn" onclick="ExportManager.exportDOCX('{original_url}', '{slug}.doc')">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Export Customized Word (.doc)
+        </button>
+        ''')
+        buttons.append(f'''
+        <button class="export-btn" onclick="ExportManager.exportPDF()">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Export as PDF
+        </button>
+        ''')
+
+    else:
+        # Markdown Document Page - PDF, Word, Copy, and Download Original
+        buttons.append(f'''
+        <button class="export-btn primary" onclick="ExportManager.exportPDF()">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Export as PDF
+        </button>
+        ''')
+        buttons.append(f'''
+        <button class="export-btn" onclick="ExportManager.exportDOCX(null, '{slug}.doc')">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Export as Word (.doc)
+        </button>
+        ''')
+        buttons.append(f'''
+        <button class="export-btn" onclick="ExportManager.copyContentToClipboard()">
+          <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copy Content
+        </button>
+        ''')
+        buttons.append(f'''
+        <button class="export-btn" onclick="ExportManager.downloadFile('{original_url}', '{filename}')">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Original ({filename})
+        </button>
+        ''')
+
+    return '<div class="export-toolbar">' + ''.join(buttons) + '</div>'
+
+
 def generate_doc_page_html(doc: dict) -> str:
     """Build individual document view page (docs/pages/<slug>.html)."""
     layout_wrapper_start = '<div class="doc-layout-grid">' if doc.get('sidebar_toc') else '<div>'
     layout_wrapper_end = '</div>'
+    export_toolbar_html = render_export_toolbar_html(doc)
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -842,7 +923,7 @@ def generate_doc_page_html(doc: dict) -> str:
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="../index.html" class="nav-pill">🏠 Workspace</a>
         <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
-        <a href="interactive-proposal-builder.html" class="nav-pill">✨ Proposal Builder</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">Proposal Builder</a>
         <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
@@ -862,28 +943,8 @@ def generate_doc_page_html(doc: dict) -> str:
         <span>Last Modified: {doc['last_modified']}</span>
       </div>
 
-      <!-- Export & Download Action Bar -->
-      <div class="export-toolbar">
-        <button class="export-btn primary" onclick="ExportManager.exportPDF()">
-          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
-          Export as PDF
-        </button>
-
-        <button class="export-btn" onclick="ExportManager.exportDOCX('{doc['docx_url']}', '{doc['slug']}.docx')">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-          Export as Word (.docx)
-        </button>
-
-        <button class="export-btn" onclick="ExportManager.exportXLSX('{doc['xlsx_url']}', '{doc['slug']}.xlsx')">
-          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-          Export as Excel (.xlsx)
-        </button>
-
-        <button class="export-btn" onclick="ExportManager.downloadFile('{doc['original_url']}', '{doc['filename']}')">
-          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-          Download Original ({doc['label']})
-        </button>
-      </div>
+      <!-- Dynamic Format-Specific Export & Download Action Bar -->
+      {export_toolbar_html}
     </section>
 
     <!-- 2-Column Content Layout (TOC Sidebar + Main Content) -->
