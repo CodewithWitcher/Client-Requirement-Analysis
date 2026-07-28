@@ -1,6 +1,7 @@
 /**
- * Client Proposal & Report Generator Module
- * Compiles active project state, selected requirements, line-item costs, and milestones into a printable proposal report.
+ * Dynamic Client Proposal & Report Generator Module
+ * Compiles active project state, selected requirements, line-item costs, GST rates, 
+ * complexity multipliers, proposal dates, statuses, and custom payment milestone percentages into a live re-calculating proposal.
  */
 
 window.ProposalGenerator = {
@@ -12,6 +13,17 @@ window.ProposalGenerator = {
     if (!container) return;
 
     const project = window.ProjectStorage.getProject();
+    
+    // Ensure default values exist
+    if (project.gstRate === undefined) project.gstRate = 18;
+    if (project.discount === undefined) project.discount = 0;
+    if (project.complexity === undefined) project.complexity = 1.0;
+    if (!project.date) project.date = new Date().toISOString().split('T')[0];
+    if (!project.status) project.status = 'Draft Proposal';
+    if (!project.milestones) {
+      project.milestones = { kickoff: 35, design: 20, dev: 30, handover: 15 };
+    }
+
     let totalEstimate = 0;
     const selectedLineItems = [];
 
@@ -23,6 +35,7 @@ window.ProposalGenerator = {
           selectedLineItems.push({
             id: itemId,
             sheet: sheetSlug,
+            name: itemData.name || itemId,
             cost: itemData.cost,
             qty: itemData.qty,
             total: itemData.total
@@ -35,24 +48,32 @@ window.ProposalGenerator = {
     const complexityMult = parseFloat(project.complexity || 1.0);
     const adjustedSubtotal = Math.round(totalEstimate * platformMult * complexityMult);
 
-    const discountAmount = Math.round(adjustedSubtotal * ((project.discount || 0) / 100));
+    const discountRate = parseFloat(project.discount || 0);
+    const discountAmount = Math.round(adjustedSubtotal * (discountRate / 100));
     const discountedSubtotal = adjustedSubtotal - discountAmount;
 
-    const gstAmount = Math.round(discountedSubtotal * 0.18);
+    const gstRate = parseFloat(project.gstRate !== undefined ? project.gstRate : 18);
+    const gstAmount = Math.round(discountedSubtotal * (gstRate / 100));
     const grandTotal = discountedSubtotal + gstAmount;
 
-    // Milestones
-    const mAdvance = Math.round(grandTotal * 0.35);
-    const mDesign = Math.round(grandTotal * 0.20);
-    const mDev = Math.round(grandTotal * 0.30);
-    const mHandover = Math.round(grandTotal * 0.15);
+    // Custom Milestones Split
+    const ms = project.milestones;
+    const mKickoffPct = parseFloat(ms.kickoff !== undefined ? ms.kickoff : 35);
+    const mDesignPct = parseFloat(ms.design !== undefined ? ms.design : 20);
+    const mDevPct = parseFloat(ms.dev !== undefined ? ms.dev : 30);
+    const mHandoverPct = parseFloat(ms.handover !== undefined ? ms.handover : 15);
+
+    const mKickoff = Math.round(grandTotal * (mKickoffPct / 100));
+    const mDesign = Math.round(grandTotal * (mDesignPct / 100));
+    const mDev = Math.round(grandTotal * (mDevPct / 100));
+    const mHandover = Math.round(grandTotal * (mHandoverPct / 100));
 
     let rowsHtml = '';
     selectedLineItems.forEach((item, index) => {
       rowsHtml += `
         <tr>
           <td>${index + 1}</td>
-          <td>Parameter item (${escapeHtml(item.id)})</td>
+          <td>${escapeHtml(item.name)}</td>
           <td>₹${(item.cost || 0).toLocaleString('en-IN')}</td>
           <td>${item.qty || 1}</td>
           <td><strong>₹${(item.total || 0).toLocaleString('en-IN')}</strong></td>
@@ -65,6 +86,80 @@ window.ProposalGenerator = {
     }
 
     container.innerHTML = `
+      <!-- Interactive Metadata & Financial Controls Bar -->
+      <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+        <div style="font-weight: 800; font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-main); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>⚙️ Proposal Metadata & Dynamic Settings</span>
+        </div>
+
+        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+          <div class="form-group">
+            <label>Proposal Date:</label>
+            <input type="date" class="form-control" value="${project.date}" onchange="ProposalGenerator.updateParam('date', this.value)">
+          </div>
+
+          <div class="form-group">
+            <label>Proposal Status:</label>
+            <select class="form-control" onchange="ProposalGenerator.updateParam('status', this.value)">
+              <option value="Draft Proposal" ${project.status === 'Draft Proposal' ? 'selected' : ''}>Draft Proposal</option>
+              <option value="Finalized Proposal" ${project.status === 'Finalized Proposal' ? 'selected' : ''}>Finalized Proposal</option>
+              <option value="Approved Scope" ${project.status === 'Approved Scope' ? 'selected' : ''}>Approved Scope</option>
+              <option value="In Execution" ${project.status === 'In Execution' ? 'selected' : ''}>In Execution</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Scope Platform:</label>
+            <select class="form-control" onchange="ProposalGenerator.updateParam('platform', this.value)">
+              <option value="Website" ${project.platform === 'Website' ? 'selected' : ''}>🌐 Website Platform</option>
+              <option value="Mobile" ${project.platform === 'Mobile' ? 'selected' : ''}>📱 Mobile Platform</option>
+              <option value="Both" ${project.platform === 'Both' ? 'selected' : ''}>⚡ Web & Mobile Platforms</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>GST Tax Rate (%):</label>
+            <input type="number" class="form-control" value="${gstRate}" min="0" max="30" step="1" onchange="ProposalGenerator.updateParam('gstRate', this.value)">
+          </div>
+
+          <div class="form-group">
+            <label>Discount Rate (%):</label>
+            <input type="number" class="form-control" value="${discountRate}" min="0" max="50" step="1" onchange="ProposalGenerator.updateParam('discount', this.value)">
+          </div>
+
+          <div class="form-group">
+            <label>Complexity Multiplier:</label>
+            <select class="form-control" onchange="ProposalGenerator.updateParam('complexity', this.value)">
+              <option value="1.0" ${complexityMult === 1.0 ? 'selected' : ''}>1.0x — Standard Scope</option>
+              <option value="1.2" ${complexityMult === 1.2 ? 'selected' : ''}>1.2x — Medium Complexity</option>
+              <option value="1.5" ${complexityMult === 1.5 ? 'selected' : ''}>1.5x — Enterprise Scale</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(99, 102, 241, 0.2);">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-subtle); margin-bottom: 0.5rem;">Custom Milestone Payment Splits (%):</div>
+          <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem;">
+            <div class="form-group">
+              <label>1. Advance Kickoff (%):</label>
+              <input type="number" class="form-control" value="${mKickoffPct}" min="0" max="100" onchange="ProposalGenerator.updateMilestone('kickoff', this.value)">
+            </div>
+            <div class="form-group">
+              <label>2. UI/UX Design (%):</label>
+              <input type="number" class="form-control" value="${mDesignPct}" min="0" max="100" onchange="ProposalGenerator.updateMilestone('design', this.value)">
+            </div>
+            <div class="form-group">
+              <label>3. Development (%):</label>
+              <input type="number" class="form-control" value="${mDevPct}" min="0" max="100" onchange="ProposalGenerator.updateMilestone('dev', this.value)">
+            </div>
+            <div class="form-group">
+              <label>4. Handover (%):</label>
+              <input type="number" class="form-control" value="${mHandoverPct}" min="0" max="100" onchange="ProposalGenerator.updateMilestone('handover', this.value)">
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="proposal-document">
         <!-- Proposal Header -->
         <div class="proposal-header-banner">
@@ -76,7 +171,7 @@ window.ProposalGenerator = {
           <div style="text-align: right; font-size: 0.9rem; color: var(--text-subtle);">
             <div><strong>Date:</strong> ${project.date}</div>
             <div><strong>Scope:</strong> ${project.platform} Platform</div>
-            <div><strong>Status:</strong> Draft Proposal</div>
+            <div><strong>Status:</strong> ${escapeHtml(project.status)}</div>
           </div>
         </div>
 
@@ -115,18 +210,18 @@ window.ProposalGenerator = {
           <div class="summary-card">
             <h3>Investment Summary</h3>
             <div class="summary-row"><span>Base Scope Subtotal:</span><span>₹${totalEstimate.toLocaleString('en-IN')}</span></div>
-            <div class="summary-row"><span>Platform & Complexity Adj:</span><span>₹${adjustedSubtotal.toLocaleString('en-IN')}</span></div>
-            <div class="summary-row"><span>Discount (${project.discount || 0}%):</span><span>-₹${discountAmount.toLocaleString('en-IN')}</span></div>
-            <div class="summary-row"><span>GST (18%):</span><span>₹${gstAmount.toLocaleString('en-IN')}</span></div>
+            <div class="summary-row"><span>Platform (${project.platform}) & Complexity (${complexityMult}x):</span><span>₹${adjustedSubtotal.toLocaleString('en-IN')}</span></div>
+            <div class="summary-row"><span>Discount (${discountRate}%):</span><span>-₹${discountAmount.toLocaleString('en-IN')}</span></div>
+            <div class="summary-row"><span>GST (${gstRate}%):</span><span>₹${gstAmount.toLocaleString('en-IN')}</span></div>
             <div class="summary-row grand-total"><span>Grand Total Investment:</span><span>₹${grandTotal.toLocaleString('en-IN')}</span></div>
           </div>
 
           <div class="summary-card">
             <h3>Payment Milestone Schedule</h3>
-            <div class="milestone-item"><span>Milestone 1: Project Kickoff & Advance (35%)</span><strong>₹${mAdvance.toLocaleString('en-IN')}</strong></div>
-            <div class="milestone-item"><span>Milestone 2: Design & UI/UX Signoff (20%)</span><strong>₹${mDesign.toLocaleString('en-IN')}</strong></div>
-            <div class="milestone-item"><span>Milestone 3: Core Feature Development (30%)</span><strong>₹${mDev.toLocaleString('en-IN')}</strong></div>
-            <div class="milestone-item"><span>Milestone 4: QA, Deployment & Handover (15%)</span><strong>₹${mHandover.toLocaleString('en-IN')}</strong></div>
+            <div class="milestone-item"><span>Milestone 1: Project Kickoff & Advance (${mKickoffPct}%)</span><strong>₹${mKickoff.toLocaleString('en-IN')}</strong></div>
+            <div class="milestone-item"><span>Milestone 2: Design & UI/UX Signoff (${mDesignPct}%)</span><strong>₹${mDesign.toLocaleString('en-IN')}</strong></div>
+            <div class="milestone-item"><span>Milestone 3: Core Feature Development (${mDevPct}%)</span><strong>₹${mDev.toLocaleString('en-IN')}</strong></div>
+            <div class="milestone-item"><span>Milestone 4: QA, Deployment & Handover (${mHandoverPct}%)</span><strong>₹${mHandover.toLocaleString('en-IN')}</strong></div>
           </div>
         </div>
 
@@ -146,6 +241,33 @@ window.ProposalGenerator = {
         </div>
       </div>
     `;
+  },
+
+  /**
+   * Update single parameter and trigger real-time proposal re-render
+   */
+  updateParam: function(param, val) {
+    if (window.ProjectStorage) {
+      const proj = window.ProjectStorage.getProject();
+      proj[param] = val;
+      window.ProjectStorage.saveProject(proj);
+      this.renderProposal('proposal-output-container');
+      if (window.showToast) window.showToast(`Updated proposal ${param}!`, 'info');
+    }
+  },
+
+  /**
+   * Update milestone split percentage
+   */
+  updateMilestone: function(mKey, val) {
+    if (window.ProjectStorage) {
+      const proj = window.ProjectStorage.getProject();
+      if (!proj.milestones) proj.milestones = { kickoff: 35, design: 20, dev: 30, handover: 15 };
+      proj.milestones[mKey] = parseFloat(val) || 0;
+      window.ProjectStorage.saveProject(proj);
+      this.renderProposal('proposal-output-container');
+      if (window.showToast) window.showToast('Updated milestone payment schedule!', 'info');
+    }
   }
 };
 

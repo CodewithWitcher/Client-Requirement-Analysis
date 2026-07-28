@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTocScrollSpy();
   initLiveDocumentEditor();
   initInteractiveTaskChecklists();
+  if (window.SmartAssistant) window.SmartAssistant.updateHeaderApiKeyStatus();
 });
 
 /**

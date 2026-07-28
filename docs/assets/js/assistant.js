@@ -91,22 +91,27 @@ window.SmartAssistant = {
   },
 
   updateHeaderApiKeyStatus() {
-    const btns = document.querySelectorAll('.header-api-key-btn, button[onclick*="openApiKeyModal"]');
-    const hasKey = !!this.getApiKey();
+    const key = this.getApiKey();
+    const hasKey = !!(key && key.trim().length > 0);
+
+    const btns = document.querySelectorAll('.header-api-key-btn, .export-btn, button');
     btns.forEach(btn => {
-      btn.classList.add('header-api-key-btn');
-      if (hasKey) {
-        btn.innerHTML = '🟢 DeepSeek API Saved';
-        btn.style.background = 'rgba(16, 185, 129, 0.12)';
-        btn.style.borderColor = '#10b981';
-        btn.style.color = '#059669';
-        btn.style.fontWeight = '700';
-      } else {
-        btn.innerHTML = '🔑 DeepSeek Key';
-        btn.style.background = '';
-        btn.style.borderColor = '';
-        btn.style.color = '';
-        btn.style.fontWeight = '';
+      const onclickAttr = btn.getAttribute('onclick') || '';
+      if (onclickAttr.includes('openApiKeyModal') || btn.classList.contains('header-api-key-btn')) {
+        btn.classList.add('header-api-key-btn');
+        if (hasKey) {
+          btn.innerHTML = '🟢 DeepSeek API Saved';
+          btn.style.background = 'rgba(16, 185, 129, 0.15)';
+          btn.style.borderColor = '#10b981';
+          btn.style.color = '#059669';
+          btn.style.fontWeight = '700';
+        } else {
+          btn.innerHTML = '🔑 DeepSeek Key';
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.style.color = '';
+          btn.style.fontWeight = '';
+        }
       }
     });
   },
