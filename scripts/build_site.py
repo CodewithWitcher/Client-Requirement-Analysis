@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Document Hub & Interactive Static Site Generator
-Scans repository for .md, .xlsx, .xls, .doc, and .docx files, converts them into web pages,
-embeds interactive client workspace engines, builds 2-column TOC layouts, and builds static web hub in `docs/`.
+Scans repository for .md, .xlsx, .xls, .doc, and .docx files, filters out redundant markdown files 
+from the UI while preserving them in the repo, builds interactive web components, 2-column TOC layouts, 
+and builds a clean, non-repetitive static web hub inside `docs/`.
 
 Run:
   python scripts/build_site.py
@@ -38,6 +39,17 @@ SUPPORTED_EXTENSIONS = {".md", ".docx", ".doc", ".xlsx", ".xls"}
 IGNORE_DIRS = {
     ".git", ".github", ".gemini", "node_modules", "venv", "env",
     "__pycache__", "build", "dist", "site", ".pytest_cache"
+}
+
+# Redundant pricing markdown files to hide from UI (since interactive Excel calculators represent them)
+UI_EXCLUDE_FILENAMES = {
+    "Application-Pricing-Parameters.md",
+    "Website-Pricing-Parameters.md",
+    "Application-Pricing-Module-Overview.md",
+    "Application-Pricing-Quick-Guide.md",
+    "Website-Pricing-Module-Overview.md",
+    "Website-Pricing-Quick-Guide.md",
+    "Readme1.md"
 }
 
 
@@ -115,7 +127,6 @@ def parse_markdown_file(file_path: Path):
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'attr_list', 'nl2br'])
     rendered_html = md.convert(processed_content)
 
-    # Extract headings for Sidebar Table of Contents (TOC)
     headings = re.findall(r'<h([23])\s+id="([^"]+)">([^<]+)</h[23]>', rendered_html)
     toc_items_html = []
     sec_count = 0
@@ -125,7 +136,6 @@ def parse_markdown_file(file_path: Path):
         clean_head_text = re.sub(r'^[0-9\.]+\s*', '', head_text).strip()
         toc_items_html.append(f'<li {indent}><a href="#{head_id}">📌 {html.escape(clean_head_text)}</a></li>')
 
-        # Inject interactive "+ Add to Scope" buttons on H2 / H3 section headers
         sec_id = f"sec_{sec_count}"
         scope_btn = f'<div class="section-scope-header"><h{level} id="{head_id}">{head_text}</h{level}><button class="section-scope-btn" data-sec-id="{sec_id}">+ Add to Scope</button></div>'
         rendered_html = rendered_html.replace(f'<h{level} id="{head_id}">{head_text}</h{level}>', scope_btn)
@@ -476,7 +486,7 @@ def generate_index_html(documents: list) -> str:
         <button class="export-btn" onclick="openFileExplorerModal()">📁 File Explorer</button>
         <a href="pages/interactive-proposal-builder.html" class="export-btn primary">✨ Proposal Builder</a>
         <span class="breadcrumb">
-          <span style="font-weight: 600; color: var(--text-main);">{len(documents)} Total Documents</span>
+          <span style="font-weight: 600; color: var(--text-main);">{len(documents)} Primary Tools</span>
         </span>
       </nav>
     </header>
@@ -496,7 +506,7 @@ def generate_index_html(documents: list) -> str:
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" id="search-input" class="search-input" placeholder="Search documents by title or keyword..." aria-label="Search documents">
+        <input type="text" id="search-input" class="search-input" placeholder="Search primary tools by title or keyword..." aria-label="Search documents">
       </div>
 
       <!-- Domain / Topic Filters -->
@@ -522,7 +532,7 @@ def generate_index_html(documents: list) -> str:
     <main class="card-grid" id="card-grid">
       {"".join(cards_html)}
       <div id="no-results" class="no-results" style="display: none;">
-        <h3>No matching documents found</h3>
+        <h3>No matching tools found</h3>
         <p>Try refining your search terms or selecting a different file category filter.</p>
       </div>
     </main>
@@ -544,7 +554,7 @@ def generate_index_html(documents: list) -> str:
 
 
 def generate_doc_page_html(doc: dict) -> str:
-    """Build individual document view page (docs/pages/<slug>.html) with 2-Column TOC layout."""
+    """Build individual document view page (docs/pages/<slug>.html)."""
     layout_wrapper_start = '<div class="doc-layout-grid">' if doc.get('sidebar_toc') else '<div>'
     layout_wrapper_end = '</div>'
 
@@ -759,10 +769,15 @@ def main():
             if ext in SUPPORTED_EXTENSIONS and not filename.startswith("."):
                 if "docs" in file_path.parts and ("pages" in file_path.parts or "files" in file_path.parts):
                     continue
+                # Exclude redundant markdown files from UI building
+                if filename in UI_EXCLUDE_FILENAMES:
+                    print(f"  [EXCLUDE FROM UI] Skipping duplicate pricing markdown: {filename}")
+                    continue
+
                 discovered_files.append(file_path)
 
     discovered_files.sort(key=lambda p: str(p).lower())
-    print(f"[DISCOVERY] Found {len(discovered_files)} document(s) in repository:\n")
+    print(f"\n[DISCOVERY] Found {len(discovered_files)} primary tool document(s) for UI:\n")
 
     processed_docs = []
 
@@ -837,7 +852,7 @@ def main():
     print(f"[OUTPUT] Directory: {OUTPUT_DIR}")
     print(f"[INDEX] Main Index: {OUTPUT_DIR / 'index.html'}")
     print(f"[TOOL] Proposal Builder: {PAGES_DIR / 'interactive-proposal-builder.html'}")
-    print(f"[PAGES] Generated {len(processed_docs)} document pages in {PAGES_DIR}")
+    print(f"[PAGES] Generated {len(processed_docs)} primary tool pages in {PAGES_DIR}")
     print("=" * 60)
 
 

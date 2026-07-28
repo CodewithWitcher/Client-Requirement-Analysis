@@ -188,29 +188,24 @@ function initCopyButtons() {
 }
 
 /**
- * File Explorer Modal Drawer - Browse and open any document instantly
+ * File Explorer Modal Drawer - Browse and open primary tools
  */
 function openFileExplorerModal() {
   const isPage = window.location.pathname.includes('/pages/');
   const prefix = isPage ? '' : 'pages/';
 
   const docs = [
+    { title: "Application Pricing Calculator (Interactive)", slug: "template-excel-template-application-pricing-calculator", type: "XLSX" },
+    { title: "Website Pricing Calculator (Interactive)", slug: "template-excel-template-website-pricing-calculator", type: "XLSX" },
     { title: "Application Client Questionnaire", slug: "questionnaire-application-application-client-questionnaire", type: "MD" },
     { title: "Website Client Questionnaire", slug: "questionnaire-website-website-client-questionnaire", type: "MD" },
-    { title: "Application Pricing Calculator", slug: "template-excel-template-application-pricing-calculator", type: "XLSX" },
-    { title: "Website Pricing Calculator", slug: "template-excel-template-website-pricing-calculator", type: "XLSX" },
     { title: "Application Client Proposal", slug: "template-word-template-application-client-proposal", type: "DOCX" },
     { title: "Website Client Proposal", slug: "template-word-template-website-client-proposal", type: "DOCX" },
     { title: "Application Project Checklist", slug: "checklists-application-project-checklist", type: "MD" },
     { title: "Website Project Checklist", slug: "checklists-website-project-checklist", type: "MD" },
-    { title: "Application Pricing Parameters Guide", slug: "docs-application-application-pricing-parameters", type: "MD" },
     { title: "Application Requirements Complete Guide", slug: "docs-application-application-requirements-complete-guide", type: "MD" },
-    { title: "Website Pricing Parameters Guide", slug: "docs-website-website-pricing-parameters", type: "MD" },
     { title: "Website Requirements Complete Guide", slug: "docs-website-website-requirements-complete-guide", type: "MD" },
-    { title: "Application Pricing Overview", slug: "overview-application-pricing-module-overview", type: "MD" },
-    { title: "Application Pricing Quick Guide", slug: "overview-application-pricing-quick-guide", type: "MD" },
-    { title: "Website Pricing Overview", slug: "overview-website-pricing-module-overview", type: "MD" },
-    { title: "Website Pricing Quick Guide", slug: "overview-website-pricing-quick-guide", type: "MD" }
+    { title: "Repository Toolkit Guide", slug: "readme", type: "MD" }
   ];
 
   let listHtml = '';
@@ -227,11 +222,11 @@ function openFileExplorerModal() {
     <div id="file-explorer-overlay" class="modal-overlay">
       <div class="modal-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3>📁 File Explorer — Open Any Document</h3>
+          <h3>📁 File Explorer — Primary Tools</h3>
           <button class="export-btn" onclick="closeFileExplorerModal()">✕ Close</button>
         </div>
         <div class="search-box" style="margin-bottom: 1rem;">
-          <input type="text" id="explorer-search" class="search-input" placeholder="Search documents..." oninput="filterExplorerItems(this.value)">
+          <input type="text" id="explorer-search" class="search-input" placeholder="Search primary tools..." oninput="filterExplorerItems(this.value)">
         </div>
         <div class="explorer-list" id="explorer-list">
           ${listHtml}
