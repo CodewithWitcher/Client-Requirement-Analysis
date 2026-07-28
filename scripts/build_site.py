@@ -117,12 +117,14 @@ def parse_markdown_file(file_path: Path):
     cb_count = 0
     def replace_task_cb(match):
         nonlocal cb_count
-        checked = 'checked' if match.group(1).lower() == 'x' else ''
+        matched_str = match.group(0)
+        checked = 'checked' if (matched_str in {'☑', '☒'} or (len(matched_str) >= 3 and matched_str[1].lower() == 'x')) else ''
         cb_html = f'<input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-{cb_count}" {checked}>'
         cb_count += 1
         return cb_html
 
-    processed_content = re.sub(r'\[([ xX])\]', replace_task_cb, content)
+    # Replace both [ ] / [x] and literal Unicode ballot boxes ☐ / ☑ / ☒
+    processed_content = re.sub(r'(?:\[[ xX]\]|[☐☑☒])', replace_task_cb, content)
 
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'attr_list', 'nl2br'])
     rendered_html = md.convert(processed_content)

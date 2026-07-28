@@ -934,3 +934,45 @@ table.doc-table tr:hover td {
   .doc-layout-grid { grid-template-columns: 1fr; }
   .doc-sidebar-toc { display: none; }
 }
+
+/* Interactive Checkboxes in Markdown Documents & Questionnaires */
+.interactive-checklist-item,
+.rendered-markdown input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 2px solid var(--accent-primary, #3b82f6);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+  margin-left: 0.25rem;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.interactive-checklist-item:checked,
+.rendered-markdown input[type="checkbox"]:checked {
+  background-color: var(--accent-emerald, #10b981);
+  border-color: var(--accent-emerald, #10b981);
+}
+
+.interactive-checklist-item:checked::after,
+.rendered-markdown input[type="checkbox"]:checked::after {
+  content: '✓';
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.interactive-checklist-item:hover,
+.rendered-markdown input[type="checkbox"]:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+

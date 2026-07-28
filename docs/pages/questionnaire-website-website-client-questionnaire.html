@@ -44,8 +44,8 @@
 
       <div class="doc-meta-row">
         <span>File Size: 15.6 KB</span>
-        <span>Metrics: 2,417 words</span>
-        <span>Reading Time: 12 min read</span>
+        <span>Metrics: 1,968 words</span>
+        <span>Reading Time: 9 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -97,6 +97,16 @@
       <main class="doc-main-content">
         <div class="doc-content-card">
           
+        <div class="summary-card" style="margin-bottom: 2rem; background: rgba(59, 130, 246, 0.05);">
+          <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.5rem;">
+            <span>Task Checklist Progress</span>
+            <span id="checklist-progress-text">0 of 449 completed (0%)</span>
+          </div>
+          <div style="height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden;">
+            <div id="checklist-progress-bar" style="height: 100%; width: 0%; background: var(--accent-primary); transition: width 0.3s ease;"></div>
+          </div>
+        </div>
+        
           <div class="rendered-markdown">
             <h1 id="website-project-client-discovery-questionnaire">🌐 Website Project — Client Discovery Questionnaire</h1>
 <blockquote>
@@ -170,7 +180,7 @@
 <tr>
 <td>B1</td>
 <td>Do you already own a domain name?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-0" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-1" > No</td>
 </tr>
 <tr>
 <td>B2</td>
@@ -185,27 +195,27 @@
 <tr>
 <td>B4</td>
 <td>Preferred domain extension?</td>
-<td>☐ .com ☐ .in ☐ .org ☐ .io ☐ .co ☐ Other: ___</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-2" > .com <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-3" > .in <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-4" > .org <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-5" > .io <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-6" > .co <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-7" > Other: ___</td>
 </tr>
 <tr>
 <td>B5</td>
 <td>Do you want domain privacy protection?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-8" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-9" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-10" > Not sure</td>
 </tr>
 <tr>
 <td>B6</td>
 <td>Do you have a logo?</td>
-<td>☐ Yes ☐ No (Need design)</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-11" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-12" > No (Need design)</td>
 </tr>
 <tr>
 <td>B7</td>
 <td>Do you have brand guidelines (colors, fonts, style)?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-13" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-14" > No</td>
 </tr>
 <tr>
 <td>B8</td>
 <td>Do you have existing brand assets (images, videos, copy)?</td>
-<td>☐ Yes ☐ Partial ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-15" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-16" > Partial <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-17" > No</td>
 </tr>
 </tbody>
 </table>
@@ -223,7 +233,7 @@
 <tr>
 <td>C1</td>
 <td>Do you have existing hosting?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-18" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-19" > No</td>
 </tr>
 <tr>
 <td>C2</td>
@@ -233,32 +243,32 @@
 <tr>
 <td>C3</td>
 <td>Hosting preference?</td>
-<td>☐ Shared ☐ VPS ☐ Cloud ☐ Dedicated ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-20" > Shared <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-21" > VPS <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-22" > Cloud <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-23" > Dedicated <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-24" > Not sure</td>
 </tr>
 <tr>
 <td>C4</td>
 <td>Preferred hosting provider?</td>
-<td>☐ AWS ☐ DigitalOcean ☐ Hostinger ☐ GoDaddy ☐ Vercel ☐ Netlify ☐ No preference</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-25" > AWS <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-26" > DigitalOcean <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-27" > Hostinger <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-28" > GoDaddy <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-29" > Vercel <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-30" > Netlify <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-31" > No preference</td>
 </tr>
 <tr>
 <td>C5</td>
 <td>Do you need an SSL certificate?</td>
-<td>☐ Yes (Free) ☐ Yes (Paid/Premium) ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-32" > Yes (Free) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-33" > Yes (Paid/Premium) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-34" > Not sure</td>
 </tr>
 <tr>
 <td>C6</td>
 <td>Expected storage needs?</td>
-<td>☐ &lt; 5 GB ☐ 5–20 GB ☐ 20–100 GB ☐ 100+ GB</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-35" > &lt; 5 GB <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-36" > 5–20 GB <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-37" > 20–100 GB <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-38" > 100+ GB</td>
 </tr>
 <tr>
 <td>C7</td>
 <td>Server location preference?</td>
-<td>☐ India ☐ US ☐ Europe ☐ Asia ☐ No preference</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-39" > India <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-40" > US <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-41" > Europe <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-42" > Asia <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-43" > No preference</td>
 </tr>
 <tr>
 <td>C8</td>
 <td>Do you need email hosting? (e.g., name@yourdomain.com)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-44" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-45" > No</td>
 </tr>
 <tr>
 <td>C9</td>
@@ -281,37 +291,37 @@
 <tr>
 <td>D1</td>
 <td>What type of website do you need?</td>
-<td>☐ Static/Landing Page ☐ Business Website ☐ E-Commerce ☐ Blog/Magazine ☐ Portfolio ☐ Web Application ☐ Directory/Listing ☐ Social Platform ☐ Other: ___</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-46" > Static/Landing Page <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-47" > Business Website <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-48" > E-Commerce <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-49" > Blog/Magazine <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-50" > Portfolio <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-51" > Web Application <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-52" > Directory/Listing <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-53" > Social Platform <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-54" > Other: ___</td>
 </tr>
 <tr>
 <td>D2</td>
 <td>Do you have a tech stack preference?</td>
-<td>☐ Yes ☐ No / Developer decides</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-55" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-56" > No / Developer decides</td>
 </tr>
 <tr>
 <td>D3</td>
 <td>If yes, preferred frontend?</td>
-<td>☐ HTML/CSS/JS ☐ React ☐ Next.js ☐ Vue ☐ Angular ☐ Other: ___</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-57" > HTML/CSS/JS <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-58" > React <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-59" > Next.js <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-60" > Vue <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-61" > Angular <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-62" > Other: ___</td>
 </tr>
 <tr>
 <td>D4</td>
 <td>Preferred backend?</td>
-<td>☐ Node.js ☐ Python/Django ☐ PHP/Laravel ☐ Java ☐ .NET ☐ No backend ☐ Other: ___</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-63" > Node.js <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-64" > Python/Django <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-65" > PHP/Laravel <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-66" > Java <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-67" > .NET <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-68" > No backend <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-69" > Other: ___</td>
 </tr>
 <tr>
 <td>D5</td>
 <td>Do you want a CMS?</td>
-<td>☐ WordPress ☐ Strapi ☐ Sanity ☐ Custom Admin Panel ☐ No CMS ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-70" > WordPress <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-71" > Strapi <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-72" > Sanity <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-73" > Custom Admin Panel <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-74" > No CMS <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-75" > Not sure</td>
 </tr>
 <tr>
 <td>D6</td>
 <td>Do you need a mobile-responsive design?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-76" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-77" > No</td>
 </tr>
 <tr>
 <td>D7</td>
 <td>Do you need a Progressive Web App (PWA)?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-78" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-79" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-80" > Not sure</td>
 </tr>
 </tbody>
 </table>
@@ -329,32 +339,32 @@
 <tr>
 <td>E1</td>
 <td>Does the website need a database?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-81" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-82" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-83" > Not sure</td>
 </tr>
 <tr>
 <td>E2</td>
 <td>Type of data to be stored?</td>
-<td>☐ User accounts ☐ Products ☐ Orders ☐ Content/Articles ☐ Media files ☐ Other: ___</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-84" > User accounts <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-85" > Products <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-86" > Orders <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-87" > Content/Articles <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-88" > Media files <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-89" > Other: ___</td>
 </tr>
 <tr>
 <td>E3</td>
 <td>Database preference?</td>
-<td>☐ MySQL ☐ PostgreSQL ☐ MongoDB ☐ Firebase ☐ Supabase ☐ No preference</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-90" > MySQL <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-91" > PostgreSQL <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-92" > MongoDB <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-93" > Firebase <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-94" > Supabase <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-95" > No preference</td>
 </tr>
 <tr>
 <td>E4</td>
 <td>Estimated number of records/users?</td>
-<td>☐ &lt; 1,000 ☐ 1K–10K ☐ 10K–100K ☐ 100K+</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-96" > &lt; 1,000 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-97" > 1K–10K <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-98" > 10K–100K <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-99" > 100K+</td>
 </tr>
 <tr>
 <td>E5</td>
 <td>Do you need database backups?</td>
-<td>☐ Daily ☐ Weekly ☐ Monthly ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-100" > Daily <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-101" > Weekly <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-102" > Monthly <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-103" > Not sure</td>
 </tr>
 <tr>
 <td>E6</td>
 <td>Any data migration from an existing system?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-104" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-105" > No</td>
 </tr>
 </tbody>
 </table>
@@ -372,22 +382,22 @@
 <tr>
 <td>F1</td>
 <td>Design approach?</td>
-<td>☐ Custom design from scratch ☐ Use a template/theme ☐ Redesign existing website</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-106" > Custom design from scratch <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-107" > Use a template/theme <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-108" > Redesign existing website</td>
 </tr>
 <tr>
 <td>F2</td>
 <td>Do you need wireframes before development?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-109" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-110" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-111" > Not sure</td>
 </tr>
 <tr>
 <td>F3</td>
 <td>Do you need UI/UX design in Figma/XD?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-112" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-113" > No</td>
 </tr>
 <tr>
 <td>F4</td>
 <td>Design style preference?</td>
-<td>☐ Minimalist ☐ Modern/Bold ☐ Corporate ☐ Playful ☐ Luxury ☐ Other: ___</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-114" > Minimalist <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-115" > Modern/Bold <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-116" > Corporate <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-117" > Playful <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-118" > Luxury <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-119" > Other: ___</td>
 </tr>
 <tr>
 <td>F5</td>
@@ -397,22 +407,22 @@
 <tr>
 <td>F6</td>
 <td>How many design revisions do you expect?</td>
-<td>☐ 1–2 ☐ 3–5 ☐ Unlimited</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-120" > 1–2 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-121" > 3–5 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-122" > Unlimited</td>
 </tr>
 <tr>
 <td>F7</td>
 <td>Do you need dark mode?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-123" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-124" > No</td>
 </tr>
 <tr>
 <td>F8</td>
 <td>Do you need animations/micro-interactions?</td>
-<td>☐ Yes (Basic) ☐ Yes (Advanced) ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-125" > Yes (Basic) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-126" > Yes (Advanced) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-127" > No</td>
 </tr>
 <tr>
 <td>F9</td>
 <td>Do you need multi-language support?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-128" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-129" > No</td>
 </tr>
 <tr>
 <td>F10</td>
@@ -435,7 +445,7 @@
 <tr>
 <td>G1</td>
 <td>How many pages do you need?</td>
-<td>☐ 1–5 ☐ 6–10 ☐ 11–20 ☐ 20–50 ☐ 50+</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-130" > 1–5 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-131" > 6–10 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-132" > 11–20 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-133" > 20–50 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-134" > 50+</td>
 </tr>
 <tr>
 <td>G2</td>
@@ -456,102 +466,102 @@
 <tbody>
 <tr>
 <td>Home</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-135" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-136" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>About Us</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-137" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-138" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Services</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-139" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-140" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Products / Shop</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-141" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-142" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Pricing</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-143" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-144" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Portfolio / Gallery</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-145" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-146" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Blog</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-147" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-148" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Contact Us</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-149" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-150" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>FAQ</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-151" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-152" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Testimonials / Reviews</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-153" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-154" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Team / Staff</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-155" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-156" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Careers</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-157" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-158" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Terms &amp; Conditions</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-159" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-160" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Privacy Policy</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-161" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-162" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Login / Register</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-163" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-164" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>User Dashboard</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-165" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-166" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Admin Panel</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-167" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-168" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>404 Error Page</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-169" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-170" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Sitemap</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-171" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-172" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>Other: ___</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-173" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-174" > No</td>
 <td></td>
 </tr>
 </tbody>
@@ -571,181 +581,181 @@
 <tr>
 <td>H1</td>
 <td>Contact form</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-175" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-176" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H2</td>
 <td>Newsletter / Email subscription</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-177" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-178" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H3</td>
 <td>Live chat / Chatbot</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-179" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-180" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H4</td>
 <td>User registration &amp; login</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-181" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-182" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H5</td>
 <td>Social login (Google, Facebook, etc.)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-183" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-184" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H6</td>
 <td>User profiles / Dashboard</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-185" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-186" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H7</td>
 <td>Role-based access (Admin, Editor, User)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-187" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-188" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H8</td>
 <td>Search functionality</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-189" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-190" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H9</td>
 <td>Advanced filtering &amp; sorting</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-191" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-192" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H10</td>
 <td>Booking / Appointment system</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-193" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-194" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H11</td>
 <td>Calendar integration</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-195" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-196" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H12</td>
 <td>Google Maps integration</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-197" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-198" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H13</td>
 <td>Image/Video gallery</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-199" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-200" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H14</td>
 <td>File upload / Download</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-201" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-202" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H15</td>
 <td>Notifications (Email / In-app)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-203" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-204" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H16</td>
 <td>Social media sharing buttons</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-205" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-206" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H17</td>
 <td>Social media feed embed</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-207" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-208" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H18</td>
 <td>Blog with categories &amp; tags</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-209" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-210" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H19</td>
 <td>Comments system</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-211" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-212" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H20</td>
 <td>Ratings &amp; Reviews</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-213" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-214" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H21</td>
 <td>Wishlist / Favorites</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-215" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-216" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H22</td>
 <td>Comparison feature</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-217" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-218" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H23</td>
 <td>PDF generation</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-219" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-220" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H24</td>
 <td>Invoice generation</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-221" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-222" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H25</td>
 <td>Multi-vendor support</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-223" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-224" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H26</td>
 <td>Referral / Affiliate system</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-225" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-226" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H27</td>
 <td>Loyalty / Rewards program</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-227" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-228" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H28</td>
 <td>Real-time updates (WebSockets)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-229" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-230" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H29</td>
 <td>API for mobile app</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-231" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-232" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>H30</td>
 <td>Third-party API integrations</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-233" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-234" > No</td>
 <td></td>
 </tr>
 </tbody>
@@ -764,12 +774,12 @@
 <tr>
 <td>I1</td>
 <td>Is this an e-commerce website?</td>
-<td>☐ Yes ☐ No (Skip this section)</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-235" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-236" > No (Skip this section)</td>
 </tr>
 <tr>
 <td>I2</td>
 <td>How many products initially?</td>
-<td>☐ 1–50 ☐ 51–200 ☐ 201–1000 ☐ 1000+</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-237" > 1–50 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-238" > 51–200 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-239" > 201–1000 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-240" > 1000+</td>
 </tr>
 <tr>
 <td>I3</td>
@@ -779,52 +789,52 @@
 <tr>
 <td>I4</td>
 <td>Do products have variants (size, color, etc.)?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-241" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-242" > No</td>
 </tr>
 <tr>
 <td>I5</td>
 <td>Do you need inventory management?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-243" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-244" > No</td>
 </tr>
 <tr>
 <td>I6</td>
 <td>Shopping cart type?</td>
-<td>☐ Standard ☐ Multi-vendor ☐ Subscription box</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-245" > Standard <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-246" > Multi-vendor <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-247" > Subscription box</td>
 </tr>
 <tr>
 <td>I7</td>
 <td>Checkout process preference?</td>
-<td>☐ Single page ☐ Multi-step ☐ Guest checkout ☐ All</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-248" > Single page <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-249" > Multi-step <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-250" > Guest checkout <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-251" > All</td>
 </tr>
 <tr>
 <td>I8</td>
 <td>Do you need order tracking?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-252" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-253" > No</td>
 </tr>
 <tr>
 <td>I9</td>
 <td>Do you need shipping calculation?</td>
-<td>☐ Flat rate ☐ Weight-based ☐ API (Shiprocket/Delhivery) ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-254" > Flat rate <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-255" > Weight-based <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-256" > API (Shiprocket/Delhivery) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-257" > Not sure</td>
 </tr>
 <tr>
 <td>I10</td>
 <td>Do you need tax calculation (GST, VAT)?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-258" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-259" > No</td>
 </tr>
 <tr>
 <td>I11</td>
 <td>Do you need discount codes / Coupons?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-260" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-261" > No</td>
 </tr>
 <tr>
 <td>I12</td>
 <td>Do you need a return/refund system?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-262" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-263" > No</td>
 </tr>
 <tr>
 <td>I13</td>
 <td>E-commerce platform preference?</td>
-<td>☐ WooCommerce ☐ Shopify ☐ Custom built ☐ No preference</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-264" > WooCommerce <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-265" > Shopify <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-266" > Custom built <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-267" > No preference</td>
 </tr>
 </tbody>
 </table>
@@ -842,42 +852,42 @@
 <tr>
 <td>J1</td>
 <td>Do you need online payments?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-268" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-269" > No</td>
 </tr>
 <tr>
 <td>J2</td>
 <td>Payment gateway preference?</td>
-<td>☐ Razorpay ☐ Stripe ☐ PayPal ☐ PayU ☐ CCAvenue ☐ Cashfree ☐ Multiple ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-270" > Razorpay <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-271" > Stripe <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-272" > PayPal <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-273" > PayU <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-274" > CCAvenue <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-275" > Cashfree <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-276" > Multiple <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-277" > Not sure</td>
 </tr>
 <tr>
 <td>J3</td>
 <td>Payment methods needed?</td>
-<td>☐ Credit/Debit Card ☐ UPI ☐ Net Banking ☐ Wallets ☐ EMI ☐ COD ☐ All</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-278" > Credit/Debit Card <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-279" > UPI <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-280" > Net Banking <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-281" > Wallets <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-282" > EMI <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-283" > COD <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-284" > All</td>
 </tr>
 <tr>
 <td>J4</td>
 <td>Do you need subscription/recurring payments?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-285" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-286" > No</td>
 </tr>
 <tr>
 <td>J5</td>
 <td>Do you need multi-currency support?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-287" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-288" > No</td>
 </tr>
 <tr>
 <td>J6</td>
 <td>Do you need invoicing?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-289" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-290" > No</td>
 </tr>
 <tr>
 <td>J7</td>
 <td>Do you need split payments (multi-vendor)?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-291" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-292" > No</td>
 </tr>
 <tr>
 <td>J8</td>
 <td>Who will set up the payment gateway account?</td>
-<td>☐ Client ☐ Developer ☐ Together</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-293" > Client <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-294" > Developer <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-295" > Together</td>
 </tr>
 </tbody>
 </table>
@@ -895,32 +905,32 @@
 <tr>
 <td>K1</td>
 <td>Who will provide the website content?</td>
-<td>☐ Client ☐ Developer ☐ Shared</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-296" > Client <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-297" > Developer <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-298" > Shared</td>
 </tr>
 <tr>
 <td>K2</td>
 <td>Do you need content writing services?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-299" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-300" > No</td>
 </tr>
 <tr>
 <td>K3</td>
 <td>Do you need professional photography?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-301" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-302" > No</td>
 </tr>
 <tr>
 <td>K4</td>
 <td>Do you need stock images?</td>
-<td>☐ Yes (Free) ☐ Yes (Premium/Paid) ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-303" > Yes (Free) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-304" > Yes (Premium/Paid) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-305" > No</td>
 </tr>
 <tr>
 <td>K5</td>
 <td>Do you need video production?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-306" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-307" > No</td>
 </tr>
 <tr>
 <td>K6</td>
 <td>Do you need infographics or illustrations?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-308" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-309" > No</td>
 </tr>
 <tr>
 <td>K7</td>
@@ -943,42 +953,42 @@
 <tr>
 <td>L1</td>
 <td>Do you need SEO optimization?</td>
-<td>☐ Basic (On-page) ☐ Advanced (On-page + Off-page) ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-310" > Basic (On-page) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-311" > Advanced (On-page + Off-page) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-312" > No</td>
 </tr>
 <tr>
 <td>L2</td>
 <td>Do you need Google Analytics setup?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-313" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-314" > No</td>
 </tr>
 <tr>
 <td>L3</td>
 <td>Do you need Google Search Console setup?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-315" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-316" > No</td>
 </tr>
 <tr>
 <td>L4</td>
 <td>Do you need Google Tag Manager?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-317" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-318" > No</td>
 </tr>
 <tr>
 <td>L5</td>
 <td>Do you need Facebook Pixel / Meta Pixel?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-319" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-320" > No</td>
 </tr>
 <tr>
 <td>L6</td>
 <td>Do you need schema markup (Rich Snippets)?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-321" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-322" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-323" > Not sure</td>
 </tr>
 <tr>
 <td>L7</td>
 <td>Do you need a sitemap?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-324" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-325" > No</td>
 </tr>
 <tr>
 <td>L8</td>
 <td>Do you need page speed optimization?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-326" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-327" > No</td>
 </tr>
 <tr>
 <td>L9</td>
@@ -1001,42 +1011,42 @@
 <tr>
 <td>M1</td>
 <td>Do you need CAPTCHA on forms?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-328" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-329" > No</td>
 </tr>
 <tr>
 <td>M2</td>
 <td>Do you need two-factor authentication?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-330" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-331" > No</td>
 </tr>
 <tr>
 <td>M3</td>
 <td>Do you need GDPR compliance?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-332" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-333" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-334" > Not sure</td>
 </tr>
 <tr>
 <td>M4</td>
 <td>Do you need cookie consent banner?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-335" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-336" > No</td>
 </tr>
 <tr>
 <td>M5</td>
 <td>Do you need regular security audits?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-337" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-338" > No</td>
 </tr>
 <tr>
 <td>M6</td>
 <td>Do you need DDoS protection?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-339" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-340" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-341" > Not sure</td>
 </tr>
 <tr>
 <td>M7</td>
 <td>Do you need IP-based access restrictions?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-342" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-343" > No</td>
 </tr>
 <tr>
 <td>M8</td>
 <td>Do you need data encryption?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-344" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-345" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-346" > Not sure</td>
 </tr>
 <tr>
 <td>M9</td>
@@ -1059,7 +1069,7 @@
 <tr>
 <td>N1</td>
 <td>Expected monthly visitors?</td>
-<td>☐ &lt; 1,000 ☐ 1K–10K ☐ 10K–50K ☐ 50K–100K ☐ 100K+</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-347" > &lt; 1,000 <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-348" > 1K–10K <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-349" > 10K–50K <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-350" > 50K–100K <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-351" > 100K+</td>
 </tr>
 <tr>
 <td>N2</td>
@@ -1069,22 +1079,22 @@
 <tr>
 <td>N3</td>
 <td>Do you need a CDN?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-352" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-353" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-354" > Not sure</td>
 </tr>
 <tr>
 <td>N4</td>
 <td>Do you need load balancing?</td>
-<td>☐ Yes ☐ No ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-355" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-356" > No <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-357" > Not sure</td>
 </tr>
 <tr>
 <td>N5</td>
 <td>Performance target?</td>
-<td>☐ &lt; 2s load time ☐ &lt; 3s load time ☐ No specific target</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-358" > &lt; 2s load time <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-359" > &lt; 3s load time <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-360" > No specific target</td>
 </tr>
 <tr>
 <td>N6</td>
 <td>Do you need uptime monitoring?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-361" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-362" > No</td>
 </tr>
 </tbody>
 </table>
@@ -1103,79 +1113,79 @@
 <tr>
 <td>O1</td>
 <td>Email marketing (Mailchimp, SendGrid, etc.)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-363" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-364" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O2</td>
 <td>CRM (HubSpot, Salesforce, Zoho, etc.)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-365" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-366" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O3</td>
 <td>ERP system</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-367" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-368" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O4</td>
 <td>Accounting (Tally, QuickBooks, etc.)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-369" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-370" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O5</td>
 <td>Social media (Auto-posting, feeds)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-371" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-372" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O6</td>
 <td>WhatsApp Business API</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-373" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-374" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O7</td>
 <td>SMS gateway</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-375" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-376" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O8</td>
 <td>Google Maps / Location services</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-377" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-378" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O9</td>
 <td>Calendar (Google/Outlook)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-379" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-380" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O10</td>
 <td>Video conferencing (Zoom, Google Meet)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-381" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-382" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O11</td>
 <td>Cloud storage (AWS S3, Google Cloud, etc.)</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-383" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-384" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O12</td>
 <td>Logistics / Shipping API</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-385" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-386" > No</td>
 <td></td>
 </tr>
 <tr>
 <td>O13</td>
 <td>Other (specify):</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-387" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-388" > No</td>
 <td></td>
 </tr>
 </tbody>
@@ -1194,37 +1204,37 @@
 <tr>
 <td>P1</td>
 <td>Do you need ongoing maintenance after launch?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-389" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-390" > No</td>
 </tr>
 <tr>
 <td>P2</td>
 <td>Maintenance plan preference?</td>
-<td>☐ Monthly ☐ Quarterly ☐ On-demand ☐ Not sure</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-391" > Monthly <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-392" > Quarterly <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-393" > On-demand <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-394" > Not sure</td>
 </tr>
 <tr>
 <td>P3</td>
 <td>What should maintenance include?</td>
-<td>☐ Bug fixes ☐ Content updates ☐ Security patches ☐ Feature additions ☐ Performance monitoring ☐ Backups ☐ All</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-395" > Bug fixes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-396" > Content updates <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-397" > Security patches <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-398" > Feature additions <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-399" > Performance monitoring <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-400" > Backups <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-401" > All</td>
 </tr>
 <tr>
 <td>P4</td>
 <td>Expected support hours?</td>
-<td>☐ Business hours ☐ Extended (12hr) ☐ 24/7</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-402" > Business hours <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-403" > Extended (12hr) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-404" > 24/7</td>
 </tr>
 <tr>
 <td>P5</td>
 <td>Preferred communication channel?</td>
-<td>☐ Email ☐ Phone ☐ WhatsApp ☐ Slack ☐ Project management tool</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-405" > Email <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-406" > Phone <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-407" > WhatsApp <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-408" > Slack <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-409" > Project management tool</td>
 </tr>
 <tr>
 <td>P6</td>
 <td>Do you need training to manage the website?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-410" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-411" > No</td>
 </tr>
 <tr>
 <td>P7</td>
 <td>Do you need documentation/manual?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-412" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-413" > No</td>
 </tr>
 </tbody>
 </table>
@@ -1252,27 +1262,27 @@
 <tr>
 <td>Q3</td>
 <td>Is this a hard deadline?</td>
-<td>☐ Yes ☐ Flexible</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-414" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-415" > Flexible</td>
 </tr>
 <tr>
 <td>Q4</td>
 <td>Do you want phased delivery (MVP first)?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-416" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-417" > No</td>
 </tr>
 <tr>
 <td>Q5</td>
 <td>What is your total budget range?</td>
-<td>☐ ₹10K–30K ☐ ₹30K–75K ☐ ₹75K–1.5L ☐ ₹1.5L–3L ☐ ₹3L–5L ☐ ₹5L+ ☐ Flexible / Not decided</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-418" > ₹10K–30K <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-419" > ₹30K–75K <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-420" > ₹75K–1.5L <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-421" > ₹1.5L–3L <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-422" > ₹3L–5L <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-423" > ₹5L+ <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-424" > Flexible / Not decided</td>
 </tr>
 <tr>
 <td>Q6</td>
 <td>Payment preference?</td>
-<td>☐ Milestone-based ☐ Monthly ☐ 50-50 (Advance + Final) ☐ Other: ___</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-425" > Milestone-based <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-426" > Monthly <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-427" > 50-50 (Advance + Final) <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-428" > Other: ___</td>
 </tr>
 <tr>
 <td>Q7</td>
 <td>Have you worked with a developer/agency before?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-429" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-430" > No</td>
 </tr>
 <tr>
 <td>Q8</td>
@@ -1295,32 +1305,32 @@
 <tr>
 <td>R1</td>
 <td>Do you need a Terms &amp; Conditions page?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-431" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-432" > No</td>
 </tr>
 <tr>
 <td>R2</td>
 <td>Do you need a Privacy Policy page?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-433" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-434" > No</td>
 </tr>
 <tr>
 <td>R3</td>
 <td>Do you need a Refund/Cancellation policy?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-435" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-436" > No</td>
 </tr>
 <tr>
 <td>R4</td>
 <td>Do you need an NDA before starting?</td>
-<td>☐ Yes ☐ No</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-437" > Yes <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-438" > No</td>
 </tr>
 <tr>
 <td>R5</td>
 <td>Who owns the code after project completion?</td>
-<td>☐ Client ☐ Developer ☐ To be discussed</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-439" > Client <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-440" > Developer <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-441" > To be discussed</td>
 </tr>
 <tr>
 <td>R6</td>
 <td>Who owns the design files?</td>
-<td>☐ Client ☐ Developer ☐ To be discussed</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-442" > Client <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-443" > Developer <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-444" > To be discussed</td>
 </tr>
 </tbody>
 </table>
@@ -1356,7 +1366,7 @@
 </tr>
 <tr>
 <td><strong>Estimated Complexity</strong></td>
-<td>☐ Simple ☐ Medium ☐ Complex ☐ Enterprise</td>
+<td><input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-445" > Simple <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-446" > Medium <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-447" > Complex <input type="checkbox" class="interactive-checklist-item" data-cb-id="cb-448" > Enterprise</td>
 </tr>
 <tr>
 <td><strong>Estimated Timeline</strong></td>

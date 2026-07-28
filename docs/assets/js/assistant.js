@@ -83,10 +83,32 @@ window.SmartAssistant = {
       localStorage.removeItem('deepseek_api_key');
       if (window.showToast) window.showToast('DeepSeek API Key cleared.', 'info');
     }
+    this.updateHeaderApiKeyStatus();
   },
 
   getApiKey() {
     return this.deepseekApiKey || localStorage.getItem('deepseek_api_key') || '';
+  },
+
+  updateHeaderApiKeyStatus() {
+    const btns = document.querySelectorAll('.header-api-key-btn, button[onclick*="openApiKeyModal"]');
+    const hasKey = !!this.getApiKey();
+    btns.forEach(btn => {
+      btn.classList.add('header-api-key-btn');
+      if (hasKey) {
+        btn.innerHTML = '🟢 DeepSeek API Saved';
+        btn.style.background = 'rgba(16, 185, 129, 0.12)';
+        btn.style.borderColor = '#10b981';
+        btn.style.color = '#059669';
+        btn.style.fontWeight = '700';
+      } else {
+        btn.innerHTML = '🔑 DeepSeek Key';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+        btn.style.fontWeight = '';
+      }
+    });
   },
 
   /**
@@ -422,3 +444,9 @@ async function testApiKeyFromModal() {
     alert(`❌ Network or API Key error: ${err.message}`);
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.SmartAssistant) {
+    window.SmartAssistant.updateHeaderApiKeyStatus();
+  }
+});
