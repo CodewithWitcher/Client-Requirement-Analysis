@@ -1,17 +1,62 @@
-/**
- * Enhanced Export Utility Module
- * Supports client-side customized exports for PDF, Word (.doc/.docx), Excel (.csv/.xlsx), JSON, 
- * and Bulk Client Workspace Download.
- */
+// Self-contained Toast Notification Manager
+if (typeof window.showToast !== 'function') {
+  window.showToast = function(message, type = 'info') {
+    let container = document.getElementById('toast-notification-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-notification-container';
+      container.style.position = 'fixed';
+      container.style.top = '20px';
+      container.style.right = '20px';
+      container.style.zIndex = '999999';
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.gap = '10px';
+      container.style.pointerEvents = 'none';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.style.pointerEvents = 'auto';
+    toast.style.padding = '12px 20px';
+    toast.style.borderRadius = '10px';
+    toast.style.fontFamily = 'sans-serif';
+    toast.style.fontSize = '0.9rem';
+    toast.style.fontWeight = '600';
+    toast.style.color = '#ffffff';
+    toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+    toast.style.transition = 'all 0.3s ease';
+    toast.style.transform = 'translateY(-10px)';
+    toast.style.opacity = '0';
+
+    if (type === 'success') {
+      toast.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+      toast.innerHTML = `✓ ${message}`;
+    } else if (type === 'error') {
+      toast.style.background = 'linear-gradient(135deg, #dc2626, #ef4444)';
+      toast.innerHTML = `✕ ${message}`;
+    } else {
+      toast.style.background = 'linear-gradient(135deg, #1e293b, #334155)';
+      toast.innerHTML = `ℹ ${message}`;
+    }
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+      toast.style.transform = 'translateY(0)';
+      toast.style.opacity = '1';
+    });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-10px)';
+      setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+    }, 3500);
+  };
+}
 
 window.ExportManager = {
   /**
    * Trigger clean browser PDF print layout capturing live user inputs
    */
   exportPDF: function() {
-    if (typeof window.showToast === 'function') {
-      window.showToast('Preparing document for PDF export...', 'info');
-    }
+    window.showToast('Preparing document for PDF export...', 'info');
 
     const origTitle = document.title;
     const h1El = document.querySelector('h1');
@@ -277,16 +322,22 @@ window.ExportManager = {
     try {
       const successful = document.execCommand('copy');
       if (successful) {
-        if (typeof window.showToast === 'function') window.showToast('Document content copied to clipboard!', 'success');
+        window.showToast('Document content copied to clipboard!', 'success');
       } else {
-        if (typeof window.showToast === 'function') window.showToast('Failed to copy content.', 'error');
+        window.showToast('Failed to copy content.', 'error');
       }
     } catch (err) {
-      if (typeof window.showToast === 'function') window.showToast('Failed to copy content.', 'error');
+      window.showToast('Failed to copy content.', 'error');
     }
     document.body.removeChild(textArea);
   }
 };
+
+window.exportPDF = function() { window.ExportManager.exportPDF(); };
+window.exportDOCX = function(url, name) { window.ExportManager.exportDOCX(url, name); };
+window.exportXLSX = function(url, name) { window.ExportManager.exportXLSX(url, name); };
+window.copyContentToClipboard = function() { window.ExportManager.copyContentToClipboard(); };
+window.downloadFile = function(url, name) { window.ExportManager.downloadFile(url, name); };
 
 function escapeHtml(str) {
   return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
