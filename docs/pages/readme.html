@@ -42,9 +42,9 @@
       <h1>💼 Price Module — Client Project Pricing &amp; Requirements Toolkit</h1>
 
       <div class="doc-meta-row">
-        <span>File Size: 2.7 KB</span>
-        <span>Metrics: 419 words</span>
-        <span>Reading Time: 2 min read</span>
+        <span>File Size: 2.0 KB</span>
+        <span>Metrics: 277 words</span>
+        <span>Reading Time: 1 min read</span>
         <span>Last Modified: Jul 28, 2026</span>
       </div>
 
@@ -88,7 +88,7 @@
             <span>Table of Contents</span>
           </div>
           <ul class="toc-list">
-            <li ><a href="#interactive-web-hub-documentation-site">📌 🌐 Interactive Web Hub &amp;amp; Documentation Site</a></li><li style="padding-left: 0.75rem;"><a href="#key-web-features">📌 🌟 Key Web Features</a></li><li ><a href="#quick-start-build-guide">📌 💻 Quick Start &amp;amp; Build Guide</a></li><li style="padding-left: 0.75rem;"><a href="#1-installation">📌 Installation</a></li><li style="padding-left: 0.75rem;"><a href="#2-build-the-static-web-site">📌 Build the Static Web Site</a></li><li style="padding-left: 0.75rem;"><a href="#3-preview-locally">📌 Preview Locally</a></li><li ><a href="#github-pages-deployment-steps">📌 🚀 GitHub Pages Deployment Steps</a></li>
+            <li ><a href="#workspace-features-scoping-toolkit">📌 🌐 Workspace Features &amp;amp; Scoping Toolkit</a></li><li style="padding-left: 0.75rem;"><a href="#primary-toolkit-capabilities">📌 🌟 Primary Toolkit Capabilities</a></li><li ><a href="#repository-scoping-structure">📌 📂 Repository Scoping Structure</a></li>
           </ul>
         </aside>
         
@@ -99,53 +99,57 @@
           <div class="rendered-markdown">
             <h1 id="price-module-client-project-pricing-requirements-toolkit">💼 Price Module — Client Project Pricing &amp; Requirements Toolkit</h1>
 <blockquote>
-<p>A comprehensive toolkit for freelance developers and agencies to gather client requirements, estimate pricing, and deliver professional proposals for <strong>Website</strong> and <strong>Mobile Application</strong> projects — with an integrated <strong>Interactive Web Document Hub</strong> and <strong>Static Site Generator</strong> for GitHub Pages.</p>
+<p>A comprehensive toolkit for freelance developers and agencies to gather client requirements, estimate pricing, and deliver professional proposals for <strong>Website</strong> and <strong>Mobile Application</strong> projects — with an integrated <strong>Client Requirement Workspace</strong> and <strong>Proposal Scoping System</strong>.</p>
 </blockquote>
 <hr />
-<div class="section-scope-header"><h2 id="interactive-web-hub-documentation-site">🌐 Interactive Web Hub &amp; Documentation Site</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
-<p>This repository features a static site generator in Python that compiles all Markdown (<code>.md</code>), Word (<code>.docx</code>), and Excel (<code>.xlsx</code>) documents into an interactive, glassy web interface with <strong>Cabinet Grotesk</strong> typography and multi-format exports.</p>
-<div class="section-scope-header"><h3 id="key-web-features">🌟 Key Web Features</h3><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
+<div class="section-scope-header"><h2 id="workspace-features-scoping-toolkit">🌐 Workspace Features &amp; Scoping Toolkit</h2><button class="section-scope-btn" data-sec-id="sec_0">+ Add to Scope</button></div>
+<p>This repository features a client requirement scoping system that compiles Markdown (<code>.md</code>), Word (<code>.docx</code>), and Excel (<code>.xlsx</code>) reference documents into a clean client workspace with multi-format exports.</p>
+<div class="section-scope-header"><h3 id="primary-toolkit-capabilities">🌟 Primary Toolkit Capabilities</h3><button class="section-scope-btn" data-sec-id="sec_1">+ Add to Scope</button></div>
 <ul>
-<li><strong>All-in-One Dashboard (<code>docs/index.html</code>)</strong>: Clickable document cards with real-time live search and file-type badges (<code>MD</code>, <code>DOCX</code>, <code>XLSX</code>).</li>
-<li><strong>Interactive Document Views</strong>: Rendered Markdown text, formatted Word documents, and multi-sheet tabbed Excel spreadsheets.</li>
-<li><strong>Cabinet Grotesk Typography</strong>: Premium headline &amp; brand font loaded via Fontshare.</li>
-<li><strong>Browser LocalStorage Auto-Save</strong>: Save client details, checked features, custom unit rates, and checklist states directly in the browser.</li>
-<li><strong>Custom Proposal Builder</strong>: Create client proposals with automatic tax (GST 18%), discount, platform multiplier, and milestone payment schedules.</li>
+<li><strong>Scoping Dashboard</strong>: Access pricing calculators, client discovery questionnaires, lifecycle checklists, and master requirement guides.</li>
+<li><strong>Structured Scoping Parameter Spreadsheets</strong>: Formatted Word proposals and multi-sheet tabbed Excel calculators.</li>
+<li><strong>Browser LocalStorage Persistence</strong>: Save client details, checked features, custom unit rates, and checklist states directly in browser memory.</li>
+<li><strong>Proposal Scoping System</strong>: Create client proposals with automatic tax (GST 18%), discount, platform complexity multiplier, and milestone payment schedules.</li>
 <li><strong>Multi-Format Content Exports</strong>: One-click extraction as PDF, Word (.docx), Excel (.xlsx), or JSON Project File.</li>
-<li><strong>GitHub Pages Ready</strong>: 100% static output stored in <code>/docs</code> — zero backend runtime needed.</li>
 </ul>
 <hr />
-<div class="section-scope-header"><h2 id="quick-start-build-guide">💻 Quick Start &amp; Build Guide</h2><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
-<div class="section-scope-header"><h3 id="1-installation">1. Installation</h3><button class="section-scope-btn" data-sec-id="sec_3">+ Add to Scope</button></div>
-<p>Install the python document parsing dependencies:</p>
-<pre><code class="language-bash">pip install -r requirements.txt
-</code></pre>
-<div class="section-scope-header"><h3 id="2-build-the-static-web-site">2. Build the Static Web Site</h3><button class="section-scope-btn" data-sec-id="sec_4">+ Add to Scope</button></div>
-<p>Run the single build command to scan all documents, generate web pages, and update the static site in <code>docs/</code>:</p>
-<pre><code class="language-bash">python scripts/build_site.py
-</code></pre>
-<p><em>(On Windows with Python Launcher, you can also run <code>py scripts/build_site.py</code>)</em></p>
-<div class="section-scope-header"><h3 id="3-preview-locally">3. Preview Locally</h3><button class="section-scope-btn" data-sec-id="sec_5">+ Add to Scope</button></div>
-<p>Open <code>docs/index.html</code> directly in any web browser, or launch a quick local preview server:</p>
-<pre><code class="language-bash">python -m http.server 8000 --directory docs
-</code></pre>
-<p>Then navigate to <code>http://localhost:8000</code>.</p>
-<hr />
-<div class="section-scope-header"><h2 id="github-pages-deployment-steps">🚀 GitHub Pages Deployment Steps</h2><button class="section-scope-btn" data-sec-id="sec_6">+ Add to Scope</button></div>
-<p>To host the interactive web interface for free on GitHub Pages:</p>
-<ol>
-<li>Push your changes to GitHub:<br />
-<code>bash
-   git add .
-   git commit -m "Build static document site for GitHub Pages"
-   git push origin main</code></li>
-<li>In your GitHub Repository, navigate to <strong>Settings</strong> &rarr; <strong>Pages</strong>.</li>
-<li>Under <strong>Build and deployment</strong>:</li>
-<li><strong>Source</strong>: Select <code>Deploy from a branch</code>.</li>
-<li><strong>Branch</strong>: Select <code>main</code> and set the folder to <code>/docs</code>.</li>
-<li>Click <strong>Save</strong>.</li>
-<li>Within 1–2 minutes, your website will be live at <code>https://&lt;username&gt;.github.io/&lt;repository-name&gt;/</code>.</li>
-</ol>
+<div class="section-scope-header"><h2 id="repository-scoping-structure">📂 Repository Scoping Structure</h2><button class="section-scope-btn" data-sec-id="sec_2">+ Add to Scope</button></div>
+<table>
+<thead>
+<tr>
+<th>Module Category</th>
+<th>Description &amp; Toolkit Purpose</th>
+<th>Supported Formats</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pricing Calculators</strong></td>
+<td>Itemized cost estimation spreadsheets with real-time tax &amp; complexity multipliers</td>
+<td>Excel (<code>.xlsx</code>)</td>
+</tr>
+<tr>
+<td><strong>Proposal Parameters</strong></td>
+<td>Formal client proposal templates and statement-of-work parameters</td>
+<td>Word (<code>.docx</code>) &amp; Markdown (<code>.md</code>)</td>
+</tr>
+<tr>
+<td><strong>Discovery Questionnaires</strong></td>
+<td>Structured discovery questions for initial client consultation meetings</td>
+<td>Markdown (<code>.md</code>)</td>
+</tr>
+<tr>
+<td><strong>Lifecycle Checklists</strong></td>
+<td>QA &amp; task tracking checklists for pre-kickoff, design, dev, and handover</td>
+<td>Markdown (<code>.md</code>)</td>
+</tr>
+<tr>
+<td><strong>Reference Guides</strong></td>
+<td>Master technical parameter reference guides for website &amp; mobile apps</td>
+<td>Markdown (<code>.md</code>)</td>
+</tr>
+</tbody>
+</table>
           </div>
         </div>
       </main>
