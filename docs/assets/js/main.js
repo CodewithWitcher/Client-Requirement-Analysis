@@ -1,6 +1,7 @@
 /**
  * Document Hub - Interactive JavaScript
- * Multi-dimensional search, File Explorer Drawer, Section Scope Selector, TOC ScrollSpy, and Sheet Tabs.
+ * Multi-dimensional search, File Explorer Drawer, Section Scope Selector, TOC ScrollSpy, Sheet Tabs,
+ * and Live WYSIWYG Document Editor & Persistence Engine.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyButtons();
   initSectionScopeSelectors();
   initTocScrollSpy();
+  initLiveDocumentEditor();
 });
 
 /**
@@ -75,6 +77,122 @@ function initSearchAndFilter() {
       filterCards();
     });
   });
+}
+
+/**
+ * Live WYSIWYG Document Content Editor & LocalStorage Persistence Engine
+ */
+function initLiveDocumentEditor() {
+  const contentCard = document.querySelector('.doc-content-card');
+  const exportToolbar = document.querySelector('.export-toolbar');
+  if (!contentCard || !exportToolbar) return;
+
+  const pageSlug = getPageSlug();
+  const storageKey = 'edited_doc_' + pageSlug;
+
+  // Restore saved edits if present in localStorage
+  const savedHtml = localStorage.getItem(storageKey);
+  if (savedHtml) {
+    contentCard.innerHTML = savedHtml;
+    if (window.showToast) window.showToast('Loaded your saved proposal edits!', 'info');
+  }
+
+  // Inject Edit, Save, and Reset buttons into export toolbar
+  const editBtnHtml = `
+    <button id="toggle-edit-mode-btn" class="export-btn" style="background: rgba(245, 158, 11, 0.12); border-color: var(--accent-amber); color: #d97706; font-weight: 700;" onclick="toggleLiveEditMode()">
+      ✏️ Edit Proposal / Document
+    </button>
+    <button id="save-doc-edit-btn" class="export-btn primary" style="display: none; background: var(--accent-emerald); border-color: var(--accent-emerald);" onclick="saveDocumentEdits()">
+      💾 Save Changes
+    </button>
+    <button id="reset-doc-edit-btn" class="export-btn" style="display: none; background: rgba(239, 68, 68, 0.1); border-color: #ef4444; color: #ef4444;" onclick="resetDocumentEdits()">
+      ↩️ Reset Original
+    </button>
+  `;
+
+  exportToolbar.insertAdjacentHTML('beforeend', editBtnHtml);
+}
+
+let isEditModeActive = false;
+
+function toggleLiveEditMode() {
+  const contentCard = document.querySelector('.doc-content-card');
+  const toggleBtn = document.getElementById('toggle-edit-mode-btn');
+  const saveBtn = document.getElementById('save-doc-edit-btn');
+  const resetBtn = document.getElementById('reset-doc-edit-btn');
+
+  if (!contentCard) return;
+
+  isEditModeActive = !isEditModeActive;
+
+  if (isEditModeActive) {
+    contentCard.setAttribute('contenteditable', 'true');
+    contentCard.style.outline = '2px dashed var(--accent-amber)';
+    contentCard.style.borderRadius = 'var(--radius-lg)';
+
+    toggleBtn.textContent = '⏸ Pause Editing';
+    saveBtn.style.display = 'inline-flex';
+    resetBtn.style.display = 'inline-flex';
+
+    if (!document.getElementById('edit-mode-banner')) {
+      const bannerHtml = `
+        <div id="edit-mode-banner" contenteditable="false" style="background: rgba(245, 158, 11, 0.15); border: 1px solid var(--accent-amber); color: var(--text-main); padding: 0.85rem 1.25rem; border-radius: 12px; margin-bottom: 1.5rem; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+          <span>✏️ Live Edit Mode Active — Click any text, heading, pricing table cell, or section on this page to edit directly!</span>
+          <button class="export-btn primary" style="padding: 0.35rem 0.85rem; font-size: 0.8rem; background: var(--accent-emerald); border-color: var(--accent-emerald);" onclick="saveDocumentEdits()">💾 Save Changes</button>
+        </div>
+      `;
+      contentCard.insertAdjacentHTML('afterbegin', bannerHtml);
+    }
+
+    if (window.showToast) window.showToast('Live Edit Mode enabled! Click any text to edit.', 'info');
+  } else {
+    disableLiveEditMode();
+  }
+}
+
+function disableLiveEditMode() {
+  const contentCard = document.querySelector('.doc-content-card');
+  const toggleBtn = document.getElementById('toggle-edit-mode-btn');
+  const saveBtn = document.getElementById('save-doc-edit-btn');
+  const resetBtn = document.getElementById('reset-doc-edit-btn');
+  const banner = document.getElementById('edit-mode-banner');
+
+  if (!contentCard) return;
+
+  isEditModeActive = false;
+  contentCard.removeAttribute('contenteditable');
+  contentCard.style.outline = 'none';
+
+  if (banner) banner.remove();
+  if (toggleBtn) toggleBtn.textContent = '✏️ Edit Proposal / Document';
+  if (saveBtn) saveBtn.style.display = 'none';
+  if (resetBtn) resetBtn.style.display = 'none';
+}
+
+function saveDocumentEdits() {
+  const contentCard = document.querySelector('.doc-content-card');
+  if (!contentCard) return;
+
+  const banner = document.getElementById('edit-mode-banner');
+  if (banner) banner.remove();
+
+  const pageSlug = getPageSlug();
+  const storageKey = 'edited_doc_' + pageSlug;
+
+  localStorage.setItem(storageKey, contentCard.innerHTML);
+
+  disableLiveEditMode();
+  if (window.showToast) window.showToast('Document edits saved successfully! Ready to export PDF/Word/Excel.', 'success');
+}
+
+function resetDocumentEdits() {
+  if (!confirm('Are you sure you want to reset this proposal to its original template text? Custom changes will be lost.')) return;
+
+  const pageSlug = getPageSlug();
+  const storageKey = 'edited_doc_' + pageSlug;
+
+  localStorage.removeItem(storageKey);
+  window.location.reload();
 }
 
 /**
@@ -263,3 +381,7 @@ function escapeHtml(str) {
 window.openFileExplorerModal = openFileExplorerModal;
 window.closeFileExplorerModal = closeFileExplorerModal;
 window.filterExplorerItems = filterExplorerItems;
+window.toggleLiveEditMode = toggleLiveEditMode;
+window.disableLiveEditMode = disableLiveEditMode;
+window.saveDocumentEdits = saveDocumentEdits;
+window.resetDocumentEdits = resetDocumentEdits;

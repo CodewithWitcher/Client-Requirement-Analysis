@@ -36,6 +36,80 @@
       </p>
     </section>
 
+    <!-- BUCKET AI & SMART ASSISTANT: Recommendation Wizard & AI Document Analyzer -->
+    <section class="bucket-section" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(238, 242, 255, 0.8)); border: 1px solid rgba(99, 102, 241, 0.3);">
+      <div class="bucket-header">
+        <div class="bucket-icon" style="background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); color: #ffffff;">🤖</div>
+        <div>
+          <h2 class="bucket-title">Smart Recommendation Assistant & AI Document Analyzer</h2>
+          <p class="bucket-desc">Get tailored tool recommendations or upload client requirement documents to generate AI estimation reports.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        
+        <!-- Option A: Smart Recommendation Wizard -->
+        <div style="background: #ffffff; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--glass-border-subtle); box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-main);">🎯 Step-by-Step Tool Recommender</h3>
+          
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label>1. Select Project Type:</label>
+            <select id="wizard-platform" class="form-control">
+              <option value="web">🌐 Website / Web Application</option>
+              <option value="app">📱 Mobile Application (iOS/Android)</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label>2. Select Primary Goal:</label>
+            <select id="wizard-intent" class="form-control">
+              <option value="pricing">💰 Calculate Pricing & Estimate Costs</option>
+              <option value="interview">📋 Conduct Client Discovery Interview</option>
+              <option value="proposal">📝 Generate Formal Client Proposal</option>
+              <option value="checklist">✅ Track Project Lifecycle Checklist</option>
+              <option value="guide">📖 Review Complete Requirement Guide</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label>3. Client Name (Optional):</label>
+            <input type="text" id="wizard-client-name" class="form-control" placeholder="e.g. Acme Corp">
+          </div>
+
+          <button class="export-btn primary" style="width: 100%; justify-content: center;" onclick="handleWizardRecommend()">
+            🚀 Recommend & Open Target Tool
+          </button>
+
+          <div id="wizard-recommend-output" style="margin-top: 1rem; display: none;"></div>
+        </div>
+
+        <!-- Option B: AI Client Requirement Document Analyzer -->
+        <div style="background: #ffffff; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--glass-border-subtle); box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-main);">📄 Upload Requirement Doc for AI Analysis</h3>
+          
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label>Upload Client Requirement File (.txt, .md, .docx, .json):</label>
+            <input type="file" id="ai-file-input" class="form-control" accept=".txt,.md,.docx,.json">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label>Client & Project Title:</label>
+            <input type="text" id="ai-client-title" class="form-control" placeholder="e.g. Nexus E-Commerce App">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label>DeepSeek API Key (Optional for Cloud AI):</label>
+            <input type="password" id="ai-deepseek-key" class="form-control" placeholder="sk-..." value="">
+          </div>
+
+          <button class="export-btn" style="width: 100%; justify-content: center; background: var(--accent-indigo); color: #ffffff; border-color: var(--accent-indigo);" onclick="handleAiDocumentAnalyze()">
+            🤖 Analyze Document & Match Line-Items
+          </button>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Structured Filter & Search Controls -->
     <div class="filter-bar">
       <div class="search-box">
@@ -359,7 +433,48 @@
   <script src="./assets/js/storage.js"></script>
   <script src="./assets/js/calculator.js"></script>
   <script src="./assets/js/proposal.js"></script>
+  <script src="./assets/js/assistant.js"></script>
   <script src="./assets/js/main.js"></script>
   <script src="./assets/js/export.js"></script>
+  <script>
+    function handleWizardRecommend() {
+      const plat = document.getElementById('wizard-platform').value;
+      const intent = document.getElementById('wizard-intent').value;
+      const clientName = document.getElementById('wizard-client-name').value.trim();
+
+      const rec = window.SmartAssistant.getRecommendation(plat, intent);
+      const out = document.getElementById('wizard-recommend-output');
+
+      if (clientName && window.ProjectStorage) {
+        const proj = window.ProjectStorage.getProject();
+        proj.clientName = clientName;
+        window.ProjectStorage.saveProject(proj);
+      }
+
+      out.style.display = 'block';
+      out.innerHTML = '<div style="background: rgba(16, 185, 129, 0.08); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3);">' +
+        '<div style="font-weight: 700; color: var(--accent-emerald);">Recommended Tool: ' + rec.title + '</div>' +
+        '<p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.25rem 0 0.75rem 0;">' + rec.desc + '</p>' +
+        '<a href="pages/' + rec.slug + '.html" class="export-btn primary" style="font-size: 0.82rem;">🚀 Open ' + rec.title + ' Now</a>' +
+        '</div>';
+    }
+
+    async function handleAiDocumentAnalyze() {
+      const fileInput = document.getElementById('ai-file-input');
+      const clientTitle = document.getElementById('ai-client-title').value.trim();
+      const apiKey = document.getElementById('ai-deepseek-key').value.trim();
+
+      if (!fileInput.files || !fileInput.files[0]) {
+        alert("Please select a client requirement document file first.");
+        return;
+      }
+
+      if (apiKey) {
+        window.SmartAssistant.setApiKey(apiKey);
+      }
+
+      await window.SmartAssistant.analyzeDocumentFile(fileInput.files[0], clientTitle, clientTitle);
+    }
+  </script>
 </body>
 </html>
