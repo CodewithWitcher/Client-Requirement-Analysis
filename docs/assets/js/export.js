@@ -9,34 +9,34 @@ window.ExportManager = {
    * Trigger clean browser PDF print layout capturing live user inputs
    */
   exportPDF: function() {
-    const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
-    const clientTitle = project ? `${project.projectName} - ${project.clientName}` : document.title;
-    
-    window.showToast('Preparing customized document for PDF export...', 'info');
+    if (typeof window.showToast === 'function') {
+      window.showToast('Preparing document for PDF export...', 'info');
+    }
 
-    // Temporarily set document title for clean browser PDF filename
     const origTitle = document.title;
-    document.title = clientTitle;
+    const h1El = document.querySelector('h1');
+    if (h1El) {
+      document.title = h1El.innerText.replace(/[^a-zA-Z0-9\s-_]/g, '').trim();
+    }
 
     setTimeout(() => {
       window.print();
       document.title = origTitle;
-    }, 400);
+    }, 300);
   },
 
   /**
    * Export current customized page state (with checked items & inputs) as Word document
    */
   exportDOCX: function(fallbackUrl, fileName) {
-    const contentCard = document.querySelector('.doc-content-card');
-    const headerCard = document.querySelector('.doc-header-card');
-
+    const contentCard = document.querySelector('.doc-content-card') || document.querySelector('.doc-main-content');
     if (!contentCard) {
       if (fallbackUrl) return this.downloadFile(fallbackUrl, fileName);
-      return window.showToast('Unable to capture document content.', 'error');
+      if (typeof window.showToast === 'function') window.showToast('Unable to capture document content.', 'error');
+      return;
     }
 
-    window.showToast('Generating customized Word document with your selections...', 'info');
+    if (typeof window.showToast === 'function') window.showToast('Generating Word document...', 'info');
 
     // Clone node to manipulate without affecting live UI
     const clone = contentCard.cloneNode(true);
@@ -64,29 +64,32 @@ window.ExportManager = {
       input.parentNode.replaceChild(span, input);
     });
 
-    const headerHtml = headerCard ? `
+    // Remove buttons, toolbars, and TOC elements if cloned inside content
+    clone.querySelectorAll('.export-toolbar, .toc-sidebar, #progress-bar-container, button').forEach(el => el.remove());
+
+    const titleText = document.querySelector('h1')?.innerText || 'Client Document';
+    const headerHtml = `
       <div style="border-bottom: 2px solid #0f172a; padding-bottom: 15px; margin-bottom: 25px;">
-        <h1 style="font-family: Arial, sans-serif; color: #0f172a;">${project ? escapeHtml(project.projectName) : 'Client Project Scope'}</h1>
+        <h1 style="font-family: Arial, sans-serif; color: #0f172a;">${escapeHtml(titleText)}</h1>
         <p style="color: #475569; font-size: 14px;">
-          <strong>Client:</strong> ${project ? escapeHtml(project.clientName) : 'N/A'} | 
-          <strong>Prepared By:</strong> ${project ? escapeHtml(project.preparedBy) : 'Agency'} | 
+          <strong>Client Profile:</strong> ${project ? escapeHtml(project.clientName) : 'Standard Workspace'} | 
           <strong>Date:</strong> ${new Date().toLocaleDateString()}
         </p>
       </div>
-    ` : '';
+    `;
 
     const fullWordHtml = `
       <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
       <head>
         <meta charset='utf-8'>
-        <title>Document Export</title>
+        <title>${escapeHtml(titleText)}</title>
         <style>
-          body { font-family: 'Segoe UI', Arial, sans-serif; color: #0f172a; line-height: 1.6; }
+          body { font-family: 'Segoe UI', Arial, sans-serif; color: #0f172a; line-height: 1.6; padding: 20px; }
           table { width: 100%; border-collapse: collapse; margin: 15px 0; }
           th { background: #f1f5f9; color: #0f172a; font-weight: bold; padding: 8px; border: 1px solid #cbd5e1; }
           td { padding: 8px; border: 1px solid #e2e8f0; }
           h1, h2, h3 { color: #0f172a; }
-          blockquote { border-left: 4px solid #3b82f6; padding-left: 10px; color: #475569; }
+          blockquote { border-left: 4px solid #3b82f6; padding-left: 10px; color: #475569; background: #f8fafc; }
         </style>
       </head>
       <body>
@@ -100,23 +103,23 @@ window.ExportManager = {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = (fileName || 'custom_document').replace(/\.[^/.]+$/, "") + "_customized.doc";
+    link.download = (fileName || 'document').replace(/\.[^/.]+$/, "") + ".doc";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    window.showToast('Customized Word document downloaded successfully!', 'success');
+    if (typeof window.showToast === 'function') window.showToast('Word document downloaded successfully!', 'success');
   },
 
   /**
    * Export current customized table data / checklist items as Excel compatible CSV file
    */
   exportXLSX: function(fallbackUrl, fileName) {
-    const tables = document.querySelectorAll('.doc-content-card table');
-    const checkboxes = document.querySelectorAll('.doc-content-card input[type="checkbox"]');
+    const tables = document.querySelectorAll('.doc-content-card table, .doc-main-content table');
+    const checkboxes = document.querySelectorAll('.doc-content-card input[type="checkbox"], .doc-main-content input[type="checkbox"]');
 
-    window.showToast('Generating customized Excel spreadsheet data...', 'info');
+    if (typeof window.showToast === 'function') window.showToast('Generating Excel CSV data...', 'info');
 
     let csvContent = "data:text/csv;charset=utf-8,\ufeff";
 
@@ -155,18 +158,19 @@ window.ExportManager = {
       });
     } else {
       if (fallbackUrl) return this.downloadFile(fallbackUrl, fileName);
-      return window.showToast('No table or checklist data found to export.', 'error');
+      if (typeof window.showToast === 'function') window.showToast('No table or checklist data found to export.', 'error');
+      return;
     }
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', (fileName || 'custom_spreadsheet').replace(/\.[^/.]+$/, "") + "_customized.csv");
+    link.setAttribute('download', (fileName || 'spreadsheet').replace(/\.[^/.]+$/, "") + ".csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
-    window.showToast('Customized Excel data downloaded successfully!', 'success');
+    if (typeof window.showToast === 'function') window.showToast('Excel CSV data downloaded successfully!', 'success');
   },
 
   /**
@@ -176,10 +180,12 @@ window.ExportManager = {
     const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
     if (!project) return;
 
-    window.showToast(`Exporting complete workspace for ${project.clientName}...`, 'info');
+    if (typeof window.showToast === 'function') window.showToast(`Exporting workspace for ${project.clientName}...`, 'info');
 
     // 1. Download Project JSON Configuration File
-    window.ProjectStorage.exportJSON(project.id);
+    if (window.ProjectStorage && window.ProjectStorage.exportJSON) {
+      window.ProjectStorage.exportJSON(project.id);
+    }
 
     // 2. Build and Download Client Master Summary HTML Report
     const summaryHtml = `<!DOCTYPE html>
@@ -194,7 +200,6 @@ window.ExportManager = {
     table { width: 100%; border-collapse: collapse; margin-top: 10px; }
     th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left; }
     th { background: #e2e8f0; }
-    .badge { background: #3b82f6; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
   </style>
 </head>
 <body>
@@ -203,30 +208,7 @@ window.ExportManager = {
     <p><strong>Client Name:</strong> ${escapeHtml(project.clientName)}</p>
     <p><strong>Project Title:</strong> ${escapeHtml(project.projectName)}</p>
     <p><strong>Prepared By:</strong> ${escapeHtml(project.preparedBy)}</p>
-    <p><strong>Platform Scope:</strong> ${escapeHtml(project.platform)}</p>
     <p><strong>Report Date:</strong> ${project.date}</p>
-  </div>
-
-  <div class="card">
-    <h2>📋 Selected Section Scope</h2>
-    <p>Sections marked as "✓ Added to Scope" across repository guides:</p>
-    <ul>
-      ${Object.keys(project.questionnaires || {}).map(pSlug => {
-        const secs = Object.keys(project.questionnaires[pSlug]).filter(s => project.questionnaires[pSlug][s]);
-        return `<li><strong>${escapeHtml(pSlug)}:</strong> ${secs.length} section(s) selected</li>`;
-      }).join('') || '<li>No manual section overrides selected.</li>'}
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>✅ Completed Task Checklists</h2>
-    <p>Checklist progress recorded for this client:</p>
-    <ul>
-      ${Object.keys(project.checklists || {}).map(pSlug => {
-        const checked = Object.keys(project.checklists[pSlug]).filter(c => project.checklists[pSlug][c]);
-        return `<li><strong>${escapeHtml(pSlug)}:</strong> ${checked.length} task(s) completed</li>`;
-      }).join('') || '<li>No task checkboxes toggled yet.</li>'}
-    </ul>
   </div>
 </body>
 </html>`;
@@ -241,7 +223,7 @@ window.ExportManager = {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    window.showToast('All client workspace files exported successfully!', 'success');
+    if (typeof window.showToast === 'function') window.showToast('Workspace files exported successfully!', 'success');
   },
 
   /**
@@ -249,7 +231,7 @@ window.ExportManager = {
    */
   downloadFile: function(fileUrl, fileName) {
     if (!fileUrl) {
-      window.showToast('Original template file is not available.', 'error');
+      if (typeof window.showToast === 'function') window.showToast('Original file is not available.', 'error');
       return;
     }
     const link = document.createElement('a');
@@ -258,23 +240,51 @@ window.ExportManager = {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    window.showToast(`Downloading original file: ${fileName}`, 'info');
+    if (typeof window.showToast === 'function') window.showToast(`Downloading file: ${fileName}`, 'info');
   },
 
   /**
-   * Copy current document content text to clipboard
+   * Copy current document content text to clipboard with fallback
    */
   copyContentToClipboard: function() {
-    const contentCard = document.querySelector('.doc-content-card');
+    const contentCard = document.querySelector('.doc-content-card') || document.querySelector('.doc-main-content');
     if (!contentCard) {
-      return window.showToast('No content found to copy.', 'error');
+      if (typeof window.showToast === 'function') window.showToast('No content found to copy.', 'error');
+      return;
     }
     const text = contentCard.innerText || contentCard.textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      window.showToast('Document content copied to clipboard!', 'success');
-    }).catch(err => {
-      window.showToast('Failed to copy content.', 'error');
-    });
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        if (typeof window.showToast === 'function') window.showToast('Document content copied to clipboard!', 'success');
+      }).catch(() => {
+        this._fallbackCopyText(text);
+      });
+    } else {
+      this._fallbackCopyText(text);
+    }
+  },
+
+  _fallbackCopyText: function(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        if (typeof window.showToast === 'function') window.showToast('Document content copied to clipboard!', 'success');
+      } else {
+        if (typeof window.showToast === 'function') window.showToast('Failed to copy content.', 'error');
+      }
+    } catch (err) {
+      if (typeof window.showToast === 'function') window.showToast('Failed to copy content.', 'error');
+    }
+    document.body.removeChild(textArea);
   }
 };
 

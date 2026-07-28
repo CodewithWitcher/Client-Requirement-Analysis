@@ -584,3 +584,62 @@ window.promptNewClientProfile = promptNewClientProfile;
 window.deleteCurrentClientProfile = deleteCurrentClientProfile;
 window.updateClientInfo = updateClientInfo;
 window.handleBannerImportFile = handleBannerImportFile;
+
+/**
+ * Global Toast Notification Manager
+ */
+window.showToast = function(message, type = 'info') {
+  let container = document.getElementById('toast-notification-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-notification-container';
+    container.style.position = 'fixed';
+    container.style.top = '20px';
+    container.style.right = '20px';
+    container.style.zIndex = '999999';
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '10px';
+    container.style.pointerEvents = 'none';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.style.pointerEvents = 'auto';
+  toast.style.padding = '12px 20px';
+  toast.style.borderRadius = '10px';
+  toast.style.fontFamily = 'var(--font-sans, sans-serif)';
+  toast.style.fontSize = '0.9rem';
+  toast.style.fontWeight = '600';
+  toast.style.color = '#ffffff';
+  toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+  toast.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+  toast.style.transform = 'translateY(-10px)';
+  toast.style.opacity = '0';
+
+  if (type === 'success') {
+    toast.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+    toast.innerHTML = `✓ ${message}`;
+  } else if (type === 'error') {
+    toast.style.background = 'linear-gradient(135deg, #dc2626, #ef4444)';
+    toast.innerHTML = `✕ ${message}`;
+  } else {
+    toast.style.background = 'linear-gradient(135deg, #1e293b, #334155)';
+    toast.innerHTML = `ℹ ${message}`;
+  }
+
+  container.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.style.transform = 'translateY(0)';
+    toast.style.opacity = '1';
+  });
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-10px)';
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 300);
+  }, 3500);
+};
