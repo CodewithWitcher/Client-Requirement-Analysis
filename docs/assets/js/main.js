@@ -79,7 +79,13 @@ function renderClientProfileSwitcher() {
       <!-- Storage Warning Notice -->
       <div style="margin-top: 1rem; padding: 0.65rem 1rem; background: rgba(245, 158, 11, 0.08); border: 1px dashed var(--accent-amber); border-radius: 8px; font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
         <span>⚠️ <strong>Browser Storage Warning:</strong> Client profiles, checkboxes, and customized estimates are saved locally in your browser memory. Clearing browser history/cache will erase unsaved data.</span>
-        <button class="export-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;" onclick="window.ProjectStorage.exportJSON()">💾 Backup Project JSON</button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="export-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;" onclick="window.ProjectStorage.exportJSON()">💾 Backup Project JSON</button>
+          <label class="export-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem; cursor: pointer;">
+            📂 Import Backup JSON
+            <input type="file" accept=".json" style="display: none;" onchange="handleBannerImportFile(event)">
+          </label>
+        </div>
       </div>
     </div>
   `;
@@ -554,6 +560,17 @@ function escapeHtml(str) {
   return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+function handleBannerImportFile(evt) {
+  const file = evt.target.files[0];
+  if (file && window.ProjectStorage) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      window.ProjectStorage.importJSON(e.target.result);
+    };
+    reader.readAsText(file);
+  }
+}
+
 window.openFileExplorerModal = openFileExplorerModal;
 window.closeFileExplorerModal = closeFileExplorerModal;
 window.filterExplorerItems = filterExplorerItems;
@@ -565,3 +582,4 @@ window.switchClientProfile = switchClientProfile;
 window.promptNewClientProfile = promptNewClientProfile;
 window.deleteCurrentClientProfile = deleteCurrentClientProfile;
 window.updateClientInfo = updateClientInfo;
+window.handleBannerImportFile = handleBannerImportFile;
