@@ -1270,6 +1270,22 @@ body.full-width-layout .doc-content-card {
     margin: 0 !important;
     box-shadow: none !important;
     background: transparent !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .doc-layout-grid, .proposal-summary-grid {
+    display: block !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .summary-card {
+    width: 100% !important;
+    margin-bottom: 1.5rem !important;
+    display: block !important;
+    box-sizing: border-box !important;
   }
 }
 
