@@ -4,11 +4,14 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initProjectBanner();
-  initCalculatorListeners();
-  initChecklistListeners();
-  checkWelcomeModal();
-  renderFloatingProfileWidget();
+  try { initProjectBanner(); } catch(e) { console.error('initProjectBanner error:', e); }
+  try { initCalculatorListeners(); } catch(e) { console.error('initCalculatorListeners error:', e); }
+  try { initMaintenancePlanListeners(); } catch(e) { console.error('initMaintenancePlanListeners error:', e); }
+  try { initHourlyRatesListeners(); } catch(e) { console.error('initHourlyRatesListeners error:', e); }
+  try { initChecklistListeners(); } catch(e) { console.error('initChecklistListeners error:', e); }
+  try { checkWelcomeModal(); } catch(e) { console.error('checkWelcomeModal error:', e); }
+  try { renderFloatingProfileWidget(); } catch(e) { console.error('renderFloatingProfileWidget error:', e); }
+  try { initCalcActionDelegation(); } catch(e) { console.error('initCalcActionDelegation error:', e); }
 });
 
 // Sync data between open tabs in real-time
@@ -159,17 +162,24 @@ function initCalculatorListeners() {
 
   // ── Step 2: Attach event listeners AFTER state is fully restored ────────
   calcTables.forEach(table => {
-    table.querySelectorAll('tr[data-item-id]').forEach(row => {
-      const checkInput = row.querySelector('.item-check');
-      const costInput = row.querySelector('.item-cost');
-      const qtyInput = row.querySelector('.item-qty');
-      [checkInput, costInput, qtyInput].forEach(input => {
-        if (input) {
-          input.addEventListener('change', () => handleItemChange(table, pageSlug));
-          input.addEventListener('input', () => handleItemChange(table, pageSlug));
-        }
+    try {
+      table.querySelectorAll('tr[data-item-id]').forEach(row => {
+        const checkInput = row.querySelector('.item-check');
+        const costInput = row.querySelector('.item-cost');
+        const qtyInput = row.querySelector('.item-qty');
+        [checkInput, costInput, qtyInput].forEach(input => {
+          if (input) {
+            input.addEventListener('change', () => handleItemChange(table, pageSlug));
+            input.addEventListener('input', () => handleItemChange(table, pageSlug));
+          }
+        });
       });
-    });
+
+      // ── Step 3: Inject action toolbar & restore custom rows ──
+      injectPricingTableToolbar(table, pageSlug);
+    } catch(e) {
+      console.error('Error initializing table:', table, e);
+    }
   });
 }
 
@@ -240,8 +250,6 @@ function markUnsavedChanges() {
  */
 function savePricingState() {
   const calcTables = document.querySelectorAll('.interactive-calc-table');
-  if (!calcTables.length) return;
-
   const project = window.ProjectStorage.getProject();
   const pageSlug = getPageSlug();
 
@@ -249,7 +257,7 @@ function savePricingState() {
     project.calculators[pageSlug] = {};
   }
 
-  // Snapshot every row from every table
+  // Snapshot every row from every interactive pricing table
   calcTables.forEach(table => {
     const rows = table.querySelectorAll('tr[data-item-id]');
     rows.forEach(row => {
@@ -284,8 +292,42 @@ function savePricingState() {
     });
   });
 
+  // Snapshot maintenance plan states
+  const maintTables = document.querySelectorAll('.maintenance-table');
+  maintTables.forEach(table => {
+    const maintType = table.getAttribute('data-maint-type') || 'web';
+    const stateKey = `maint_${maintType}`;
+    const state = { prices: {}, selectedPlan: null };
+
+    table.querySelectorAll('.maint-plan-price').forEach(input => {
+      state.prices[input.getAttribute('data-plan')] = parseInt(input.value, 10) || 0;
+    });
+
+    const selectedRadio = table.querySelector('.maint-plan-radio:checked');
+    state.selectedPlan = selectedRadio ? selectedRadio.value : null;
+    project.calculators[pageSlug][stateKey] = state;
+  });
+
+  // Snapshot hourly rate states
+  const ratesTables = document.querySelectorAll('.hourly-rates-table');
+  ratesTables.forEach(table => {
+    const ratesType = table.getAttribute('data-rates-type') || 'web';
+    const stateKey = `rates_${ratesType}`;
+    const state = {};
+
+    table.querySelectorAll('tr[data-rate-id]').forEach(row => {
+      const costInput = row.querySelector('.rate-cost');
+      if (costInput) {
+        state[row.getAttribute('data-rate-id')] = parseInt(costInput.value, 10) || 0;
+      }
+    });
+
+    project.calculators[pageSlug][stateKey] = state;
+  });
+
   window.ProjectStorage.saveProject(project);
   recalculatePriceTotals();
+  updateHourlyRatesSummaryWidgets();
 
   // Update Save button to confirm saved state
   const btn = document.getElementById('save-pricing-btn');
@@ -321,8 +363,11 @@ function recalculatePriceTotals() {
   // Sum up line totals across all calculator sheets
   Object.values(project.calculators || {}).forEach(sheetState => {
     Object.values(sheetState).forEach(item => {
-      if (item.checked) {
-        subtotal += (item.total || 0);
+      // Skip maintenance plan state objects and rate state objects
+      if (item && typeof item === 'object' && item.checked !== undefined) {
+        if (item.checked) {
+          subtotal += (item.total || 0);
+        }
       }
     });
   });
@@ -349,6 +394,33 @@ function recalculatePriceTotals() {
   updateSummaryWidget('milestone-design', '₹' + Math.round(grandTotal * 0.20).toLocaleString('en-IN'));
   updateSummaryWidget('milestone-dev', '₹' + Math.round(grandTotal * 0.30).toLocaleString('en-IN'));
   updateSummaryWidget('milestone-handover', '₹' + Math.round(grandTotal * 0.15).toLocaleString('en-IN'));
+
+  // ── Maintenance Plan Summary ──
+  updateMaintenanceSummaryWidgets(project);
+}
+
+/**
+ * Update maintenance plan summary widgets on the page
+ */
+function updateMaintenanceSummaryWidgets(project) {
+  const pageSlug = getPageSlug();
+  const calcState = project.calculators[pageSlug] || {};
+
+  // WEB Maintenance
+  const webMaint = calcState['maint_web'];
+  if (webMaint && webMaint.selectedPlan) {
+    const webMonthly = webMaint.prices[webMaint.selectedPlan] || 0;
+    updateSummaryWidget('summary-web-maint-monthly', '₹' + webMonthly.toLocaleString('en-IN') + '/mo');
+    updateSummaryWidget('summary-web-maint-yearly', '₹' + (webMonthly * 12).toLocaleString('en-IN') + '/yr');
+  }
+
+  // APP Maintenance
+  const appMaint = calcState['maint_app'];
+  if (appMaint && appMaint.selectedPlan) {
+    const appMonthly = appMaint.prices[appMaint.selectedPlan] || 0;
+    updateSummaryWidget('summary-app-maint-monthly', '₹' + appMonthly.toLocaleString('en-IN') + '/mo');
+    updateSummaryWidget('summary-app-maint-yearly', '₹' + (appMonthly * 12).toLocaleString('en-IN') + '/yr');
+  }
 }
 
 function updateSummaryWidget(elementId, formattedValue) {
@@ -768,4 +840,910 @@ window.modalCreateNewProject = modalCreateNewProject;
 window.modalDeleteProject = modalDeleteProject;
 window.handleModalImportFile = handleModalImportFile;
 window.renderFloatingProfileWidget = renderFloatingProfileWidget;
+
+// ══════════════════════════════════════════════════════════════
+//  MAINTENANCE PLANS — Dynamic Pricing & Plan Selector
+// ══════════════════════════════════════════════════════════════
+
+const USD_CONVERSION_RATE = 75; // ₹75 = $1
+
+function initMaintenancePlanListeners() {
+  const maintTables = document.querySelectorAll('.maintenance-table');
+  if (!maintTables.length) return;
+
+  const pageSlug = getPageSlug();
+  const project = window.ProjectStorage.getProject();
+
+  if (!project.calculators[pageSlug]) {
+    project.calculators[pageSlug] = {};
+  }
+
+  maintTables.forEach(table => {
+    const maintType = table.getAttribute('data-maint-type') || 'web';
+    const tbody = table.querySelector('tbody');
+    if (!tbody) return;
+
+    // ── Convert static price header row to editable inputs ──
+    const allRows = tbody.querySelectorAll('tr');
+    let headerRow = null;
+    let planNames = [];
+    let planPrices = [];
+
+    allRows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length >= 6) {
+        const firstCell = cells[0].textContent.trim();
+        if (firstCell === '#') {
+          // This is the header row: #, Service, Basic\n₹3K/mo, Standard\n₹8K/mo, etc.
+          headerRow = row;
+          for (let i = 2; i < cells.length; i++) {
+            const cellText = cells[i].textContent.trim();
+            // Parse: "Basic\n₹3K/mo" → name="Basic", price=3000
+            const lines = cellText.split('\n');
+            const planName = lines[0].trim();
+            const priceStr = (lines[1] || '').replace(/[₹,\/moKk]/g, '').trim();
+            let price = parseInt(priceStr, 10) || 0;
+            // Handle "K" suffix: "3K" → 3000
+            if (/[kK]/.test(lines[1] || '')) {
+              price = price * 1000;
+            }
+            planNames.push({ name: planName, id: `${maintType}_${planName.toLowerCase()}`, price: price });
+            planPrices.push(price);
+          }
+        }
+      }
+    });
+
+    if (!headerRow || planNames.length === 0) return;
+
+    // Get saved state
+    const stateKey = `maint_${maintType}`;
+    const savedState = project.calculators[pageSlug][stateKey] || {};
+
+    // Convert header cells to editable inputs
+    const headerCells = headerRow.querySelectorAll('td');
+    for (let i = 2; i < headerCells.length; i++) {
+      const planIdx = i - 2;
+      if (planIdx < planNames.length) {
+        const plan = planNames[planIdx];
+        const savedPrice = (savedState.prices && savedState.prices[plan.id] !== undefined) ? savedState.prices[plan.id] : plan.price;
+        headerCells[i].innerHTML = `${plan.name}<br><input type="number" class="maint-plan-price form-control" data-plan="${plan.id}" value="${savedPrice}" min="0" step="100" style="width:80px;margin-top:4px;padding:4px;text-align:center;">₹/mo`;
+      }
+    }
+
+    // ── Add plan selector row ──
+    let defaultSelected = maintType === 'web' ? `${maintType}_standard` : `${maintType}_standard`;
+    if (savedState.selectedPlan) defaultSelected = savedState.selectedPlan;
+
+    const selectorRow = document.createElement('tr');
+    selectorRow.style.cssText = 'background:rgba(99,102,241,0.08);';
+    let selectorHtml = '<td colspan="2" style="text-align:right;font-weight:700;padding:10px;">💡 Select Maintenance Plan:</td>';
+    planNames.forEach(plan => {
+      const checked = plan.id === defaultSelected ? ' checked' : '';
+      selectorHtml += `<td style="text-align:center;"><input type="radio" name="${maintType}_maint_plan" value="${plan.id}" class="maint-plan-radio"${checked}></td>`;
+    });
+    selectorRow.innerHTML = selectorHtml;
+    tbody.appendChild(selectorRow);
+
+    // ── Add summary row ──
+    const selectedPrice = savedState.prices && savedState.prices[defaultSelected] ? savedState.prices[defaultSelected] : (planNames.find(p => p.id === defaultSelected) || {}).price || 0;
+    const summaryId = maintType === 'web' ? 'web-maint-summary-cost' : 'app-maint-summary-cost';
+    const summaryRow = document.createElement('tr');
+    summaryRow.id = maintType === 'web' ? 'web-maint-summary-row' : 'app-maint-summary-row';
+    summaryRow.style.cssText = 'background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(5,150,105,0.06));font-weight:700;';
+    const remainingCols = headerCells.length - 2; // cols after Service
+    summaryRow.innerHTML = `<td colspan="2" style="text-align:right;padding:10px;">📌 Selected Plan Monthly Cost:</td><td colspan="${remainingCols}" style="text-align:center;font-size:1.2rem;color:#10b981;" id="${summaryId}">₹${selectedPrice.toLocaleString('en-IN')}/mo</td>`;
+    tbody.appendChild(summaryRow);
+
+    // ── Attach event listeners ──
+    const priceInputs = table.querySelectorAll('.maint-plan-price');
+    priceInputs.forEach(input => {
+      input.addEventListener('input', () => handleMaintPlanChange(table, maintType, pageSlug));
+      input.addEventListener('change', () => handleMaintPlanChange(table, maintType, pageSlug));
+    });
+
+    const radios = table.querySelectorAll('.maint-plan-radio');
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.checked) handleMaintPlanChange(table, maintType, pageSlug);
+      });
+    });
+  });
+}
+
+function handleMaintPlanChange(table, maintType, pageSlug) {
+  const project = window.ProjectStorage.getProject();
+  if (!project.calculators[pageSlug]) {
+    project.calculators[pageSlug] = {};
+  }
+
+  const stateKey = `maint_${maintType}`;
+  const state = { prices: {}, selectedPlan: null };
+
+  // Collect prices
+  const priceInputs = table.querySelectorAll('.maint-plan-price');
+  priceInputs.forEach(input => {
+    const planId = input.getAttribute('data-plan');
+    state.prices[planId] = parseInt(input.value, 10) || 0;
+  });
+
+  // Get selected plan
+  const selectedRadio = table.querySelector('.maint-plan-radio:checked');
+  state.selectedPlan = selectedRadio ? selectedRadio.value : null;
+
+  project.calculators[pageSlug][stateKey] = state;
+  window.ProjectStorage.saveProject(project);
+
+  // Update summary
+  updateMaintPlanSummary(table, maintType, state.selectedPlan);
+  recalculatePriceTotals();
+
+  if (typeof showGlobalSaveBar === 'function') showGlobalSaveBar();
+}
+
+function updateMaintPlanSummary(table, maintType, selectedPlanId) {
+  const priceInputs = table.querySelectorAll('.maint-plan-price');
+  let selectedPrice = 0;
+  priceInputs.forEach(input => {
+    if (input.getAttribute('data-plan') === selectedPlanId) {
+      selectedPrice = parseInt(input.value, 10) || 0;
+    }
+  });
+
+  const summaryId = maintType === 'web' ? 'web-maint-summary-cost' : 'app-maint-summary-cost';
+  const summaryEl = document.getElementById(summaryId);
+  if (summaryEl) {
+    summaryEl.textContent = '₹' + selectedPrice.toLocaleString('en-IN') + '/mo';
+  }
+
+  // Also update the corresponding year cost if there's an element for it
+  const yearSummaryId = maintType === 'web' ? 'web-maint-yearly-cost' : 'app-maint-yearly-cost';
+  const yearEl = document.getElementById(yearSummaryId);
+  if (yearEl) {
+    yearEl.textContent = '₹' + (selectedPrice * 12).toLocaleString('en-IN') + '/yr';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  HOURLY RATES — Dynamic Rate Editor with Auto-Calculation
+// ══════════════════════════════════════════════════════════════
+
+function initHourlyRatesListeners() {
+  const ratesTables = document.querySelectorAll('.hourly-rates-table');
+  if (!ratesTables.length) return;
+
+  const pageSlug = getPageSlug();
+  const project = window.ProjectStorage.getProject();
+
+  if (!project.calculators[pageSlug]) {
+    project.calculators[pageSlug] = {};
+  }
+
+  // Map of rate names → rate IDs (for consistent identification across rebuilds)
+  const rateNameMap = {
+    'Junior Developer (0-2 yrs)': 'rate_web_junior_dev',
+    'Mid-Level Developer (2-5 yrs)': 'rate_web_mid_dev',
+    'Senior Developer (5-8 yrs)': 'rate_web_senior_dev',
+    'Lead Developer (8+ yrs)': 'rate_web_lead_dev',
+    'UI/UX Designer (Mid)': 'rate_web_ux_mid',
+    'UI/UX Designer (Senior)': 'rate_web_ux_senior',
+    'Full-Stack Developer (Mid)': 'rate_web_fs_mid',
+    'Full-Stack Developer (Senior)': 'rate_web_fs_senior',
+    'DevOps Engineer': 'rate_web_devops',
+    'QA / Tester': 'rate_web_qa',
+    'Project Manager': 'rate_web_pm',
+    'Technical Architect': 'rate_web_architect'
+  };
+
+  ratesTables.forEach(table => {
+    const ratesType = table.getAttribute('data-rates-type') || 'web';
+    const stateKey = `rates_${ratesType}`;
+    const savedState = project.calculators[pageSlug][stateKey] || {};
+
+    const tbody = table.querySelector('tbody');
+    if (!tbody) return;
+
+    const allRows = tbody.querySelectorAll('tr');
+
+    allRows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      // Rate rows have 5 cells: #, Developer Level, Rate (₹/hr), Rate ($/hr), Monthly
+      if (cells.length >= 4) {
+        const nameCell = cells[1];
+        const rateName = nameCell ? nameCell.textContent.trim() : '';
+        // Check if this looks like a rate row (has a developer role name and numeric rate)
+        const rateCell = cells[2];
+        const rateText = rateCell ? rateCell.textContent.trim() : '';
+        const rateValue = parseInt(rateText, 10);
+
+        if (rateName && !isNaN(rateValue) && rateValue > 0) {
+          // Determine rate ID from name map or generate one
+          let rateId = rateNameMap[rateName];
+          if (!rateId) {
+            rateId = 'rate_' + ratesType + '_' + rateName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+          }
+
+          row.setAttribute('data-rate-id', rateId);
+          row.setAttribute('data-rate-name', rateName);
+
+          // Get saved rate or use default
+          const savedRate = (savedState[rateId] !== undefined) ? savedState[rateId] : rateValue;
+
+          // Convert Rate (₹/hr) cell to editable input
+          cells[2].innerHTML = `<input type="number" class="rate-cost form-control" value="${savedRate}" min="0" step="50" style="width:85px;padding:4px;text-align:center;">`;
+
+          // Convert Rate ($/hr) cell to calculated span
+          const usdRate = Math.round(savedRate / USD_CONVERSION_RATE);
+          cells[3].innerHTML = `<span class="rate-usd-val">$${usdRate}</span>`;
+
+          // Convert Monthly cell to calculated span
+          const monthlyRate = savedRate * 160;
+          cells[4].innerHTML = `<span class="rate-monthly-val">₹${monthlyRate.toLocaleString('en-IN')}</span>`;
+
+          // Attach listeners
+          const costInput = row.querySelector('.rate-cost');
+          if (costInput) {
+            costInput.addEventListener('input', () => {
+              updateRateRowDisplay(row);
+              saveHourlyRatesState(table, ratesType, pageSlug);
+            });
+            costInput.addEventListener('change', () => {
+              updateRateRowDisplay(row);
+              saveHourlyRatesState(table, ratesType, pageSlug);
+            });
+          }
+        }
+      }
+    });
+
+    // Initial summary update
+    updateHourlyRatesSummaryWidgets();
+  });
+}
+
+function updateRateRowDisplay(row) {
+  const costInput = row.querySelector('.rate-cost');
+  const usdEl = row.querySelector('.rate-usd-val');
+  const monthlyEl = row.querySelector('.rate-monthly-val');
+
+  if (!costInput) return;
+
+  const rateINR = parseInt(costInput.value, 10) || 0;
+  const rateUSD = Math.round(rateINR / USD_CONVERSION_RATE);
+  const monthlyINR = rateINR * 160;
+
+  if (usdEl) usdEl.textContent = '$' + rateUSD;
+  if (monthlyEl) monthlyEl.textContent = '₹' + monthlyINR.toLocaleString('en-IN');
+}
+
+function saveHourlyRatesState(table, ratesType, pageSlug) {
+  const project = window.ProjectStorage.getProject();
+  if (!project.calculators[pageSlug]) {
+    project.calculators[pageSlug] = {};
+  }
+
+  const stateKey = `rates_${ratesType}`;
+  const state = {};
+
+  const rateRows = table.querySelectorAll('tr[data-rate-id]');
+  rateRows.forEach(row => {
+    const rateId = row.getAttribute('data-rate-id');
+    const costInput = row.querySelector('.rate-cost');
+    if (costInput) {
+      state[rateId] = parseInt(costInput.value, 10) || 0;
+    }
+  });
+
+  project.calculators[pageSlug][stateKey] = state;
+  window.ProjectStorage.saveProject(project);
+
+  updateHourlyRatesSummaryWidgets();
+  if (typeof showGlobalSaveBar === 'function') showGlobalSaveBar();
+}
+
+/**
+ * Update the hourly rates summary card at the bottom of the page
+ */
+function updateHourlyRatesSummaryWidgets() {
+  const tables = document.querySelectorAll('.hourly-rates-table');
+  if (!tables.length) return;
+
+  // Use first table (WEB rates) for the summary
+  const table = tables[0];
+  const rateRows = table.querySelectorAll('tr[data-rate-id]');
+  const rateMap = {};
+  rateRows.forEach(row => {
+    const rateId = row.getAttribute('data-rate-id');
+    const costInput = row.querySelector('.rate-cost');
+    if (costInput) {
+      rateMap[rateId] = parseInt(costInput.value, 10) || 0;
+    }
+  });
+
+  updateSummaryWidget('summary-rate-junior', '₹' + (rateMap['rate_web_junior_dev'] || 500).toLocaleString('en-IN') + '/hr');
+  updateSummaryWidget('summary-rate-senior', '₹' + (rateMap['rate_web_senior_dev'] || 1800).toLocaleString('en-IN') + '/hr');
+  updateSummaryWidget('summary-rate-fs-senior', '₹' + (rateMap['rate_web_fs_senior'] || 2200).toLocaleString('en-IN') + '/hr');
+  updateSummaryWidget('summary-rate-architect', '₹' + (rateMap['rate_web_architect'] || 3000).toLocaleString('en-IN') + '/hr');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  DYNAMIC CATEGORY & LINE ITEM MANAGEMENT
+// ══════════════════════════════════════════════════════════════
+
+/**
+ * Inject action toolbar at the bottom of each pricing calculator table
+ * and restore previously saved custom rows from project state.
+ */
+function injectPricingTableToolbar(table, pageSlug) {
+  const tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  // Check if toolbar already exists in HTML (generated by build script)
+  let toolbar = tbody.querySelector('.calc-toolbar-row');
+
+  // Remove existing custom rows before re-injecting (but keep the static toolbar)
+  tbody.querySelectorAll('tr[data-custom="true"], tr[data-custom-category="true"]').forEach(r => r.remove());
+
+  const tableType = getTableType(table);
+
+  // ── Restore custom rows from state ──
+  const project = window.ProjectStorage.getProject();
+  const customKey = `custom_${tableType}`;
+  const customState = (project.calculators[pageSlug] && project.calculators[pageSlug][customKey]) || { categories: [] };
+
+  if (customState.categories && customState.categories.length > 0) {
+    customState.categories.forEach(cat => {
+      renderCustomCategory(tbody, cat);
+    });
+  }
+
+  // If toolbar doesn't exist yet (JS injection didn't happen or HTML missing), create it
+  if (!toolbar) {
+    toolbar = document.createElement('tr');
+    toolbar.className = 'calc-toolbar-row';
+    toolbar.setAttribute('data-toolbar', 'true');
+    toolbar.style.cssText = 'background:rgba(99,102,241,0.04);border-top:2px dashed rgba(99,102,241,0.3);';
+
+    const colSpan = table.querySelector('tr') ? table.querySelector('tr').children.length : 8;
+    toolbar.innerHTML = `
+      <td colspan="${colSpan}" style="padding:10px 14px;text-align:center;">
+        <button class="calc-action-btn add-category-btn" data-action="add-category" title="Add a new category section">
+          ➕ Add Category
+        </button>
+        <button class="calc-action-btn add-item-btn" data-action="add-item" title="Add a new line item to a category" style="margin-left:8px;">
+          ➕ Add Line Item
+        </button>
+      </td>
+    `;
+    tbody.appendChild(toolbar);
+  }
+
+  // Re-number all rows
+  renumberTableRows(table);
+}
+
+/**
+ * Detect table type from its content — 'web' or 'app'
+ */
+function getTableType(table) {
+  const headerCell = table.querySelector('th');
+  if (headerCell) {
+    const text = headerCell.textContent.trim();
+    if (text.includes('APP:') || text.includes('APPLICATION')) return 'app';
+  }
+  return 'web';
+}
+
+/**
+ * Render a custom category (header row + its items) into the tbody before the toolbar
+ */
+function renderCustomCategory(tbody, cat) {
+  const colSpan = tbody.closest('table').querySelector('tr') ? tbody.closest('table').querySelector('tr').children.length : 8;
+
+  // Category header row
+  const catRow = document.createElement('tr');
+  catRow.setAttribute('data-custom-category', 'true');
+  catRow.setAttribute('data-category-name', cat.name);
+  catRow.style.cssText = 'background:rgba(99,102,241,0.06);';
+  catRow.innerHTML = `<td style="font-weight:700;color:var(--accent-indigo,#6366f1);">${escapeHtml(cat.name)}</td>`
+    + `<td colspan="${colSpan - 1}" style="text-align:right;">
+        <button class="calc-action-btn delete-cat-btn" data-action="delete-category" title="Delete this category and all its items" style="font-size:0.75rem;padding:2px 8px;color:#ef4444;">🗑️ Delete Category</button>
+      </td>`;
+
+  // Insert before toolbar (or at end if no toolbar)
+  const toolbar = tbody.querySelector('.calc-toolbar-row');
+  if (toolbar) {
+    tbody.insertBefore(catRow, toolbar);
+  } else {
+    tbody.appendChild(catRow);
+  }
+
+  // Item rows — each inserted before toolbar
+  (cat.items || []).forEach(item => {
+    renderCustomItemRow(tbody, item, cat.name);
+  });
+}
+
+/**
+ * Render a single custom item row into the tbody
+ */
+function renderCustomItemRow(tbody, item, categoryName) {
+  const colSpan = tbody.closest('table').querySelector('tr') ? tbody.closest('table').querySelector('tr').children.length : 8;
+  const itemRow = document.createElement('tr');
+  itemRow.setAttribute('data-custom', 'true');
+  itemRow.setAttribute('data-item-id', item.id);
+  itemRow.setAttribute('data-item-name', item.name);
+  itemRow.setAttribute('data-category', categoryName);
+
+  const checked = item.checked !== false;
+  const cost = item.cost || 0;
+  const qty = item.qty || 1;
+
+  itemRow.innerHTML = `
+    <td class="row-num">#</td>
+    <td contenteditable="true" class="editable-item-name" style="min-width:150px;outline:none;border-bottom:1px dashed #cbd5e1;padding:6px;">${escapeHtml(item.name)}</td>
+    <td style="color:var(--text-muted);font-size:0.85rem;">${escapeHtml(categoryName)}</td>
+    <td><input type="number" class="item-cost form-control" value="${cost}" min="0" step="100" style="width:90px;padding:4px;text-align:center;"></td>
+    <td><input type="number" class="item-qty form-control" value="${qty}" min="0" step="1" style="width:70px;padding:4px;text-align:center;"></td>
+    <td><span class="item-row-total" style="opacity:${checked?'1':'0.4'}">₹${(checked ? cost * qty : 0).toLocaleString('en-IN')}</span></td>
+    <td style="text-align:center;"><input type="checkbox" class="item-check" ${checked ? 'checked' : ''}></td>
+    <td style="text-align:center;"><button class="calc-action-btn delete-item-btn" data-action="delete-item" title="Remove this line item" style="font-size:0.75rem;padding:2px 6px;color:#ef4444;">🗑️</button></td>
+  `;
+
+  const toolbar = tbody.querySelector('.calc-toolbar-row');
+  if (toolbar) {
+    tbody.insertBefore(itemRow, toolbar);
+  } else {
+    tbody.appendChild(itemRow);
+  }
+
+  // Attach listeners to the new row's inputs
+  const pageSlug = getPageSlug();
+  const table = tbody.closest('table');
+  itemRow.querySelectorAll('.item-check, .item-cost, .item-qty').forEach(input => {
+    input.addEventListener('change', () => {
+      handleItemChange(table, pageSlug);
+      saveCustomRowsState(table, pageSlug);
+    });
+    input.addEventListener('input', () => {
+      handleItemChange(table, pageSlug);
+      saveCustomRowsState(table, pageSlug);
+    });
+  });
+
+  // Editable name
+  const nameCell = itemRow.querySelector('.editable-item-name');
+  if (nameCell) {
+    nameCell.addEventListener('blur', () => {
+      itemRow.setAttribute('data-item-name', nameCell.textContent.trim());
+      item.name = nameCell.textContent.trim();
+      saveCustomRowsState(table, pageSlug);
+    });
+  }
+}
+
+/**
+ * Collect all custom rows from a table and save to project state
+ */
+function saveCustomRowsState(table, pageSlug) {
+  const tableType = getTableType(table);
+  const customKey = `custom_${tableType}`;
+  const project = window.ProjectStorage.getProject();
+  if (!project.calculators[pageSlug]) project.calculators[pageSlug] = {};
+
+  const categories = [];
+  let currentCat = null;
+
+  const allRows = table.querySelectorAll('tbody > tr');
+  allRows.forEach(row => {
+    if (row.hasAttribute('data-custom-category')) {
+      // Push previous category
+      if (currentCat) categories.push(currentCat);
+      currentCat = {
+        name: row.getAttribute('data-category-name') || 'New Category',
+        items: []
+      };
+    } else if (row.hasAttribute('data-custom') && currentCat) {
+      const itemId = row.getAttribute('data-item-id');
+      const nameCell = row.querySelector('.editable-item-name');
+      const costInput = row.querySelector('.item-cost');
+      const qtyInput = row.querySelector('.item-qty');
+      const checkInput = row.querySelector('.item-check');
+      const name = nameCell ? nameCell.textContent.trim() : (row.getAttribute('data-item-name') || 'New Item');
+
+      currentCat.items.push({
+        id: itemId,
+        name: name,
+        cost: parseFloat(costInput ? costInput.value : 0) || 0,
+        qty: parseFloat(qtyInput ? qtyInput.value : 1) || 1,
+        checked: checkInput ? checkInput.checked : true
+      });
+    } else if (row.hasAttribute('data-toolbar')) {
+      // Toolbar row — push last category
+      if (currentCat) categories.push(currentCat);
+      currentCat = null;
+    }
+  });
+  // Push any remaining category
+  if (currentCat) categories.push(currentCat);
+
+  project.calculators[pageSlug][customKey] = { categories: categories };
+  window.ProjectStorage.saveProject(project);
+
+  // ── Also save custom items in flat format for recalculatePriceTotals ──
+  const tbody2 = table.querySelector('tbody');
+  const customRows = tbody2.querySelectorAll('tr[data-custom="true"]');
+  customRows.forEach(row => {
+    const itemId = row.getAttribute('data-item-id');
+    const checkInput = row.querySelector('.item-check');
+    const costInput = row.querySelector('.item-cost');
+    const qtyInput = row.querySelector('.item-qty');
+    const nameCell = row.querySelector('.editable-item-name');
+    const catCell = row.querySelectorAll('td')[2]; // 3rd td is category
+    const name = nameCell ? nameCell.textContent.trim() : (row.getAttribute('data-item-name') || 'New Item');
+
+    if (itemId) {
+      const checked = checkInput ? checkInput.checked : true;
+      const cost = parseFloat(costInput ? costInput.value : 0) || 0;
+      const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 1;
+      project.calculators[pageSlug][itemId] = {
+        checked: checked,
+        cost: cost,
+        qty: qty,
+        total: checked ? cost * qty : 0,
+        name: name,
+        category: catCell ? catCell.textContent.trim() : 'Custom'
+      };
+    }
+  });
+
+  window.ProjectStorage.saveProject(project);
+
+  if (typeof showGlobalSaveBar === 'function') showGlobalSaveBar();
+}
+
+/**
+ * Prompt user to add a new category
+ */
+function addCategoryPrompt(btn) {
+  const table = btn.closest('table');
+  const tbody = table.querySelector('tbody');
+  const catName = prompt('📂 Enter new category name:', 'e.g. THIRD-PARTY INTEGRATIONS');
+  if (!catName || !catName.trim()) return;
+
+  const pageSlug = getPageSlug();
+  const catData = {
+    name: catName.trim().toUpperCase(),
+    items: [{
+      id: 'custom_' + Date.now(),
+      name: 'New Item',
+      cost: 0,
+      qty: 1,
+      checked: true
+    }]
+  };
+
+  renderCustomCategory(tbody, catData);
+  renumberTableRows(table);
+  saveCustomRowsState(table, pageSlug);
+  recalculatePriceTotals();
+}
+
+/**
+ * Prompt user to add a new line item to an existing category
+ */
+function addItemPrompt(btn) {
+  const table = btn.closest('table');
+  const tbody = table.querySelector('tbody');
+  const pageSlug = getPageSlug();
+
+  // Collect all category names from the table
+  const categoryNames = [];
+  const allRows = table.querySelectorAll('tbody > tr');
+  allRows.forEach(row => {
+    // Skip rows that are definitely not categories
+    if (row.hasAttribute('data-item-id')) return;
+    if (row.hasAttribute('data-toolbar')) return;
+    if (row.hasAttribute('data-custom')) return;
+    if (row.hasAttribute('data-custom-category')) {
+      const name = row.getAttribute('data-category-name');
+      if (name && !categoryNames.includes(name)) categoryNames.push(name);
+      return;
+    }
+
+    // Check for built-in category: first td has text, all other tds are empty or only whitespace
+    const cells = row.querySelectorAll('td');
+    if (cells.length === 0) return;
+    const firstText = cells[0].textContent.trim();
+    if (!firstText) return;
+
+    // Skip known non-category rows
+    const skipPatterns = /^(#|\d+)$|Item \/ Parameter|PRICING CALCULATOR|Client Name|Project Name|Date|Platform/i;
+    if (skipPatterns.test(firstText)) return;
+
+    // Check that all other cells are empty (category rows have only the first cell filled)
+    let allEmpty = true;
+    for (let i = 1; i < cells.length; i++) {
+      if (cells[i].textContent.trim() !== '') {
+        allEmpty = false;
+        break;
+      }
+    }
+
+    if (allEmpty && !categoryNames.includes(firstText)) {
+      categoryNames.push(firstText);
+    }
+  });
+
+  if (categoryNames.length === 0) {
+    alert('⚠️ No categories found. Please add a category first using "➕ Add Category".');
+    return;
+  }
+
+  // Build modal HTML
+  const optionsHtml = categoryNames.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+  const modalId = 'add-item-modal-' + Date.now();
+
+  const modalHtml = `
+    <div id="${modalId}" class="modal-overlay" style="z-index:12000;">
+      <div class="modal-card" style="max-width:480px;width:100%;">
+        <h3 style="font-family:var(--font-serif);margin-bottom:1rem;">➕ Add New Line Item</h3>
+        <div class="form-group">
+          <label style="font-weight:700;font-size:0.8rem;color:var(--text-muted);">Category</label>
+          <select id="${modalId}-category" class="form-control" style="margin-top:4px;">${optionsHtml}</select>
+        </div>
+        <div class="form-group" style="margin-top:0.75rem;">
+          <label style="font-weight:700;font-size:0.8rem;color:var(--text-muted);">Item Name</label>
+          <input type="text" id="${modalId}-name" class="form-control" placeholder="e.g. Payment Gateway Integration" style="margin-top:4px;">
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:0.75rem;">
+          <div class="form-group" style="flex:1;">
+            <label style="font-weight:700;font-size:0.8rem;color:var(--text-muted);">Unit Cost (₹)</label>
+            <input type="number" id="${modalId}-cost" class="form-control" value="0" min="0" step="100" style="margin-top:4px;width:100%;">
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label style="font-weight:700;font-size:0.8rem;color:var(--text-muted);">Quantity</label>
+            <input type="number" id="${modalId}-qty" class="form-control" value="1" min="1" step="1" style="margin-top:4px;width:100%;">
+          </div>
+        </div>
+        <div style="display:flex;gap:0.5rem;margin-top:1.5rem;justify-content:flex-end;">
+          <button class="export-btn" onclick="document.getElementById('${modalId}').remove()">Cancel</button>
+          <button class="export-btn primary" id="${modalId}-confirm">✅ Add Item</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+  // Attach confirm handler
+  document.getElementById(`${modalId}-confirm`).addEventListener('click', () => {
+    const catName = document.getElementById(`${modalId}-category`).value;
+    const itemName = document.getElementById(`${modalId}-name`).value.trim();
+    const cost = parseFloat(document.getElementById(`${modalId}-cost`).value) || 0;
+    const qty = parseInt(document.getElementById(`${modalId}-qty`).value, 10) || 1;
+
+    if (!itemName) {
+      alert('⚠️ Please enter an item name.');
+      return;
+    }
+
+    const itemData = {
+      id: 'custom_' + Date.now(),
+      name: itemName,
+      cost: cost,
+      qty: qty,
+      checked: true
+    };
+
+    // Find if there's already a custom category with this name; if not, create one
+    let foundCat = false;
+    const existingCatRows = tbody.querySelectorAll('tr[data-custom-category]');
+    existingCatRows.forEach(catRow => {
+      if (catRow.getAttribute('data-category-name') === catName) {
+        // Insert item before next category header or toolbar
+        renderCustomItemRowAt(tbody, itemData, catName, catRow);
+        foundCat = true;
+      }
+    });
+
+    if (!foundCat) {
+      // Category is a built-in one — just add the item before toolbar
+      renderCustomItemRowAt(tbody, itemData, catName, null);
+    }
+
+    document.getElementById(modalId).remove();
+    renumberTableRows(table);
+    saveCustomRowsState(table, pageSlug);
+    recalculatePriceTotals();
+  });
+
+  // Close on overlay click
+  document.getElementById(modalId).addEventListener('click', function(e) {
+    if (e.target === this) this.remove();
+  });
+}
+
+/**
+ * Render a custom item row at the correct position (after a specific category header or before toolbar)
+ */
+function renderCustomItemRowAt(tbody, item, categoryName, afterCatRow) {
+  const itemRow = document.createElement('tr');
+  itemRow.setAttribute('data-custom', 'true');
+  itemRow.setAttribute('data-item-id', item.id);
+  itemRow.setAttribute('data-item-name', item.name);
+  itemRow.setAttribute('data-category', categoryName);
+
+  const checked = item.checked !== false;
+  const cost = item.cost || 0;
+  const qty = item.qty || 1;
+
+  itemRow.innerHTML = `
+    <td class="row-num">#</td>
+    <td contenteditable="true" class="editable-item-name" style="min-width:150px;outline:none;border-bottom:1px dashed #cbd5e1;padding:6px;">${escapeHtml(item.name)}</td>
+    <td style="color:var(--text-muted);font-size:0.85rem;">${escapeHtml(categoryName)}</td>
+    <td><input type="number" class="item-cost form-control" value="${cost}" min="0" step="100" style="width:90px;padding:4px;text-align:center;"></td>
+    <td><input type="number" class="item-qty form-control" value="${qty}" min="0" step="1" style="width:70px;padding:4px;text-align:center;"></td>
+    <td><span class="item-row-total" style="opacity:${checked?'1':'0.4'}">₹${(checked ? cost * qty : 0).toLocaleString('en-IN')}</span></td>
+    <td style="text-align:center;"><input type="checkbox" class="item-check" ${checked ? 'checked' : ''}></td>
+    <td style="text-align:center;"><button class="calc-action-btn delete-item-btn" data-action="delete-item" title="Remove this line item" style="font-size:0.75rem;padding:2px 6px;color:#ef4444;">🗑️</button></td>
+  `;
+
+  const toolbar = tbody.querySelector('.calc-toolbar-row');
+  if (afterCatRow) {
+    // Insert after this category's last item or before next category header
+    let insertAfter = afterCatRow;
+    let next = afterCatRow.nextElementSibling;
+    while (next && !next.hasAttribute('data-custom-category') && !next.hasAttribute('data-toolbar')) {
+      insertAfter = next;
+      next = next.nextElementSibling;
+    }
+    if (insertAfter.nextElementSibling) {
+      tbody.insertBefore(itemRow, insertAfter.nextElementSibling);
+    } else {
+      tbody.insertBefore(itemRow, toolbar);
+    }
+  } else {
+    tbody.insertBefore(itemRow, toolbar);
+  }
+
+  // Attach listeners
+  const table = tbody.closest('table');
+  const pageSlug = getPageSlug();
+  itemRow.querySelectorAll('.item-check, .item-cost, .item-qty').forEach(input => {
+    input.addEventListener('change', () => {
+      handleItemChange(table, pageSlug);
+      saveCustomRowsState(table, pageSlug);
+    });
+    input.addEventListener('input', () => {
+      handleItemChange(table, pageSlug);
+      saveCustomRowsState(table, pageSlug);
+    });
+  });
+
+  const nameCell = itemRow.querySelector('.editable-item-name');
+  if (nameCell) {
+    nameCell.addEventListener('blur', () => {
+      itemRow.setAttribute('data-item-name', nameCell.textContent.trim());
+      saveCustomRowsState(table, pageSlug);
+    });
+  }
+}
+
+/**
+ * Delete a custom category and all its items
+ */
+function deleteCustomCategory(btn) {
+  if (!confirm('Delete this category and ALL its items? This cannot be undone.')) return;
+
+  const catRow = btn.closest('tr');
+  const table = catRow.closest('table');
+  const tbody = table.querySelector('tbody');
+  const pageSlug = getPageSlug();
+
+  // Remove the category header row
+  catRow.remove();
+
+  // Remove all items belonging to this category (until next category header or toolbar)
+  let next = tbody.querySelector('.calc-toolbar-row');
+  // Find items between this category and next category/toolbar and remove them
+  // Since we already removed the catRow, we need to find orphan items
+  const allCustomRows = tbody.querySelectorAll('tr[data-custom="true"]');
+  allCustomRows.forEach(row => {
+    const catAttr = row.getAttribute('data-category');
+    // Check if this item is orphaned (its category header is gone)
+    const catHeaders = tbody.querySelectorAll(`tr[data-custom-category][data-category-name="${catAttr}"]`);
+    if (catHeaders.length === 0) {
+      row.remove();
+    }
+  });
+
+  renumberTableRows(table);
+  saveCustomRowsState(table, pageSlug);
+  recalculatePriceTotals();
+}
+
+/**
+ * Delete a single custom line item
+ */
+function deleteCustomItem(btn) {
+  const row = btn.closest('tr');
+  const table = row.closest('table');
+  const tbody = table.querySelector('tbody');
+  const pageSlug = getPageSlug();
+  const categoryName = row.getAttribute('data-category');
+
+  row.remove();
+
+  // Check if this was the last item in its custom category — if so, also remove the category header
+  if (categoryName) {
+    const remainingItems = tbody.querySelectorAll(`tr[data-custom="true"][data-category="${categoryName}"]`);
+    if (remainingItems.length === 0) {
+      const catHeader = tbody.querySelector(`tr[data-custom-category][data-category-name="${categoryName}"]`);
+      if (catHeader) catHeader.remove();
+    }
+  }
+
+  renumberTableRows(table);
+  saveCustomRowsState(table, pageSlug);
+  recalculatePriceTotals();
+}
+
+/**
+ * Re-number all rows in a pricing table
+ */
+function renumberTableRows(table) {
+  let counter = 0;
+  const allRows = table.querySelectorAll('tbody > tr');
+  allRows.forEach(row => {
+    const numCell = row.querySelector('.row-num');
+    if (numCell) {
+      counter++;
+      numCell.textContent = counter;
+    } else {
+      // Also renumber built-in rows (first td that's just a number)
+      const firstTd = row.querySelector('td:first-child');
+      if (firstTd && row.hasAttribute('data-item-id') && !row.hasAttribute('data-custom')) {
+        counter++;
+        firstTd.textContent = counter;
+      }
+    }
+  });
+}
+
+// Expose functions globally for onclick handlers
+window.addCategoryPrompt = addCategoryPrompt;
+window.addItemPrompt = addItemPrompt;
+window.deleteCustomCategory = deleteCustomCategory;
+window.deleteCustomItem = deleteCustomItem;
+window.injectPricingTableToolbar = injectPricingTableToolbar;
+window.saveCustomRowsState = saveCustomRowsState;
+
+/**
+ * Event delegation for all calc action buttons (toolbar, delete, etc.)
+ * Uses data-action attributes instead of inline onclick for reliability.
+ */
+function initCalcActionDelegation() {
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+
+    const action = btn.getAttribute('data-action');
+
+    switch (action) {
+      case 'add-category':
+        if (typeof addCategoryPrompt === 'function') addCategoryPrompt(btn);
+        break;
+      case 'add-item':
+        if (typeof addItemPrompt === 'function') addItemPrompt(btn);
+        break;
+      case 'delete-category':
+        if (typeof deleteCustomCategory === 'function') deleteCustomCategory(btn);
+        break;
+      case 'delete-item':
+        if (typeof deleteCustomItem === 'function') deleteCustomItem(btn);
+        break;
+    }
+  });
+}
 

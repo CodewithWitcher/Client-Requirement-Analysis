@@ -318,14 +318,65 @@ def parse_excel_file(file_path: Path):
                     tr_attr = ''
                 table_rows.append(f'<tr {tr_attr}>{"".join(row_cells)}</tr>')
 
-            calc_class = "interactive-calc-table" if is_calculator_sheet else ""
+            # Determine table CSS classes
+            sheet_lower = sheet_name.lower()
+            file_lower = str(file_path).lower()
+            is_calculator_sheet = ("calculator" in sheet_lower) or ("pricing" in sheet_lower)
+            is_maintenance_sheet = "maintenance" in sheet_lower
+            is_hourly_rates_sheet = ("hourly" in sheet_lower) and ("rate" in sheet_lower)
+
+            # Detect type (web/app) from sheet name first, then fall back to filename
+            if "web" in sheet_lower:
+                detected_type = "web"
+            elif "app" in sheet_lower:
+                detected_type = "app"
+            elif "website" in file_lower:
+                detected_type = "web"
+            elif "application" in file_lower or " app " in file_lower or file_lower.endswith("app"):
+                detected_type = "app"
+            else:
+                detected_type = "web"  # default
+
+            if is_calculator_sheet:
+                extra_class = "interactive-calc-table"
+                extra_attrs = ""
+            elif is_maintenance_sheet:
+                extra_class = "maintenance-table"
+                extra_attrs = f' data-maint-type="{detected_type}"'
+            elif is_hourly_rates_sheet:
+                extra_class = "hourly-rates-table"
+                extra_attrs = f' data-rates-type="{detected_type}"'
+            else:
+                extra_class = ""
+                extra_attrs = ""
+
+            # Build toolbar row for interactive calculator sheets
+            toolbar_row_html = ""
+            if is_calculator_sheet:
+                # Count columns from the header row
+                col_count = 8  # default
+                all_rows = table_rows
+                if all_rows:
+                    # Find the header row with #
+                    for tr_html in all_rows:
+                        if '<td>#</td>' in tr_html or '<td>#</td>' in tr_html:
+                            col_count = tr_html.count('<td') + tr_html.count('<th')
+                            break
+                toolbar_row_html = f'''
+<tr class="calc-toolbar-row" data-toolbar="true" style="background:rgba(99,102,241,0.04);border-top:2px dashed rgba(99,102,241,0.3);">
+  <td colspan="{col_count}" style="padding:10px 14px;text-align:center;">
+    <button class="calc-action-btn add-category-btn" data-action="add-category" title="Add a new category section">➕ Add Category</button>
+    <button class="calc-action-btn add-item-btn" data-action="add-item" title="Add a new line item to a category" style="margin-left:8px;">➕ Add Line Item</button>
+  </td>
+</tr>'''
 
             pane_html = f'''
             <div id="{sheet_id}" class="sheet-pane {is_active}">
               <div class="table-responsive">
-                <table class="doc-table {calc_class}">
+                <table class="doc-table {extra_class}"{extra_attrs}>
                   <tbody>
                     {"".join(table_rows)}
+                    {toolbar_row_html}
                   </tbody>
                 </table>
               </div>
@@ -351,6 +402,22 @@ def parse_excel_file(file_path: Path):
             <div class="milestone-item"><span>Phase 3: Core Feature Build (30%)</span><strong id="milestone-dev">₹0</strong></div>
             <div class="milestone-item"><span>Phase 4: Testing & Handover (15%)</span><strong id="milestone-handover">₹0</strong></div>
           </div>
+
+          <div class="summary-card" id="maint-summary-card">
+            <h3>🛠️ Maintenance Plans (Monthly)</h3>
+            <div class="summary-row"><span>🌐 Website Maintenance:</span><strong id="summary-web-maint-monthly">—</strong></div>
+            <div class="summary-row" style="font-size:0.8rem;color:var(--text-muted);"><span>Yearly Cost:</span><strong id="summary-web-maint-yearly">—</strong></div>
+            <div class="summary-row" style="margin-top:0.5rem;"><span>📱 App Maintenance:</span><strong id="summary-app-maint-monthly">—</strong></div>
+            <div class="summary-row" style="font-size:0.8rem;color:var(--text-muted);"><span>Yearly Cost:</span><strong id="summary-app-maint-yearly">—</strong></div>
+          </div>
+
+          <div class="summary-card" id="rates-summary-card">
+            <h3>⏱️ Key Hourly Rates (WEB)</h3>
+            <div class="summary-row"><span>Junior Dev:</span><strong id="summary-rate-junior">₹500/hr</strong></div>
+            <div class="summary-row"><span>Senior Dev:</span><strong id="summary-rate-senior">₹1,800/hr</strong></div>
+            <div class="summary-row"><span>Full-Stack (Sr):</span><strong id="summary-rate-fs-senior">₹2,200/hr</strong></div>
+            <div class="summary-row"><span>Tech Architect:</span><strong id="summary-rate-architect">₹3,000/hr</strong></div>
+          </div>
         </div>
         '''
 
@@ -367,6 +434,24 @@ def parse_excel_file(file_path: Path):
         </div>
 
         {summary_widget_html}
+        
+        <script>
+        // Bulletproof sheet tab switching (runs immediately, not dependent on other scripts)
+        (function() {{
+          var tabs = document.querySelectorAll('.sheet-tab-btn');
+          tabs.forEach(function(btn) {{
+            btn.addEventListener('click', function() {{
+              var targetId = this.getAttribute('data-sheet-target');
+              var container = this.closest('.excel-viewer') || document;
+              container.querySelectorAll('.sheet-tab-btn').forEach(function(b) {{ b.classList.remove('active'); }});
+              container.querySelectorAll('.sheet-pane').forEach(function(p) {{ p.classList.remove('active'); }});
+              this.classList.add('active');
+              var target = document.getElementById(targetId);
+              if (target) target.classList.add('active');
+            }});
+          }});
+        }})();
+        </script>
         '''
 
         excerpt = f"Interactive Pricing Calculator with {len(sheet_names)} sheet(s) and {total_rows:,} configurable line-items."
