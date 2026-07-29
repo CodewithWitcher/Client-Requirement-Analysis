@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Onboarding Flow — Requirement Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/soria">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ===== ONBOARDING FLOW SPECIFIC STYLES ===== */
+    
+    :root {
+      --step-discover: #3b82f6;
+      --step-discover-bg: rgba(59,130,246,0.08);
+      --step-requirements: #8b5cf6;
+      --step-requirements-bg: rgba(139,92,246,0.08);
+      --step-proposal: #f59e0b;
+      --step-proposal-bg: rgba(245,158,11,0.08);
+      --step-approval: #ef4444;
+      --step-approval-bg: rgba(239,68,68,0.08);
+      --step-pricing: #10b981;
+      --step-pricing-bg: rgba(16,185,129,0.08);
+      --step-planning: #06b6d4;
+      --step-planning-bg: rgba(6,182,212,0.08);
+      --step-contract: #ec4899;
+      --step-contract-bg: rgba(236,72,153,0.08);
+      --step-kickoff: #84cc16;
+      --step-kickoff-bg: rgba(132,204,22,0.08);
+    }
+
+    /* Hero Onboarding Banner */
+    .onboarding-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .onboarding-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 20%, rgba(99,102,241,0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(16,185,129,0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 80%, rgba(59,130,246,0.08) 0%, transparent 50%);
+      pointer-events: none;
+      animation: heroGlow 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroGlow {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+    .onboarding-hero > * { position: relative; z-index: 1; }
+    .onboarding-hero h1 {
+      color: #ffffff;
+      font-size: 2.8rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .onboarding-hero .hero-subtitle {
+      color: #94a3b8;
+      text-align: center;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.7;
+    }
+
+    /* Client Setup Card */
+    .client-setup-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+    }
+    .client-setup-card .setup-row {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      margin-bottom: 1.25rem;
+    }
+    .client-setup-card .setup-row:last-child { margin-bottom: 0; }
+    .setup-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      flex: 1;
+      min-width: 180px;
+    }
+    .setup-field label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .setup-field input {
+      padding: 0.8rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all var(--transition-fast);
+    }
+    .setup-field input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+      background: rgba(255,255,255,0.1);
+    }
+    .setup-field input::placeholder { color: #64748b; }
+
+    /* Project Type Selector */
+    .project-type-selector {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .type-option {
+      flex: 1;
+      min-width: 140px;
+      padding: 1rem 1.25rem;
+      background: rgba(255,255,255,0.04);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition-normal);
+      color: #94a3b8;
+    }
+    .type-option:hover {
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+    .type-option.selected {
+      border-color: var(--accent-primary);
+      background: rgba(59,130,246,0.15);
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(59,130,246,0.2);
+    }
+    .type-option .type-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .type-option .type-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .type-option .type-desc {
+      font-size: 0.72rem;
+      opacity: 0.7;
+      margin-top: 0.2rem;
+    }
+
+    .start-flow-btn {
+      display: block;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      border: none;
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      letter-spacing: 0.01em;
+    }
+    .start-flow-btn:hover {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(59,130,246,0.4);
+    }
+    .start-flow-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Flow Container */
+    .flow-container {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .flow-container.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Timeline / Flow Steps */
+    .flow-timeline {
+      position: relative;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .flow-timeline::before {
+      content: '';
+      position: absolute;
+      left: 38px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, 
+        var(--step-discover) 0%,
+        var(--step-requirements) 14%,
+        var(--step-proposal) 28%,
+        var(--step-approval) 42%,
+        var(--step-pricing) 56%,
+        var(--step-planning) 70%,
+        var(--step-contract) 84%,
+        var(--step-kickoff) 100%);
+      border-radius: 3px;
+      z-index: 0;
+    }
+
+    .flow-step {
+      position: relative;
+      padding-left: 90px;
+      padding-bottom: 2.5rem;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .flow-step:last-child { padding-bottom: 0; }
+
+    .flow-step .step-number {
+      position: absolute;
+      left: 12px;
+      top: 0;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      font-family: var(--font-serif);
+      color: #ffffff;
+      z-index: 2;
+      transition: all var(--transition-normal);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .flow-step:hover .step-number {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .flow-step.completed .step-number {
+      background: #10b981 !important;
+      box-shadow: 0 0 0 6px rgba(16,185,129,0.2);
+    }
+
+    .step-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 1.75rem;
+      box-shadow: var(--glass-shadow);
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+    .flow-step:hover .step-card {
+      box-shadow: var(--glass-shadow-hover);
+      transform: translateX(4px);
+    }
+    .flow-step.completed .step-card {
+      border-left: 4px solid #10b981;
+    }
+    .flow-step.active-step .step-card {
+      border-left: 4px solid var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.1);
+    }
+
+    .step-card .step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .step-card .step-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .step-card .step-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .step-card .step-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    /* Linked Files inside Steps */
+    .step-files {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .step-file-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+    .step-file-link:hover {
+      background: rgba(59,130,246,0.12);
+      border-color: var(--accent-primary);
+      transform: translateY(-1px);
+    }
+    .step-file-link .file-icon {
+      font-size: 1.1rem;
+    }
+    .step-file-link .file-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--badge-md-bg);
+      color: var(--badge-md-text);
+      border: 1px solid var(--badge-md-border);
+    }
+    .step-file-link .file-type.xlsx {
+      background: var(--badge-xlsx-bg);
+      color: var(--badge-xlsx-text);
+      border: 1px solid var(--badge-xlsx-border);
+    }
+    .step-file-link .file-type.docx {
+      background: var(--badge-docx-bg);
+      color: var(--badge-docx-text);
+      border: 1px solid var(--badge-docx-border);
+    }
+
+    /* Step Actions */
+    .step-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .step-action-btn {
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-sans);
+      transition: all var(--transition-fast);
+    }
+    .step-action-btn.complete-btn {
+      background: #10b981;
+      color: #ffffff;
+    }
+    .step-action-btn.complete-btn:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+    .step-action-btn.undo-btn {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+    }
+    .step-action-btn.undo-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Progress Bar */
+    .onboarding-progress {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .progress-info {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .progress-percent {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+    }
+    .progress-client-name {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .progress-client-name strong {
+      color: var(--text-main);
+    }
+    .progress-bar-outer {
+      flex: 1;
+      min-width: 200px;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, var(--step-discover), var(--step-kickoff));
+      border-radius: 10px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 0%;
+    }
+
+    /* Summary / Export Section */
+    .onboarding-summary {
+      display: none;
+      background: linear-gradient(135deg, rgba(16,185,129,0.06), rgba(59,130,246,0.06));
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .onboarding-summary.visible { display: block; }
+    .onboarding-summary h2 {
+      color: #10b981;
+      margin-bottom: 0.5rem;
+    }
+    .onboarding-summary .summary-client {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .onboarding-hero { padding: 2rem 1.25rem; }
+      .onboarding-hero h1 { font-size: 2rem; }
+      .flow-step { padding-left: 65px; }
+      .flow-step .step-number { width: 42px; height: 42px; font-size: 1rem; left: 8px; }
+      .flow-timeline::before { left: 28px; }
+      .step-card { padding: 1rem 1.25rem; }
+    }
+
+    /* Tooltip / Info */
+    .pro-tip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.7rem;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #d97706;
+      margin-top: 0.5rem;
+    }
+
+    /* Empty state */
+    .empty-flow-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+    .empty-flow-state .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+    .empty-flow-state h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="full-width-layout">
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="glass-header">
+      <a href="../index.html" class="brand-title">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="brand-name">Client Requirement Hub</span>
+          <span class="version-badge">PRO v2.4</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant&&window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
+        <a href="../index.html" class="nav-pill">🏠 Workspace</a>
+        <a href="file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="interactive-proposal-builder.html" class="nav-pill">Proposal Builder</a>
+        <a href="client-onboarding-flow.html" class="nav-pill active" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border-color: #10b981;">🚀 Onboarding Flow</a>
+        <a href="ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
+      </nav>
+    </header>
+
+    <!-- ===== HERO: Onboarding Setup ===== -->
+    <section class="onboarding-hero">
+      <h1>🚀 Professional Client Onboarding Flow</h1>
+      <p class="hero-subtitle">
+        A proven step-by-step system to onboard clients like a pro — from discovery to kickoff.
+        Stop guessing what to do next. Follow this battle-tested workflow designed for freelancers &amp; agencies
+        to maximize professionalism, avoid scope creep, and close higher-value deals.
+      </p>
+
+      <div class="client-setup-card">
+        <div class="setup-row">
+          <div class="setup-field" style="flex: 1.5;">
+            <label>👤 Client / Company Name</label>
+            <input type="text" id="clientNameInput" placeholder="e.g., Acme Corp, John's Bakery..." />
+          </div>
+          <div class="setup-field">
+            <label>📅 Expected Start Date</label>
+            <input type="date" id="startDateInput" />
+          </div>
+        </div>
+        <div class="setup-row">
+          <div class="setup-field" style="flex: 2;">
+            <label>🎯 Project Type — What does the client need?</label>
+            <div class="project-type-selector" id="projectTypeSelector">
+              <div class="type-option" data-type="website" onclick="selectProjectType('website', this)">
+                <span class="type-icon">🌐</span>
+                <span class="type-label">Website</span>
+                <span class="type-desc">Landing page, CMS, E-commerce, Web App</span>
+              </div>
+              <div class="type-option" data-type="application" onclick="selectProjectType('application', this)">
+                <span class="type-icon">📱</span>
+                <span class="type-label">Application</span>
+                <span class="type-desc">iOS, Android, Cross-platform Mobile App</span>
+              </div>
+              <div class="type-option" data-type="combined" onclick="selectProjectType('combined', this)">
+                <span class="type-icon">🔗</span>
+                <span class="type-label">Combined</span>
+                <span class="type-desc">Website + Mobile App (Full Stack)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="start-flow-btn" id="startFlowBtn" disabled onclick="startOnboarding()">
+          ▶ Start My Onboarding Flow
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== Active Client Workspace Banner (linked to ProjectStorage) ===== -->
+    <div id="project-banner-container"></div>
+
+    <!-- ===== Progress Bar ===== -->
+    <div class="onboarding-progress" id="progressBar" style="display: none;">
+      <div class="progress-info">
+        <div class="progress-percent" id="progressPercent">0%</div>
+        <div class="progress-client-name">
+          Onboarding: <strong id="progressClientLabel">—</strong><br>
+          <span id="progressTypeLabel" style="font-size: 0.78rem; color: var(--text-subtle);">—</span>
+        </div>
+      </div>
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="progressBarInner"></div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-subtle); white-space: nowrap;">
+        <span id="progressStepsDone">0</span> / <span id="progressStepsTotal">8</span> steps
+      </div>
+    </div>
+
+    <!-- ===== Empty State (before flow starts) ===== -->
+    <div class="flow-container active" id="emptyState">
+      <div class="empty-flow-state">
+        <div class="empty-icon">🗺️</div>
+        <h3>Your Onboarding Roadmap Awaits</h3>
+        <p>Enter the client name, select the project type above, and click <strong>"Start My Onboarding Flow"</strong> to reveal the complete professional onboarding workflow.</p>
+      </div>
+    </div>
+
+    <!-- ===== Flow Timeline ===== -->
+    <div class="flow-container" id="flowTimeline">
+      <div class="flow-timeline" id="flowStepsContainer">
+        <!-- Dynamically populated by JS -->
+      </div>
+    </div>
+
+    <!-- ===== Completion Summary ===== -->
+    <div class="onboarding-summary" id="completionSummary">
+      <h2>🎉 Onboarding Complete!</h2>
+      <p class="summary-client" id="summaryClientText"></p>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem auto;">
+        You've successfully completed the professional onboarding workflow. All documents are prepared, 
+        the proposal is ready, and the project is set up for success. Now go build something amazing!
+      </p>
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <a href="interactive-proposal-builder.html" class="export-btn primary" style="text-decoration: none;">📄 Go to Proposal Builder</a>
+        <a href="combined-combined-pricing-calculator.html" class="export-btn" style="text-decoration: none;">💰 Open Pricing Calculator</a>
+        <a href="../index.html" class="export-btn" style="text-decoration: none;">🏠 Back to Workspace</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/storage.js"></script>
+  <script>
+    // ===== INTEGRATION: Linked with Active Client Workspace (ProjectStorage) =====
+    // All onboarding data persists per-client in ProjectStorage under project.onboarding
+
+    function getActiveProject() {
+      return window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+    }
+    function saveProject(p) { if (window.ProjectStorage) window.ProjectStorage.saveProject(p); }
+
+    function loadOnboardingFromProject() {
+      var proj = getActiveProject(); if (!proj) return null;
+      var ob = proj.onboarding || {};
+      return { clientName: proj.clientName || '', projectType: ob.projectType || '', startDate: ob.startDate || '', completedSteps: new Set(ob.completedSteps || []), currentStep: ob.currentStep || 0 };
+    }
+
+    function saveOnboardingToProject(state) {
+      var proj = getActiveProject(); if (!proj) return;
+      if (state.clientName) proj.clientName = state.clientName;
+      if (state.projectType) {
+        var pm = { website:'Web', application:'Mobile', combined:'Both' };
+        proj.platform = pm[state.projectType] || 'Both';
+        proj.projectName = (state.projectType==='website'?'Website':state.projectType==='application'?'Mobile App':'Website & App') + ' Solution';
+      }
+      proj.date = state.startDate || proj.date;
+      proj.onboarding = { projectType: state.projectType, startDate: state.startDate, completedSteps: Array.from(state.completedSteps), currentStep: state.currentStep };
+      proj.updatedAt = new Date().toISOString();
+      saveProject(proj);
+    }
+
+    // In-memory state (persisted via ProjectStorage)
+    var _memState = { clientName:'', projectType:'', startDate:'', completedSteps:new Set(), currentStep:0 };
+
+    // ===== GLOBAL STATE (for backward compat) =====
+    const STATE = {
+      clientName: '',
+      projectType: '',
+      startDate: '',
+      currentStep: 0,
+      completedSteps: new Set()
+    };
+
+    // ===== FILE MAPPINGS =====
+    const FILE_MAP = {
+      website: {
+        questionnaire: {
+          title: 'Website Client Discovery Questionnaire',
+          href: 'questionnaire-website-website-client-questionnaire.html',
+          type: 'md'
+        },
+        requirements: {
+          title: 'Website Requirements — Complete Guide',
+          href: 'docs-website-website-requirements-complete-guide.html',
+          type: 'md'
+        },
+        proposal: {
+          title: 'Website Client Proposal Template',
+          href: 'template-word-template-website-client-proposal.html',
+          type: 'docx'
+        },
+        pricing: {
+          title: 'Website Pricing Calculator',
+          href: 'template-excel-template-website-pricing-calculator.html',
+          type: 'xlsx'
+        },
+        pricingOverview: {
+          title: 'Website Pricing Module Overview',
+          href: 'overview-website-pricing-module-overview.html',
+          type: 'md'
+        },
+        pricingQuick: {
+          title: 'Website Pricing Quick Guide',
+          href: 'overview-website-pricing-quick-guide.html',
+          type: 'md'
+        },
+        pricingParams: {
+          title: 'Website Pricing Parameters',
+          href: 'docs-website-website-pricing-parameters.html',
+          type: 'md'
+        },
+        checklist: {
+          title: 'Website Project Checklist',
+          href: 'checklists-website-project-checklist.html',
+          type: 'md'
+        }
+      },
+      application: {
+        questionnaire: {
+          title: 'Application Client Discovery Questionnaire',
+          href: 'questionnaire-application-application-client-questionnaire.html',
+          type: 'md'
+        },
+        requirements: {
+          title: 'Application Requirements — Complete Guide',
+          href: 'docs-application-application-requirements-complete-guide.html',
+          type: 'md'
+        },
+        proposal: {
+          title: 'Application Client Proposal Template',
+          href: 'template-word-template-application-client-proposal.html',
+          type: 'docx'
+        },
+        pricing: {
+          title: 'Application Pricing Calculator',
+          href: 'template-excel-template-application-pricing-calculator.html',
+          type: 'xlsx'
+        },
+        pricingOverview: {
+          title: 'Application Pricing Module Overview',
+          href: 'overview-application-pricing-module-overview.html',
+          type: 'md'
+        },
+        pricingQuick: {
+          title: 'Application Pricing Quick Guide',
+          href: 'overview-application-pricing-quick-guide.html',
+          type: 'md'
+        },
+        pricingParams: {
+          title: 'Application Pricing Parameters',
+          href: 'docs-application-application-pricing-parameters.html',
+          type: 'md'
+        },
+        checklist: {
+          title: 'Application Project Checklist',
+          href: 'checklists-application-project-checklist.html',
+          type: 'md'
+        }
+      },
+      combined: {
+        questionnaire: {
+          title: 'Combined Client Discovery Questionnaire',
+          href: 'combined-combined-client-questionnaire.html',
+          type: 'md'
+        },
+        requirements: {
+          title: 'Combined Requirements — Complete Guide',
+          href: 'combined-combined-requirements-complete-guide.html',
+          type: 'md'
+        },
+        proposal: {
+          title: 'Combined Client Proposal Template',
+          href: 'combined-combined-client-proposal.html',
+          type: 'docx'
+        },
+        pricing: {
+          title: 'Combined Pricing Calculator',
+          href: 'combined-combined-pricing-calculator.html',
+          type: 'xlsx'
+        },
+        pricingOverview: {
+          title: 'Pricing Module — Complete Overview',
+          href: 'combined-combined-pricing-module-overview.html',
+          type: 'md'
+        },
+        pricingQuick: {
+          title: 'Pricing Quick Reference Guide',
+          href: 'combined-combined-pricing-quick-guide.html',
+          type: 'md'
+        },
+        pricingParams: {
+          title: 'Pricing Parameters Reference',
+          href: 'combined-combined-pricing-parameters.html',
+          type: 'md'
+        },
+        checklist: {
+          title: 'Combined Project Delivery Checklist',
+          href: 'combined-combined-project-checklist.html',
+          type: 'md'
+        }
+      }
+    };
+
+    const STEPS = [
+      {
+        id: 'discovery',
+        icon: '🔍',
+        number: 1,
+        color: 'var(--step-discover)',
+        bgColor: 'var(--step-discover-bg)',
+        title: 'Initial Discussion — Discovery Call',
+        badge: 'Phase 1',
+        badgeColor: '#3b82f6',
+        description: 'Schedule the first meeting with the client. Use the structured questionnaire to gather ALL requirements — business goals, target audience, features, design preferences, budget range, and timeline. <strong>Never skip this step.</strong> The quality of your proposal depends entirely on the depth of your discovery.',
+        proTip: '💡 Pro Tip: Record the call (with permission) or have a second person take notes. You WILL miss things if you try to do both.',
+        files: function(type) {
+          const m = FILE_MAP[type];
+          return [
+            { icon: '📋', label: m.questionnaire.title, href: m.questionnaire.href, badge: m.questionnaire.type.toUpperCase() },
+            { icon: '📖', label: 'Combined Pricing Quick Guide', href: FILE_MAP[type].pricingQuick.href, badge: 'MD' }
+          ];
+        }
+      },
+      {
+        id: 'requirements',
+        icon: '📝',
+        number: 2,
+        color: 'var(--step-requirements)',
+        bgColor: 'var(--step-requirements-bg)',
+        title: 'Requirements Analysis & Documentation',
+        badge: 'Phase 2',
+        badgeColor: '#8b5cf6',
+        description: 'Take the raw discovery notes and transform them into a structured requirements document. Map every feature, define user stories, sketch wireframes if needed, and identify technical constraints. This becomes the foundation of your proposal.',
+        proTip: '💡 Pro Tip: Send a summary email after the call with bullet points — "Here\'s what I understood." This builds trust and catches misunderstandings early.',
+        files: function(type) {
+          const m = FILE_MAP[type];
+          return [
+            { icon: '📖', label: m.requirements.title, href: m.requirements.href, badge: m.requirements.type.toUpperCase() },
+            { icon: '📊', label: m.pricingParams.title, href: m.pricingParams.href, badge: m.pricingParams.type.toUpperCase() }
+          ];
+        }
+      },
+      {
+        id: 'proposal',
+        icon: '📄',
+        number: 3,
+        color: 'var(--step-proposal)',
+        bgColor: 'var(--step-proposal-bg)',
+        title: 'Create Professional Proposal',
+        badge: 'Phase 3',
+        badgeColor: '#f59e0b',
+        description: 'Build a polished, professional proposal using the template. Include: executive summary, scope of work, timeline with milestones, technology stack, team allocation, and pricing breakdown. A well-crafted proposal separates professionals from amateurs.',
+        proTip: '💡 Pro Tip: Always include 3 pricing tiers (Basic / Standard / Premium). It anchors the client\'s expectation and increases average deal size by 20-40%.',
+        files: function(type) {
+          const m = FILE_MAP[type];
+          return [
+            { icon: '📄', label: m.proposal.title, href: m.proposal.href, badge: m.proposal.type.toUpperCase() },
+            { icon: '📊', label: m.pricingOverview.title, href: m.pricingOverview.href, badge: m.pricingOverview.type.toUpperCase() }
+          ];
+        }
+      },
+      {
+        id: 'approval',
+        icon: '✉️',
+        number: 4,
+        color: 'var(--step-approval)',
+        bgColor: 'var(--step-approval-bg)',
+        title: 'Send Proposal & Await Client Approval',
+        badge: 'Phase 4',
+        badgeColor: '#ef4444',
+        description: 'Send the proposal as a PDF with a clear call-to-action. Set a follow-up reminder for 3-5 business days. Be available for questions. <strong>Do not start any work</strong> until the proposal is approved (verbally or signed). This protects you from scope creep and unpaid work.',
+        proTip: '💡 Pro Tip: Always set an expiration date on your proposal (e.g., "Valid for 14 days"). It creates urgency and prevents price renegotiation months later.',
+        files: function(type) {
+          return [];
+        }
+      },
+      {
+        id: 'pricing',
+        icon: '💰',
+        number: 5,
+        color: 'var(--step-pricing)',
+        bgColor: 'var(--step-pricing-bg)',
+        title: 'Detailed Pricing & Estimation',
+        badge: 'Phase 5',
+        badgeColor: '#10b981',
+        description: 'Now that the proposal is approved, create the detailed pricing sheet. Break down costs by feature/module, include hourly rates, maintenance plans, and payment milestones (e.g., 30% upfront, 30% mid-project, 40% on delivery). Transparency builds trust.',
+        proTip: '💡 Pro Tip: Always charge a non-refundable deposit (25-40%). It qualifies serious clients and covers your initial investment of time.',
+        files: function(type) {
+          const m = FILE_MAP[type];
+          return [
+            { icon: '📊', label: m.pricing.title, href: m.pricing.href, badge: m.pricing.type.toUpperCase() },
+            { icon: '📋', label: m.pricingQuick.title, href: m.pricingQuick.href, badge: m.pricingQuick.type.toUpperCase() }
+          ];
+        }
+      },
+      {
+        id: 'planning',
+        icon: '✅',
+        number: 6,
+        color: 'var(--step-planning)',
+        bgColor: 'var(--step-planning-bg)',
+        title: 'Project Planning & Task Breakdown',
+        badge: 'Phase 6',
+        badgeColor: '#06b6d4',
+        title: 'Project Setup & Planning',
+        description: 'Set up the project management board (Trello, Jira, Notion, etc.), break down the scope into sprints/milestones, assign responsibilities, define the tech stack, set up repositories, and establish communication channels (Slack, weekly calls).',
+        proTip: '💡 Pro Tip: Share the project board with the client (read-only). It shows professionalism and keeps them informed without micromanaging you.',
+        files: function(type) {
+          const m = FILE_MAP[type];
+          return [
+            { icon: '✅', label: m.checklist.title, href: m.checklist.href, badge: m.checklist.type.toUpperCase() }
+          ];
+        }
+      },
+      {
+        id: 'contract',
+        icon: '🤝',
+        number: 7,
+        color: 'var(--step-contract)',
+        bgColor: 'var(--step-contract-bg)',
+        title: 'Contract, Agreement & Payment Setup',
+        badge: 'Phase 7',
+        badgeColor: '#ec4899',
+        description: 'Finalize the legal agreement/contract covering: scope of work, payment schedule, intellectual property rights, confidentiality, termination clause, and liability limitations. Set up invoicing (Wave, FreshBooks, etc.) and send the first invoice for the deposit.',
+        proTip: '💡 Pro Tip: Use a standard contract template and have a lawyer review it once. Reuse it for all clients — this alone can save you thousands in disputes.',
+        files: function(type) {
+          return [];
+        }
+      },
+      {
+        id: 'kickoff',
+        icon: '🚀',
+        number: 8,
+        color: 'var(--step-kickoff)',
+        bgColor: 'var(--step-kickoff-bg)',
+        title: 'Project Kickoff — Development Begins!',
+        badge: 'Phase 8',
+        badgeColor: '#84cc16',
+        description: 'Host the kickoff meeting with all stakeholders. Review the project plan, confirm access to all tools/assets (hosting, domain, API keys, brand assets, content), set expectations for feedback cycles, and officially start development. Congratulations — you\'ve onboarded like a pro!',
+        proTip: '💡 Pro Tip: Send a "Week 1 Action Plan" email right after kickoff. It sets the tone and keeps momentum from day one.',
+        files: function(type) {
+          return [];
+        }
+      }
+    ];
+
+    // ===== FUNCTIONS =====
+
+    function selectProjectType(type, el) {
+      STATE.projectType = type;
+      _memState.projectType = type;
+      document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      updateStartButton();
+      autoSaveCurrentState();
+    }
+
+    function autoSaveCurrentState() {
+      var name = document.getElementById('clientNameInput').value.trim();
+      var ptEl = document.querySelector('.type-option.selected');
+      var pt = ptEl ? ptEl.getAttribute('data-type') : '';
+      var date = document.getElementById('startDateInput').value;
+      if (!name && !pt) return;
+      saveOnboardingToProject({ clientName:name, projectType:pt, startDate:date, completedSteps:_memState.completedSteps, currentStep:_memState.currentStep });
+    }
+
+    function updateStartButton() {
+      const btn = document.getElementById('startFlowBtn');
+      const name = document.getElementById('clientNameInput').value.trim();
+      STATE.clientName = name;
+      STATE.startDate = document.getElementById('startDateInput').value;
+      btn.disabled = !(name && STATE.projectType);
+    }
+
+    var _autoSaveTimer = null;
+    document.getElementById('clientNameInput').addEventListener('input', function() {
+      updateStartButton();
+      clearTimeout(_autoSaveTimer);
+      _autoSaveTimer = setTimeout(autoSaveCurrentState, 600);
+    });
+    document.getElementById('startDateInput').addEventListener('change', function() {
+      clearTimeout(_autoSaveTimer);
+      _autoSaveTimer = setTimeout(autoSaveCurrentState, 400);
+    });
+
+    function startOnboarding() {
+      if (!STATE.clientName || !STATE.projectType) return;
+      // Create/ensure project exists in workspace
+      var proj = getActiveProject();
+      if (!proj || proj.clientName !== STATE.clientName) {
+        if (window.ProjectStorage) proj = window.ProjectStorage.createClientProfile(STATE.clientName, STATE.projectType==='website'?'Website Solution':STATE.projectType==='application'?'Mobile App Solution':'Website & App Solution');
+      }
+      _memState.clientName = STATE.clientName;
+      _memState.projectType = STATE.projectType;
+      _memState.startDate = STATE.startDate;
+      _memState.completedSteps = STATE.completedSteps;
+      _memState.currentStep = STATE.currentStep;
+      saveOnboardingToProject(_memState);
+
+      document.getElementById('emptyState').classList.remove('active');
+      document.getElementById('completionSummary').classList.remove('visible');
+      document.getElementById('progressBar').style.display = 'flex';
+      document.getElementById('flowTimeline').classList.add('active');
+      renderFlowSteps();
+      updateProgress();
+      document.getElementById('progressBar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderFlowSteps() {
+      const container = document.getElementById('flowStepsContainer');
+      const type = STATE.projectType;
+      const typeLabels = { website: '🌐 Website', application: '📱 Application', combined: '🔗 Combined (Web + App)' };
+      
+      document.getElementById('progressClientLabel').textContent = STATE.clientName;
+      document.getElementById('progressTypeLabel').textContent = typeLabels[type] || '';
+      document.getElementById('progressStepsTotal').textContent = STEPS.length;
+      
+      let html = '';
+      STEPS.forEach((step, index) => {
+        const files = typeof step.files === 'function' ? step.files(type) : step.files;
+        const isCompleted = STATE.completedSteps.has(index);
+        const isActive = index === STATE.currentStep && !isCompleted;
+        
+        let stepClass = 'flow-step';
+        if (isCompleted) stepClass += ' completed';
+        if (isActive) stepClass += ' active-step';
+        
+        html += `
+          <div class="${stepClass}" data-step="${index}">
+            <div class="step-number" style="background: ${isCompleted ? '#10b981' : step.color};">
+              ${isCompleted ? '✓' : step.number}
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <div class="step-title">${step.icon} ${step.title}</div>
+                <span class="step-badge" style="background: ${step.bgColor}; color: ${step.color}; border: 1px solid ${step.color}20;">${step.badge}</span>
+              </div>
+              <p class="step-desc">${step.description}</p>
+              ${step.proTip ? `<div class="pro-tip">${step.proTip}</div>` : ''}
+              ${files.length > 0 ? `
+                <div class="step-files" style="margin-top: 1rem;">
+                  ${files.map(f => `
+                    <a href="${f.href}" class="step-file-link" target="_blank">
+                      <span class="file-icon">${f.icon}</span>
+                      <span>${f.label}</span>
+                      <span class="file-type ${f.badge.toLowerCase()}">${f.badge}</span>
+                    </a>
+                  `).join('')}
+                </div>
+              ` : ''}
+              <div class="step-actions">
+                ${isCompleted ? `
+                  <button class="step-action-btn undo-btn" onclick="toggleStep(${index})">↩ Undo</button>
+                ` : `
+                  <button class="step-action-btn complete-btn" onclick="toggleStep(${index})">✓ Mark Complete</button>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = html;
+      scrollToCurrentStep();
+    }
+
+    function toggleStep(index) {
+      if (STATE.completedSteps.has(index)) {
+        STATE.completedSteps.delete(index);
+        // Find the earliest uncompleted step
+        let earliest = STEPS.length;
+        for (let i = 0; i < STEPS.length; i++) {
+          if (!STATE.completedSteps.has(i)) { earliest = i; break; }
+        }
+        STATE.currentStep = earliest;
+      } else {
+        STATE.completedSteps.add(index);
+        // Mark all previous steps as completed too
+        for (let i = 0; i < index; i++) {
+          STATE.completedSteps.add(i);
+        }
+        STATE.currentStep = index + 1;
+        if (STATE.currentStep >= STEPS.length) {
+          STATE.currentStep = STEPS.length;
+        }
+      }
+      
+      saveOnboardingToProject(_memState);
+      renderFlowSteps();
+      updateProgress();
+      if (STATE.completedSteps.size >= STEPS.length) {
+        showCompletion();
+      } else {
+        document.getElementById('completionSummary').classList.remove('visible');
+      }
+    }
+
+    function updateProgress() {
+      const total = STEPS.length;
+      const done = STATE.completedSteps.size;
+      const pct = Math.round((done / total) * 100);
+      
+      document.getElementById('progressPercent').textContent = pct + '%';
+      document.getElementById('progressBarInner').style.width = pct + '%';
+      document.getElementById('progressStepsDone').textContent = done;
+    }
+
+    function scrollToCurrentStep() {
+      setTimeout(() => {
+        const activeStep = document.querySelector('.flow-step.active-step');
+        if (activeStep) {
+          activeStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+    }
+
+    function showCompletion() {
+      const summary = document.getElementById('completionSummary');
+      summary.classList.add('visible');
+      document.getElementById('summaryClientText').innerHTML = 
+        `<strong>${STATE.clientName}</strong> — ${STATE.projectType === 'website' ? '🌐 Website' : STATE.projectType === 'application' ? '📱 Application' : '🔗 Combined'} Project`;
+      summary.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // ===== CLIENT BANNER & SWITCHER =====
+    function renderClientBanner() {
+      var container = document.getElementById('project-banner-container');
+      var proj = getActiveProject();
+      if (!container || !proj) return;
+      var ob = proj.onboarding || {};
+      var pct = ob.completedSteps ? Math.round((ob.completedSteps.length / STEPS.length) * 100) : 0;
+      var tl = ob.projectType==='website'?'🌐 Website':ob.projectType==='application'?'📱 Application':ob.projectType==='combined'?'🔗 Combined':'—';
+      container.innerHTML = '<div class="project-banner-card" style="padding:0.75rem 1.5rem;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;background:var(--glass-bg);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);">' +
+        '<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;font-size:0.9rem;">' +
+          '<span class="badge badge-docx" style="background:rgba(16,185,129,0.15);color:#059669;border-color:rgba(16,185,129,0.3);">🔗 Linked Workspace</span>' +
+          '<span style="color:var(--text-main);font-weight:600;">Client: <span style="font-weight:700;color:var(--accent-indigo);">' + escapeHtml(proj.clientName) + '</span></span>' +
+          '<span style="color:var(--text-light);">|</span>' +
+          '<span style="color:var(--text-muted);">Type: <strong>' + tl + '</strong></span>' +
+          '<span style="color:var(--text-light);">|</span>' +
+          '<span style="color:var(--text-muted);">Onboarding: <strong>' + pct + '% complete</strong></span>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:0.5rem;">' +
+          '<button class="export-btn" style="padding:0.35rem 0.75rem;font-size:0.8rem;" onclick="switchClientProfile()">📁 Switch Client</button>' +
+          '<button class="export-btn" style="padding:0.35rem 0.75rem;font-size:0.8rem;" onclick="promptNewClientProfile()">➕ New Client</button>' +
+        '</div></div>';
+    }
+
+    // Client switcher - reloads onboarding data when switching
+    window._origSwitch = window.switchClientProfile;
+    window.switchClientProfile = function(id) {
+      if (!id) { openProjectManagerModal(); return; }
+      if (window.ProjectStorage) {
+        window.ProjectStorage.setActiveProjectId(id);
+        var st = loadOnboardingFromProject();
+        if (st) {
+          document.getElementById('clientNameInput').value = st.clientName;
+          document.getElementById('startDateInput').value = st.startDate || new Date().toISOString().split('T')[0];
+          document.querySelectorAll('.type-option').forEach(function(o){o.classList.remove('selected');});
+          if (st.projectType) { var opt = document.querySelector('.type-option[data-type="'+st.projectType+'"]'); if(opt) opt.classList.add('selected'); }
+          _memState = st;
+          STATE.clientName = st.clientName; STATE.projectType = st.projectType; STATE.startDate = st.startDate;
+          STATE.completedSteps = st.completedSteps; STATE.currentStep = st.currentStep;
+          updateStartButton();
+          if (st.clientName && st.projectType && st.completedSteps.size > 0) {
+            document.getElementById('emptyState').classList.remove('active');
+            document.getElementById('progressBar').style.display = 'flex';
+            document.getElementById('flowTimeline').classList.add('active');
+            renderFlowSteps(); updateProgress();
+            if (st.completedSteps.size >= STEPS.length) showCompletion();
+            else document.getElementById('completionSummary').classList.remove('visible');
+          } else {
+            document.getElementById('emptyState').classList.add('active');
+            document.getElementById('flowTimeline').classList.remove('active');
+            document.getElementById('progressBar').style.display = 'none';
+            document.getElementById('completionSummary').classList.remove('visible');
+          }
+        }
+        if (window.showToast) window.showToast('Switched client — onboarding data loaded!', 'info');
+      }
+    };
+
+    window.promptNewClientProfile = function() {
+      var cn = prompt('Enter New Client Name:', 'Beta Corp');
+      if (!cn) return;
+      var pn = prompt('Enter Project Scope Title:', 'Client Project Scope');
+      if (window.ProjectStorage) {
+        window.ProjectStorage.createClientProfile(cn, pn);
+        document.getElementById('clientNameInput').value = cn;
+        document.querySelectorAll('.type-option').forEach(function(o){o.classList.remove('selected');});
+        _memState = { clientName:cn, projectType:'', startDate:'', completedSteps:new Set(), currentStep:0 };
+        STATE.clientName = cn; STATE.projectType = ''; STATE.startDate = ''; STATE.completedSteps = new Set(); STATE.currentStep = 0;
+        updateStartButton();
+        document.getElementById('emptyState').classList.add('active');
+        document.getElementById('flowTimeline').classList.remove('active');
+        document.getElementById('progressBar').style.display = 'none';
+        document.getElementById('completionSummary').classList.remove('visible');
+        if (window.showToast) window.showToast('Created new client: ' + cn + '! Start onboarding below.', 'success');
+      }
+    };
+
+    function escapeHtml(str) { return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+      var today = new Date().toISOString().split('T')[0];
+      document.getElementById('startDateInput').value = today;
+
+      // Load from Active Client Workspace (ProjectStorage)
+      var st = loadOnboardingFromProject();
+      if (st && st.clientName) {
+        document.getElementById('clientNameInput').value = st.clientName;
+        document.getElementById('startDateInput').value = st.startDate || today;
+        if (st.projectType) { var opt = document.querySelector('.type-option[data-type="'+st.projectType+'"]'); if(opt) opt.classList.add('selected'); }
+        _memState = st;
+        STATE.clientName = st.clientName; STATE.projectType = st.projectType; STATE.startDate = st.startDate || today;
+        STATE.completedSteps = st.completedSteps; STATE.currentStep = st.currentStep;
+        updateStartButton();
+        if (st.clientName && st.projectType && st.completedSteps.size > 0) {
+          document.getElementById('emptyState').classList.remove('active');
+          document.getElementById('progressBar').style.display = 'flex';
+          document.getElementById('flowTimeline').classList.add('active');
+          renderFlowSteps(); updateProgress();
+          if (st.completedSteps.size >= STEPS.length) showCompletion();
+        }
+      } else {
+        // Migrate from old localStorage key
+        try {
+          var old = JSON.parse(localStorage.getItem('onboarding_flow_state'));
+          if (old && old.clientName) {
+            document.getElementById('clientNameInput').value = old.clientName;
+            document.getElementById('startDateInput').value = old.startDate || today;
+            if (old.projectType) { var opt2 = document.querySelector('.type-option[data-type="'+old.projectType+'"]'); if(opt2) opt2.classList.add('selected'); }
+            _memState.clientName = old.clientName; _memState.projectType = old.projectType||''; _memState.startDate = old.startDate||today;
+            _memState.completedSteps = new Set(old.completedSteps||[]); _memState.currentStep = old.currentStep||0;
+            STATE.clientName = _memState.clientName; STATE.projectType = _memState.projectType; STATE.startDate = _memState.startDate;
+            STATE.completedSteps = _memState.completedSteps; STATE.currentStep = _memState.currentStep;
+            updateStartButton();
+            saveOnboardingToProject(_memState);
+            localStorage.removeItem('onboarding_flow_state');
+            if (old.clientName && old.projectType && _memState.completedSteps.size > 0) {
+              document.getElementById('emptyState').classList.remove('active');
+              document.getElementById('progressBar').style.display = 'flex';
+              document.getElementById('flowTimeline').classList.add('active');
+              renderFlowSteps(); updateProgress();
+              if (_memState.completedSteps.size >= STEPS.length) showCompletion();
+            }
+          }
+        } catch(e) {}
+      }
+    });
+
+    // Auto-save to ProjectStorage on page unload
+    window.addEventListener('beforeunload', function() {
+      saveOnboardingToProject(_memState);
+    });
+  </script>
+  <script src="../assets/js/calculator.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

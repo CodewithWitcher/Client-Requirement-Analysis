@@ -616,12 +616,51 @@ def generate_index_html(documents: list) -> str:
         <button id="header-api-key-btn" class="export-btn api-key-btn" onclick="window.SmartAssistant.openApiKeyModal()">🔑 DeepSeek Key</button>
         <a href="index.html" class="nav-pill active">🏠 Workspace</a>
         <a href="pages/file-explorer.html" class="nav-pill">📁 File Explorer</a>
+        <a href="pages/client-onboarding-flow.html" class="nav-pill" style="background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; border-color: #10b981; font-weight: 700;">🚀 Onboarding Flow</a>
         <a href="pages/interactive-proposal-builder.html" class="nav-pill">Proposal Builder</a>
         <a href="pages/ai-intelligence-engine.html" class="nav-pill ai-pill">🧠 AI Studio</a>
       </nav>
     </header>
 
 
+
+    <!-- Hero: Onboarding Flow CTA Banner -->
+    <section class="hero-section" style="margin-top: 1rem; padding: 2rem 2rem 2rem 2.5rem; text-align: left; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(59,130,246,0.05)); border: 1px solid rgba(16,185,129,0.15);">
+      <div style="flex: 1; min-width: 280px;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.75rem; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25); border-radius: 20px; font-size: 0.75rem; font-weight: 700; color: #059669; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em;">
+          🆕 NEW — Professional Onboarding System
+        </div>
+        <h2 style="margin-bottom: 0.5rem; font-size: 1.8rem;">🚀 Client Onboarding Flow</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; max-width: 600px;">
+          A complete step-by-step system to onboard clients like a pro — from discovery call to project kickoff. Follow the proven 8-stage workflow with linked questionnaires, proposals, pricing calculators, and checklists tailored to Website, Application, or Combined projects.
+        </p>
+        <a href="pages/client-onboarding-flow.html" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">
+          Start Onboarding Flow →
+        </a>
+      </div>
+      <div style="flex-shrink: 0; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <div style="text-align: center; padding: 1rem 1.5rem; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(59,130,246,0.15);">
+          <div style="font-size: 2rem;">🔍</div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Discovery</div>
+          <div style="font-size: 0.7rem; color: var(--text-subtle);">Call → Questionnaire</div>
+        </div>
+        <div style="text-align: center; padding: 1rem 1.5rem; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(245,158,11,0.2);">
+          <div style="font-size: 2rem;">📄</div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Proposal</div>
+          <div style="font-size: 0.7rem; color: var(--text-subtle);">Build → Send → Approve</div>
+        </div>
+        <div style="text-align: center; padding: 1rem 1.5rem; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(16,185,129,0.2);">
+          <div style="font-size: 2rem;">💰</div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Pricing</div>
+          <div style="font-size: 0.7rem; color: var(--text-subtle);">Calculator → Milestones</div>
+        </div>
+        <div style="text-align: center; padding: 1rem 1.5rem; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(132,204,22,0.2);">
+          <div style="font-size: 2rem;">🚀</div>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Kickoff</div>
+          <div style="font-size: 0.7rem; color: var(--text-subtle);">Contract → Development</div>
+        </div>
+      </div>
+    </section>
 
     <!-- Structured Filter & Search Controls -->
     <div class="filter-bar">
