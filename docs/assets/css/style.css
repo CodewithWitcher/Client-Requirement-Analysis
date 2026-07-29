@@ -1241,6 +1241,14 @@ tr[data-custom="true"]:hover {
   background: rgba(99, 102, 241, 0.03) !important;
 }
 
+/* Category Select-All Checkbox */
+.cat-select-all {
+  cursor: pointer;
+}
+.cat-select-all:indeterminate {
+  opacity: 0.6;
+}
+
 /* Floating Client Profile Button */
 #floating-profile-btn {
   position: fixed;

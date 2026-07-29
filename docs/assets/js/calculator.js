@@ -177,6 +177,9 @@ function initCalculatorListeners() {
 
       // ── Step 3: Inject action toolbar & restore custom rows ──
       injectPricingTableToolbar(table, pageSlug);
+      
+      // ── Step 4: Inject category "Select All" checkboxes ──
+      injectCategorySelectAll(table);
     } catch(e) {
       console.error('Error initializing table:', table, e);
     }
@@ -226,6 +229,7 @@ function handleItemChange(table, pageSlug) {
 
   window.ProjectStorage.saveProject(project);
   recalculatePriceTotals();
+  updateAllCategoryCheckboxes(table);
 
   // Mark as having unsaved changes (pending explicit save)
   markUnsavedChanges();
@@ -1171,6 +1175,189 @@ function updateHourlyRatesSummaryWidgets() {
 // ══════════════════════════════════════════════════════════════
 
 /**
+ * Inject "Select All" checkboxes into category header rows.
+ * Runs after toolbar injection so custom categories are also covered.
+ */
+function injectCategorySelectAll(table) {
+  const tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  const allRows = tbody.querySelectorAll('tr');
+
+  allRows.forEach(row => {
+    // Skip item rows, toolbar rows, custom item rows
+    if (row.hasAttribute('data-item-id')) return;
+    if (row.hasAttribute('data-toolbar')) return;
+    if (row.hasAttribute('data-custom')) return;
+
+    // Already has a cat-checkbox? skip
+    if (row.querySelector('.cat-select-all')) return;
+
+    const cells = row.querySelectorAll('td');
+    if (cells.length === 0) return;
+
+    const firstText = cells[0].textContent.trim();
+    if (!firstText) return;
+
+    // Skip known non-category rows
+    const skipPatterns = /^(#|\d+)$|Item \/ Parameter|PRICING CALCULATOR|Client Name|Project Name|Date|Platform/i;
+    if (skipPatterns.test(firstText)) return;
+
+    // Check that this is a category row (all other cells empty, or it's a custom category)
+    if (row.hasAttribute('data-custom-category')) {
+      // Custom category - inject checkbox
+      injectCatCheckbox(row, cells[0], firstText, tbody);
+    } else {
+      // Built-in category - verify other cells are empty
+      let allEmpty = true;
+      for (let i = 1; i < cells.length; i++) {
+        if (cells[i].textContent.trim() !== '') { allEmpty = false; break; }
+      }
+      if (allEmpty) {
+        injectCatCheckbox(row, cells[0], firstText, tbody);
+      }
+    }
+  });
+}
+
+/**
+ * Add a select-all checkbox to a category header cell
+ */
+function injectCatCheckbox(row, firstCell, catName, tbody) {
+  const existing = firstCell.querySelector('.cat-select-all');
+  if (existing) return;
+
+  // Determine current state: are all items under this category checked?
+  const items = getCategoryItems(tbody, catName, row);
+  const allChecked = items.length > 0 && items.every(r => {
+    const cb = r.querySelector('.item-check');
+    return cb && cb.checked;
+  });
+
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.className = 'cat-select-all';
+  checkbox.checked = allChecked;
+  checkbox.title = allChecked ? 'Deselect all items in this category' : 'Select all items in this category';
+  checkbox.style.cssText = 'margin-right:8px;width:16px;height:16px;cursor:pointer;accent-color:var(--accent-indigo,#6366f1);vertical-align:middle;';
+
+  // Prepend checkbox to the first cell
+  firstCell.insertBefore(checkbox, firstCell.firstChild);
+
+  // Attach change handler
+  checkbox.addEventListener('change', function() {
+    const isChecked = this.checked;
+    const table = row.closest('table');
+    const pageSlug = getPageSlug();
+    const catItems = getCategoryItems(tbody, catName, row);
+
+    catItems.forEach(itemRow => {
+      const itemCb = itemRow.querySelector('.item-check');
+      if (itemCb) {
+        itemCb.checked = isChecked;
+        // Update row total opacity
+        const rowTotal = itemRow.querySelector('.item-row-total');
+        if (rowTotal) rowTotal.style.opacity = isChecked ? '1' : '0.4';
+      }
+    });
+
+    // Update checkbox title
+    this.title = isChecked ? 'Deselect all items in this category' : 'Select all items in this category';
+
+    // Trigger total recalculation
+    handleItemChange(table, pageSlug);
+  });
+}
+
+/**
+ * Get all item rows belonging to a category.
+ * For built-in categories: items between this header and the next header/toolbar.
+ * For custom categories: items with matching data-category attribute.
+ */
+function getCategoryItems(tbody, catName, catRow) {
+  const items = [];
+
+  if (catRow.hasAttribute('data-custom-category')) {
+    // Custom category: find items with matching data-category
+    tbody.querySelectorAll('tr[data-custom="true"]').forEach(row => {
+      if (row.getAttribute('data-category') === catName) {
+        items.push(row);
+      }
+    });
+  } else {
+    // Built-in category: find items between this header and next category/toolbar
+    let current = catRow.nextElementSibling;
+    while (current) {
+      if (current.hasAttribute('data-toolbar')) break;
+      if (current.hasAttribute('data-custom-category')) break;
+      // Check if it's another built-in category header
+      if (!current.hasAttribute('data-item-id') && !current.hasAttribute('data-custom')) {
+        const cells = current.querySelectorAll('td');
+        if (cells.length > 0) {
+          const text = cells[0].textContent.trim();
+          if (text && !(/^(#|\d+)$/.test(text)) && text !== catName) {
+            let allEmpty = true;
+            for (let i = 1; i < cells.length; i++) {
+              if (cells[i].textContent.trim() !== '') { allEmpty = false; break; }
+            }
+            if (allEmpty) break; // Next category found
+          }
+        }
+      }
+      if (current.hasAttribute('data-item-id')) {
+        items.push(current);
+      }
+      current = current.nextElementSibling;
+    }
+  }
+
+  return items;
+}
+
+/**
+ * Update all category "Select All" checkboxes to reflect current item states
+ */
+function updateAllCategoryCheckboxes(table) {
+  const tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  const checkboxes = tbody.querySelectorAll('.cat-select-all');
+  checkboxes.forEach(cb => {
+    const row = cb.closest('tr');
+    if (!row) return;
+    const catName = row.hasAttribute('data-custom-category')
+      ? row.getAttribute('data-category-name')
+      : row.querySelector('td:first-child')?.textContent.replace(/^[☑☐✔✓✗✘\s]+/, '').trim();
+
+    if (!catName) return;
+    const items = getCategoryItems(tbody, catName, row);
+    
+    if (items.length === 0) {
+      cb.checked = false;
+      cb.indeterminate = false;
+    } else {
+      const checkedCount = items.filter(r => {
+        const icb = r.querySelector('.item-check');
+        return icb && icb.checked;
+      }).length;
+      
+      if (checkedCount === 0) {
+        cb.checked = false;
+        cb.indeterminate = false;
+      } else if (checkedCount === items.length) {
+        cb.checked = true;
+        cb.indeterminate = false;
+      } else {
+        cb.checked = false;
+        cb.indeterminate = true;
+      }
+    }
+    
+    cb.title = cb.checked ? 'Deselect all items in this category' : 'Select all items in this category';
+  });
+}
+
+/**
  * Inject action toolbar at the bottom of each pricing calculator table
  * and restore previously saved custom rows from project state.
  */
@@ -1426,6 +1613,7 @@ function addCategoryPrompt(btn) {
   renderCustomCategory(tbody, catData);
   renumberTableRows(table);
   saveCustomRowsState(table, pageSlug);
+  injectCategorySelectAll(table);
   recalculatePriceTotals();
 }
 
@@ -1555,6 +1743,7 @@ function addItemPrompt(btn) {
     document.getElementById(modalId).remove();
     renumberTableRows(table);
     saveCustomRowsState(table, pageSlug);
+    injectCategorySelectAll(table);
     recalculatePriceTotals();
   });
 
@@ -1660,6 +1849,7 @@ function deleteCustomCategory(btn) {
 
   renumberTableRows(table);
   saveCustomRowsState(table, pageSlug);
+  injectCategorySelectAll(table);
   recalculatePriceTotals();
 }
 
@@ -1686,6 +1876,7 @@ function deleteCustomItem(btn) {
 
   renumberTableRows(table);
   saveCustomRowsState(table, pageSlug);
+  injectCategorySelectAll(table);
   recalculatePriceTotals();
 }
 
