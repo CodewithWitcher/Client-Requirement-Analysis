@@ -1463,17 +1463,19 @@ def generate_ai_intelligence_engine_html() -> str:
       }}
 
       let tabsHtml = '';
-      docs.forEach(doc => {{
-        const isActive = doc.id === currentSelectedAiDocId;
-        const activeStyles = isActive 
-          ? 'background: rgba(99, 102, 241, 0.08); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;'
-          : 'background: #ffffff; border-color: #e2e8f0; color: var(--text-muted);';
-        tabsHtml += `
-          <button class="export-btn" style="padding: 0.5rem 0.75rem; border-radius: 6px; text-align: left; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; display: block; width: 100%; border: 1px solid; margin-bottom: 0.35rem; ${{activeStyles}}" onclick="switchAiDocTab('${{doc.id}}')">
-            ${{doc.icon || '📄'}} ${{doc.title}}
-          </button>
-        `;
-      }});
+      for (let loop = 0; loop < 3; loop++) {{
+        docs.forEach(doc => {{
+          const isActive = doc.id === currentSelectedAiDocId;
+          const activeStyles = isActive 
+            ? 'background: rgba(99, 102, 241, 0.08); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;'
+            : 'background: #ffffff; border-color: #e2e8f0; color: var(--text-muted);';
+          tabsHtml += `
+            <button class="export-btn" style="padding: 0.5rem 0.75rem; border-radius: 6px; text-align: left; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; display: block; width: 100%; border: 1px solid; margin-bottom: 0.35rem; ${{activeStyles}}" onclick="switchAiDocTab('${{doc.id}}')">
+              ${{doc.icon || '📄'}} ${{doc.title}}
+            </button>
+          `;
+        }});
+      }}
 
       const activeDoc = proj.aiGeneratedDocs[currentSelectedAiDocId];
       const isAgentPrompt = activeDoc.id === 'agent_prompt';
@@ -1524,8 +1526,8 @@ def generate_ai_intelligence_engine_html() -> str:
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 240px 1fr; gap: 1.25rem; align-items: stretch; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); min-height: 480px;">
-            <div style="display: flex; flex-direction: column; gap: 0.15rem; max-height: 480px; overflow-y: auto; border-right: 1px solid #e2e8f0; padding-right: 1rem;">
+          <div style="display: grid; grid-template-columns: 240px 1fr; gap: 1.25rem; align-items: stretch; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); min-height: 560px;">
+            <div id="ai-tabs-container" style="display: flex; flex-direction: column; gap: 0.15rem; max-height: 560px; overflow-y: auto; border-right: 1px solid #e2e8f0; padding-right: 1rem;">
               ${{tabsHtml}}
             </div>
 
@@ -1542,7 +1544,7 @@ def generate_ai_intelligence_engine_html() -> str:
                 </div>
               </div>
 
-              <pre style="background: #f8fafc; padding: 0.85rem; border-radius: 8px; border: 1px solid #e2e8f0; height: 420px; overflow-y: auto; font-size: 0.82rem; line-height: 1.45; margin: 0; white-space: pre-wrap; word-break: break-word;">${{escapeHtml(activeDoc.markdown)}}</pre>
+              <pre style="background: #f8fafc; padding: 0.85rem; border-radius: 8px; border: 1px solid #e2e8f0; height: 500px; overflow-y: auto; font-size: 0.82rem; line-height: 1.45; margin: 0; white-space: pre-wrap; word-break: break-word;">${{escapeHtml(activeDoc.markdown)}}</pre>
               ${{refinementPanelHtml}}
             </div>
           </div>
@@ -1550,6 +1552,25 @@ def generate_ai_intelligence_engine_html() -> str:
       `;
 
       resultsContainer.innerHTML = resultsHtml;
+
+      // Hook up infinite scroll loop on the tabs list
+      const tabContainer = document.getElementById('ai-tabs-container');
+      if (tabContainer) {{
+        const singleSetHeight = tabContainer.scrollHeight / 3;
+        
+        // Scroll to the middle set initially
+        if (tabContainer.scrollTop === 0) {{
+          tabContainer.scrollTop = singleSetHeight;
+        }}
+
+        tabContainer.onscroll = () => {{
+          if (tabContainer.scrollTop < 10) {{
+            tabContainer.scrollTop += singleSetHeight;
+          }} else if (tabContainer.scrollTop > (singleSetHeight * 2) - 10) {{
+            tabContainer.scrollTop -= singleSetHeight;
+          }}
+        }};
+      }}
     }}
 
     function switchAiDocTab(id) {{
