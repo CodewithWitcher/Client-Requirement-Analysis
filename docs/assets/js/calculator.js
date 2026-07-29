@@ -83,6 +83,11 @@ function initCalculatorListeners() {
           savedState[itemId].name = itemName;
           stateUpdated = true;
         }
+        if (!savedState[itemId].category) {
+          const cells = row.querySelectorAll('td');
+          savedState[itemId].category = cells.length > 2 ? cells[2].textContent.trim() : 'General';
+          stateUpdated = true;
+        }
       }
 
       // Attach recalculation event listeners
@@ -127,12 +132,16 @@ function handleItemChange(table, pageSlug) {
       rowTotalCell.style.opacity = isChecked ? '1' : '0.4';
     }
 
+    const cells = row.querySelectorAll('td');
+    const category = cells.length > 2 ? cells[2].textContent.trim() : 'General';
+
     project.calculators[pageSlug][itemId] = {
       checked: isChecked,
       cost: cost,
       qty: qty,
       total: lineTotal,
-      name: itemName
+      name: itemName,
+      category: category
     };
   });
 

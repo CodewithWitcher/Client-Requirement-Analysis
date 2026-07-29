@@ -89,7 +89,7 @@ function updateClientInfo(field, val) {
  * Handle interactive task checkboxes in Markdown files (Checklists & Questionnaires)
  */
 function initInteractiveTaskChecklists() {
-  const checkboxes = document.querySelectorAll('.interactive-checklist-item, .rendered-markdown input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll('.interactive-checklist-item, .rendered-markdown input[type="checkbox"]:not(.item-check)');
   if (!checkboxes.length) return;
 
   const pageSlug = getPageSlug();

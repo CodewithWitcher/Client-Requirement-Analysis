@@ -44,7 +44,8 @@ window.ProposalGenerator = {
             name: itemData.name || itemId,
             cost: itemData.cost,
             qty: itemData.qty,
-            total: itemData.total
+            total: itemData.total,
+            category: itemData.category || 'General'
           });
         }
       });
@@ -74,17 +75,36 @@ window.ProposalGenerator = {
     const mDev = Math.round(grandTotal * (mDevPct / 100));
     const mHandover = Math.round(grandTotal * (mHandoverPct / 100));
 
+    // Group selected items by category
+    const groupedItems = {};
+    selectedLineItems.forEach(item => {
+      const cat = item.category || 'General';
+      if (!groupedItems[cat]) groupedItems[cat] = [];
+      groupedItems[cat].push(item);
+    });
+
     let rowsHtml = '';
-    selectedLineItems.forEach((item, index) => {
+    let globalIndex = 1;
+    Object.entries(groupedItems).forEach(([categoryName, items]) => {
+      // Add Category Section Header Row
       rowsHtml += `
-        <tr>
-          <td>${index + 1}</td>
-          <td>${escapeHtml(item.name)}</td>
-          <td>₹${(item.cost || 0).toLocaleString('en-IN')}</td>
-          <td>${item.qty || 1}</td>
-          <td><strong>₹${(item.total || 0).toLocaleString('en-IN')}</strong></td>
+        <tr style="background: rgba(99, 102, 241, 0.05); font-weight: 700; color: var(--accent-indigo);">
+          <td colspan="5" style="padding: 0.6rem 1rem; border-bottom: 2px solid rgba(99, 102, 241, 0.15); text-align: left;">
+            📂 ${categoryName.toUpperCase()}
+          </td>
         </tr>
       `;
+      items.forEach(item => {
+        rowsHtml += `
+          <tr>
+            <td>${globalIndex++}</td>
+            <td style="padding-left: 1.5rem; text-align: left;">${escapeHtml(item.name)}</td>
+            <td>₹${(item.cost || 0).toLocaleString('en-IN')}</td>
+            <td>${item.qty || 1}</td>
+            <td><strong>₹${(item.total || 0).toLocaleString('en-IN')}</strong></td>
+          </tr>
+        `;
+      });
     });
 
     if (!selectedLineItems.length) {
@@ -220,7 +240,22 @@ window.ProposalGenerator = {
 
         <!-- Selected Requirements & Pricing Table -->
         <div class="proposal-section">
-          <h2>2. Functional Deliverables & Pricing Breakdown</h2>
+          <h2>
+            2. Functional Deliverables & Pricing Breakdown
+            ${(() => {
+              const platform = (project.platform || '').toLowerCase();
+              if (platform === 'website') {
+                return `<a href="template-excel-template-website-pricing-calculator.html" class="export-btn no-print" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; vertical-align: middle; margin-left: 1rem; text-decoration: none;">✏️ Edit Website Pricing</a>`;
+              } else if (platform === 'android' || platform === 'ios' || platform === 'mobile') {
+                return `<a href="template-excel-template-application-pricing-calculator.html" class="export-btn no-print" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; vertical-align: middle; margin-left: 1rem; text-decoration: none;">✏️ Edit App Pricing</a>`;
+              } else {
+                return `
+                  <a href="template-excel-template-website-pricing-calculator.html" class="export-btn no-print" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; vertical-align: middle; margin-left: 1rem; text-decoration: none;">✏️ Edit Web Pricing</a>
+                  <a href="template-excel-template-application-pricing-calculator.html" class="export-btn no-print" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; vertical-align: middle; margin-left: 0.5rem; text-decoration: none;">✏️ Edit App Pricing</a>
+                `;
+              }
+            })()}
+          </h2>
           <div class="table-responsive">
             <table class="doc-table">
               <thead>
@@ -275,6 +310,22 @@ window.ProposalGenerator = {
         </div>
       </div>
     `;
+
+    // Dynamic Action Bar Edit Button update
+    const actionEditBtn = document.getElementById('proposal-actions-edit-btn');
+    if (actionEditBtn) {
+      const platform = (project.platform || '').toLowerCase();
+      if (platform === 'website') {
+        actionEditBtn.href = 'template-excel-template-website-pricing-calculator.html';
+        actionEditBtn.textContent = '✏️ Edit Web Pricing';
+      } else if (platform === 'android' || platform === 'ios' || platform === 'mobile') {
+        actionEditBtn.href = 'template-excel-template-application-pricing-calculator.html';
+        actionEditBtn.textContent = '✏️ Edit App Pricing';
+      } else {
+        actionEditBtn.href = 'template-excel-template-website-pricing-calculator.html';
+        actionEditBtn.textContent = '✏️ Edit Scoped Pricing';
+      }
+    }
   },
 
   /**
