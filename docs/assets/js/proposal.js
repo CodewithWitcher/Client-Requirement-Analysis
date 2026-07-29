@@ -36,15 +36,15 @@ window.ProposalGenerator = {
     // Aggregate line items selected across all calculator sheets
     Object.entries(project.calculators || {}).forEach(([sheetSlug, items]) => {
       Object.entries(items).forEach(([itemId, itemData]) => {
-        if (itemData.checked && itemData.total > 0) {
-          totalEstimate += itemData.total;
+        if (itemData.checked) {
+          totalEstimate += (itemData.total || 0);
           selectedLineItems.push({
             id: itemId,
             sheet: sheetSlug,
             name: itemData.name || itemId,
-            cost: itemData.cost,
-            qty: itemData.qty,
-            total: itemData.total,
+            cost: itemData.cost || 0,
+            qty: itemData.qty || 1,
+            total: itemData.total || 0,
             category: itemData.category || 'General'
           });
         }
@@ -86,21 +86,25 @@ window.ProposalGenerator = {
     let rowsHtml = '';
     let globalIndex = 1;
     Object.entries(groupedItems).forEach(([categoryName, items]) => {
-      // Add Category Section Header Row
+      const catSubtotal = items.reduce((sum, i) => sum + (i.total || 0), 0);
+      // Category Section Header
       rowsHtml += `
-        <tr style="background: rgba(99, 102, 241, 0.05); font-weight: 700; color: var(--accent-indigo);">
-          <td colspan="5" style="padding: 0.6rem 1rem; border-bottom: 2px solid rgba(99, 102, 241, 0.15); text-align: left;">
-            📂 ${categoryName.toUpperCase()}
+        <tr style="background: linear-gradient(90deg, rgba(99, 102, 241, 0.08), transparent); border-left: 3px solid #6366f1;">
+          <td colspan="4" style="padding: 0.55rem 1rem 0.55rem 0.75rem; font-weight: 800; font-size: 0.82rem; letter-spacing: 0.07em; color: #6366f1; text-transform: uppercase;">
+            📂 ${escapeHtml(categoryName)}
+          </td>
+          <td style="padding: 0.55rem 0.75rem; font-weight: 700; color: #6366f1; font-size: 0.82rem; text-align: right;">
+            ₹${catSubtotal.toLocaleString('en-IN')}
           </td>
         </tr>
       `;
       items.forEach(item => {
         rowsHtml += `
           <tr>
-            <td>${globalIndex++}</td>
-            <td style="padding-left: 1.5rem; text-align: left;">${escapeHtml(item.name)}</td>
+            <td style="color: #94a3b8; font-size: 0.85rem;">${globalIndex++}</td>
+            <td style="padding-left: 1.5rem;">${escapeHtml(item.name)}</td>
             <td>₹${(item.cost || 0).toLocaleString('en-IN')}</td>
-            <td>${item.qty || 1}</td>
+            <td style="text-align: center;">${item.qty || 1}</td>
             <td><strong>₹${(item.total || 0).toLocaleString('en-IN')}</strong></td>
           </tr>
         `;

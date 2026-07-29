@@ -62,7 +62,12 @@ function initCalculatorListeners() {
 
   const project = window.ProjectStorage.getProject();
   const pageSlug = getPageSlug();
-  const savedState = project.calculators[pageSlug] || {};
+
+  // Ensure the calculator slot exists for this page
+  if (!project.calculators[pageSlug]) {
+    project.calculators[pageSlug] = {};
+  }
+  const savedState = project.calculators[pageSlug];
 
   let stateUpdated = false;
   calcTables.forEach(table => {
@@ -73,21 +78,32 @@ function initCalculatorListeners() {
       const checkInput = row.querySelector('.item-check');
       const costInput = row.querySelector('.item-cost');
       const qtyInput = row.querySelector('.item-qty');
+      const cells = row.querySelectorAll('td');
+      const categoryFromDom = cells.length > 2 ? cells[2].textContent.trim() : 'General';
 
-      // Restore saved state if exists
-      if (savedState[itemId]) {
-        if (checkInput) checkInput.checked = savedState[itemId].checked;
-        if (costInput) costInput.value = savedState[itemId].cost;
-        if (qtyInput) qtyInput.value = savedState[itemId].qty;
-        if (!savedState[itemId].name) {
-          savedState[itemId].name = itemName;
-          stateUpdated = true;
-        }
-        if (!savedState[itemId].category) {
-          const cells = row.querySelectorAll('td');
-          savedState[itemId].category = cells.length > 2 ? cells[2].textContent.trim() : 'General';
-          stateUpdated = true;
-        }
+      if (savedState[itemId] !== undefined && savedState[itemId] !== null && typeof savedState[itemId] === 'object') {
+        // Restore saved state — always apply the saved checked value explicitly
+        if (checkInput) checkInput.checked = savedState[itemId].checked === true;
+        if (costInput && savedState[itemId].cost !== undefined) costInput.value = savedState[itemId].cost;
+        if (qtyInput && savedState[itemId].qty !== undefined) qtyInput.value = savedState[itemId].qty;
+        // Ensure category is always up-to-date from DOM
+        savedState[itemId].name = itemName;
+        savedState[itemId].category = categoryFromDom;
+        stateUpdated = true;
+      } else {
+        // First visit — initialize state from current HTML defaults
+        const isChecked = checkInput ? checkInput.checked : true;
+        const cost = parseFloat(costInput ? costInput.value : 0) || 0;
+        const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 1;
+        savedState[itemId] = {
+          checked: isChecked,
+          cost: cost,
+          qty: qty,
+          total: isChecked ? cost * qty : 0,
+          name: itemName,
+          category: categoryFromDom
+        };
+        stateUpdated = true;
       }
 
       // Attach recalculation event listeners
