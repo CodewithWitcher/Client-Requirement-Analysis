@@ -248,8 +248,13 @@ def parse_docx_file(file_path: Path):
 def parse_excel_file(file_path: Path):
     """Convert Excel (.xlsx) sheets into live interactive pricing tables."""
     title = file_path.stem.replace('-', ' ').replace('_', ' ').title()
-    import os
-    build_stamp = str(int(os.path.getmtime(file_path)))
+    import os, hashlib
+    # Use a content-based hash so the build stamp is stable across builds
+    # unless the actual file content changes.  This prevents the stamp from
+    # churning on every `build_site.py` run (which copies files and can
+    # change mtimes).
+    with open(file_path, 'rb') as f:
+        build_stamp = hashlib.md5(f.read()).hexdigest()[:12]
     
     try:
         wb = openpyxl.load_workbook(file_path, data_only=True)

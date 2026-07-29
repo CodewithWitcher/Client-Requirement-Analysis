@@ -62,22 +62,102 @@ function initCalculatorListeners() {
 
   const pageSlug = getPageSlug();
 
-  // ── Build-stamp migration: clear stale data if the Excel was rebuilt ────
+  // ── Build-stamp migration: ONLY add/remove items, never wipe user state ──
   const excelViewer = document.querySelector('.excel-viewer[data-build-stamp]');
   if (excelViewer) {
     const currentStamp = excelViewer.getAttribute('data-build-stamp');
     const stampKey = `calc_stamp_${pageSlug}`;
     const savedStamp = localStorage.getItem(stampKey);
     if (savedStamp !== currentStamp) {
-      // Excel rebuilt — wipe old saved state for this page so users get clean defaults
-      const proj = window.ProjectStorage.getProject();
-      delete proj.calculators[pageSlug];
-      window.ProjectStorage.saveProject(proj);
+      // Excel was rebuilt — mark stamp as seen but DO NOT wipe user's saved state.
+      // New items will get defaults; removed items will simply be orphaned in savedState
+      // (they won't appear in the DOM so they won't affect calculations).
       localStorage.setItem(stampKey, currentStamp);
     }
   }
 
-  // ── Step 1: Attach event listeners immediately ──────────────────────────
+  // ── Step 1: Restore/init checkbox state FIRST, before attaching listeners ──
+  // CRITICAL: State MUST be restored before event listeners are attached,
+  // otherwise setting checkInput.checked triggers 'change' events that call
+  // handleItemChange, which reads ALL rows' current DOM state and overwrites
+  // the not-yet-restored rows with their HTML defaults (unchecked).
+  window._calcRestoringState = true;
+  const project = window.ProjectStorage.getProject();
+
+  if (!project.calculators[pageSlug]) {
+    project.calculators[pageSlug] = {};
+  }
+  const savedState = project.calculators[pageSlug];
+  let dirty = false;
+
+  calcTables.forEach(table => {
+    table.querySelectorAll('tr[data-item-id]').forEach(row => {
+      const itemId = row.getAttribute('data-item-id');
+      const itemName = row.getAttribute('data-item-name') || itemId;
+      const checkInput = row.querySelector('.item-check');
+      const costInput = row.querySelector('.item-cost');
+      const qtyInput = row.querySelector('.item-qty');
+      const rowTotalCell = row.querySelector('.item-row-total');
+      const cells = row.querySelectorAll('td');
+      const categoryFromDom = cells.length > 2 ? cells[2].textContent.trim() : 'General';
+
+      const existing = savedState[itemId];
+
+      if (existing && typeof existing === 'object') {
+        // ── RETURNING VISITOR: restore exact saved state ──
+        const savedChecked = existing.checked === true; // strict boolean
+        if (checkInput) checkInput.checked = savedChecked;
+        if (costInput && existing.cost !== undefined) costInput.value = existing.cost;
+        if (qtyInput && existing.qty !== undefined) qtyInput.value = existing.qty;
+
+        // Update row total visual to match saved state
+        if (rowTotalCell) {
+          const cost = parseFloat(existing.cost || 0);
+          const qty = parseFloat(existing.qty || 1);
+          const lineTotal = savedChecked ? cost * qty : 0;
+          rowTotalCell.textContent = '₹' + lineTotal.toLocaleString('en-IN');
+          rowTotalCell.style.opacity = savedChecked ? '1' : '0.4';
+        }
+
+        // Refresh metadata (name/category may have changed in rebuild)
+        existing.name = itemName;
+        existing.category = categoryFromDom;
+        dirty = true;
+
+      } else {
+        // ── FIRST VISIT: read data-default-checked attr (not HTML checked) ──
+        const defaultVal = checkInput ? checkInput.getAttribute('data-default-checked') : 'true';
+        const isChecked = defaultVal !== 'false'; // anything that isn't explicitly false is on
+        const cost = parseFloat(costInput ? costInput.value : 0) || 0;
+        const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 1;
+
+        if (checkInput) checkInput.checked = isChecked;
+        if (rowTotalCell) {
+          const lineTotal = isChecked ? cost * qty : 0;
+          rowTotalCell.textContent = '₹' + lineTotal.toLocaleString('en-IN');
+          rowTotalCell.style.opacity = isChecked ? '1' : '0.4';
+        }
+
+        savedState[itemId] = {
+          checked: isChecked,
+          cost: cost,
+          qty: qty,
+          total: isChecked ? cost * qty : 0,
+          name: itemName,
+          category: categoryFromDom
+        };
+        dirty = true;
+      }
+    });
+  });
+
+  if (dirty) {
+    window.ProjectStorage.saveProject(project);
+  }
+  recalculatePriceTotals();
+  window._calcRestoringState = false;
+
+  // ── Step 2: Attach event listeners AFTER state is fully restored ────────
   calcTables.forEach(table => {
     table.querySelectorAll('tr[data-item-id]').forEach(row => {
       const checkInput = row.querySelector('.item-check');
@@ -91,88 +171,12 @@ function initCalculatorListeners() {
       });
     });
   });
-
-  // ── Step 2: Restore/init checkbox state after render ────────────────────
-  // Use requestAnimationFrame so this runs AFTER the browser fully
-  // paints the HTML defaults — guaranteeing our JS state wins.
-  requestAnimationFrame(() => {
-    const project = window.ProjectStorage.getProject();
-
-    if (!project.calculators[pageSlug]) {
-      project.calculators[pageSlug] = {};
-    }
-    const savedState = project.calculators[pageSlug];
-    let dirty = false;
-
-    calcTables.forEach(table => {
-      table.querySelectorAll('tr[data-item-id]').forEach(row => {
-        const itemId = row.getAttribute('data-item-id');
-        const itemName = row.getAttribute('data-item-name') || itemId;
-        const checkInput = row.querySelector('.item-check');
-        const costInput = row.querySelector('.item-cost');
-        const qtyInput = row.querySelector('.item-qty');
-        const rowTotalCell = row.querySelector('.item-row-total');
-        const cells = row.querySelectorAll('td');
-        const categoryFromDom = cells.length > 2 ? cells[2].textContent.trim() : 'General';
-
-        const existing = savedState[itemId];
-
-        if (existing && typeof existing === 'object') {
-          // ── RETURNING VISITOR: restore exact saved state ──
-          const savedChecked = existing.checked === true; // strict boolean
-          if (checkInput) checkInput.checked = savedChecked;
-          if (costInput && existing.cost !== undefined) costInput.value = existing.cost;
-          if (qtyInput && existing.qty !== undefined) qtyInput.value = existing.qty;
-
-          // Update row total visual to match saved state
-          if (rowTotalCell) {
-            const cost = parseFloat(existing.cost || 0);
-            const qty = parseFloat(existing.qty || 1);
-            const lineTotal = savedChecked ? cost * qty : 0;
-            rowTotalCell.textContent = '₹' + lineTotal.toLocaleString('en-IN');
-            rowTotalCell.style.opacity = savedChecked ? '1' : '0.4';
-          }
-
-          // Refresh metadata (name/category may have changed in rebuild)
-          existing.name = itemName;
-          existing.category = categoryFromDom;
-          dirty = true;
-
-        } else {
-          // ── FIRST VISIT: read data-default-checked attr (not HTML checked) ──
-          const defaultVal = checkInput ? checkInput.getAttribute('data-default-checked') : 'true';
-          const isChecked = defaultVal !== 'false'; // anything that isn't explicitly false is on
-          const cost = parseFloat(costInput ? costInput.value : 0) || 0;
-          const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 1;
-
-          if (checkInput) checkInput.checked = isChecked;
-          if (rowTotalCell) {
-            const lineTotal = isChecked ? cost * qty : 0;
-            rowTotalCell.textContent = '₹' + lineTotal.toLocaleString('en-IN');
-            rowTotalCell.style.opacity = isChecked ? '1' : '0.4';
-          }
-
-          savedState[itemId] = {
-            checked: isChecked,
-            cost: cost,
-            qty: qty,
-            total: isChecked ? cost * qty : 0,
-            name: itemName,
-            category: categoryFromDom
-          };
-          dirty = true;
-        }
-      });
-    });
-
-    if (dirty) {
-      window.ProjectStorage.saveProject(project);
-    }
-    recalculatePriceTotals();
-  });
 }
 
 function handleItemChange(table, pageSlug) {
+  // Safety: don't save during state restoration to avoid overwriting not-yet-restored rows
+  if (window._calcRestoringState) return;
+
   const project = window.ProjectStorage.getProject();
   if (!project.calculators[pageSlug]) {
     project.calculators[pageSlug] = {};
