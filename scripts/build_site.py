@@ -1453,6 +1453,43 @@ def generate_ai_intelligence_engine_html() -> str:
       }});
 
       const activeDoc = proj.aiGeneratedDocs[currentSelectedAiDocId];
+      const isAgentPrompt = activeDoc.id === 'agent_prompt';
+      
+      let refinementHistoryHtml = '';
+      if (isAgentPrompt && proj.aiPromptRefinements && proj.aiPromptRefinements.length) {{
+        refinementHistoryHtml = `
+          <div style="background: rgba(99, 102, 241, 0.03); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 8px; padding: 0.75rem; margin-top: 1rem;">
+            <div style="font-weight: 700; font-size: 0.8rem; color: var(--accent-indigo); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
+              ⏳ Refinement History Memory Context
+            </div>
+            <ul style="margin: 0; padding-left: 1.1rem; font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; text-align: left;">
+        `;
+        proj.aiPromptRefinements.forEach(r => {{
+          refinementHistoryHtml += `<li><b>\${{new Date(r.timestamp).toLocaleTimeString()}}:</b> \${{escapeHtml(r.text)}}</li>`;
+        }});
+        refinementHistoryHtml += `</ul></div>`;
+      }}
+
+      let refinementPanelHtml = '';
+      if (isAgentPrompt) {{
+        refinementPanelHtml = `
+          <div style="margin-top: 1rem; border-top: 1px dashed #cbd5e1; padding-top: 1rem; text-align: left;">
+            <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
+              🤖 Add Features / Refine Coding Prompt
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-subtle); margin: 0 0 0.5rem 0; line-height: 1.4;">
+              Type new feature specifications or bug fixes. The system will build upon your existing prompt history utilizing session context memory.
+            </p>
+            <div style="display: flex; gap: 0.5rem; align-items: stretch;">
+              <textarea id="ai-refinement-input" class="form-control" placeholder="e.g. Add Google/Apple social sign-in support and write Jest integration tests." style="font-size: 0.8rem; padding: 0.45rem 0.75rem; flex: 1; min-height: 50px; resize: vertical;"></textarea>
+              <button id="ai-refine-btn" class="export-btn primary" style="font-size: 0.82rem; padding: 0 1rem;" onclick="refineActivePrompt()">
+                ⚡ Refine Prompt
+              </button>
+            </div>
+            ${{refinementHistoryHtml}}
+          </div>
+        `;
+      }}
 
       let resultsHtml = `
         <main class="doc-content-card" style="min-height: auto; margin-bottom: 2rem; padding: 1.25rem;">
@@ -1483,6 +1520,7 @@ def generate_ai_intelligence_engine_html() -> str:
               </div>
 
               <pre style="background: #f8fafc; padding: 0.85rem; border-radius: 8px; border: 1px solid #e2e8f0; height: 320px; overflow-y: auto; font-size: 0.82rem; line-height: 1.45; margin: 0; white-space: pre-wrap; word-break: break-word;">${{escapeHtml(activeDoc.markdown)}}</pre>
+              ${{refinementPanelHtml}}
             </div>
           </div>
         </main>
@@ -1496,11 +1534,48 @@ def generate_ai_intelligence_engine_html() -> str:
       renderExistingGeneratedDocs();
     }}
 
+    async function refineActivePrompt() {{
+      const inputEl = document.getElementById('ai-refinement-input');
+      const text = inputEl ? inputEl.value.trim() : '';
+      if (!text) {{
+        alert("Please enter a feature description or fix request.");
+        return;
+      }}
+
+      const apiKey = window.SmartAssistant ? window.SmartAssistant.getApiKey() : '';
+      if (!apiKey) {{
+        alert("DeepSeek API Key is required to refine the prompt. Please add it in the key manager at the top.");
+        return;
+      }}
+
+      const btn = document.getElementById('ai-refine-btn');
+      if (btn) {{
+        btn.disabled = true;
+        btn.textContent = "⚡ Refining Prompt...";
+      }}
+
+      try {{
+        if (window.showToast) window.showToast("Refining coding prompt using memory context...", "info");
+        await window.AIEngine.generateRefinedPrompt(text, apiKey);
+        if (inputEl) inputEl.value = '';
+        renderExistingGeneratedDocs();
+        if (window.showToast) window.showToast("Successfully updated coding prompt!", "success");
+      }} catch (err) {{
+        alert("Prompt refinement failed: " + err.message);
+      }} finally {{
+        if (btn) {{
+          btn.disabled = false;
+          btn.textContent = "⚡ Refine Prompt";
+        }}
+      }}
+    }}
+
     function clearAllAiDeliverables() {{
       if (confirm("Are you sure you want to clear all generated AI documents for this client workspace? This cannot be undone.")) {{
         const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
         if (proj) {{
           proj.aiGeneratedDocs = {{}};
+          proj.aiPromptRefinements = [];
           window.ProjectStorage.saveProject(proj);
           renderExistingGeneratedDocs();
           if (window.showToast) window.showToast("Cleared generated documents.", "info");

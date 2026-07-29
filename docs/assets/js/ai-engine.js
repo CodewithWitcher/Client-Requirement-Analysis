@@ -88,6 +88,14 @@ window.AIEngine = {
       category: "Executive",
       desc: "Non-technical 1-page executive summary tailored for client presentations, budget justifications, and project scope sign-off.",
       targetSlug: "template-word-template-website-client-proposal"
+    },
+    agent_prompt: {
+      id: "agent_prompt",
+      title: "AI Coding Agent Master Prompt",
+      icon: "🤖",
+      category: "AI Coding",
+      desc: "A comprehensive developer instruction prompt tailored for AI coding agents (Cursor, Claude Code, Antigravity, etc.) to implement the project.",
+      targetSlug: "overview-website-pricing-module-overview"
     }
   },
 
@@ -131,6 +139,43 @@ window.AIEngine = {
     const projType = context.projectType || "Website";
     const answers = JSON.stringify(context.answers || {}, null, 2);
     const docText = (context.docText || "").slice(0, 5000);
+
+    if (docType === 'agent_prompt') {
+      return `You are a Senior CTO & Principal AI Integration Architect. Generate a Master System Implementation Prompt tailored for an AI Coding Agent (e.g. Cursor, Antigravity, Claude Code, GitHub Copilot) to build the ${projName} (${projType}) for ${clientName}.
+
+### Instructions:
+Generate a structured, extremely clear, and actionable markdown system prompt that a developer can copy-paste directly into an AI coding agent. The prompt must force the agent to follow a strict, professional engineering methodology:
+
+1. **Pre-requisite / Phase 0 (Research & Repository Analysis)**:
+   - Instruct the coding agent to thoroughly read and analyze the existing codebase first. Do not write code before analyzing the existing codebase structure.
+   - It MUST read all generated project reference documents which are saved in the project repository:
+     - Technical Architecture Specification
+     - Tech Stack Decision Report
+     - REST API Endpoint Contract
+     - Deployment & Infrastructure Guide
+     - Security & OWASP Compliance Checklist
+     - Performance & Scalability Blueprint
+     - Risk Assessment Matrix
+   - It MUST not start coding until it understands the complete system design.
+
+2. **Phase 1: Task Checklist Creation (\`todo.md\`)**:
+   - Instruct the agent to create a \`todo.md\` file outlining all component tasks, database migrations, and integrations, split into progressive implementation phases (Phase 1, Phase 2, Phase 3).
+
+3. **Phase 2: Progressive Implementation**:
+   - Explicitly instruct the agent to work on only one task checklist item at a time.
+   - It must mark items as in-progress [ / ] and completed [ x ] in \`todo.md\` as it works.
+
+4. **Phase 3: Rigorous Testing & Security Verification**:
+   - Instruct the agent that after implementing each component, it must run verification tests, security audits, and sanity checks to ensure no regression or breakages occur.
+
+### Context Summary for the Coding Agent:
+- Industry/Domain: ${context.answers?.industry || 'General'}
+- Hosting Preference: ${context.answers?.hostingPreference || 'Cloud'}
+- Traffic Scale: ${context.answers?.trafficScale || 'MVP'}
+- Urgency: ${context.answers?.timeline || 'MVP'}
+
+Output ONLY the raw coding agent markdown prompt. Do not add intro or outro notes.`;
+    }
 
     return `You are a seasoned, visionary Senior Chief Technology Officer (CTO) and Principal Enterprise Software Architect. 
 Your goal is to generate an exceptionally detailed, professional, production-ready enterprise technical document titled "${docDef.title}" for ${clientName}'s ${projName} (Target Platform: ${projType}).
@@ -325,6 +370,16 @@ jobs:
   "description": "${project} Solution Platform"
 }
 \`\`\`\n\n`;
+    } else if (docType === 'agent_prompt') {
+      content += `## 2. AI Coding Agent Master System Prompt\n\n`;
+      content += `Copy the prompt below to paste into your AI coding agent/IDE (e.g. Cursor, Antigravity, Claude Code, GitHub Copilot):\n\n`;
+      content += `\`\`\`markdown\n`;
+      content += `You are an AI Software Engineer coding agent. Your goal is to build the ${project} (${platform}) for ${client}.\n\n`;
+      content += `### Phase 0: Research existing code and generated documentation (Technical Architecture, API Contracts, Security Compliance Checklist).\n`;
+      content += `### Phase 1: Create a todo.md file outlining all component tasks split into Phase 1, Phase 2, and Phase 3.\n`;
+      content += `### Phase 2: Execute tasks in todo.md one-by-one, marking progress.\n`;
+      content += `### Phase 3: Verify and run security checks on each component built before proceeding.\n`;
+      content += `\`\`\`\n\n`;
     } else {
       content += `## 2. Standard Technical Specifications & Execution Guidelines\n\n`;
       content += `1. **Scalability Standards:** Microservice ready module structures.\n`;
@@ -346,5 +401,82 @@ jobs:
       markdown: content,
       generatedAt: new Date().toISOString()
     };
+  },
+
+  /**
+   * Refine prompt using workspace memory history context
+   */
+  async generateRefinedPrompt(newRefinementText, apiKey) {
+    if (!window.ProjectStorage) return null;
+    const project = window.ProjectStorage.getProject();
+    if (!project.aiPromptRefinements) project.aiPromptRefinements = [];
+    
+    // Add new refinement to history
+    project.aiPromptRefinements.push({
+      timestamp: new Date().toISOString(),
+      text: newRefinementText
+    });
+    window.ProjectStorage.saveProject(project);
+
+    const previousPrompt = project.aiGeneratedDocs?.['agent_prompt']?.markdown || '';
+    const clientName = project.clientName || "Client";
+    const projName = project.projectName || "Project";
+    const platform = project.platform || "Website";
+
+    const prompt = `You are a Senior CTO & Principal AI Integration Architect.
+We have an existing AI Coding Agent Master Prompt for the project "${projName}" (${platform}) of ${clientName}.
+The user wants to refine this prompt by adding new features, requirements, or fixing existing bugs.
+
+### Existing Master Prompt:
+\`\`\`markdown
+${previousPrompt}
+\`\`\`
+
+### History of Refinement Requests:
+${project.aiPromptRefinements.map((r, i) => `${i + 1}. [${r.timestamp}] ${r.text}`).join('\n')}
+
+### Latest New Refinement Request:
+"""
+${newRefinementText}
+"""
+
+### Instructions:
+Update the Master Coding Agent Prompt to cleanly incorporate these new features, requirement constraints, and bug-fix directives. Ensure that the strict Phase-based methodology, todo.md checklist creation, progressive coding, and component-by-component testing rules are still maintained. Output the updated Master Prompt.
+
+Output ONLY the new raw markdown prompt. No chat commentary.`;
+
+    try {
+      const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: "deepseek-chat",
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      if (!res.ok) throw new Error(`DeepSeek API error HTTP ${res.status}`);
+      const data = await res.json();
+      const updatedMarkdown = data.choices[0].message.content;
+
+      // Save back to project state
+      if (!project.aiGeneratedDocs) project.aiGeneratedDocs = {};
+      project.aiGeneratedDocs['agent_prompt'] = {
+        id: 'agent_prompt',
+        title: 'AI Coding Agent Master Prompt',
+        icon: '🤖',
+        targetSlug: 'overview-website-pricing-module-overview',
+        markdown: updatedMarkdown,
+        generatedAt: new Date().toISOString()
+      };
+      window.ProjectStorage.saveProject(project);
+      return updatedMarkdown;
+    } catch (err) {
+      console.error("Refined prompt generation failed:", err);
+      throw err;
+    }
   }
 };
