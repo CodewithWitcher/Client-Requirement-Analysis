@@ -22,78 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderClientProfileSwitcher() {
   const container = document.getElementById('project-banner-container');
   const project = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
-  if (!project) return;
+  if (!project || !container) return;
 
-  const allProjects = window.ProjectStorage.getAllProjects();
-  const activeId = window.ProjectStorage.getActiveProjectId();
-
-  let optionsHtml = '';
-  Object.keys(allProjects).forEach(id => {
-    const p = allProjects[id];
-    const isSel = (id === activeId) ? 'selected' : '';
-    optionsHtml += `<option value="${p.id}" ${isSel}>👤 ${escapeHtml(p.clientName)} — ${escapeHtml(p.projectName)}</option>`;
-  });
-
-  const bannerHtml = `
-    <div class="project-banner-card">
-      <div class="banner-title-row">
-        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-          <span style="font-weight: 800; font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-main);">Client Workspace Profile:</span>
-          <select id="client-profile-select" class="form-control" style="font-weight: 700; max-width: 320px; border-color: var(--accent-primary);" onchange="switchClientProfile(this.value)">
-            ${optionsHtml}
-          </select>
-          <button class="export-btn" style="padding: 0.4rem 0.85rem; font-size: 0.82rem;" onclick="promptNewClientProfile()">+ New Client Profile</button>
-          <button class="export-btn" style="padding: 0.4rem 0.85rem; font-size: 0.82rem; color: #ef4444; border-color: #ef4444;" onclick="deleteCurrentClientProfile()">🗑️ Delete</button>
-        </div>
-
-        <div class="banner-actions">
-          <button class="export-btn primary" style="background: var(--accent-emerald); border-color: var(--accent-emerald);" onclick="ExportManager.downloadCompleteClientWorkspace()">
-            📦 Download Complete Client Workspace
-          </button>
-        </div>
+  container.innerHTML = `
+    <div class="project-banner-card" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; font-size: 0.9rem;">
+        <span class="badge badge-docx">Active Client Workspace</span>
+        <span style="color: var(--text-main); font-weight: 600;">Client: <span style="font-weight: 700; color: var(--accent-indigo);">${escapeHtml(project.clientName)}</span></span>
+        <span style="color: var(--text-light);">|</span>
+        <span style="color: var(--text-muted);">Project: <strong>${escapeHtml(project.projectName)}</strong></span>
+        <span style="color: var(--text-light);">|</span>
+        <span style="color: var(--text-muted);">Platform: <strong>${project.platform} Platform</strong></span>
+        <span style="color: var(--text-light);">|</span>
+        <span style="color: var(--text-muted);">Complexity: <strong>${project.complexity}x</strong></span>
+        <span style="color: var(--text-light);">|</span>
+        <span style="color: var(--text-muted);">Discount: <strong>${project.discount || 0}%</strong></span>
       </div>
-
-      <!-- Live Client Info Editing Bar -->
-      <div class="form-grid" style="margin-top: 1rem;">
-        <div class="form-group">
-          <label>Client Name:</label>
-          <input type="text" id="client-input-name" class="form-control" value="${escapeHtml(project.clientName)}" onchange="updateClientInfo('clientName', this.value)">
-        </div>
-        <div class="form-group">
-          <label>Project Scope Title:</label>
-          <input type="text" id="client-input-project" class="form-control" value="${escapeHtml(project.projectName)}" onchange="updateClientInfo('projectName', this.value)">
-        </div>
-        <div class="form-group">
-          <label>Prepared By / Agency:</label>
-          <input type="text" id="client-input-agency" class="form-control" value="${escapeHtml(project.preparedBy)}" onchange="updateClientInfo('preparedBy', this.value)">
-        </div>
-        <div class="form-group">
-          <label>Target Platform:</label>
-          <select id="client-input-platform" class="form-control" onchange="updateClientInfo('platform', this.value)">
-            <option value="Both" ${project.platform === 'Both' ? 'selected' : ''}>🌐 Both Website & Mobile App</option>
-            <option value="Website" ${project.platform === 'Website' ? 'selected' : ''}>🌐 Website Only</option>
-            <option value="Mobile" ${project.platform === 'Mobile' ? 'selected' : ''}>📱 Mobile App Only</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Storage Warning Notice -->
-      <div style="margin-top: 1rem; padding: 0.65rem 1rem; background: rgba(245, 158, 11, 0.08); border: 1px dashed var(--accent-amber); border-radius: 8px; font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-        <span>⚠️ <strong>Browser Storage Warning:</strong> Client profiles, checkboxes, and customized estimates are saved locally in your browser memory. Clearing browser history/cache will erase unsaved data.</span>
-        <div style="display: flex; gap: 0.5rem;">
-          <button class="export-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;" onclick="window.ProjectStorage.exportJSON()">💾 Backup Project JSON</button>
-          <label class="export-btn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem; cursor: pointer;">
-            📂 Import Backup JSON
-            <input type="file" accept=".json" style="display: none;" onchange="handleBannerImportFile(event)">
-          </label>
-        </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="export-btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;" onclick="openProjectProfileModal()">✏️ Edit Profile</button>
+        <button class="export-btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;" onclick="openProjectManagerModal()">📁 Switch Client</button>
       </div>
     </div>
   `;
-
-  if (container) {
-    container.innerHTML = bannerHtml;
-  }
 }
 
 function switchClientProfile(id) {

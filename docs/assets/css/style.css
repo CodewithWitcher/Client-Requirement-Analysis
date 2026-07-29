@@ -944,6 +944,9 @@ table.doc-table tr:hover td {
 }
 
 .form-control {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 0.6rem 0.85rem;
   font-family: var(--font-sans);
   font-size: 0.9rem;
@@ -966,7 +969,7 @@ table.doc-table tr:hover td {
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(15, 23, 42, 0.5);
   backdrop-filter: blur(8px);
-  z-index: 999;
+  z-index: 11000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -977,7 +980,7 @@ table.doc-table tr:hover td {
   background: #ffffff;
   border-radius: var(--radius-lg);
   padding: 2rem;
-  max-width: 650px;
+  max-width: 95vw;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
@@ -1115,10 +1118,37 @@ table.doc-table tr:hover td {
   100% { transform: scale(1.6); opacity: 0; }
 }
 
+/* Floating Client Profile Button */
+#floating-profile-btn {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-emerald, #10b981), #059669);
+  color: #ffffff;
+  font-size: 1.6rem;
+  border: none;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#floating-profile-btn:hover {
+  transform: scale(1.12) rotate(-6deg);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6);
+}
+
+
 /* Speech Bubble above Robot */
 #floating-robot-bubble {
   position: fixed;
-  bottom: 95px;
+  bottom: 168px;
   right: 24px;
   max-width: 280px;
   background: #ffffff;
@@ -1190,6 +1220,57 @@ body.full-width-layout .rendered-markdown {
 
 body.full-width-layout .doc-content-card {
   padding: 1.5rem !important;
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #000000 !important;
+  }
+  
+  .glass-header,
+  .doc-header-card,
+  .export-toolbar,
+  .doc-sidebar-toc,
+  .site-footer,
+  .no-print,
+  .banner-actions,
+  button,
+  .project-banner-card,
+  #project-banner-container,
+  .toast-container,
+  #toast-notification-container,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  .app-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .doc-main-content {
+    width: 100% !important;
+  }
+
+  .doc-content-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+  }
+
+  .proposal-document {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
 }
 
 

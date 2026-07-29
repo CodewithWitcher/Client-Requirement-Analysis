@@ -47,103 +47,116 @@
       </p>
     </section>
 
-    <!-- Step 1 & 2: Interactive Intake Wizard Form -->
-    <main class="doc-content-card" style="margin-bottom: 2rem;">
-      <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-        <span>📋 Step 1: Technical Requirement Intake Wizard</span>
-      </h2>
+    <!-- Consolidated Intake & Document Selector Dashboard Grid -->
+    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.5rem; margin-bottom: 2rem; align-items: start;">
+      
+      <!-- Left Column: Intake Wizard & File Uploader -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Intake Wizard Card -->
+        <main class="doc-content-card" style="padding: 1.25rem; margin: 0; min-height: auto;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;">
+            <span>📋</span> Technical Intake Wizard
+          </h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+            <div class="form-group" style="margin: 0;">
+              <label style="font-size: 0.82rem; margin-bottom: 0.25rem; font-weight: 700;">Target Project Platform:</label>
+              <select id="ai-wizard-platform" class="form-control" onchange="toggleWizardFields(this.value)" style="font-size: 0.85rem; padding: 0.45rem 0.75rem;">
+                <option value="Website">🌐 Website / Web App Only</option>
+                <option value="Android">🤖 Android App Only</option>
+                <option value="iOS">🍎 iOS App Only</option>
+                <option value="Mobile">📱 Both Android & iOS Mobile Apps</option>
+                <option value="Both">⚡ Both Website & Mobile Apps (All Platforms)</option>
+                <option value="Custom">⚙️ Custom Platform...</option>
+              </select>
+              <div id="ai-wizard-custom-platform-container" style="margin-top: 0.5rem; display: none;">
+                <input type="text" id="ai-wizard-custom-platform-input" class="form-control" placeholder="Enter Custom Platform Name (e.g. Smart TV App)" style="font-size: 0.85rem; padding: 0.45rem 0.75rem;">
+              </div>
+            </div>
 
-      <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-        <div class="form-group">
-          <label>Target Project Platform:</label>
-          <select id="ai-wizard-platform" class="form-control" onchange="toggleWizardFields(this.value)">
-            <option value="Website">🌐 Website / Web Application</option>
-            <option value="Mobile">📱 Mobile Application (iOS/Android)</option>
-            <option value="Both">⚡ Full-Stack Web & Mobile Solution</option>
-          </select>
-        </div>
+            <div class="form-group" style="margin: 0;">
+              <label style="font-size: 0.82rem; margin-bottom: 0.25rem; font-weight: 700;">Target Industry / Domain:</label>
+              <input type="text" id="ai-wizard-industry" class="form-control" placeholder="e.g. E-Commerce, SaaS, Fintech" style="font-size: 0.85rem; padding: 0.45rem 0.75rem;">
+            </div>
 
-        <div class="form-group">
-          <label>Target Industry / Business Domain:</label>
-          <input type="text" id="ai-wizard-industry" class="form-control" placeholder="e.g. E-Commerce, SaaS, Healthcare, Fintech">
-        </div>
+            <div class="form-group" id="group-seo" style="margin: 0;">
+              <label style="font-size: 0.82rem; margin-bottom: 0.25rem; font-weight: 700;">SEO & Growth Priority:</label>
+              <select id="ai-wizard-seo" class="form-control" style="font-size: 0.85rem; padding: 0.45rem 0.75rem;">
+                <option value="High (Local & National SEO + Schema.org + OpenGraph)">🚀 High (SEO + Schema.org)</option>
+                <option value="Medium (Standard On-Page Meta & Sitemap)">Standard Meta Tags & Sitemap</option>
+                <option value="Internal Tool (No SEO Needed)">Internal Platform (No Public SEO)</option>
+              </select>
+            </div>
 
-        <div class="form-group" id="group-seo">
-          <label>SEO & Marketing Growth Priority:</label>
-          <select id="ai-wizard-seo" class="form-control">
-            <option value="High (Local & National SEO + Schema.org + OpenGraph)">🚀 High (Local/National SEO + Schema.org)</option>
-            <option value="Medium (Standard On-Page Meta & Sitemap)">Standard Meta Tags & Sitemap</option>
-            <option value="Internal Tool (No SEO Needed)">Internal Platform (No Public SEO)</option>
-          </select>
-        </div>
+            <div class="form-group" style="margin: 0;">
+              <label style="font-size: 0.82rem; margin-bottom: 0.25rem; font-weight: 700;">Cloud Hosting Preference:</label>
+              <select id="ai-wizard-hosting" class="form-control" style="font-size: 0.85rem; padding: 0.45rem 0.75rem;">
+                <option value="AWS Cloud Container Stack">AWS (ECS / RDS / S3)</option>
+                <option value="Vercel + Managed Postgres">Vercel / Netlify + Supabase</option>
+                <option value="DigitalOcean App Platform">DigitalOcean App Platform</option>
+                <option value="Google Cloud Platform (GCP)">Google Cloud Platform (GCP)</option>
+              </select>
+            </div>
 
-        <div class="form-group">
-          <label>Cloud Infrastructure & Hosting Preference:</label>
-          <select id="ai-wizard-hosting" class="form-control">
-            <option value="AWS Cloud Container Stack">AWS (ECS / RDS / S3)</option>
-            <option value="Vercel + Managed Postgres">Vercel / Netlify + Supabase</option>
-            <option value="DigitalOcean App Platform">DigitalOcean App Platform</option>
-            <option value="Google Cloud Platform (GCP)">Google Cloud Platform (GCP)</option>
-          </select>
-        </div>
+            <div class="form-group" style="margin: 0;">
+              <label style="font-size: 0.82rem; margin-bottom: 0.25rem; font-weight: 700;">Expected Traffic / Active User Scale:</label>
+              <select id="ai-wizard-traffic" class="form-control" style="font-size: 0.85rem; padding: 0.45rem 0.75rem;">
+                <option value="10,000+ monthly active users">10,000+ monthly active users</option>
+                <option value="100,000+ monthly active users">100,000+ high concurrency users</option>
+                <option value="Startup Initial Launch (<5k users)">Startup Launch (<5,000 users)</option>
+              </select>
+            </div>
 
-        <div class="form-group">
-          <label>Expected Traffic / Active User Scale:</label>
-          <select id="ai-wizard-traffic" class="form-control">
-            <option value="10,000+ monthly active users">10,000+ monthly active users</option>
-            <option value="100,000+ monthly active users">100,000+ high concurrency users</option>
-            <option value="Startup Initial Launch (<5k users)">Startup Launch (<5,000 users)</option>
-          </select>
-        </div>
+            <div class="form-group" style="margin: 0;">
+              <label style="font-size: 0.82rem; margin-bottom: 0.25rem; font-weight: 700;">Delivery Timeline Urgency:</label>
+              <select id="ai-wizard-timeline" class="form-control" style="font-size: 0.85rem; padding: 0.45rem 0.75rem;">
+                <option value="Standard Sprint Delivery (4–8 Weeks)">Standard Sprint Delivery (4–8 Weeks)</option>
+                <option value="Fast-Track MVP (2–4 Weeks)">Fast-Track MVP (2–4 Weeks)</option>
+                <option value="Enterprise Multi-Phase Roadmap">Enterprise Multi-Phase Roadmap</option>
+              </select>
+            </div>
+          </div>
+        </main>
 
-        <div class="form-group">
-          <label>Delivery Timeline Urgency:</label>
-          <select id="ai-wizard-timeline" class="form-control">
-            <option value="Standard Sprint Delivery (4–8 Weeks)">Standard Sprint Delivery (4–8 Weeks)</option>
-            <option value="Fast-Track MVP (2–4 Weeks)">Fast-Track MVP (2–4 Weeks)</option>
-            <option value="Enterprise Multi-Phase Roadmap">Enterprise Multi-Phase Roadmap</option>
-          </select>
-        </div>
-      </div>
-    </main>
-
-    <!-- Step 3: Document Upload Area -->
-    <main class="doc-content-card" style="margin-bottom: 2rem;">
-      <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1.25rem;">
-        📄 Step 2: Upload Client Requirement File
-      </h2>
-
-      <div style="border: 2px dashed var(--accent-indigo); padding: 2rem; border-radius: 12px; text-align: center; background: rgba(99, 102, 241, 0.03);">
-        <input type="file" id="ai-doc-file" accept=".pdf,.docx,.txt,.md" style="display: none;" onchange="updateFileLabel(this)">
-        <button class="export-btn primary" onclick="document.getElementById('ai-doc-file').click()" style="padding: 0.75rem 1.5rem; font-size: 1rem; margin-bottom: 0.75rem;">
-          📁 Choose File (PDF, DOCX, TXT, MD)
-        </button>
-        <div id="ai-file-name-label" style="font-weight: 600; color: var(--text-subtle);">No file chosen yet. (Optional — AI can build documents using intake parameters alone!)</div>
-      </div>
-    </main>
-
-    <!-- Step 4: Deliverables Generator Selector -->
-    <main class="doc-content-card" style="margin-bottom: 2rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin: 0;">
-          🛠️ Step 3: Select Technical Documents for AI to Generate
-        </h2>
-        <div style="display: flex; gap: 0.5rem;">
-          <button class="export-btn" onclick="selectAllDocTypes(true)">Check All (10 Docs)</button>
-          <button class="export-btn" onclick="selectAllDocTypes(false)">Clear Selection</button>
-        </div>
-      </div>
-
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem;" id="ai-doc-type-grid">
-        <!-- Rendered via JS script below -->
+        <!-- Document Upload Card -->
+        <main class="doc-content-card" style="padding: 1.25rem; margin: 0; min-height: auto;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;">
+            <span>📄</span> Upload Requirement File
+          </h3>
+          <div style="border: 2px dashed var(--accent-indigo); padding: 1.25rem; border-radius: 8px; text-align: center; background: rgba(99, 102, 241, 0.02);">
+            <input type="file" id="ai-doc-file" accept=".pdf,.docx,.txt,.md" style="display: none;" onchange="updateFileLabel(this)">
+            <button class="export-btn primary" onclick="document.getElementById('ai-doc-file').click()" style="padding: 0.5rem 1rem; font-size: 0.85rem; margin-bottom: 0.5rem; justify-content: center; width: 100%;">
+              📁 Choose File (PDF/DOCX/TXT/MD)
+            </button>
+            <div id="ai-file-name-label" style="font-size: 0.75rem; color: var(--text-subtle); line-height: 1.4;">No file chosen yet. (Optional)</div>
+          </div>
+        </main>
       </div>
 
-      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end;">
-        <button class="export-btn primary" style="padding: 0.85rem 2rem; font-size: 1.1rem; background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); border: none; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);" onclick="startAiGenerationPipeline()">
-          🚀 Generate Selected AI Documents & Auto-Fill Workspace
-        </button>
-      </div>
-    </main>
+      <!-- Right Column: Deliverables Selector & Pipeline Run -->
+      <main class="doc-content-card" style="padding: 1.25rem; margin: 0; display: flex; flex-direction: column; align-self: stretch; min-height: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin: 0;">
+            <span>🛠️</span> AI Deliverables
+          </h3>
+          <div style="display: flex; gap: 0.35rem;">
+            <button class="export-btn" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="selectAllDocTypes(true)">Check All</button>
+            <button class="export-btn" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="selectAllDocTypes(false)">Clear</button>
+          </div>
+        </div>
+
+        <div class="card-grid" style="grid-template-columns: 1fr; gap: 0.65rem; max-height: 480px; overflow-y: auto; padding-right: 0.25rem;" id="ai-doc-type-grid">
+          <!-- Rendered via JS script below -->
+        </div>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end;">
+          <button class="export-btn primary" style="padding: 0.75rem 1.5rem; font-size: 0.95rem; background: linear-gradient(135deg, var(--accent-indigo), var(--accent-primary)); border: none; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3); width: 100%; justify-content: center;" onclick="startAiGenerationPipeline()">
+            🚀 Generate Selected AI Documents
+          </button>
+        </div>
+      </main>
+    </div>
 
     <!-- Step 5: Live Generation Dashboard Overlay / Container -->
     <div id="ai-progress-container" class="doc-content-card" style="display: none; margin-bottom: 2rem; background: rgba(99, 102, 241, 0.05); border: 1px solid var(--accent-indigo);">
@@ -178,7 +191,11 @@
     function toggleWizardFields(val) {
       const seoGroup = document.getElementById('group-seo');
       if (seoGroup) {
-        seoGroup.style.display = (val === 'Mobile') ? 'none' : 'block';
+        seoGroup.style.display = (val === 'Mobile' || val === 'Android' || val === 'iOS') ? 'none' : 'block';
+      }
+      const customContainer = document.getElementById('ai-wizard-custom-platform-container');
+      if (customContainer) {
+        customContainer.style.display = (val === 'Custom') ? 'block' : 'none';
       }
     }
 
@@ -238,11 +255,15 @@
       }
 
       const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : {};
+      const platformSelectVal = document.getElementById('ai-wizard-platform').value;
+      const finalPlatform = (platformSelectVal === 'Custom')
+        ? (document.getElementById('ai-wizard-custom-platform-input')?.value.trim() || 'Custom')
+        : platformSelectVal;
 
       const context = {
         clientName: proj.clientName || 'Client',
         projectName: proj.projectName || 'Project',
-        projectType: document.getElementById('ai-wizard-platform').value,
+        projectType: finalPlatform,
         docText: docText,
         answers: {
           industry: document.getElementById('ai-wizard-industry').value,

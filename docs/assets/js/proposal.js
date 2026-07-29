@@ -25,6 +25,11 @@ window.ProposalGenerator = {
       project.milestones = { kickoff: 35, design: 20, dev: 30, handover: 15 };
     }
 
+    const standardPlatforms = ['Website', 'Android', 'iOS', 'Mobile', 'Both'];
+    const isCustomPlatform = !standardPlatforms.includes(project.platform);
+    const platformVal = isCustomPlatform ? 'Custom' : project.platform;
+    const customPlatformText = isCustomPlatform ? project.platform : '';
+
     let totalEstimate = 0;
     const selectedLineItems = [];
 
@@ -45,7 +50,7 @@ window.ProposalGenerator = {
       });
     });
 
-    const platformMult = (project.platform === 'Both') ? 1.4 : 1.0;
+    const platformMult = (project.platform === 'Both') ? 1.4 : (project.platform === 'Mobile' ? 1.2 : 1.0);
     const complexityMult = parseFloat(project.complexity || 1.0);
     const adjustedSubtotal = Math.round(totalEstimate * platformMult * complexityMult);
 
@@ -105,7 +110,7 @@ window.ProposalGenerator = {
 
     container.innerHTML = `
       <!-- Interactive Metadata & Financial Controls Bar -->
-      <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+      <div class="no-print" style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <div style="font-weight: 800; font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-main);">
             Proposal Metadata & System Parameters
@@ -133,11 +138,17 @@ window.ProposalGenerator = {
 
           <div class="form-group">
             <label>Scope Platform:</label>
-            <select class="form-control" onchange="ProposalGenerator.updateParam('platform', this.value)">
-              <option value="Website" ${project.platform === 'Website' ? 'selected' : ''}>🌐 Website Platform</option>
-              <option value="Mobile" ${project.platform === 'Mobile' ? 'selected' : ''}>📱 Mobile Platform</option>
-              <option value="Both" ${project.platform === 'Both' ? 'selected' : ''}>⚡ Web & Mobile Platforms</option>
+            <select id="proposal-platform-select" class="form-control" onchange="ProposalGenerator.handlePlatformChange(this.value)">
+              <option value="Website" ${platformVal === 'Website' ? 'selected' : ''}>🌐 Website / Web App Only</option>
+              <option value="Android" ${platformVal === 'Android' ? 'selected' : ''}>🤖 Android App Only</option>
+              <option value="iOS" ${platformVal === 'iOS' ? 'selected' : ''}>🍎 iOS App Only</option>
+              <option value="Mobile" ${platformVal === 'Mobile' ? 'selected' : ''}>📱 Both Android & iOS Mobile Apps</option>
+              <option value="Both" ${platformVal === 'Both' ? 'selected' : ''}>⚡ Both Website & Mobile Apps (All Platforms)</option>
+              <option value="Custom" ${platformVal === 'Custom' ? 'selected' : ''}>⚙️ Custom Platform...</option>
             </select>
+            <div id="proposal-custom-platform-container" style="margin-top: 0.5rem; display: ${isCustomPlatform ? 'block' : 'none'};">
+              <input type="text" id="proposal-custom-platform-input" class="form-control" placeholder="Enter Custom Platform Name" value="${escapeHtml(customPlatformText)}" onchange="ProposalGenerator.updateCustomPlatform(this.value)">
+            </div>
           </div>
 
           <div class="form-group">
@@ -341,6 +352,23 @@ window.ProposalGenerator = {
     `;
 
     document.body.insertAdjacentHTML('beforeend', modalHtml);
+  },
+
+  handlePlatformChange(val) {
+    const container = document.getElementById('proposal-custom-platform-container');
+    if (container) {
+      container.style.display = (val === 'Custom') ? 'block' : 'none';
+    }
+    if (val !== 'Custom') {
+      this.updateParam('platform', val);
+    } else {
+      const customText = document.getElementById('proposal-custom-platform-input')?.value.trim() || 'Custom';
+      this.updateParam('platform', customText);
+    }
+  },
+
+  updateCustomPlatform(val) {
+    this.updateParam('platform', val.trim() || 'Custom');
   },
 
   /**

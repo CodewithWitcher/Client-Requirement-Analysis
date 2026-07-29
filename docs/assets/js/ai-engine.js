@@ -132,7 +132,13 @@ window.AIEngine = {
     const answers = JSON.stringify(context.answers || {}, null, 2);
     const docText = (context.docText || "").slice(0, 5000);
 
-    return `You are a Principal Solutions Architect & Senior Technical Lead. Generate a comprehensive, professional, production-grade technical document titled "${docDef.title}" for ${clientName}'s ${projName} (${projType}).
+    return `You are a seasoned, visionary Senior Chief Technology Officer (CTO) and Principal Enterprise Software Architect. 
+Your goal is to generate an exceptionally detailed, professional, production-ready enterprise technical document titled "${docDef.title}" for ${clientName}'s ${projName} (Target Platform: ${projType}).
+
+### Role Directive:
+- Write with the authority, clarity, and deep technical insight of a CTO advising a Fortune 500 engineering team.
+- Provide concrete architectural patterns, deep technology trade-offs, structured database schema definitions, real-world deployment pipeline configs, and robust security risk mitigation matrices.
+- Never use generic placeholders or high-level filler descriptions. Include exact folder structures, library names, class names, API paths, and configuration file snippets (YAML/JSON/Terraform/Docker) where relevant.
 
 ### Project Intake Context & Clarifying Requirements:
 ${answers}
@@ -142,10 +148,10 @@ ${answers}
 ${docText}
 """
 
-### Document Instructions:
-Produce a complete markdown-formatted document. Include detailed sections, tables, code snippets, config blocks, and actionable architectural guidance. Do not use generic filler text; tailor every detail specifically to the provided client requirement and intake context.
+### Document Specific Instructions:
+Produce a comprehensive, publication-quality document in valid Github Markdown. Ensure it is structurally sound, using clear headers, comparative tables, database models, API endpoint structures, and code blocks with syntax highlighting. Focus on scalability, security, load handling, and clean-code practices.
 
-Output ONLY valid markdown content.`;
+Output ONLY the final markdown content. Do not include introductory notes or chat commentary.`;
   },
 
   /**
