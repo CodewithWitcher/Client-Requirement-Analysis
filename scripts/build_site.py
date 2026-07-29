@@ -1093,6 +1093,7 @@ def generate_ai_intelligence_engine_html() -> str:
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
 
@@ -1269,6 +1270,7 @@ def generate_ai_intelligence_engine_html() -> str:
   <script>
     document.addEventListener('DOMContentLoaded', () => {{
       renderDocTypeSelectionGrid();
+      renderExistingGeneratedDocs();
     }});
 
     function toggleWizardFields(val) {{
@@ -1372,53 +1374,146 @@ def generate_ai_intelligence_engine_html() -> str:
 
       progressContainer.style.display = 'none';
 
-      // Render Deliverables Summary Cards
-      let resultsHtml = `<main class="doc-content-card"><h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1.25rem;">✨ Generated Technical Deliverables</h2><div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;"><button class="export-btn primary" onclick="downloadAllAiDeliverables()">📦 Download All AI Deliverables</button></div><div style="display: grid; gap: 1.5rem;">`;
-
-      results.forEach(doc => {{
-        resultsHtml += `
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <h3 style="font-size: 1.2rem; color: var(--text-main); margin: 0;">${{doc.icon}} ${{doc.title}}</h3>
-              <a href="${{doc.targetSlug}}.html" class="export-btn" style="font-size: 0.8rem;">🚀 Open Auto-Filled Page</a>
-            </div>
-            <pre style="background: #ffffff; padding: 1rem; border-radius: 8px; border: 1px solid #cbd5e1; max-height: 250px; overflow-y: auto; font-size: 0.85rem; line-height: 1.5;">${{escapeHtml(doc.markdown)}}</pre>
-          </div>
-        `;
-      }});
-
-      resultsHtml += `</div></main>`;
-      resultsContainer.innerHTML = resultsHtml;
+      renderExistingGeneratedDocs();
 
       if (window.showToast) window.showToast(`Generated ${{results.length}} technical documents and auto-filled workspace pages!`, "success");
     }}
 
-    function downloadAllAiDeliverables() {{
+    async function downloadAllAiDeliverables() {{
       const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
-      if (!proj || !proj.aiGeneratedDocs) {{
+      if (!proj || !proj.aiGeneratedDocs || !Object.keys(proj.aiGeneratedDocs).length) {{
         alert("No AI deliverables generated yet.");
         return;
       }}
 
-      let fullContent = `# AI Technical Deliverables Package\nClient: ${{proj.clientName}}\n\n`;
+      if (typeof JSZip === 'undefined') {{
+        alert("JSZip library is still loading. Please try again in a moment.");
+        return;
+      }}
+
+      if (window.showToast) window.showToast("Preparing ZIP archive...", "info");
+
+      const zip = new JSZip();
       Object.keys(proj.aiGeneratedDocs).forEach(id => {{
         const doc = proj.aiGeneratedDocs[id];
-        fullContent += `\n\n================================================\n# ${{doc.title}}\n================================================\n\n${{doc.markdown}}\n`;
+        const safeTitle = doc.title.replace(/[^a-z0-9\\s-_]+/gi, '').replace(/\\s+/g, '_');
+        zip.file(`${{safeTitle}}.md`, doc.markdown);
       }});
 
-      const blob = new Blob([fullContent], {{ type: 'text/markdown' }});
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `AI_Deliverables_${{proj.clientName.replace(/[^a-z0-9]+/gi, '_')}}.md`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      try {{
+        const content = await zip.generateAsync({{ type: 'blob' }});
+        const url = URL.createObjectURL(content);
+        const link = document.createElement('a');
+        link.href = url;
+        const safeClientName = proj.clientName.replace(/[^a-z0-9]+/gi, '_');
+        link.download = `AI_Deliverables_${{safeClientName}}.zip`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        if (window.showToast) window.showToast("Downloaded all files as ZIP!", "success");
+      }} catch (err) {{
+        console.error("ZIP creation failed:", err);
+        alert("Failed to build ZIP archive.");
+      }}
     }}
 
     function escapeHtml(str) {{
       return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }}
+
+    let currentSelectedAiDocId = null;
+
+    function renderExistingGeneratedDocs() {{
+      const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+      const resultsContainer = document.getElementById('ai-results-container');
+      if (!resultsContainer) return;
+
+      if (!proj || !proj.aiGeneratedDocs || !Object.keys(proj.aiGeneratedDocs).length) {{
+        resultsContainer.innerHTML = '';
+        return;
+      }}
+
+      const docs = Object.values(proj.aiGeneratedDocs);
+      if (!currentSelectedAiDocId || !proj.aiGeneratedDocs[currentSelectedAiDocId]) {{
+        currentSelectedAiDocId = docs[0].id;
+      }}
+
+      let tabsHtml = '';
+      docs.forEach(doc => {{
+        const isActive = doc.id === currentSelectedAiDocId;
+        const activeStyles = isActive 
+          ? 'background: rgba(99, 102, 241, 0.08); border-color: var(--accent-indigo); color: var(--accent-indigo); font-weight: 700;'
+          : 'background: #ffffff; border-color: #e2e8f0; color: var(--text-muted);';
+        tabsHtml += `
+          <button class="export-btn" style="padding: 0.5rem 0.75rem; border-radius: 6px; text-align: left; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; display: block; width: 100%; border: 1px solid; margin-bottom: 0.35rem; ${{activeStyles}}" onclick="switchAiDocTab('${{doc.id}}')">
+            ${{doc.icon || '📄'}} ${{doc.title}}
+          </button>
+        `;
+      }});
+
+      const activeDoc = proj.aiGeneratedDocs[currentSelectedAiDocId];
+
+      let resultsHtml = `
+        <main class="doc-content-card" style="min-height: auto; margin-bottom: 2rem; padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.75rem; flex-wrap: wrap; gap: 0.75rem;">
+            <h2 style="font-family: var(--font-serif); font-size: 1.3rem; margin: 0;">✨ Generated Technical Deliverables</h2>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="export-btn primary" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;" onclick="downloadAllAiDeliverables()">📦 Download All</button>
+              <button class="export-btn" style="color: #ef4444; border-color: #ef4444; padding: 0.4rem 0.85rem; font-size: 0.8rem;" onclick="clearAllAiDeliverables()">🗑️ Clear All</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 240px 1fr; gap: 1.25rem; align-items: stretch; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); min-height: 380px;">
+            <!-- Left: Document List Tab buttons -->
+            <div style="display: flex; flex-direction: column; gap: 0.15rem; max-height: 380px; overflow-y: auto; border-right: 1px solid #e2e8f0; padding-right: 1rem;">
+              ${{tabsHtml}}
+            </div>
+
+            <!-- Right: Selected Document Detail -->
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 0.5rem;">
+                <div style="font-weight: 700; font-size: 1.05rem; color: var(--text-main); display: flex; align-items: center; gap: 0.35rem;">
+                  ${{activeDoc.icon || '📄'}} ${{activeDoc.title}}
+                </div>
+                <div style="display: flex; gap: 0.4rem;">
+                  <a href="${{activeDoc.targetSlug}}.html" class="export-btn primary" style="font-size: 0.78rem; padding: 0.3rem 0.65rem;">🚀 Open Page</a>
+                  <button class="export-btn" style="font-size: 0.78rem; padding: 0.3rem 0.65rem;" onclick="copyDocTextToClipboard('${{activeDoc.id}}')">📋 Copy Content</button>
+                </div>
+              </div>
+
+              <pre style="background: #f8fafc; padding: 0.85rem; border-radius: 8px; border: 1px solid #e2e8f0; height: 320px; overflow-y: auto; font-size: 0.82rem; line-height: 1.45; margin: 0; white-space: pre-wrap; word-break: break-word;">${{escapeHtml(activeDoc.markdown)}}</pre>
+            </div>
+          </div>
+        </main>
+      `;
+
+      resultsContainer.innerHTML = resultsHtml;
+    }}
+
+    function switchAiDocTab(id) {{
+      currentSelectedAiDocId = id;
+      renderExistingGeneratedDocs();
+    }}
+
+    function clearAllAiDeliverables() {{
+      if (confirm("Are you sure you want to clear all generated AI documents for this client workspace? This cannot be undone.")) {{
+        const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+        if (proj) {{
+          proj.aiGeneratedDocs = {{}};
+          window.ProjectStorage.saveProject(proj);
+          renderExistingGeneratedDocs();
+          if (window.showToast) window.showToast("Cleared generated documents.", "info");
+        }}
+      }}
+    }}
+
+    function copyDocTextToClipboard(id) {{
+      const proj = window.ProjectStorage ? window.ProjectStorage.getProject() : null;
+      if (proj && proj.aiGeneratedDocs && proj.aiGeneratedDocs[id]) {{
+        navigator.clipboard.writeText(proj.aiGeneratedDocs[id].markdown);
+        if (window.showToast) window.showToast("Copied content to clipboard!", "success");
+      }}
     }}
   </script>
 </body>
