@@ -248,6 +248,8 @@ def parse_docx_file(file_path: Path):
 def parse_excel_file(file_path: Path):
     """Convert Excel (.xlsx) sheets into live interactive pricing tables."""
     title = file_path.stem.replace('-', ' ').replace('_', ' ').title()
+    import os
+    build_stamp = str(int(os.path.getmtime(file_path)))
     
     try:
         wb = openpyxl.load_workbook(file_path, data_only=True)
@@ -288,8 +290,9 @@ def parse_excel_file(file_path: Path):
 
                     if is_calculator_sheet and item_id and not is_header:
                         if c_idx == 7:
-                            checked = "checked" if val_str.lower() in {"yes", "true", "1"} else ""
-                            row_cells.append(f'<{cell_tag} style="text-align: center;"><input type="checkbox" class="item-check" {checked}></{cell_tag}>')
+                            # Store default as data attr — JS always sets the actual checked state from localStorage
+                            is_checked_default = "true" if val_str.lower() in {"yes", "true", "1"} else "false"
+                            row_cells.append(f'<{cell_tag} style="text-align: center;"><input type="checkbox" class="item-check" data-default-checked="{is_checked_default}"></{cell_tag}>')
                             continue
                         elif c_idx == 4 and val_str.isdigit():
                             row_cells.append(f'<{cell_tag}><input type="number" class="item-cost form-control" value="{val_str}"></{cell_tag}>')
@@ -349,7 +352,7 @@ def parse_excel_file(file_path: Path):
         full_html = f'''
         <div id="project-banner-container"></div>
 
-        <div class="excel-viewer">
+        <div class="excel-viewer" data-build-stamp="{build_stamp}">
           <div class="sheet-tabs">
             {"".join(tab_buttons)}
           </div>
@@ -818,7 +821,19 @@ def render_export_toolbar_html(doc: dict) -> str:
     buttons = []
 
     if category == 'xlsx':
-        # Excel Calculator Page - Only show relevant Excel/PDF downloads
+        # Excel Calculator Page - Save button first, then Excel/PDF downloads
+        buttons.append(f'''
+        <button id="save-pricing-btn" class="export-btn" style="background: linear-gradient(135deg, #10b981, #059669); border-color: #10b981; color: #ffffff; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.4rem; gap: 0.5rem;" onclick="savePricingState()">
+          <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+          💾 Save Pricing Changes
+        </button>
+        ''')
+        buttons.append(f'''
+        <a href="interactive-proposal-builder.html" id="go-to-proposal-btn" class="export-btn" style="color: #6366f1; border-color: #6366f1; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          View Proposal Builder
+        </a>
+        ''')
         buttons.append(f'''
         <button class="export-btn primary" onclick="ExportManager.downloadFile('{original_url}', '{filename}')">
           <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -972,6 +987,29 @@ def generate_doc_page_html(doc: dict) -> str:
     </footer>
   </div>
 
+  <!-- Global Floating Save Bar (shows on any page when unsaved changes exist) -->
+  <div id="global-save-bar" style="
+    position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
+    background: #0f172a; color: #ffffff;
+    padding: 0.75rem 1.5rem; border-radius: 50px;
+    display: flex; align-items: center; gap: 0.9rem;
+    box-shadow: 0 8px 32px rgba(15,23,42,0.35);
+    z-index: 99999; transition: bottom 0.4s cubic-bezier(0.16,1,0.3,1);
+    border: 1px solid rgba(255,255,255,0.08); min-width: 340px; justify-content: center;
+  ">
+    <span id="global-save-msg" style="font-size: 0.88rem; font-weight: 600; opacity: 0.85;">⚠️ You have unsaved changes</span>
+    <button id="global-save-btn" onclick="globalSaveAllData()" style="
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff; border: none; border-radius: 25px;
+      padding: 0.45rem 1.1rem; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+    ">💾 Save Now</button>
+    <button onclick="document.getElementById('global-save-bar').style.bottom='-80px'" style="
+      background: transparent; border: none; color: rgba(255,255,255,0.4);
+      font-size: 1.1rem; cursor: pointer; padding: 0 0.2rem; line-height: 1;
+    " title="Dismiss">✕</button>
+  </div>
+
   <script src="../assets/js/storage.js"></script>
   <script src="../assets/js/calculator.js"></script>
   <script src="../assets/js/proposal.js"></script>
@@ -979,6 +1017,56 @@ def generate_doc_page_html(doc: dict) -> str:
   <script src="../assets/js/ai-engine.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/export.js"></script>
+  <script>
+    // Global Save Bar Controller
+    let _globalSavePending = false;
+    function showGlobalSaveBar(msg) {{
+      const bar = document.getElementById('global-save-bar');
+      const msgEl = document.getElementById('global-save-msg');
+      if (msgEl) msgEl.textContent = msg || '⚠️ You have unsaved changes';
+      if (bar) bar.style.bottom = '24px';
+      _globalSavePending = true;
+    }}
+    function hideGlobalSaveBar() {{
+      const bar = document.getElementById('global-save-bar');
+      if (bar) bar.style.bottom = '-80px';
+      _globalSavePending = false;
+    }}
+    function globalSaveAllData() {{
+      // Save pricing calculator data if on a calculator page
+      if (typeof savePricingState === 'function') savePricingState();
+      // Save checklist data via storage
+      if (window.ProjectStorage) {{
+        const proj = window.ProjectStorage.getProject();
+        window.ProjectStorage.saveProject(proj);
+      }}
+      // Visual feedback on bar
+      const btn = document.getElementById('global-save-btn');
+      const msg = document.getElementById('global-save-msg');
+      if (btn) {{ btn.textContent = '✅ Saved!'; btn.style.background = 'linear-gradient(135deg, #6366f1, #4f46e5)'; }}
+      if (msg) msg.textContent = '✅ All changes saved to your workspace';
+      if (typeof window.showToast === 'function') window.showToast('✅ All changes saved successfully!', 'success');
+      setTimeout(() => {{
+        hideGlobalSaveBar();
+        if (btn) {{ btn.textContent = '💾 Save Now'; btn.style.background = 'linear-gradient(135deg, #10b981, #059669)'; }}
+      }}, 2000);
+    }}
+    // Intercept all changes globally to show the save bar
+    document.addEventListener('DOMContentLoaded', () => {{
+      // Watch for checkbox changes
+      document.addEventListener('change', (e) => {{
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {{
+          showGlobalSaveBar();
+        }}
+      }});
+      // Watch for number/text input changes
+      document.addEventListener('input', (e) => {{
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {{
+          showGlobalSaveBar();
+        }}
+      }});
+    }});
+  </script>
 </body>
 </html>
 '''
@@ -1075,6 +1163,67 @@ def generate_proposal_builder_tool_html() -> str:
         reader.readAsText(file);
       }}
     }}
+  </script>
+
+  <!-- Global Floating Save Bar -->
+  <div id="global-save-bar" style="
+    position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
+    background: #0f172a; color: #ffffff;
+    padding: 0.75rem 1.5rem; border-radius: 50px;
+    display: flex; align-items: center; gap: 0.9rem;
+    box-shadow: 0 8px 32px rgba(15,23,42,0.35);
+    z-index: 99999; transition: bottom 0.4s cubic-bezier(0.16,1,0.3,1);
+    border: 1px solid rgba(255,255,255,0.08); min-width: 340px; justify-content: center;
+  ">
+    <span id="global-save-msg" style="font-size: 0.88rem; font-weight: 600; opacity: 0.85;">⚠️ You have unsaved changes</span>
+    <button id="global-save-btn" onclick="globalSaveAllData()" style="
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff; border: none; border-radius: 25px;
+      padding: 0.45rem 1.1rem; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+    ">💾 Save Now</button>
+    <button onclick="document.getElementById('global-save-bar').style.bottom='-80px'" style="
+      background: transparent; border: none; color: rgba(255,255,255,0.4);
+      font-size: 1.1rem; cursor: pointer; padding: 0 0.2rem; line-height: 1;
+    " title="Dismiss">✕</button>
+  </div>
+  <script>
+    let _globalSavePending = false;
+    function showGlobalSaveBar(msg) {{
+      const bar = document.getElementById('global-save-bar');
+      const msgEl = document.getElementById('global-save-msg');
+      if (msgEl) msgEl.textContent = msg || '⚠️ You have unsaved changes';
+      if (bar) bar.style.bottom = '24px';
+      _globalSavePending = true;
+    }}
+    function hideGlobalSaveBar() {{
+      const bar = document.getElementById('global-save-bar');
+      if (bar) bar.style.bottom = '-80px';
+      _globalSavePending = false;
+    }}
+    function globalSaveAllData() {{
+      if (window.ProjectStorage) {{
+        const proj = window.ProjectStorage.getProject();
+        window.ProjectStorage.saveProject(proj);
+      }}
+      const btn = document.getElementById('global-save-btn');
+      const msg = document.getElementById('global-save-msg');
+      if (btn) {{ btn.textContent = '✅ Saved!'; btn.style.background = 'linear-gradient(135deg, #6366f1, #4f46e5)'; }}
+      if (msg) msg.textContent = '✅ All changes saved to your workspace';
+      if (typeof window.showToast === 'function') window.showToast('✅ All changes saved successfully!', 'success');
+      setTimeout(() => {{
+        hideGlobalSaveBar();
+        if (btn) {{ btn.textContent = '💾 Save Now'; btn.style.background = 'linear-gradient(135deg, #10b981, #059669)'; }}
+      }}, 2000);
+    }}
+    document.addEventListener('DOMContentLoaded', () => {{
+      document.addEventListener('change', (e) => {{
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') showGlobalSaveBar();
+      }});
+      document.addEventListener('input', (e) => {{
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') showGlobalSaveBar();
+      }});
+    }});
   </script>
 </body>
 </html>

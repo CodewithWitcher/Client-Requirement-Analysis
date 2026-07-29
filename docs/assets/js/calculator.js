@@ -60,53 +60,29 @@ function initCalculatorListeners() {
   const calcTables = document.querySelectorAll('.interactive-calc-table');
   if (!calcTables.length) return;
 
-  const project = window.ProjectStorage.getProject();
   const pageSlug = getPageSlug();
 
-  // Ensure the calculator slot exists for this page
-  if (!project.calculators[pageSlug]) {
-    project.calculators[pageSlug] = {};
+  // ── Build-stamp migration: clear stale data if the Excel was rebuilt ────
+  const excelViewer = document.querySelector('.excel-viewer[data-build-stamp]');
+  if (excelViewer) {
+    const currentStamp = excelViewer.getAttribute('data-build-stamp');
+    const stampKey = `calc_stamp_${pageSlug}`;
+    const savedStamp = localStorage.getItem(stampKey);
+    if (savedStamp !== currentStamp) {
+      // Excel rebuilt — wipe old saved state for this page so users get clean defaults
+      const proj = window.ProjectStorage.getProject();
+      delete proj.calculators[pageSlug];
+      window.ProjectStorage.saveProject(proj);
+      localStorage.setItem(stampKey, currentStamp);
+    }
   }
-  const savedState = project.calculators[pageSlug];
 
-  let stateUpdated = false;
+  // ── Step 1: Attach event listeners immediately ──────────────────────────
   calcTables.forEach(table => {
-    const rows = table.querySelectorAll('tr[data-item-id]');
-    rows.forEach(row => {
-      const itemId = row.getAttribute('data-item-id');
-      const itemName = row.getAttribute('data-item-name') || itemId;
+    table.querySelectorAll('tr[data-item-id]').forEach(row => {
       const checkInput = row.querySelector('.item-check');
       const costInput = row.querySelector('.item-cost');
       const qtyInput = row.querySelector('.item-qty');
-      const cells = row.querySelectorAll('td');
-      const categoryFromDom = cells.length > 2 ? cells[2].textContent.trim() : 'General';
-
-      if (savedState[itemId] !== undefined && savedState[itemId] !== null && typeof savedState[itemId] === 'object') {
-        // Restore saved state — always apply the saved checked value explicitly
-        if (checkInput) checkInput.checked = savedState[itemId].checked === true;
-        if (costInput && savedState[itemId].cost !== undefined) costInput.value = savedState[itemId].cost;
-        if (qtyInput && savedState[itemId].qty !== undefined) qtyInput.value = savedState[itemId].qty;
-        // Ensure category is always up-to-date from DOM
-        savedState[itemId].name = itemName;
-        savedState[itemId].category = categoryFromDom;
-        stateUpdated = true;
-      } else {
-        // First visit — initialize state from current HTML defaults
-        const isChecked = checkInput ? checkInput.checked : true;
-        const cost = parseFloat(costInput ? costInput.value : 0) || 0;
-        const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 1;
-        savedState[itemId] = {
-          checked: isChecked,
-          cost: cost,
-          qty: qty,
-          total: isChecked ? cost * qty : 0,
-          name: itemName,
-          category: categoryFromDom
-        };
-        stateUpdated = true;
-      }
-
-      // Attach recalculation event listeners
       [checkInput, costInput, qtyInput].forEach(input => {
         if (input) {
           input.addEventListener('change', () => handleItemChange(table, pageSlug));
@@ -116,11 +92,84 @@ function initCalculatorListeners() {
     });
   });
 
-  if (stateUpdated) {
-    window.ProjectStorage.saveProject(project);
-  }
+  // ── Step 2: Restore/init checkbox state after render ────────────────────
+  // Use requestAnimationFrame so this runs AFTER the browser fully
+  // paints the HTML defaults — guaranteeing our JS state wins.
+  requestAnimationFrame(() => {
+    const project = window.ProjectStorage.getProject();
 
-  recalculatePriceTotals();
+    if (!project.calculators[pageSlug]) {
+      project.calculators[pageSlug] = {};
+    }
+    const savedState = project.calculators[pageSlug];
+    let dirty = false;
+
+    calcTables.forEach(table => {
+      table.querySelectorAll('tr[data-item-id]').forEach(row => {
+        const itemId = row.getAttribute('data-item-id');
+        const itemName = row.getAttribute('data-item-name') || itemId;
+        const checkInput = row.querySelector('.item-check');
+        const costInput = row.querySelector('.item-cost');
+        const qtyInput = row.querySelector('.item-qty');
+        const rowTotalCell = row.querySelector('.item-row-total');
+        const cells = row.querySelectorAll('td');
+        const categoryFromDom = cells.length > 2 ? cells[2].textContent.trim() : 'General';
+
+        const existing = savedState[itemId];
+
+        if (existing && typeof existing === 'object') {
+          // ── RETURNING VISITOR: restore exact saved state ──
+          const savedChecked = existing.checked === true; // strict boolean
+          if (checkInput) checkInput.checked = savedChecked;
+          if (costInput && existing.cost !== undefined) costInput.value = existing.cost;
+          if (qtyInput && existing.qty !== undefined) qtyInput.value = existing.qty;
+
+          // Update row total visual to match saved state
+          if (rowTotalCell) {
+            const cost = parseFloat(existing.cost || 0);
+            const qty = parseFloat(existing.qty || 1);
+            const lineTotal = savedChecked ? cost * qty : 0;
+            rowTotalCell.textContent = '₹' + lineTotal.toLocaleString('en-IN');
+            rowTotalCell.style.opacity = savedChecked ? '1' : '0.4';
+          }
+
+          // Refresh metadata (name/category may have changed in rebuild)
+          existing.name = itemName;
+          existing.category = categoryFromDom;
+          dirty = true;
+
+        } else {
+          // ── FIRST VISIT: read data-default-checked attr (not HTML checked) ──
+          const defaultVal = checkInput ? checkInput.getAttribute('data-default-checked') : 'true';
+          const isChecked = defaultVal !== 'false'; // anything that isn't explicitly false is on
+          const cost = parseFloat(costInput ? costInput.value : 0) || 0;
+          const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 1;
+
+          if (checkInput) checkInput.checked = isChecked;
+          if (rowTotalCell) {
+            const lineTotal = isChecked ? cost * qty : 0;
+            rowTotalCell.textContent = '₹' + lineTotal.toLocaleString('en-IN');
+            rowTotalCell.style.opacity = isChecked ? '1' : '0.4';
+          }
+
+          savedState[itemId] = {
+            checked: isChecked,
+            cost: cost,
+            qty: qty,
+            total: isChecked ? cost * qty : 0,
+            name: itemName,
+            category: categoryFromDom
+          };
+          dirty = true;
+        }
+      });
+    });
+
+    if (dirty) {
+      window.ProjectStorage.saveProject(project);
+    }
+    recalculatePriceTotals();
+  });
 }
 
 function handleItemChange(table, pageSlug) {
@@ -163,7 +212,100 @@ function handleItemChange(table, pageSlug) {
 
   window.ProjectStorage.saveProject(project);
   recalculatePriceTotals();
+
+  // Mark as having unsaved changes (pending explicit save)
+  markUnsavedChanges();
 }
+
+/**
+ * Mark that unsaved changes exist — updates Save button visual state
+ */
+function markUnsavedChanges() {
+  const btn = document.getElementById('save-pricing-btn');
+  if (!btn) return;
+  btn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+  btn.style.borderColor = '#f59e0b';
+  btn.innerHTML = `
+    <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+    ⚠️ Unsaved Changes — Click to Save
+  `;
+}
+
+/**
+ * Explicitly save all current pricing table states to localStorage
+ */
+function savePricingState() {
+  const calcTables = document.querySelectorAll('.interactive-calc-table');
+  if (!calcTables.length) return;
+
+  const project = window.ProjectStorage.getProject();
+  const pageSlug = getPageSlug();
+
+  if (!project.calculators[pageSlug]) {
+    project.calculators[pageSlug] = {};
+  }
+
+  // Snapshot every row from every table
+  calcTables.forEach(table => {
+    const rows = table.querySelectorAll('tr[data-item-id]');
+    rows.forEach(row => {
+      const itemId = row.getAttribute('data-item-id');
+      const itemName = row.getAttribute('data-item-name') || itemId;
+      const checkInput = row.querySelector('.item-check');
+      const costInput = row.querySelector('.item-cost');
+      const qtyInput = row.querySelector('.item-qty');
+      const rowTotalCell = row.querySelector('.item-row-total');
+      const cells = row.querySelectorAll('td');
+      const category = cells.length > 2 ? cells[2].textContent.trim() : 'General';
+
+      const isChecked = checkInput ? checkInput.checked : true;
+      const cost = parseFloat(costInput ? costInput.value : 0) || 0;
+      const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 1;
+      const lineTotal = isChecked ? cost * qty : 0;
+
+      // Update visible row total
+      if (rowTotalCell) {
+        rowTotalCell.textContent = '₹' + lineTotal.toLocaleString('en-IN');
+        rowTotalCell.style.opacity = isChecked ? '1' : '0.4';
+      }
+
+      project.calculators[pageSlug][itemId] = {
+        checked: isChecked,
+        cost: cost,
+        qty: qty,
+        total: lineTotal,
+        name: itemName,
+        category: category
+      };
+    });
+  });
+
+  window.ProjectStorage.saveProject(project);
+  recalculatePriceTotals();
+
+  // Update Save button to confirm saved state
+  const btn = document.getElementById('save-pricing-btn');
+  if (btn) {
+    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    btn.style.borderColor = '#10b981';
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+      ✅ Pricing Saved!
+    `;
+    setTimeout(() => {
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+        💾 Save Pricing Changes
+      `;
+    }, 2500);
+  }
+
+  if (typeof window.showToast === 'function') {
+    window.showToast('✅ Pricing selections saved! Your proposal is now updated.', 'success');
+  }
+}
+
+window.savePricingState = savePricingState;
 
 /**
  * Calculate grand totals, taxes, multipliers, and payment milestones

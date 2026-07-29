@@ -1526,6 +1526,29 @@
     </footer>
   </div>
 
+  <!-- Global Floating Save Bar (shows on any page when unsaved changes exist) -->
+  <div id="global-save-bar" style="
+    position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
+    background: #0f172a; color: #ffffff;
+    padding: 0.75rem 1.5rem; border-radius: 50px;
+    display: flex; align-items: center; gap: 0.9rem;
+    box-shadow: 0 8px 32px rgba(15,23,42,0.35);
+    z-index: 99999; transition: bottom 0.4s cubic-bezier(0.16,1,0.3,1);
+    border: 1px solid rgba(255,255,255,0.08); min-width: 340px; justify-content: center;
+  ">
+    <span id="global-save-msg" style="font-size: 0.88rem; font-weight: 600; opacity: 0.85;">⚠️ You have unsaved changes</span>
+    <button id="global-save-btn" onclick="globalSaveAllData()" style="
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff; border: none; border-radius: 25px;
+      padding: 0.45rem 1.1rem; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+    ">💾 Save Now</button>
+    <button onclick="document.getElementById('global-save-bar').style.bottom='-80px'" style="
+      background: transparent; border: none; color: rgba(255,255,255,0.4);
+      font-size: 1.1rem; cursor: pointer; padding: 0 0.2rem; line-height: 1;
+    " title="Dismiss">✕</button>
+  </div>
+
   <script src="../assets/js/storage.js"></script>
   <script src="../assets/js/calculator.js"></script>
   <script src="../assets/js/proposal.js"></script>
@@ -1533,5 +1556,55 @@
   <script src="../assets/js/ai-engine.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/export.js"></script>
+  <script>
+    // Global Save Bar Controller
+    let _globalSavePending = false;
+    function showGlobalSaveBar(msg) {
+      const bar = document.getElementById('global-save-bar');
+      const msgEl = document.getElementById('global-save-msg');
+      if (msgEl) msgEl.textContent = msg || '⚠️ You have unsaved changes';
+      if (bar) bar.style.bottom = '24px';
+      _globalSavePending = true;
+    }
+    function hideGlobalSaveBar() {
+      const bar = document.getElementById('global-save-bar');
+      if (bar) bar.style.bottom = '-80px';
+      _globalSavePending = false;
+    }
+    function globalSaveAllData() {
+      // Save pricing calculator data if on a calculator page
+      if (typeof savePricingState === 'function') savePricingState();
+      // Save checklist data via storage
+      if (window.ProjectStorage) {
+        const proj = window.ProjectStorage.getProject();
+        window.ProjectStorage.saveProject(proj);
+      }
+      // Visual feedback on bar
+      const btn = document.getElementById('global-save-btn');
+      const msg = document.getElementById('global-save-msg');
+      if (btn) { btn.textContent = '✅ Saved!'; btn.style.background = 'linear-gradient(135deg, #6366f1, #4f46e5)'; }
+      if (msg) msg.textContent = '✅ All changes saved to your workspace';
+      if (typeof window.showToast === 'function') window.showToast('✅ All changes saved successfully!', 'success');
+      setTimeout(() => {
+        hideGlobalSaveBar();
+        if (btn) { btn.textContent = '💾 Save Now'; btn.style.background = 'linear-gradient(135deg, #10b981, #059669)'; }
+      }, 2000);
+    }
+    // Intercept all changes globally to show the save bar
+    document.addEventListener('DOMContentLoaded', () => {
+      // Watch for checkbox changes
+      document.addEventListener('change', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+          showGlobalSaveBar();
+        }
+      });
+      // Watch for number/text input changes
+      document.addEventListener('input', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          showGlobalSaveBar();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
